@@ -1,0 +1,59 @@
+/*
+ * Copyright (c) 2018, Chanus and/or its affiliates. All rights reserved.
+ */
+package pers.chanus.yuntao.manager.service;
+
+import javax.servlet.http.HttpServletRequest;
+
+import pers.chanus.yuntao.commons.constant.LogTypeEnum;
+import pers.chanus.yuntao.commons.pojo.CustomMap;
+import pers.chanus.yuntao.commons.pojo.PageBean;
+import pers.chanus.yuntao.server.syslog.Log;
+
+/**
+ * 系统日志接口
+ * 
+ * @author Chanus
+ * @date 2018-09-09 15:51:06
+ * @since 0.0.1
+ */
+public interface LogService {
+	/**
+	 * 添加系统日志
+	 * 
+	 * @param request	必需
+	 * @param moduleId	模块代码，可选
+	 * @param content	日志内容，可选
+	 * @param logType	日志类型，必需
+	 * @param operateTypeDesc	操作类型描述，可选
+	 * @since 0.0.1
+	 */
+	void insert(HttpServletRequest request, Integer moduleId, String content, LogTypeEnum logType, String operateTypeDesc);
+	
+	/**
+	 * 获取系统日志内容
+	 * 
+	 * @param id
+	 * @return
+	 * @since 0.0.1
+	 */
+	Log get(Long id);
+	
+	/**
+	 * 分页查询系统日志
+	 * 
+	 * @param params
+	 * @return
+	 * @since 0.0.1
+	 */
+	PageBean listPagination(CustomMap params);
+	
+	/**
+	 * 获取用户最后登录信息
+	 * 
+	 * @param operateNo	操作账号
+	 * @return
+	 * @since 0.0.1
+	 */
+	Log getLastLoginInfo(String operateNo);
+}

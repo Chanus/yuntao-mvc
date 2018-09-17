@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:s="http://www.springframework.org/schema/security"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security 
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+  <!-- <annotation-driven>
+    <message-converters register-defaults="true">
+      <beans:bean class="org.springframework.http.converter.StringHttpMessageConverter">
+        <beans:property name="supportedMediaTypes">
+          <beans:list>
+            <beans:value>text/html;charset=UTF-8</beans:value>
+            <beans:value>text/plain;charset=UTF-8</beans:value>
+            <beans:value>application/json;charset=UTF-8</beans:value>
+          </beans:list>
+        </beans:property>
+      </beans:bean>
+    </message-converters>
+  </annotation-driven> -->
+
+  <beans:bean id="configUtils" class="pers.chanus.yuntao.springmvc.ConfigUtils">
+    <beans:property name="fileEncoding" value="UTF-8" />
+    <beans:property name="ignoreResourceNotFound" value="true" />
+    <!-- SYSTEM_PROPERTIES_MODE_NEVER：只允许在properties文件中查找，不允许去System类中查找 -->
+    <!-- SYSTEM_PROPERTIES_MODE_FALLBACK：默认模式 -->
+    <!-- SYSTEM_PROPERTIES_MODE_OVERRIDE：优先System类中查找，找不到再去properties文件中查找，与默认模式正好相反 -->
+    <beans:property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_NEVER" />
+    <beans:property name="locations">
+      <beans:list>
+        <!-- 当前应用参数配置 -->
+        <beans:value>classpath:config.properties</beans:value>
+      </beans:list>
+    </beans:property>
+    <beans:property name="ignoreUnresolvablePlaceholders" value="true" />
+  </beans:bean>
+
+  <mvc:annotation-driven>
+    <mvc:message-converters register-defaults="true">
+      <beans:bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <beans:constructor-arg value="UTF-8" index="0" />
+        <beans:property name="supportedMediaTypes">
+          <beans:list>
+            <beans:value>text/plain;charset=UTF-8</beans:value>
+          </beans:list>
+        </beans:property>
+      </beans:bean>
+      <!-- 自定义Json解析器，配置Fastjson支持 -->
+      <beans:bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4">
+        <beans:property name="supportedMediaTypes">
+          <beans:list>
+            <beans:value>text/html;charset=UTF-8</beans:value>
+            <beans:value>application/json;charset=UTF-8</beans:value>
+          </beans:list>
+        </beans:property>
+        <beans:property name="features">
+          <beans:list>
+            <!-- 输出key时是否使用双引号，默认为true -->
+            <beans:value>QuoteFieldNames</beans:value>
+            <!-- 是否输出值为null的字段，默认为false -->
+            <beans:value>WriteMapNullValue</beans:value>
+            <!-- 数值字段如果为null，输出为0，而非null -->
+            <!-- <beans:value>WriteNullNumberAsZero</beans:value> -->
+            <!-- List字段如果为null，输出为[]，而非null -->
+            <!-- <beans:value>WriteNullListAsEmpty</beans:value> -->
+            <!-- 字符类型字段如果为null，输出为""，而非null -->
+            <!-- <beans:value>WriteNullStringAsEmpty</beans:value> -->
+            <!-- Boolean字段如果为null，输出为false，而非null -->
+            <!-- <beans:value>WriteNullBooleanAsFalse</beans:value> -->
+            <!-- null String不输出 -->
+            <!-- <beans:value>WriteNullStringAsEmpty</beans:value> -->
+            <!-- null String也要输出 -->
+            <beans:value>WriteMapNullValue</beans:value>
+            <!-- Date的日期转换器 -->
+            <!-- <beans:value>WriteDateUseDateFormat</beans:value> -->
+          </beans:list>
+        </beans:property>
+        <!-- <beans:property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"></beans:property> -->
+      </beans:bean>
+    </mvc:message-converters>
+  </mvc:annotation-driven>
+  
+  <!-- 自定义异常处理 -->
+  <beans:bean id="exceptionResolver" class="pers.chanus.yuntao.springmvc.exception.ExceptionResolver" />
+  
+  <!-- 对于静态资源，js、css、images等访问，全部映射到/resources/下的目录 -->
+  <resources mapping="/js/**" location="/resources/js/" />
+  <resources mapping="/css/**" location="/resources/css/" />
+  <resources mapping="/images/**" location="/resources/images/" />
+  <resources mapping="/font/**" location="/resources/font/" />
+  <resources mapping="/audio/**" location="/resources/audio/" />
+  <resources mapping="/lib/**" location="/resources/lib/" />
+  <resources mapping="/**" location="/" />
+
+  <!-- 配置展示页面为jsp，全部放在/WEB-INF/view/目录下 -->
+  <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:property name="prefix" value="/WEB-INF/view/" />
+    <beans:property name="suffix" value=".jsp" />
+  </beans:bean>
+  
+  <!-- 支持上传文件 -->
+  <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <beans:property name="defaultEncoding" value="UTF-8" />
+    <beans:property name="maxUploadSize">
+      <beans:value>104857600</beans:value>
+    </beans:property>
+    <beans:property name="maxInMemorySize">
+      <beans:value>4096</beans:value>
+    </beans:property>
+  </beans:bean>
+  
+  <!-- 启动对@AspectJ注解的支持，交由cglib代理 -->
+  <aop:aspectj-autoproxy proxy-target-class="true" />
+  <!-- 扫描系统日志切点类 -->
+  <context:component-scan base-package="pers.chanus.yuntao.springmvc.aspect"/>
+
+</beans:beans>

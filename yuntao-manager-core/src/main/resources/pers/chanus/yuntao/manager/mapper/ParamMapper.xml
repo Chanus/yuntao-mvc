@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.chanus.yuntao.manager.mapper.ParamMapper">
+  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.Param">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="param_code" jdbcType="VARCHAR" property="paramCode" />
+    <result column="param_data" jdbcType="VARCHAR" property="paramData" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="valid_status" jdbcType="CHAR" property="validStatus" />
+    <result column="modified_role_id" jdbcType="VARCHAR" property="modifiedRoleId" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, param_code, param_data, remark, valid_status, modified_role_id, priority, gmt_create, gmt_modified
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_param
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_param
+    <where>
+      <choose>
+        <when test="list == null or list.size() == 0">
+          1 &lt;&gt; 1
+        </when>
+        <when test="list.size() == 1">
+          id = <foreach collection="list" item="id">#{id}</foreach>
+        </when>
+        <otherwise>
+          id in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+        </otherwise>
+      </choose>
+    </where>
+  </delete>
+  
+  <insert id="insertSelective" parameterType="pers.chanus.yuntao.manager.model.Param">
+    insert into sys_param
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paramCode != null">
+        param_code,
+      </if>
+      <if test="paramData != null">
+        param_data,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="validStatus != null">
+        valid_status,
+      </if>
+      <if test="modifiedRoleId != null">
+        modified_role_id,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="paramCode != null">
+        #{paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramData != null">
+        #{paramData,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        #{validStatus,jdbcType=CHAR},
+      </if>
+      <if test="modifiedRoleId != null">
+        #{modifiedRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="pers.chanus.yuntao.manager.model.Param">
+    update sys_param
+    <set>
+      <if test="paramCode != null">
+        param_code = #{paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramData != null">
+        param_data = #{paramData,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        valid_status = #{validStatus,jdbcType=CHAR},
+      </if>
+      <if test="modifiedRoleId != null">
+        modified_role_id = #{modifiedRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) from sys_param
+    <where>
+      <if test="paramCode != null">
+        and param_code = #{paramCode,jdbcType=VARCHAR}
+      </if>
+      <if test="validStatus != null">
+        and valid_status = #{validStatus,jdbcType=CHAR}
+      </if>
+      <if test='modifiedRoleId != null and modifiedRoleId != "0"'>
+        and FIND_IN_SET(#{modifiedRoleId,jdbcType=VARCHAR},modified_role_id)
+      </if>
+    </where>
+  </select>
+  
+  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_param
+    <where>
+      <if test="paramCode != null">
+        and param_code = #{paramCode,jdbcType=VARCHAR}
+      </if>
+      <if test="validStatus != null">
+        and valid_status = #{validStatus,jdbcType=CHAR}
+      </if>
+      <if test='modifiedRoleId != null and modifiedRoleId != "0"'>
+        and FIND_IN_SET(#{modifiedRoleId,jdbcType=VARCHAR},modified_role_id)
+      </if>
+    </where>
+    order by priority asc
+    <if test="pagination == true">
+      limit #{start,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+    </if>
+  </select>
+  
+  <update id="priority" parameterType="java.util.Map">
+    update sys_param t1, sys_param t2, (select 
+      <choose>
+        <when test='direction == "up"'>max(priority) priority</when>
+        <otherwise>min(priority) priority</otherwise>
+      </choose>
+      from sys_param
+      <if test='direction != "top"'>
+        <where>
+          <choose>
+            <when test='direction == "up"'>priority &lt; #{priority}</when>
+            <otherwise>priority &gt; #{priority}</otherwise>
+          </choose>
+        </where>
+      </if>
+    ) t3 set
+    <choose>
+      <when test='direction == "top"'>t1.priority = t3.priority, t2.priority = t2.priority + 1</when>
+      <otherwise>t1.priority = t2.priority, t2.priority = t1.priority</otherwise>
+    </choose>
+    <where>
+      t1.priority = #{priority}
+      <choose>
+        <when test='direction == "top"'>and t2.priority &lt; #{priority}</when>
+        <otherwise>and t2.priority = t3.priority</otherwise>
+      </choose>
+    </where>
+  </update>
+</mapper>

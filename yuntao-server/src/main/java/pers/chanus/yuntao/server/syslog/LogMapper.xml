@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.chanus.yuntao.server.syslog.LogMapper">
+  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.server.syslog.Log">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="operate_no" jdbcType="VARCHAR" property="operateNo" />
+    <result column="operate_role_id" jdbcType="VARCHAR" property="operateRoleId" />
+    <result column="operate_ip" jdbcType="INTEGER" property="operateIp" />
+    <result column="operate_module_id" jdbcType="INTEGER" property="operateModuleId" />
+    <result column="operate_url" jdbcType="VARCHAR" property="operateUrl" />
+    <result column="operate_method" jdbcType="VARCHAR" property="operateMethod" />
+    <result column="operate_exception" jdbcType="VARCHAR" property="operateException" />
+    <result column="operate_type" jdbcType="VARCHAR" property="operateType" />
+    <result column="operate_type_desc" jdbcType="VARCHAR" property="operateTypeDesc" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="operate_content" jdbcType="LONGVARBINARY" property="operateContent" />
+    
+    <result column="role_name" jdbcType="VARCHAR" property="operateRoleName" />
+    <result column="module_name" jdbcType="VARCHAR" property="operateModuleName" />
+  </resultMap>
+  
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select operate_no, operate_url, operate_method, operate_exception, operate_content, operate_type from sys_log where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <insert id="insertSelective" parameterType="pers.chanus.yuntao.server.syslog.Log">
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="operateNo != null">
+        operate_no,
+      </if>
+      <if test="operateRoleId != null">
+        operate_role_id,
+      </if>
+      <if test="operateIp != null">
+        operate_ip,
+      </if>
+      <if test="operateModuleId != null">
+        operate_module_id,
+      </if>
+      <if test="operateUrl != null">
+        operate_url,
+      </if>
+      <if test="operateMethod != null">
+        operate_method,
+      </if>
+      <if test="operateException != null">
+        operate_exception,
+      </if>
+      <if test="operateType != null">
+        operate_type,
+      </if>
+      <if test="operateTypeDesc != null">
+        operate_type_desc,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="operateContent != null">
+        operate_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="operateNo != null">
+        #{operateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="operateRoleId != null">
+        #{operateRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateIp != null">
+        inet_aton(#{operateIp,jdbcType=INTEGER}),
+      </if>
+      <if test="operateModuleId != null">
+        #{operateModuleId,jdbcType=INTEGER},
+      </if>
+      <if test="operateUrl != null">
+        #{operateUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="operateMethod != null">
+        #{operateMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="operateException != null">
+        #{operateException,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null">
+        #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTypeDesc != null">
+        #{operateTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateContent != null">
+        #{operateContent,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) from sys_log
+    <where>
+      <if test="beginTime != null">
+        and operate_time &gt;= #{beginTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and operate_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operateNo != null">
+        and operate_no = #{operateNo,jdbcType=VARCHAR}
+      </if>
+      <if test='operateRoleId != null and operateRoleId != "0"'>
+        and operate_role_id like concat(#{operateRoleId,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="operateType != null">
+        <choose>
+          <when test='operateType == "1"'>and operate_type &lt;&gt; 'EXCEPTION'</when>
+          <when test='operateType == "2"'>and operate_type = 'EXCEPTION'</when>
+          <otherwise>and operate_type = #{operateType,jdbcType=VARCHAR}</otherwise>
+        </choose>
+      </if>
+    </where>
+  </select>
+  
+  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    sys_log.id, operate_no, operate_role_id, inet_ntoa(operate_ip) operate_ip, operate_module_id, operate_type, operate_type_desc, operate_time, role_name, module_name
+    from sys_log
+    left join sys_role on operate_role_id = role_id
+    left join sys_module on operate_module_id = module_id
+    <where>
+      <if test="beginTime != null">
+        and operate_time &gt;= #{beginTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and operate_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operateNo != null">
+        and operate_no = #{operateNo,jdbcType=VARCHAR}
+      </if>
+      <if test='operateRoleId != null and operateRoleId != "0"'>
+        and operate_role_id like concat(#{operateRoleId,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="operateType != null">
+        <choose>
+          <when test='operateType == "1"'>and operate_type &lt;&gt; 'EXCEPTION'</when>
+          <when test='operateType == "2"'>and operate_type = 'EXCEPTION'</when>
+          <otherwise>and operate_type = #{operateType,jdbcType=VARCHAR}</otherwise>
+        </choose>
+      </if>
+    </where>
+    order by operate_time desc
+    <if test="pagination == true">
+      limit #{start,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+    </if>
+  </select>
+  
+  <select id="getLastLoginInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    operate_no, max(operate_time) operate_time, operate_role_id, inet_ntoa(operate_ip) operate_ip, role_name
+    from sys_log, sys_role
+    where operate_role_id = role_id and operate_type = 'LOGIN' and operate_no = #{operateNo,jdbcType=VARCHAR}
+  </select>
+</mapper>
