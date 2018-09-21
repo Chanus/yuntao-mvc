@@ -162,7 +162,9 @@ public class ModulePowerController extends BaseController {
 	
 	/**
 	 * 获取指定类名下的URL列表
+	 * @param className	类名
 	 * @return
+	 * @since 0.0.1
 	 */
 	@ResponseBody
 	@PostMapping(value = "urls.do", produces = "application/json; charset=utf-8")

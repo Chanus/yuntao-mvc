@@ -34,7 +34,7 @@ layui.config({
 	
 	// 监听选择类名
 	var className;
-	form.on('select(className)', function(data){
+	form.on('select(className)', function(data) {
 		className = data.value;
 		if (className) {
 			$('#url option:gt(0)').remove();
@@ -42,9 +42,9 @@ layui.config({
 				url: action_path + 'urls.do',
 				data: {className: className},
 				dataType: "json",
-				success: function(data){
+				success: function(data) {
 					var selectHtml = '';
-					 $.each(data, function(n, value){
+					 $.each(data, function(n, value) {
 						 selectHtml += '<option value="' + value + '">' + value + '</option>';
 					 });
 					 $('#url').append(selectHtml);
@@ -59,7 +59,7 @@ layui.config({
 	
 	// 监听选择二级模块
 	var url;
-	form.on('select(url)', function(data){
+	form.on('select(url)', function(data) {
 		url = data.value;
 	});
 	
