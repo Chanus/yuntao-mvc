@@ -26,10 +26,13 @@
               <span id="currentTime"></span>&nbsp;&nbsp;(GMT+8)
             </li>
           </ul>
+          
           <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
             <li class="layui-nav-item" lay-unselect>
               <a lay-href="javascript:;" layadmin-event="message" lay-text="消息中心"> 
-                <i class="layui-icon layui-icon-notice"></i> <!-- 如果有新消息，则显示小圆点 --> <span class="layui-badge-dot"></span>
+                <i class="layui-icon layui-icon-notice"></i>
+                <!-- 如果有新消息，则显示小圆点 -->
+                <span class="layui-badge-dot"></span>
               </a>
             </li>
             <li class="layui-nav-item layui-hide-xs" lay-unselect>
