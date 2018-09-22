@@ -6,7 +6,7 @@
     <%@ include file="../../public/header.jsp" %>
   </head>
   <body>
-    <div class="pd-20">
+    <div class="pd-5">
       <!-- 搜索条件 -->
       <div class="layui-form layui-form-pane">
         <div class="layui-input-inline operator-div">

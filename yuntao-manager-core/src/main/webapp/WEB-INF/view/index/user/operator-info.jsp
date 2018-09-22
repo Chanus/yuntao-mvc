@@ -6,7 +6,7 @@
     <%@ include file="../../public/header.jsp" %>
   </head>
   <body>
-    <div class="pd-20">
+    <div class="pd-5">
       <form class="layui-form layui-form-pane layui-row">
         <div class="layui-col-md3 layui-col-xs12 user_right">
           <div class="layui-upload-list">

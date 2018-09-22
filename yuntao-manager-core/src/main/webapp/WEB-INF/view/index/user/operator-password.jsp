@@ -6,7 +6,7 @@
     <%@ include file="../../public/header.jsp" %>
   </head>
   <body>
-    <div class="pd-20">
+    <div class="pd-5">
       <form class="layui-form layui-form-pane">
         <div class="layui-form-item">
           <label class="layui-form-label">当前密码<span class="red">*</span></label>

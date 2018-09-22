@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="${ctx }/lib/zTree/zTreeStyle/zTreeStyle.css" />
   </head>
   <body onload="loadTree();">
-    <div class="pd-20">
+    <div class="pd-5">
       <div class="page-tree">
         <ul id="modules" class="ztree"></ul>
       </div>

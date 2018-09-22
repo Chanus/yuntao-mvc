@@ -6,7 +6,7 @@
     <%@ include file="../../public/header.jsp" %>
   </head>
   <body>
-    <div class="pd-20">
+    <div class="pd-5">
       <form class="layui-form layui-form-pane">
         <c:choose>
           <c:when test="${cmd eq 'add' }">

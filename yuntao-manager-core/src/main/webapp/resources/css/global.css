@@ -73,6 +73,14 @@ html {
 }
 
 /** 间距设置 */
+.pd-5 {
+	padding: 5px;
+}
+
+.pd-10 {
+	padding: 10px;
+}
+
 .pd-20 {
 	padding: 20px;
 }

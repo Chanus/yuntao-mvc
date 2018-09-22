@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="${ctx }/lib/zTree/zTreeStyle/zTreeStyle.css" />
   </head>
   <body onload="loadTree();">
-    <div class="pd-20">
+    <div class="pd-5">
       <!-- 角色列表树 -->
       <div class="page-tree">
         <ul id="roles" class="ztree"></ul>

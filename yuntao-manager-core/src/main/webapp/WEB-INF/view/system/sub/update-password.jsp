@@ -6,7 +6,7 @@
     <%@ include file="../../public/header.jsp" %>
   </head>
   <body>
-    <div class="pd-20">
+    <div class="pd-5">
       <form class="layui-form layui-form-pane">
         <input type="hidden" name="subNo" value="${subNo }" autocomplete="off" class="layui-input">
         <div class="layui-form-item">
