@@ -33,7 +33,7 @@ public class ConfigServlet extends HttpServlet {
 	public void init() throws ServletException {
 		ServletContext servletContext = getServletContext();
 		servletContext.setAttribute("ctx", servletContext.getContextPath());
-		servletContext.setAttribute("parentCtx", StringUtils.isBlank(servletContext.getContextPath()) ? "/" : new File(servletContext.getContextPath()).getParent());
+		servletContext.setAttribute("parentCtx", StringUtils.isBlank(servletContext.getContextPath()) ? File.separator : new File(servletContext.getContextPath()).getParent());
 		servletContext.setAttribute("parentRealCtx", new File(servletContext.getRealPath("")).getParent());
 		try {
 			servletContext.setAttribute("system_name", ConfigUtils.getProperty("system.name"));
