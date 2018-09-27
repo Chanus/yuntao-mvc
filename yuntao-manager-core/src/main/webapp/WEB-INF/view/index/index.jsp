@@ -23,7 +23,7 @@
               <a href="javascript:;" layadmin-event="refresh" title="刷新"> <i class="layui-icon layui-icon-refresh-3"></i></a>
             </li>
             <li class="layui-tip-item">
-              <span id="currentTime"></span>&nbsp;&nbsp;(GMT+8)
+              <a href="javascript:;"><span id="currentTime"></span>&nbsp;&nbsp;(GMT+8)</a>
             </li>
           </ul>
           
