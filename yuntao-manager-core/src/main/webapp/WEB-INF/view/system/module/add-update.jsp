@@ -36,6 +36,13 @@
           </div>
         </div>
         <div class="layui-form-item" pane>
+          <label class="layui-form-label">设置权限<span class="red">*</span></label>
+          <div class="layui-input-block">
+            <input type="radio" name="moduleForPermission" lay-verify="mustradio" value="1" title="需要" <c:if test="${empty module.moduleForPermission or module.moduleForPermission == '1' }">checked</c:if>>
+            <input type="radio" name="moduleForPermission" value="0" title="不需要" <c:if test="${module.moduleForPermission == '0' }">checked</c:if>>
+          </div>
+        </div>
+        <div class="layui-form-item" pane>
           <label class="layui-form-label">超管专属<span class="red">*</span></label>
           <div class="layui-input-block">
             <input type="radio" name="moduleForAdmin" lay-verify="mustradio" value="1" title="是" <c:if test="${module.moduleForAdmin == '1' }">checked</c:if>>

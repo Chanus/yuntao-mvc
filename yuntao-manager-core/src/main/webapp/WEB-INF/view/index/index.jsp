@@ -93,17 +93,21 @@
             <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
               <!-- 一级菜单 -->
               <c:forEach var="menu" items="${loginUser.menus }">
-                <li data-name="${menu.moduleId }" class="layui-nav-item">
-                  <a href="javascript:;" lay-tips="${menu.moduleName }" lay-direction="2"> <i class="${menu.moduleIcon }"></i> <cite>${menu.moduleName }</cite></a>
-                  <dl class="layui-nav-child">
-                    <!-- 二级菜单 -->
-                    <c:forEach var="menu2" items="${menu.children }">
-                      <dd data-name="${menu2.moduleId }">
-                        <a lay-href="${ctx }/${menu2.moduleUrl }"> <i class="${menu2.moduleIcon }"></i> ${menu2.moduleName }</a>
-                      </dd>
-                    </c:forEach>
-                  </dl>
-                </li>
+                <c:if test="${menu.moduleIsMenu eq '1' }">
+                  <li data-name="${menu.moduleId }" class="layui-nav-item">
+                    <a href="javascript:;" lay-tips="${menu.moduleName }" lay-direction="2"> <i class="${menu.moduleIcon }"></i> <cite>${menu.moduleName }</cite></a>
+                    <dl class="layui-nav-child">
+                      <!-- 二级菜单 -->
+                      <c:forEach var="menu2" items="${menu.children }">
+                        <c:if test="${menu2.moduleIsMenu eq '1' }">
+                          <dd data-name="${menu2.moduleId }">
+                            <a lay-href="${ctx }/${menu2.moduleUrl }"> <i class="${menu2.moduleIcon }"></i> ${menu2.moduleName }</a>
+                          </dd>
+                        </c:if>
+                      </c:forEach>
+                    </dl>
+                  </li>
+                </c:if>
               </c:forEach>
             </ul>
           </div>

@@ -19,6 +19,8 @@ public class Module implements Serializable {
 
     private String moduleIsMenu;
 
+    private String moduleForPermission;
+
     private String moduleForAdmin;
 
     private String moduleBelong;
@@ -85,7 +87,15 @@ public class Module implements Serializable {
         this.moduleIsMenu = moduleIsMenu == null ? null : moduleIsMenu.trim();
     }
 
-    public String getModuleForAdmin() {
+    public String getModuleForPermission() {
+		return moduleForPermission;
+	}
+
+	public void setModuleForPermission(String moduleForPermission) {
+		this.moduleForPermission = moduleForPermission == null ? null : moduleForPermission.trim();
+	}
+
+	public String getModuleForAdmin() {
         return moduleForAdmin;
     }
 
@@ -159,6 +169,6 @@ public class Module implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Module [moduleId=" + moduleId + ", moduleParentId=" + moduleParentId + ", moduleName=" + moduleName + ", moduleUrl=" + moduleUrl + ", moduleLevel=" + moduleLevel + ", moduleIsMenu=" + moduleIsMenu + ", moduleForAdmin=" + moduleForAdmin + ", moduleBelong=" + moduleBelong + ", moduleIcon=" + moduleIcon + ", remark=" + remark + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+		return "Module [moduleId=" + moduleId + ", moduleParentId=" + moduleParentId + ", moduleName=" + moduleName + ", moduleUrl=" + moduleUrl + ", moduleLevel=" + moduleLevel + ", moduleIsMenu=" + moduleIsMenu + ", moduleForPermission=" + moduleForPermission + ", moduleForAdmin=" + moduleForAdmin + ", moduleBelong=" + moduleBelong + ", moduleIcon=" + moduleIcon + ", remark=" + remark + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 }

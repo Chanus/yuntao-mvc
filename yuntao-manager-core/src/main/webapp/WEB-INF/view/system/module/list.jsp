@@ -32,6 +32,11 @@
 		{{# }else if(d.moduleIsMenu == "0"){ }}<span class="layui-badge layui-bg-gray">否</span>
 		{{# }else{ }}{{ d.moduleIsMenu }}{{# } }}
     </script>
+    <script type="text/html" id="moduleForPermissionTpl">
+		{{# if(d.moduleForPermission == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">需要</span>
+		{{# }else if(d.moduleForPermission == "0"){ }}<span class="layui-badge layui-bg-gray">不需要</span>
+		{{# }else{ }}{{ d.moduleForPermission }}{{# } }}
+    </script>
     <script type="text/html" id="moduleIconTpl">
 		{{# if(d.moduleIcon){ }}
 			<i class="{{ d.moduleIcon }}"></i>({{ d.moduleIcon }})
