@@ -663,10 +663,14 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
           //检查数据格式是否符合规范
           if(res[response.statusName] != response.statusCode){
             that.renderForm();
-            that.layMain.html('<div class="'+ NONE +'">'+ (
+            // 异常的时候渲染为空的
+            res[response.dataName] = [];
+            that.renderData(res, curr, res[response.countName]);
+            sort();
+            that.layMain.find('.' + NONE).html(
               res[response.msgName] ||
               ('返回的数据不符合规范，正确的成功状态码 ('+ response.statusName +') 应为：'+ response.statusCode)
-            ) +'</div>');
+            );
           } else {
             that.renderData(res, curr, res[response.countName]), sort();
             options.time = (new Date().getTime() - that.startTime) + ' ms'; //耗时（接口请求+视图渲染）
@@ -676,7 +680,12 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
           typeof options.done === 'function' && options.done(res, curr, res[response.countName]);
         }
         ,error: function(e, m){
-          that.layMain.html('<div class="'+ NONE +'">数据接口请求异常：'+ m +'</div>');
+          var res = {};
+          res[response.dataName] = [];
+          that.renderData(res, 1, 0);
+          sort();
+          that.layMain.find('.' + NONE).html('数据接口请求异常：' + m);
+          // that.layMain.html('<div class="'+ NONE +'">数据接口请求异常：'+ m +'</div>');
           that.renderForm();
           that.setColsWidth();
           that.loading(true);
@@ -807,7 +816,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
       });
 
       that.layBody.scrollTop(0);
-      that.layMain.find('.'+ NONE).remove();
+      data.length && that.layMain.find('.'+ NONE).remove();
       that.layMain.find('tbody').html(trs.join(''));
       that.layFixLeft.find('tbody').html(trs_fixed.join(''));
       that.layFixRight.find('tbody').html(trs_fixed_r.join(''));
@@ -842,7 +851,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
       return render();
     }
     
-    that.layFixed.removeClass(HIDE);
+    // that.layFixed.removeClass(HIDE);
     if(data.length === 0){
       that.renderForm();
       // that.layFixed.remove();
@@ -889,6 +898,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
     ,options = that.config
     ,totalNums = {};
     
+    that.layTotal[options.totalRow && data.length ? 'removeClass' : 'addClass'](HIDE);
     if(!options.totalRow) return;
     
     layui.each(data, function(i1, item1){
@@ -1025,6 +1035,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
       res[options.response.dataName] = data;
       // 前面加了一个判断的作用是避免重复无用的渲染浪费资源
       formEvent || that.renderData(res, that.page, that.count, true);
+      // formEvent ? that.pullData(1) : that.renderData(res, that.page, that.count, true);
     }
     
     if(formEvent){

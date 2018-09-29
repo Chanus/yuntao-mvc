@@ -68,7 +68,7 @@ layui.define([ 'form', 'table' ], function(exports) {
 		 * @param func	删除成功后执行的函数，可选
 		 */
 		del: function(obj, url, func) {
-			layer.confirm('确定删除记录？', {icon: 3, title:'提示'}, function(index){
+			layer.confirm('确定删除记录？', {icon: 3, title:'提示'}, function(index) {
 				if (obj) {
 					// 拼接url
 					if (typeof obj === "object") {
