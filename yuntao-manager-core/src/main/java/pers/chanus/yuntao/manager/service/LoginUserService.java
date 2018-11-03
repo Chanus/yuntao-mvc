@@ -23,4 +23,16 @@ public interface LoginUserService {
 	 * @since 0.0.1
 	 */
 	Message login(String loginNo, String password, String loginIp);
+
+	/**
+	 * 用户指定角色登录
+	 * 
+	 * @param loginNo	登录账号
+	 * @param password	登录密码
+	 * @param roleId	登录角色
+	 * @param loginIp	登录IP
+	 * @return
+	 * @since 0.0.1
+	 */
+	Message login(String loginNo, String password, String roleId, String loginIp);
 }

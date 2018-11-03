@@ -127,6 +127,7 @@ public class LoginController extends BaseController {
 		}
 
 		String loginname = (String) params.get("loginname");
+		String roleId = (String) params.get("roleId");
 		String password = (String) params.get("password");
 		try {
 			password = new String(RSAUtils.decryptByPrivateKey(Base64.getDecoder().decode(password), CacheData.RSA_KEYS_MAP.get(rsaPublicKey)), "UTF-8");
@@ -135,7 +136,14 @@ public class LoginController extends BaseController {
 		} finally {
 			CacheData.RSA_KEYS_MAP.remove(rsaPublicKey);
 		}
-		Message message = loginUserService.login(loginname, password, IpUtils.getIpAddress(getRequest()));
+		
+		Message message = null;
+		if (StringUtils.isBlank(roleId)) {
+			message = loginUserService.login(loginname, password, IpUtils.getIpAddress(getRequest()));
+		} else {
+			message = loginUserService.login(loginname, password, roleId, IpUtils.getIpAddress(getRequest()));
+		}
+		
 		if (message.getCode() == MsgCode.SUCCESS)// 存储登录账号信息
 			session.setAttribute("loginUser", message.getData());
 		

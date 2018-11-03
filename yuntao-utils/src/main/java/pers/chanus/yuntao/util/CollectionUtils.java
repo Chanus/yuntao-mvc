@@ -68,4 +68,25 @@ public class CollectionUtils {
 		sortMap.putAll(map);
 		return sortMap;
 	}
+
+	/**
+	 * 判断数组是否包含某元素
+	 * 
+	 * @param array	数据数组
+	 * @param object	数组元素
+	 * @return {@code true} array包含object；{@code false} array不包含object
+	 * @since 0.0.3
+	 */
+	public static boolean contains(Object[] objects, Object object) {
+		if (isEmpty(objects))
+			return false;
+		
+		for (Object o : objects) {
+			if ((o == null && object == null) || (o != null && o.equals(object))) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }
