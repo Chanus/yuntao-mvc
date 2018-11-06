@@ -32,7 +32,7 @@ public interface LoginUserService {
 	 * @param roleId	登录角色
 	 * @param loginIp	登录IP
 	 * @return
-	 * @since 0.0.1
+	 * @since 0.0.3
 	 */
 	Message login(String loginNo, String password, String roleId, String loginIp);
 }

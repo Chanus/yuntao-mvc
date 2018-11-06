@@ -109,15 +109,42 @@ html {
 .operator-div {
 	margin-left: 50px !important;
 }
-
+/** 常用颜色 */
 .red {
 	color: #FF5722;
 	padding-left: 2px;
 }
 
+.color-red {
+	color: #FF5722;
+}
+
+.color-lightblue {
+	color: #4F94CD;
+}
+
+.color-lightgreen {
+	color: #5FB878;
+}
+
+/** 字体加粗 */
+.b {
+	font-weight: bold;
+}
+
+/** span高度自适应 */
+span[class*="layui-badge"] {
+	height: auto;
+}
+
 /** 背景颜色 */
 .layui-bg-custom-lightgreen {
 	background-color: #5FB878 !important;
+}
+
+/*禁用字体颜色*/
+.layui-disabled, .layui-disabled:hover {
+	color: #666 !important;
 }
 
 /** 对齐方式 */
@@ -131,4 +158,9 @@ html {
 
 .text-r, .text-r th, .text-r td {
 	text-align: right;
+}
+
+/*表格中操作按钮取消左间距*/
+td .layui-btn+.layui-btn {
+	margin-left: 0;
 }

@@ -43,14 +43,14 @@ layui.define([ 'form', 'table' ], function(exports) {
   					layer.msg(e.msg, {icon: 1, time: 1000}, function() {
 						// 执行func
 						if (func && typeof func === 'function')
-							func();
+							func(data);
   						if (type === 'add') {
   							if (addFunc && typeof addFunc === 'function')
-  								addFunc();
+  								addFunc(data);
   							parent.layer.close(parent.layer.getFrameIndex(window.name));
   						} else if (type === 'addAgain') {
   							if (addAgainFunc && typeof addAgainFunc === 'function')
-  								addAgainFunc();
+  								addAgainFunc(data);
   							$(".layui-form")[0].reset();
   						}
   					});
@@ -90,7 +90,7 @@ layui.define([ 'form', 'table' ], function(exports) {
 										$(".layui-laypage-btn")[0].click();
 									
 									if (func && typeof func === 'function')
-										func();
+										func(data);
 								});
 							} else {
 								layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
@@ -121,7 +121,7 @@ layui.define([ 'form', 'table' ], function(exports) {
 					layer.msg(data.msg, {icon: 1, time: 1000}, function() {
 						// 执行func
 						if (func && typeof func === 'function')
-							func();
+							func(data);
 						// 刷新父页面表格数据并关闭弹出层
 						var layuiLaypageBtnClass = p ? $('.layui-laypage-btn', p.document)[0] : false;
 						if (layuiLaypageBtnClass)
@@ -153,7 +153,7 @@ layui.define([ 'form', 'table' ], function(exports) {
 							layer.msg(data.msg, {icon: 1, time: 1000}, function() {
 								// 执行func
 								if (func && typeof func === 'function')
-									func();
+									func(data);
 								// 刷新页面表格数据
 								if ($(".layui-laypage-btn")[0])
 									$(".layui-laypage-btn")[0].click();
