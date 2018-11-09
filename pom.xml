@@ -328,6 +328,24 @@
             </archive>
           </configuration>
         </plugin>
+        <!-- 打包源文件插件，在此不生效，需放到指定的模块下 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.1</version>
+          <configuration>
+            <attach>true</attach>
+          </configuration>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
         <!-- war包插件 -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>

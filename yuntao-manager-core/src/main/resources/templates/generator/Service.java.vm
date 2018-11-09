@@ -1,0 +1,15 @@
+package ${package}.service;
+
+import ${package}.model.${className};
+import pers.chanus.yuntao.server.service.BaseService;
+
+/**
+ * ${tableComment}接口
+ * 
+ * @author ${author}
+ * @date ${dateTime}
+ * @since ${since}
+ */
+public interface ${className}Service extends BaseService<${className}, ${pk.attributeType}> {
+
+}

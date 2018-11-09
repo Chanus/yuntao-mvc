@@ -6,6 +6,8 @@ package pers.chanus.yuntao.manager.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import pers.chanus.yuntao.manager.model.DataBaseTable;
 
 /**
@@ -19,4 +21,6 @@ public interface DataBaseTableMapper {
 	int count(Map<String, Object> params);
 
 	List<DataBaseTable> list(Map<String, Object> params);
+
+	DataBaseTable get(@Param("tableSchema")String tableSchema, @Param("tableName")String tableName);
 }

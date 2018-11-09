@@ -16,9 +16,14 @@
   <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from information_schema.tables
     <where>
-      <if test="tableSchema != null">
-        and table_schema = #{tableSchema,jdbcType=VARCHAR}
-      </if>
+      <choose>
+        <when test="tableSchema != null">
+          and table_schema = #{tableSchema,jdbcType=VARCHAR}
+        </when>
+        <otherwise>
+          and table_schema = (select database())
+        </otherwise>
+      </choose>
       <if test="tableName != null">
         and table_name = #{tableName,jdbcType=VARCHAR}
       </if>
@@ -30,9 +35,14 @@
     table_schema, table_name, table_type, engine, table_rows, auto_increment, create_time, table_collation, table_comment
     from information_schema.tables
     <where>
-      <if test="tableSchema != null">
-        and table_schema = #{tableSchema,jdbcType=VARCHAR}
-      </if>
+      <choose>
+        <when test="tableSchema != null">
+          and table_schema = #{tableSchema,jdbcType=VARCHAR}
+        </when>
+        <otherwise>
+          and table_schema = (select database())
+        </otherwise>
+      </choose>
       <if test="tableName != null">
         and table_name = #{tableName,jdbcType=VARCHAR}
       </if>
@@ -40,5 +50,22 @@
     <if test="pagination == true">
       limit #{start,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
     </if>
+  </select>
+  
+  <select id="get" resultMap="BaseResultMap">
+    select table_name, table_comment from information_schema.tables
+    <where>
+      <choose>
+        <when test="tableSchema != null">
+          and table_schema = #{tableSchema,jdbcType=VARCHAR}
+        </when>
+        <otherwise>
+          and table_schema = (select database())
+        </otherwise>
+      </choose>
+      <if test="tableName != null">
+        and table_name = #{tableName,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
 </mapper>

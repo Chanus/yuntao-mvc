@@ -75,8 +75,19 @@ public class StringUtils {
 	 * @since 0.0.1
 	 */
 	public static boolean equals(String s, String t) {
-		return s != null ? s.equals(t) : t == null;
+		return s == null ? t == null : s.equals(t);
 	}
+	
+	/**
+	 * 安全的比较两个字符串是否相等，忽略大小写
+	 * @param s	字符串1
+	 * @param t	字符串2
+	 * @return {@code true} 两个字符串相等；{@code false} 两个字符串不相等
+	 * @since 0.0.3
+	 */
+	public static boolean equalsIgnoreCase(String s, String t) {
+        return s == null ? t == null : s.equalsIgnoreCase(t);
+    }
 
 	/**
 	 * 判断字符串是否为纯数字
@@ -341,4 +352,35 @@ public class StringUtils {
 	public static String replace(final String source, final int begin, final int end) {
 		return source.substring(0, begin) + repeat("*", end - begin) + source.substring(end);
 	}
+	
+	/**
+	 * 将字符串的首字母转为大写
+	 * 
+	 * @param str	字符串
+	 * @return 首字母转为大写后的字符串
+	 * @since 0.0.3
+	 */
+	public static String capitalize(String str) {
+		int strLen;
+		if (str == null || (strLen = str.length()) == 0) {
+			return str;
+		}
+		return new StringBuffer(strLen).append(Character.toTitleCase(str.charAt(0))).append(str.substring(1)).toString();
+	}
+	
+	/**
+	 * 将字符串的首字母转为小写
+	 * 
+	 * @param str	字符串
+	 * @return 首字母转为小写后的字符串
+	 * @since 0.0.3
+	 */
+    public static String uncapitalize(String str) {
+        int strLen;
+        if (str == null || (strLen = str.length()) == 0) {
+            return str;
+        }
+        
+        return new StringBuffer(strLen).append(Character.toLowerCase(str.charAt(0))).append(str.substring(1)).toString();
+    }
 }

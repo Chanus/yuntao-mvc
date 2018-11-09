@@ -49,4 +49,26 @@
       <artifactId>jcl-over-slf4j</artifactId>
     </dependency>
   </dependencies>
+  
+  <build>
+    <plugins>
+      <!-- 打包源文件插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <configuration>
+          <attach>true</attach>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

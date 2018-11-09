@@ -106,6 +106,7 @@
   <resources mapping="/font/**" location="/resources/font/" />
   <resources mapping="/audio/**" location="/resources/audio/" />
   <resources mapping="/lib/**" location="/resources/lib/" />
+  <resources mapping="/templates/**" location="/resources/templates/" />
   <resources mapping="/**" location="/" />
 
   <!-- 配置展示页面为jsp，全部放在/WEB-INF/view/目录下 -->

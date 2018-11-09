@@ -39,6 +39,6 @@
     
     <!-- 指定数据库表 -->
     <!-- <table tableName="ss_test"></table> -->
-    <table tableName="sys_china_area" domainObjectName="ChinaArea" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+    <table tableName="test" domainObjectName="Test" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
   </context>
 </generatorConfiguration>

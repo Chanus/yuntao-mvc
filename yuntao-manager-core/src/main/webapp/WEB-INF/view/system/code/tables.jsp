@@ -18,11 +18,11 @@
             <div class="layui-input-inline" style="width: 85px;">
               <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
             </div>
-            <div class="layui-input-inline operator-div">
+            <%-- <div class="layui-input-inline operator-div">
               <c:if test="${powers['DOWNLOAD'] }">
                 <button id="generation" class="layui-btn layui-btn-normal">批量生成</button>
               </c:if>
-            </div>
+            </div> --%>
           </div>
         </div>
       </div>
@@ -35,11 +35,11 @@
 			<a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="column">字典</a>
 		{{# } }}
 		{{# if(${powers.containsKey('DOWNLOAD') }){ }}
-			<a class="layui-btn layui-btn-xs" lay-event="update">生成代码</a>
+			<a class="layui-btn layui-btn-xs" lay-event="generate">代码生成</a>
 		{{# } }}
   	</script>
     
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.0.1.2"></script>
+    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.0.1.5"></script>
   </body>
 </html>

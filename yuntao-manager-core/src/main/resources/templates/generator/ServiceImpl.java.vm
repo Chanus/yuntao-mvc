@@ -1,0 +1,26 @@
+package ${package}.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ${package}.mapper.${className}Mapper;
+import ${package}.model.${className};
+import ${package}.service.${className}Service;
+import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+
+/**
+ * ${tableComment}接口实现
+ * 
+ * @author ${author}
+ * @date ${dateTime}
+ * @since ${since}
+ */
+@Service
+public class ${className}ServiceImpl extends BaseServiceImpl<${className}Mapper, ${className}, ${pk.attributeType}> implements ${className}Service {
+
+	@Autowired
+	public void setMapper(${className}Mapper mapper) {
+		this.mapper = mapper;
+	}
+
+}

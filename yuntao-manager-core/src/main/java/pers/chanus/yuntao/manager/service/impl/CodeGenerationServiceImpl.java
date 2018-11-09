@@ -3,17 +3,23 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.PageBean;
+import pers.chanus.yuntao.manager.common.CodeGenerationUtils;
 import pers.chanus.yuntao.manager.mapper.DataBaseColumnMapper;
 import pers.chanus.yuntao.manager.mapper.DataBaseTableMapper;
 import pers.chanus.yuntao.manager.model.DataBaseColumn;
+import pers.chanus.yuntao.manager.model.DataBaseTable;
 import pers.chanus.yuntao.manager.service.CodeGenerationService;
+import pers.chanus.yuntao.util.IOUtils;
 
 /**
  * 系统代码自动生成接口实现
@@ -45,6 +51,26 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
 	@Override
 	public List<DataBaseColumn> listDataBaseColumn(CustomMap params) {
 		return dataBaseColumnMapper.list(params);
+	}
+
+	@Override
+	public byte[] generateCode(String tableSchema, String[] tableNames, Map<String, Object> params) {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		ZipOutputStream zip = new ZipOutputStream(outputStream);
+		
+		DataBaseTable table = null;
+		List<DataBaseColumn> columns = null;
+		for (String tableName : tableNames) {
+			// 查询表信息
+			table = dataBaseTableMapper.get(tableSchema, tableName);
+			// 查询列信息
+			columns = dataBaseColumnMapper.list(CustomMap.get().putNext("tableSchema", tableSchema).putNext("tableName", tableName));
+			// 生成代码
+			CodeGenerationUtils.generateCode(table, columns, params, zip);
+		}
+		
+		IOUtils.closeQuietly(zip);
+		return outputStream.toByteArray();
 	}
 
 }

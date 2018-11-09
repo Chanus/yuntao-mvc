@@ -152,7 +152,7 @@ public abstract class BaseController {
 				realName = java.net.URLEncoder.encode(realName, "UTF-8");
 			}
 			
-			response.setHeader("Content-disposition", "attachment; filename=" + (StringUtils.isBlank(realName) ? fileParh.substring(fileParh.lastIndexOf("/")) : realName) + fileParh.substring(fileParh.lastIndexOf(".")));
+			response.setHeader("Content-Disposition", "attachment; filename=" + (StringUtils.isBlank(realName) ? fileParh.substring(fileParh.lastIndexOf("/")) : realName) + fileParh.substring(fileParh.lastIndexOf(".")));
 			response.setHeader("Content-Length", String.valueOf(new File(fileParh).length()));
 			
 			bis = new BufferedInputStream(new FileInputStream(fileParh));
