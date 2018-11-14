@@ -43,14 +43,14 @@ layui.define([ 'form', 'table' ], function(exports) {
   					layer.msg(e.msg, {icon: 1, time: 1000}, function() {
 						// 执行func
 						if (func && typeof func === 'function')
-							func(data);
+							func(e);
   						if (type === 'add') {
   							if (addFunc && typeof addFunc === 'function')
-  								addFunc(data);
+  								addFunc(e);
   							parent.layer.close(parent.layer.getFrameIndex(window.name));
   						} else if (type === 'addAgain') {
   							if (addAgainFunc && typeof addAgainFunc === 'function')
-  								addAgainFunc(data);
+  								addAgainFunc(e);
   							$(".layui-form")[0].reset();
   						}
   					});
