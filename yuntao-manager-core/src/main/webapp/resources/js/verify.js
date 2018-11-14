@@ -11,7 +11,7 @@
  * 	lay-fraction-digits	检验浮点数时小数部分的位数，lay-fraction-digits="2"表示固定长度2，lay-fraction-digits="1-2"表示长度在1到2之间
  *  lay-separator	检验输入内容是否以指定的分隔符分隔
  * 	
- * @name		verify.js
+ * @name	verify.js
  * @author	Chanus
  * @date	20180509
  * @version	0.0.1

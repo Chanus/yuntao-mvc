@@ -65,6 +65,8 @@ public class LogAspect {
 	 */
 	@Around("systemLogAspect()")
 	public Object writeSystemLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		long start = System.currentTimeMillis();
+		
 		SystemLog systemLog = getSystemLog(proceedingJoinPoint);
 		if (systemLog == null)
 			return proceedingJoinPoint.proceed();
@@ -90,6 +92,7 @@ public class LogAspect {
 		log.setOperateTime(new Date());
 		if (LogTypeEnum.LOGOUT.equals(systemLog.logType())) {// 退出系统时
 			object = proceedingJoinPoint.proceed();
+			log.setOperateConsumeTime((int) (System.currentTimeMillis() - start));
 			logMapper.insertSelective(log);
 		} else {
 			try {
@@ -103,6 +106,7 @@ public class LogAspect {
 				}
 				if (object instanceof Message && ((Message) object).getCode() == MsgCode.SUCCESS) {// 操作成功
 					log.setOperateContent(StringUtils.compress(getParameters(proceedingJoinPoint, null)));// 操作内容
+					log.setOperateConsumeTime((int) (System.currentTimeMillis() - start));
 					logMapper.insertSelective(log);
 				}
 			} catch (Exception ex) {// 记录异常日志
@@ -110,6 +114,7 @@ public class LogAspect {
 				log.setOperateType(LogTypeEnum.EXCEPTION.name());
 				log.setOperateException(ex.getClass().getName());// 异常代码
 				log.setOperateContent(StringUtils.compress(getParameters(proceedingJoinPoint, ex)));// 异常信息
+				log.setOperateConsumeTime((int) (System.currentTimeMillis() - start));
 				logMapper.insertSelective(log);
 			}
 		}

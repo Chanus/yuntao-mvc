@@ -33,6 +33,8 @@ public class Log implements Serializable {
 
     private String operateTypeDesc;
 
+    private Integer operateConsumeTime;
+
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date operateTime;
 
@@ -138,7 +140,15 @@ public class Log implements Serializable {
         this.operateTypeDesc = operateTypeDesc == null ? null : operateTypeDesc.trim();
     }
 
-    public Date getOperateTime() {
+    public Integer getOperateConsumeTime() {
+		return operateConsumeTime;
+	}
+
+	public void setOperateConsumeTime(Integer operateConsumeTime) {
+		this.operateConsumeTime = operateConsumeTime;
+	}
+
+	public Date getOperateTime() {
         return operateTime;
     }
 
@@ -196,6 +206,6 @@ public class Log implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Log [id=" + id + ", operateNo=" + operateNo + ", operateRoleId=" + operateRoleId + ", operateIp=" + operateIp + ", operateModuleId=" + operateModuleId + ", operateUrl=" + operateUrl + ", operateMethod=" + operateMethod + ", operateException=" + operateException + ", operateType=" + operateType + ", operateTypeDesc=" + operateTypeDesc + ", operateTime=" + operateTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+		return "Log [id=" + id + ", operateNo=" + operateNo + ", operateRoleId=" + operateRoleId + ", operateIp=" + operateIp + ", operateModuleId=" + operateModuleId + ", operateUrl=" + operateUrl + ", operateMethod=" + operateMethod + ", operateException=" + operateException + ", operateType=" + operateType + ", operateTypeDesc=" + operateTypeDesc + ", operateConsumeTime=" + operateConsumeTime + ", operateTime=" + operateTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 }

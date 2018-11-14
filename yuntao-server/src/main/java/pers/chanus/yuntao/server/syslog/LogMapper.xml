@@ -12,6 +12,7 @@
     <result column="operate_exception" jdbcType="VARCHAR" property="operateException" />
     <result column="operate_type" jdbcType="VARCHAR" property="operateType" />
     <result column="operate_type_desc" jdbcType="VARCHAR" property="operateTypeDesc" />
+    <result column="operate_consume_time" jdbcType="INTEGER" property="operateConsumeTime" />
     <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -58,6 +59,9 @@
       <if test="operateTypeDesc != null">
         operate_type_desc,
       </if>
+      <if test="operateConsumeTime != null">
+        operate_consume_time,
+      </if>
       <if test="operateTime != null">
         operate_time,
       </if>
@@ -102,6 +106,9 @@
       <if test="operateTypeDesc != null">
         #{operateTypeDesc,jdbcType=VARCHAR},
       </if>
+      <if test="operateConsumeTime != null">
+        #{operateConsumeTime,jdbcType=INTEGER},
+      </if>
       <if test="operateTime != null">
         #{operateTime,jdbcType=TIMESTAMP},
       </if>
@@ -144,7 +151,8 @@
   
   <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
-    sys_log.id, operate_no, operate_role_id, inet_ntoa(operate_ip) operate_ip, operate_module_id, operate_type, operate_type_desc, operate_time, role_name, module_name
+    sys_log.id, operate_no, operate_role_id, inet_ntoa(operate_ip) operate_ip, operate_module_id, operate_type, 
+    operate_type_desc, operate_consume_time, operate_time, role_name, module_name
     from sys_log
     left join sys_role on operate_role_id = role_id
     left join sys_module on operate_module_id = module_id

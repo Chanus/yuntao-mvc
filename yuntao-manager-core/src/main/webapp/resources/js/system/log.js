@@ -18,10 +18,11 @@ layui.config({
 		},
 		method : 'post',
 		cols : [[
-			{ field : 'operateNo', title : '操作账号', width : '12%', unresize : true, align : 'center' }, 
+			{ field : 'operateNo', title : '操作账号', width : '10%', unresize : true, align : 'center' }, 
 			{ field : 'operateRoleName', title : '角色', width : '10%', unresize : true, align : 'center' }, 
-			{ field : 'operateModuleName', title : '模块', width : '12%', unresize : true, align : 'center' }, 
+			{ field : 'operateModuleName', title : '模块', width : '10%', unresize : true, align : 'center' }, 
 			{ field : 'operateTypeDesc', title : '操作描述', unresize : true, align : 'center' }, 
+			{ field : 'operateConsumeTime', title : '耗时(毫秒)', width : '8%', unresize : true, align : 'center' }, 
 			{ field : 'operateIp', title : '操作IP', width : '12%', unresize : true, align : 'center' }, 
 			{ field : 'operateTime', title : '操作时间', width : '12%', unresize : true, align : 'center' }, 
 			{ fixed : 'right', title : '操作内容', width : '10%', unresize : true, align : 'center', toolbar : '#toolbar' } 
