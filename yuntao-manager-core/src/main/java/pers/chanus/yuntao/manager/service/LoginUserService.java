@@ -4,6 +4,7 @@
 package pers.chanus.yuntao.manager.service;
 
 import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.manager.model.LoginUserView;
 
 /**
  * 登录用户接口
@@ -35,4 +36,22 @@ public interface LoginUserService {
 	 * @since 0.0.3
 	 */
 	Message login(String loginNo, String password, String roleId, String loginIp);
+	
+	/**
+	 * 根据登录账号获取用户信息，不区分账号字母大小写
+	 * 
+	 * @param loginNo	登录账号
+	 * @return
+	 * @since 0.0.4
+	 */
+	LoginUserView getUser(String loginNo);
+    
+	/**
+	 * 根据登录账号获取用户信息，区分账号字母大小写
+	 * 
+	 * @param loginNo	登录账号
+	 * @return
+	 * @since 0.0.4
+	 */
+	LoginUserView getLoginUser(String loginNo);
 }

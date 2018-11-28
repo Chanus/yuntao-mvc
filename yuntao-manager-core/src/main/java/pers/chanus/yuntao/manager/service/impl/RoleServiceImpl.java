@@ -103,4 +103,9 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
 		return Message.success("角色授权成功");
 	}
 
+	@Override
+	public Role getRoleLoginStatus(String roleId) {
+		return mapper.getLoginStatus(roleId);
+	}
+
 }

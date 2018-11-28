@@ -64,7 +64,6 @@ public class LoginUserServiceImpl implements LoginUserService {
 				if (whiteIpsCount == 0)
 					return Message.fail("当前IP不允许登录");
 			}
-			
 		}
 		
 		LoginUserView loginUserView = loginUserViewMapper.login(loginNo);
@@ -124,7 +123,6 @@ public class LoginUserServiceImpl implements LoginUserService {
 				if (whiteIpsCount == 0)
 					return Message.fail("当前IP不允许登录");
 			}
-			
 		}
 		
 		LoginUserView loginUserView = loginUserViewMapper.login(loginNo);
@@ -166,6 +164,16 @@ public class LoginUserServiceImpl implements LoginUserService {
 		LoginUser.setLoginUser(loginUser);
 		
 		return Message.success("登录成功").initMsg(loginUser);
+	}
+
+	@Override
+	public LoginUserView getUser(String loginNo) {
+		return loginUserViewMapper.getUser(loginNo);
+	}
+
+	@Override
+	public LoginUserView getLoginUser(String loginNo) {
+		return loginUserViewMapper.login(loginNo);
 	}
 
 }

@@ -26,4 +26,9 @@ public class WhiteIpServiceImpl extends BaseServiceImpl<WhiteIpMapper, WhiteIp, 
 		this.mapper = mapper;
 	}
 
+	@Override
+	public String getFixedWhiteIps(String loginNo) {
+		return mapper.getFixedWhiteIps(loginNo);
+	}
+
 }

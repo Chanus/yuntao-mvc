@@ -34,4 +34,13 @@ public interface RoleService extends BaseService<Role, Integer> {
 	 * @since 0.0.1
 	 */
 	Message grantRoleModulePower(String roleId, String[] modulePowers);
+	
+	/**
+	 * 获取角色的登录状态
+	 * 
+	 * @param roleId	角色代码
+	 * @return
+	 * @since 0.0.4
+	 */
+	Role getRoleLoginStatus(String roleId);
 }

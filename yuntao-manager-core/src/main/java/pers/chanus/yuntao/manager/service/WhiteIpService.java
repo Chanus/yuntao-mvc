@@ -14,5 +14,12 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @since 0.0.1
  */
 public interface WhiteIpService extends BaseService<WhiteIp, Integer> {
-
+	/**
+	 * 获取登录账号的固定登录IP
+	 * 
+	 * @param loginNo
+	 * @return
+	 * @since 0.0.4
+	 */
+	String getFixedWhiteIps(String loginNo);
 }
