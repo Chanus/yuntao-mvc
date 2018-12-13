@@ -99,6 +99,17 @@ public class StringUtils {
 	public static boolean isNumeric(String s) {
 		return isNotBlank(s) && Pattern.compile("[0-9]*").matcher(s).matches();
 	}
+
+	/**
+	 * 判断字符串是否为数字
+	 * 
+	 * @param s	源字符串
+	 * @return {@code true} 字符串是数字；{@code false} 字符串不是数字
+	 * @since 0.0.4
+	 */
+	public static boolean isNumber(String s) {
+		return isNotBlank(s) && Pattern.compile("^([\\+|-]?0\\.\\d+)|^([\\+|-]?[1-9]\\d*(\\.\\d+)?)$").matcher(s).matches();
+	}
 	
 	/**
 	 * 将Map转换成指定字符连接和分割的字符串

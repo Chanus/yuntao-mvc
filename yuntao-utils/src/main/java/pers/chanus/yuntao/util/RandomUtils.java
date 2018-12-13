@@ -145,7 +145,43 @@ public class RandomUtils {
 	 * @since 0.0.1
 	 */
 	public static String getRandomUniqueNo() {
-		return String.valueOf(System.currentTimeMillis()).substring(2) + String.valueOf((long) ((Math.random() * 9 + 1) * 10000));
+		return String.valueOf(System.currentTimeMillis()) + String.valueOf((int) ((Math.random() * 9 + 1) * 10000));
+	}
+	
+	/**
+	 * 根据UUID的hashCode值生成的纯数字字符串
+	 * 
+	 * @param machineId	机器码，为1-9之间的数据
+	 * @param length	生成字符串的长度(不包含一位机器码)，length必须大于10，否则默认10
+	 * @return <code>length + 1</code>位纯数字字符串
+	 * @since 0.0.4
+	 */
+	public static String getUUIDUniqueNo(int machineId, int length) {
+		machineId = (machineId < 1 || machineId > 10) ? 1 : machineId;
+		length = length >= 10 ? length : 10;
+		int hashCodeV = UUID.randomUUID().toString().hashCode();
+		if (hashCodeV < 0) {// 有可能是负数
+			hashCodeV = -hashCodeV;
+		}
+
+		return machineId + String.format("%0" + length + "d", hashCodeV);
+	}
+	
+	/**
+	 * 获取由UUID的hashCode值和5位随机数字组成的纯数字字符串
+	 * 
+	 * @param machineId	机器码，为1-9之间的数据
+	 * @return 16位纯数字字符串
+	 * @since 0.0.4
+	 */
+	public static String getRandomUUIDUniqueNo(int machineId) {
+		machineId = (machineId < 1 || machineId > 10) ? 1 : machineId;
+		int hashCodeV = UUID.randomUUID().toString().hashCode();
+		if (hashCodeV < 0) {// 有可能是负数
+			hashCodeV = -hashCodeV;
+		}
+
+		return machineId + String.format("%015d", Long.parseLong(hashCodeV + String.valueOf((int) ((Math.random() * 9 + 1) * 10000))));
 	}
 
 	/**

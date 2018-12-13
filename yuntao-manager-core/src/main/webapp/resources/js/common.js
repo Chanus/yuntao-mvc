@@ -97,3 +97,28 @@ Number.prototype.formatNumber = function(pointPsti) {
 	}
 	return number;
 }
+
+// 获取数组中指定元素的索引
+Array.prototype.indexOf = function(val) {
+	for (var i = 0; i < this.length; i++) {
+		if (this[i] == val)
+			return i;
+	}
+	return -1;
+}
+
+// 数组添加元素，已存在的不添加
+Array.prototype.pushNoRepeat = function(val) {
+	var index = this.indexOf(val);
+	if (index == -1) {
+		this.push(val);
+	}
+}
+
+// 删除数组指定元素
+Array.prototype.remove = function(val) {
+	var index = this.indexOf(val);
+	if (index > -1) {
+		this.splice(index, 1);
+	}
+}
