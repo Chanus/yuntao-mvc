@@ -15,6 +15,8 @@ public class ConfigConsts {
 	public final static String STATUS_NO = "0";
 	/** 状态：是 */
 	public final static String STATUS_YES = "1";
+	/** 状态：进行中 */
+	public final static String STATUS_HAND = "2";
 	
 	/** 系统内置角色：超级管理员 */
 	public final static String ROLE_ADMIN_0 = "0";

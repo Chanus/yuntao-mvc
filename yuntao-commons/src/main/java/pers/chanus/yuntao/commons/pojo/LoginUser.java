@@ -37,6 +37,9 @@ public class LoginUser implements Serializable {
     /** 用户类型 */
     private String userType;
 
+    /** 用户权限限制 */
+    private String authority;
+
     /** 用户登录IP */
     private String loginIp;
 
@@ -126,6 +129,14 @@ public class LoginUser implements Serializable {
         this.userType = userType == null ? null : userType.trim();
     }
 
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority == null ? null : authority.trim();
+	}
+
 	public String getLoginIp() {
 		return loginIp;
 	}
@@ -168,7 +179,7 @@ public class LoginUser implements Serializable {
 
 	@Override
 	public String toString() {
-		return "LoginUser [loginNo=" + loginNo + ", loginName=" + loginName + ", roleId=" + roleId + ", masterNo=" + masterNo + ", masterRoleId=" + masterRoleId + ", userType=" + userType + ", loginIp=" + loginIp + ", headImage=" + headImage + ", object=" + object + "]";
+		return "LoginUser [loginNo=" + loginNo + ", loginName=" + loginName + ", roleId=" + roleId + ", masterNo=" + masterNo + ", masterRoleId=" + masterRoleId + ", userType=" + userType + ", authority=" + authority + ", loginIp=" + loginIp + ", headImage=" + headImage + ", object=" + object + "]";
 	}
 
 }

@@ -97,6 +97,9 @@
         <value>com.*.service.impl</value>
         <value>com.*.*.service.impl</value>
         <value>com.*.*.*.service.impl</value>
+        <value>com.*.services.impl</value>
+        <value>com.*.*.services.impl</value>
+        <value>com.*.*.*.services.impl</value>
       </list>
     </property>
   </bean>
@@ -132,9 +135,9 @@
 
   <!-- 配置Mybatis Mapper注册 -->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="**.mapper,pers.chanus.yuntao.server.syslog" />
+    <property name="basePackage" value="**.mapper,pers.chanus.yuntao.server.syslog,jasun.spring.mvc.core.syslog" />
   </bean>
   
   <!-- 扫描Service -->
-  <context:component-scan base-package="**.service.impl"/>
+  <context:component-scan base-package="**.service.impl,**.services.impl"/>
 </beans>
