@@ -9,7 +9,10 @@
   <context-param>
     <description>Spring配置文件，启动数据库连接</description>
     <param-name>contextConfigLocation</param-name>
+    <!-- 单数据源 -->
     <param-value>classpath*:spring-database.xml</param-value>
+    <!-- 双数据源，实现读写分离 -->
+    <!-- <param-value>classpath*:spring-database-rw.xml</param-value> -->
   </context-param>
   
   <!-- Spring核心 -->
