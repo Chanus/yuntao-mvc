@@ -105,7 +105,6 @@ public class IndexController extends BaseController {
 	/**
 	 * 头像上传
 	 * @param file
-	 * @param id	记录ID
 	 * @return
 	 */
 	@ResponseBody
@@ -133,7 +132,6 @@ public class IndexController extends BaseController {
 	
 	/**
 	 * 跳转到修改个人密码页面
-	 * @param model
 	 * @return
 	 */
 	@GetMapping(value = "user/update-own-password.do")

@@ -22,6 +22,12 @@ import java.util.zip.GZIPOutputStream;
  */
 public class StringUtils {
 	/**
+	 * 空字符串
+	 * @since 0.0.5
+	 */
+	public static final String EMPTY = "";
+	
+	/**
 	 * 判断字符串是否为空或空格
 	 * 
 	 * @param s	源字符串
@@ -394,4 +400,37 @@ public class StringUtils {
         
         return new StringBuffer(strLen).append(Character.toLowerCase(str.charAt(0))).append(str.substring(1)).toString();
     }
+
+	/**
+	 * 字符串转Unicode码
+	 * 
+	 * @param string	待转换的字符串
+	 * @return 转换后的Unicode码
+	 * @since 0.0.5
+	 */
+	public static String string2Unicode(String string) {
+		StringBuilder unicode = new StringBuilder();
+		for (int i = 0; i < string.length(); i++) {
+			unicode.append("\\u" + String.valueOf(Integer.toHexString(string.charAt(i))));
+		}
+		
+		return unicode.toString();
+	}
+
+	/**
+	 * Unicode码转字符串
+	 * 
+	 * @param unicode	待转换的Unicode码
+	 * @return 转换后的字符串
+	 * @since 0.0.5
+	 */
+	public static String unicode2String(String unicode) {
+		StringBuilder string = new StringBuilder();
+		String[] hex = unicode.split("\\\\u");
+		for (int i = 1; i < hex.length; i++) {
+			string.append((char) Integer.parseInt(hex[i], 16));
+		}
+		
+		return string.toString();
+	}
 }

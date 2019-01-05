@@ -27,6 +27,7 @@ import pers.chanus.yuntao.manager.model.DataBaseColumn;
 import pers.chanus.yuntao.manager.model.DataBaseTable;
 import pers.chanus.yuntao.util.DateUtils;
 import pers.chanus.yuntao.util.IOUtils;
+import pers.chanus.yuntao.util.StreamUtils;
 import pers.chanus.yuntao.util.StringUtils;
 
 /**
@@ -216,7 +217,7 @@ public class CodeGenerationUtils {
 			try {
 				// 添加到zip
 				zip.putNextEntry(new ZipEntry(getFileName(template, table.getClassname(), table.getClassName(), packageName, manyModule)));
-				IOUtils.write(stringWriter.toString(), zip, "UTF-8");
+				StreamUtils.write(stringWriter.toString(), zip, "UTF-8");
 				IOUtils.closeQuietly(stringWriter);
 				zip.closeEntry();
 			} catch (IOException e) {

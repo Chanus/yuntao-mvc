@@ -30,7 +30,7 @@ public interface BaseMapper<T, PK extends Serializable> {
 	/**
 	 * 根据主键删除实体
 	 * 
-	 * @param pk	主键
+	 * @param pks	主键
 	 * @return 删除的行数
 	 * @since 0.0.1
 	 */

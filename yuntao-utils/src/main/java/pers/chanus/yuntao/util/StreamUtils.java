@@ -6,6 +6,8 @@ package pers.chanus.yuntao.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * 流操作工具类
@@ -60,5 +62,33 @@ public class StreamUtils {
 			IOUtils.close(inputStream);
 		}
 		return stringBuffer.toString();
+	}
+	
+	/**
+	 * 将字节数组写入输出流
+	 * 
+	 * @param data	字节数组
+	 * @param os	输出流
+	 * @throws IOException	I/O异常
+	 * @since 0.0.5
+	 */
+	public static void write(final byte[] data, final OutputStream os) throws IOException {
+		if (data != null)
+			os.write(data);
+	}
+	
+	/**
+	 * 将字符从字符串写入使用指定的字符编码输出流
+	 * 
+	 * @param data	字符串
+	 * @param os	输出流
+	 * @param encoding	字符编码
+	 * @throws IOException I/O异常
+	 * @throws UnsupportedEncodingException 字符编码不支持时抛出
+	 * @since 0.0.5
+	 */
+	public static void write(final String data, final OutputStream os, final String encoding) throws IOException {
+		if (data != null)
+			os.write(data.getBytes(encoding));
 	}
 }

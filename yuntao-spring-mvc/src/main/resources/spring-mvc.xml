@@ -85,8 +85,6 @@
             <!-- <beans:value>WriteNullBooleanAsFalse</beans:value> -->
             <!-- null String不输出 -->
             <!-- <beans:value>WriteNullStringAsEmpty</beans:value> -->
-            <!-- null String也要输出 -->
-            <beans:value>WriteMapNullValue</beans:value>
             <!-- Date的日期转换器 -->
             <!-- <beans:value>WriteDateUseDateFormat</beans:value> -->
           </beans:list>

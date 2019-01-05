@@ -20,7 +20,7 @@ import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import pers.chanus.yuntao.manager.service.CodeGenerationService;
 import pers.chanus.yuntao.springmvc.ConfigUtils;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
-import pers.chanus.yuntao.util.IOUtils;
+import pers.chanus.yuntao.util.StreamUtils;
 
 /**
  * 代码自动生成工具
@@ -106,7 +106,7 @@ public class CodeGenerationController extends BaseController {
 		response.setContentType("application/octet-stream; charset=UTF-8");
 
 		try {
-			IOUtils.write(data, response.getOutputStream());
+			StreamUtils.write(data, response.getOutputStream());
 		} catch (IOException e) {
 			LOGGER.error("自动生成代码下载失败", e);
 		}

@@ -94,7 +94,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
 				String[] mp = s.split("_");
 				roleModulePower.setModuleId(Integer.parseInt(mp[0]));
 				roleModulePower.setPowerItem(mp[1]);
-				roleModulePower.setSubNo("");
+				roleModulePower.setSubNo(StringUtils.EMPTY);
 				roleModulePowers.add(roleModulePower);
 			}
 			roleModulePowerMapper.insertBatch(roleModulePowers);

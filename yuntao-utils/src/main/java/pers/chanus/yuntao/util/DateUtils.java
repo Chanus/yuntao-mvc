@@ -130,10 +130,25 @@ public class DateUtils {
 	 * 获取昨天的yyyy-MM-dd格式字符串
 	 * 
 	 * @return 昨天的yyyy-MM-dd格式字符串
-	 * @see DateUtils#formatDate(Date, String)
+	 * @see DateUtils#getYesterdayDateStr()
 	 * @since 0.0.1
 	 */
+	@Deprecated
 	public static String getYdayDateStr() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.add(Calendar.DATE, -1);
+		return formatDate(calendar.getTime(), DATE_FORMAT);
+	}
+	
+	/**
+	 * 获取昨天的yyyy-MM-dd格式字符串
+	 * 
+	 * @return 昨天的yyyy-MM-dd格式字符串
+	 * @see DateUtils#formatDate(Date, String)
+	 * @since 0.0.5
+	 */
+	public static String getYesterdayDateStr() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		calendar.add(Calendar.DATE, -1);
@@ -253,6 +268,25 @@ public class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.add(Calendar.MINUTE, minute);
+		
+		return calendar.getTime();
+	}
+	
+	/**
+	 * 获取指定时间之前或之后{@code second}秒的时间
+	 * 
+	 * @param date	时间
+	 * @param second	秒数，正数是{@code date}之后，负数是{@code date}之前
+	 * @return 指定时间之前或之后{@code second}秒的时间
+	 * @since 0.0.5
+	 */
+	public static Date getDateTimeBeforeSecond(Date date, int second) {
+		if (date == null)
+			return null;
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.SECOND, second);
 		
 		return calendar.getTime();
 	}
@@ -398,6 +432,19 @@ public class DateUtils {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	/**
+	 * 判断某个时间是否在某一时间段内
+	 * 
+	 * @param date	时间
+	 * @param start	时间段开始时间
+	 * @param end	时间段结束时间
+	 * @return {@code true} date在start和end之间；{@code false} date不在start和end之间
+	 * @since 0.0.5
+	 */
+	public static boolean between(Date date, Date start, Date end) {
+		return date.after(start) && date.before(end);
 	}
 	
 	/**

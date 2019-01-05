@@ -1,7 +1,6 @@
 var treeObj, reload, renderRoleModulePower, action_path = ctx + '/system/role/';
 layui.config({
-	base : '../../js/',
-	version : '0.0.1.1'
+	base : '../../js/'
 }).use([ 'table', 'popup', 'form', 'operations', 'laytpl' ], function() {
 	var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, form = layui.form, operations = layui.operations, laytpl = layui.laytpl;
 	

@@ -13,7 +13,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.math.BigInteger;
+import java.net.URLConnection;
 import java.nio.channels.FileChannel;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -229,6 +234,108 @@ public class FileUtils {
 	}
 
 	/**
+	 * 获取文件大小
+	 * 
+	 * @param path	文件路径
+	 * @return 返回文件字节数，若文件不存在或不是文件则返回0
+	 * @since 0.0.1
+	 */
+	public static long getFileSize(String path) {
+		if (StringUtils.isBlank(path))
+			return 0L;
+
+		File file = new File(path);
+		return (file.exists() && file.isFile()) ? file.length() : 0L;
+	}
+
+	/**
+	 * 获取文件的MD5值
+	 * 
+	 * @param path	文件路径
+	 * @return 文件MD5值
+	 * @since 0.0.5
+	 */
+	public static String getFileMD5(String path) {
+		if (StringUtils.isBlank(path))
+			return null;
+		
+		try {
+			byte[] buffer = new byte[8192];
+			int len = 0;
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			File file = new File(path);
+			FileInputStream fis = new FileInputStream(file);
+			while ((len = fis.read(buffer)) != -1) {
+				md.update(buffer, 0, len);
+			}
+			fis.close();
+			return new BigInteger(1, md.digest()).toString(16);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 获取文件的Mime类型
+	 * 
+	 * @param path	文件全路径
+	 * @return 文件的Mime类型
+	 * @since 0.0.5
+	 */
+	public static String getFileMimeType(String path) {
+		if (StringUtils.isBlank(path))
+			return null;
+		
+		return URLConnection.getFileNameMap().getContentTypeFor(path);
+	}
+	
+	/**
+	 * 获取文件的Mime类型
+	 * 
+	 * @param file	文件
+	 * @return 文件的Mime类型
+	 * @since 0.0.5
+	 */
+	public static String getFileMimeType(File file) {
+		if (file == null)
+			return null;
+		
+		return getFileMimeType(file.getAbsolutePath());
+	}
+	
+	/**
+	 * 获取文件最后的修改时间
+	 * 
+	 * @param file 文件
+	 * @return 文件最后的修改时间
+	 * @since 0.0.5
+	 */
+	public static Date getFileLastModifyTime(File file) {
+		if (file == null)
+			return null;
+		
+		return new Date(file.lastModified());
+	}
+	
+	/**
+	 * 获取文件最后的修改时间
+	 * 
+	 * @param path	文件全路径
+	 * @return 文件最后的修改时间
+	 * @since 0.0.5
+	 */
+	public static Date getFileLastModifyTime(String path) {
+		if (StringUtils.isBlank(path))
+			return null;
+		
+		return getFileLastModifyTime(new File(path));
+	}
+
+	/**
 	 * 创建文件目录
 	 * 
 	 * @param directory	文件目录
@@ -358,6 +465,31 @@ public class FileUtils {
 			file.delete();
 		}
 	}
+	
+	/**
+	 * 快速删除大文件
+	 * 
+	 * @param file	待处理文件
+	 * @since 0.0.5
+	 */
+	public static void deleteBigFile(File file) {
+		if (file != null) {
+			clean(file);
+			file.delete();
+		}
+	}
+	
+	/**
+	 * 快速删除大文件
+	 * 
+	 * @param path	待处理文件全路径
+	 * @since 0.0.5
+	 */
+	public static void deleteBigFile(String path) {
+		if (StringUtils.isNotBlank(path)) {
+			deleteBigFile(new File(path));
+		}
+	}
 
 	/**
 	 * 复制文件
@@ -387,7 +519,6 @@ public class FileUtils {
 			IOUtils.close(in);
 			IOUtils.close(fos);
 			IOUtils.close(out);
-
 		}
 	}
 
@@ -462,19 +593,35 @@ public class FileUtils {
 			return;
 		move(new File(sourcePath), new File(targetPath));
 	}
-
+	
 	/**
-	 * 获取文件大小
+	 * 清空文件
 	 * 
-	 * @param path	文件路径
-	 * @return 返回文件字节数，若文件不存在或不是文件则返回0
-	 * @since 0.0.1
+	 * @param file	待处理文件
+	 * @since 0.0.5
 	 */
-	public static long getFileSize(String path) {
+	public static void clean(File file) {
+		FileWriter fileWriter = null;
+		try {
+			fileWriter = new FileWriter(file);
+			fileWriter.write("");
+		} catch (IOException e) {
+			throw new RuntimeException("IOException occurred.", e);
+		} finally {
+			IOUtils.close(fileWriter);
+		}
+    }
+	
+	/**
+	 * 清空文件
+	 * 
+	 * @param path	待处理文件全路径
+	 * @since 0.0.5
+	 */
+	public static void clean(String path) {
 		if (StringUtils.isBlank(path))
-			return 0L;
-
-		File file = new File(path);
-		return (file.exists() && file.isFile()) ? file.length() : 0L;
-	}
+			return;
+		
+		clean(new File(path));
+    }
 }
