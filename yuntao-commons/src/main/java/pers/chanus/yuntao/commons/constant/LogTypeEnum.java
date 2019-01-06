@@ -21,6 +21,8 @@ public enum LogTypeEnum {
 	DELETE,
 	/** 更新 */
 	UPDATE,
+	/** 添加或更新 */
+	SAVE,
 	/** 系统异常 */
 	EXCEPTION
 }
