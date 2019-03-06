@@ -57,7 +57,7 @@ public class UrlUtils {
 	 * @return http请求URI
 	 * @since 0.0.1
 	 */
-	public static String getParamsUri(Map<String, String> params) {
+	public static String getParamsUri(Map<String, Object> params) {
 		if (CollectionUtils.isEmpty(params)) 
 			return null;
 		

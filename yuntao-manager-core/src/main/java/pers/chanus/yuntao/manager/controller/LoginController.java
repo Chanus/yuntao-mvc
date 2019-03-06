@@ -28,7 +28,9 @@ import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.service.LoginUserService;
 import pers.chanus.yuntao.server.annotation.SystemLog;
+import pers.chanus.yuntao.springmvc.ConfigUtils;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
+import pers.chanus.yuntao.util.GoogleAuthenticatorUtils;
 import pers.chanus.yuntao.util.IpUtils;
 import pers.chanus.yuntao.util.StringUtils;
 import pers.chanus.yuntao.util.VerifyCodeUtils;
@@ -54,6 +56,7 @@ public class LoginController extends BaseController {
 	@GetMapping(value = "login")
 	public String login(Model model) {
 		model.addAttribute("isCheckVerifyCode", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_verify_code"));
+		model.addAttribute("isCheckGoogleAuthenticator", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"));
 		return "login";
 	}
 	
@@ -125,6 +128,24 @@ public class LoginController extends BaseController {
 				return Message.fail("验证码输入错误");
 			}
 		}
+		
+		if ("1".equals(CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"))) {// 启用谷歌验证器
+			String googleAuthenticatorCode = (String) params.get("googleAuthenticatorCode");
+			
+			if (StringUtils.isBlank(googleAuthenticatorCode))
+				return Message.initMsg(MsgCode.FAIL, "动态验证码不能为空");
+			
+			if (!StringUtils.isNumeric(googleAuthenticatorCode))
+				return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
+			
+			GoogleAuthenticatorUtils googleAuthenticatorUtils = new GoogleAuthenticatorUtils();
+			googleAuthenticatorUtils.setWindowSize(5);
+			long t = System.currentTimeMillis();
+			String secret = ConfigUtils.getProperty("google.authenticator.secret");
+			
+			if (!googleAuthenticatorUtils.check_code(secret, Long.parseLong(googleAuthenticatorCode), t))
+				return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
+		}
 
 		String loginname = (String) params.get("loginname");
 		String roleId = (String) params.get("roleId");
@@ -159,6 +180,7 @@ public class LoginController extends BaseController {
 	public String logout(Model model) {
 		getSession().invalidate();
 		model.addAttribute("isCheckVerifyCode", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_verify_code"));
+		model.addAttribute("isCheckGoogleAuthenticator", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"));
 		return "login";
 	}
 

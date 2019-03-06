@@ -3,6 +3,9 @@
  */
 package pers.chanus.yuntao.manager.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
+import pers.chanus.yuntao.util.StringUtils;
 
 /**
  * 日志查询
@@ -45,7 +50,18 @@ public class LogController extends BaseController {
 	@ResponseBody
 	@PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
 	public PageBean list() {
-		return logService.listPagination(getParams().putNext("operateRoleId", LoginUser.getLoginUser().getMasterRoleId()));
+		CustomMap params = getParams();
+		String opModuleName = (String) params.get("opModuleName");
+		String opTypeDesc = (String) params.get("opTypeDesc");
+		try {
+			if (StringUtils.isNotBlank(opModuleName))
+				params.put("opModuleName", URLDecoder.decode(opModuleName, "UTF-8"));
+			if (StringUtils.isNotBlank(opTypeDesc))
+				params.put("opTypeDesc", URLDecoder.decode(opTypeDesc, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			LOGGER.error("查询系统日志转码异常", e);
+		}
+		return logService.listPagination(params.putNext("operateRoleId", LoginUser.getLoginUser().getMasterRoleId()));
 	}
 	
 	/**

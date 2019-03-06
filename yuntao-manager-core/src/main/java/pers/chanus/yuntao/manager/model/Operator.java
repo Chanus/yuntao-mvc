@@ -20,6 +20,8 @@ public class Operator implements Serializable {
 
     private String masterRoleId;
 
+    private String authority;
+
     private String email;
 
     private String tel;
@@ -95,6 +97,14 @@ public class Operator implements Serializable {
     public void setMasterRoleId(String masterRoleId) {
         this.masterRoleId = masterRoleId == null ? null : masterRoleId.trim();
     }
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority == null ? null : authority.trim();
+	}
 
     public String getEmail() {
         return email;
@@ -178,6 +188,6 @@ public class Operator implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Operator [id=" + id + ", operatorNo=" + operatorNo + ", operatorName=" + operatorName + ", operatorPassword=" + operatorPassword + ", operatorRoleId=" + operatorRoleId + ", masterNo=" + masterNo + ", masterRoleId=" + masterRoleId + ", email=" + email + ", tel=" + tel + ", headImage=" + headImage + ", remark=" + remark + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+		return "Operator [id=" + id + ", operatorNo=" + operatorNo + ", operatorName=" + operatorName + ", operatorPassword=" + operatorPassword + ", operatorRoleId=" + operatorRoleId + ", masterNo=" + masterNo + ", masterRoleId=" + masterRoleId + ", authority=" + authority + ", email=" + email + ", tel=" + tel + ", headImage=" + headImage + ", remark=" + remark + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 }

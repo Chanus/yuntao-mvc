@@ -94,6 +94,7 @@ public class LoginUserServiceImpl implements LoginUserService {
 		loginUser.setMasterRoleId(StringUtils.isBlank(loginUserView.getMasterRoleId()) ? loginUserView.getRoleId() : loginUserView.getMasterRoleId());
 		loginUser.setUserType(loginUserView.getUserType());
 		loginUser.setLoginIp(loginIp);
+		loginUser.setAuthority(StringUtils.trim(loginUserView.getAuthority()));
 		loginUser.setHeadImage(loginUserView.getHeadImage());
 		loginUser.setMenus(menus);
 		loginUser.setUrls(moduleMapper.listUrl(loginUserView.getRoleId(), loginUserView.getLoginNo()));
@@ -158,6 +159,7 @@ public class LoginUserServiceImpl implements LoginUserService {
 		loginUser.setMasterRoleId(StringUtils.isBlank(loginUserView.getMasterRoleId()) ? roleId : loginUserView.getMasterRoleId());
 		loginUser.setUserType(loginUserView.getUserType());
 		loginUser.setLoginIp(loginIp);
+		loginUser.setAuthority(StringUtils.trim(loginUserView.getAuthority()));
 		loginUser.setHeadImage(loginUserView.getHeadImage());
 		loginUser.setMenus(menus);
 		loginUser.setUrls(moduleMapper.listUrl(roleId, loginUserView.getLoginNo()));

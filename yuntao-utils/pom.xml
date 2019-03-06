@@ -3,7 +3,7 @@
   <parent>
     <groupId>yuntao</groupId>
     <artifactId>yuntao</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.7</version>
   </parent>
   <artifactId>yuntao-utils</artifactId>
   <name>${project.artifactId}</name>
@@ -17,6 +17,10 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
     </dependency>
   </dependencies>
   

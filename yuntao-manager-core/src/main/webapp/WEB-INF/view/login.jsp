@@ -41,6 +41,12 @@
               <div class="beg-clear"></div>
             </div>
           </c:if>
+          <c:if test="${isCheckGoogleAuthenticator eq '1' }">
+            <div class="layui-form-item">
+              <label class="beg-login-icon layui-icon layui-icon-auz"> </label>
+              <input type="text" name="googleAuthenticatorCode" lay-verify="integer" lay-data-length="6" lay-null-msg="请输入动态验证码" lay-error-msg="动态验证码为6位数字" placeholder="动态验证码" autocomplete="off" class="layui-input">
+            </div>
+          </c:if>
           <div id="logindiv" class="layui-form-item">
             <button id="loginbtn" class="layui-btn layui-btn-primary" lay-submit lay-filter="login">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
           </div>

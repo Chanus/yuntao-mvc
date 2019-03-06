@@ -92,7 +92,7 @@ public class HttpUtils {
 	 * @return 远程资源的响应结果
 	 * @since 0.0.1
 	 */
-	public static String get(final String url, final Map<String, String> parameters) {
+	public static String get(final String url, final Map<String, Object> parameters) {
 		String uri = UrlUtils.getParamsUri(parameters);
 		return get(StringUtils.isBlank(uri) ? url : (url + "?" + uri));
 	}
@@ -127,7 +127,7 @@ public class HttpUtils {
 	 * @param callBack	回调方法
 	 * @since 0.0.1
 	 */
-	public static void getAsyn(final String url, final Map<String, String> parameters, final CallBack callBack) {
+	public static void getAsyn(final String url, final Map<String, Object> parameters, final CallBack callBack) {
 		new Thread() {
 			public void run() {
 				try {
@@ -207,7 +207,7 @@ public class HttpUtils {
 	 * @return 远程资源的响应结果
 	 * @since 0.0.1
 	 */
-	public static String post(final String url, final Map<String, String> parameters) {
+	public static String post(final String url, final Map<String, Object> parameters) {
 		String uri = UrlUtils.getParamsUri(parameters);
 		return post(StringUtils.isBlank(uri) ? url : (url + "?" + uri));
 	}
@@ -242,7 +242,7 @@ public class HttpUtils {
 	 * @param callBack	回调方法
 	 * @since 0.0.1
 	 */
-	public static void postAsyn(final String url, final Map<String, String> parameters, final CallBack callBack) {
+	public static void postAsyn(final String url, final Map<String, Object> parameters, final CallBack callBack) {
 		new Thread() {
 			public void run() {
 				try {
