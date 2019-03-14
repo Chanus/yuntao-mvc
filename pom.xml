@@ -28,7 +28,8 @@
     <mysql.version>8.0.15</mysql.version>
     <druid.version>1.1.14</druid.version>
     <spring.data.redis.version>2.1.5.RELEASE</spring.data.redis.version>
-    <jedis.version>3.0.1</jedis.version>
+    <jedis.version>2.9.0</jedis.version>
+    <spring.session.data.redis.version>2.1.4.RELEASE</spring.session.data.redis.version>
     <commons.io.version>2.6</commons.io.version>
     <fileupload.version>1.4</fileupload.version>
     <slf4j.api.version>1.7.26</slf4j.api.version>
@@ -164,6 +165,12 @@
         <artifactId>jedis</artifactId>
         <version>${jedis.version}</version>
       </dependency>
+      <!-- Spring Session Data Redis 集成 -->
+      <dependency>
+        <groupId>org.springframework.session</groupId>
+        <artifactId>spring-session-data-redis</artifactId>
+        <version>${spring.session.data.redis.version}</version>
+      </dependency>
       <!-- IO操作 -->
       <dependency>
         <groupId>commons-io</groupId>
@@ -229,6 +236,11 @@
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
+        <version>${fasterxml.jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
         <version>${fasterxml.jackson.version}</version>
       </dependency>
       <dependency>

@@ -14,8 +14,18 @@
         http://www.springframework.org/schema/aop 
         http://www.springframework.org/schema/aop/spring-aop.xsd" default-lazy-init="false">
 	
-  <!-- 引入jdbc配置文件 -->
-  <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true" />
+  <!-- 引入jdbc配置文件，这里要特别注意，如果有多个properties文件，必须用逗号分开，不能写成两个 <context:property-placeholder/> -->
+  <!-- <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true" /> -->
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+        <value>classpath:jdbc.properties</value>
+        <!-- <value>classpath:redis.properties</value> --><!-- 如果是类路径下这样加载 -->
+        <!--<value>/WEB-INF/redis.properties</value> --><!-- 如果是WEB-INFO路径下这样加载 -->
+      </list>
+    </property>
+    <property name="ignoreUnresolvablePlaceholders" value="true" />
+  </bean>
 
   <!--创建jdbc数据源 -->
   <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">

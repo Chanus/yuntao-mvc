@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xmlns:redis="http://www.springframework.org/schema/redis"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/cache 
+        http://www.springframework.org/schema/cache/spring-cache.xsd 
+        http://www.springframework.org/schema/redis 
+        http://www.springframework.org/schema/redis/spring-redis.xsd 
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd" default-lazy-init="false">
+        
+  <context:component-scan base-package="pers.chanus.yuntao.redis"/>
+	
+  <!-- 引入jdbc配置文件，这里要特别注意，如果有多个properties文件，必须用逗号分开，不能写成两个 <context:property-placeholder/> -->
+  <!-- <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true" /> -->
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+        <value>classpath:redis.properties</value><!-- 如果是类路径下这样加载 -->
+        <!--<value>/WEB-INF/redis.properties</value> --><!-- 如果是WEB-INFO路径下这样加载 -->
+      </list>
+    </property>
+    <property name="ignoreUnresolvablePlaceholders" value="true" />
+  </bean>
+
+  <!-- 配置JedisPoolConfig连接池 -->
+  <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <!-- 最大连接数 -->
+    <property name="maxTotal" value="${spring.redis.pool.maxTotal}" />
+    <!-- 最大空闲连接数 -->
+    <property name="maxIdle" value="${spring.redis.pool.maxIdle}" />
+    <!-- 最小空闲连接数 -->
+    <property name="minIdle" value="${spring.redis.pool.minIdle}" />
+    <!-- 每次释放连接的最大数目 -->
+    <property name="numTestsPerEvictionRun" value="1024" />
+    <!-- 释放连接的扫描间隔（毫秒） -->
+    <property name="timeBetweenEvictionRunsMillis" value="30000" />
+    <!-- 连接最小空闲时间 -->
+    <property name="minEvictableIdleTimeMillis" value="1800000" />
+    <!-- 连接空闲多久后释放, 当空闲时间>该值 且 空闲连接>最大空闲连接数 时直接释放 -->
+    <property name="softMinEvictableIdleTimeMillis" value="10000" />
+    <!-- 获取连接时的最大等待毫秒数,小于零:阻塞不确定的时间,默认-1 -->
+    <property name="maxWaitMillis" value="${spring.redis.pool.maxWaitMillis}" />
+    <!-- 当调用borrow Object方法时，是否进行有效性检查, 默认false -->
+    <property name="testOnBorrow" value="true" />
+    <!-- 当调用return Object方法时，是否进行有效性检查, 默认false -->
+    <property name="testOnReturn" value="true" />
+    <!-- 在空闲时检查有效性, 默认false -->
+    <property name="testWhileIdle" value="true" />
+    <!-- 连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true -->
+    <property name="blockWhenExhausted" value="false" />
+  </bean>
+  
+  <!-- 单片机方式，业务层主要通过该bean访问redis服务器 -->
+  <!-- <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+    <constructor-arg index="0" name="poolConfig" ref="poolConfig" />
+    <constructor-arg index="1" name="host" value="${spring.redis.host}" type="java.lang.String" />
+    <constructor-arg index="2" name="port" value="${spring.redis.port}" type="int" />
+    <constructor-arg index="3" name="timeout" value="${spring.redis.timeout}" type="int" />
+    <constructor-arg index="4" name="password" value="${spring.redis.password}" type="java.lang.String" />
+  </bean> -->
+
+  <!-- 配置jedis连接工厂 -->
+  <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+    <property name="hostName" value="${spring.redis.host}" />
+    <property name="port" value="${spring.redis.port}" />
+    <property name="password" value="${spring.redis.password}" />
+    <property name="database" value="${spring.redis.database}" />
+    <property name="timeout" value="${spring.redis.timeout}" />
+    <property name="poolConfig" ref="jedisPoolConfig" />
+    <!-- usePool：是否使用连接池 -->
+    <property name="usePool" value="true"/>
+  </bean>
+
+  <!-- SDR默认采用的序列化策略有两种，一种是String的序列化策略，一种是JDK的序列化策略。 StringRedisTemplate默认采用的是String的序列化策略，保存的key和value都是采用此策略序列化保存的。 
+    RedisTemplate默认采用的是JDK的序列化策略，保存的key和value都是采用此策略序列化保存的。 就是因为序列化策略的不同，即使是同一个key用不同的Template去序列化，结果是不同的。
+    所以根据key去删除数据的时候就出现了删除失败的问题。 -->
+  <!-- redis 序列化策略 ，通常情况下key值采用String序列化策略，如果不指定序列化策略，StringRedisTemplate的key和value都将采用String序列化策略。
+    但是RedisTemplate的key和value都将采用JDK序列化 这样就会出现采用不同template保存的数据不能用同一个template删除的问题 -->
+  <!-- 配置RedisTemplate -->
+  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+    <property name="connectionFactory" ref="jedisConnectionFactory" />
+
+    <!-- String -->
+    <property name="keySerializer">
+      <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+    </property>
+    <property name="valueSerializer">
+      <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"></bean>
+    </property>
+    <!-- hash -->
+    <property name="hashKeySerializer">
+      <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+    </property>
+    <property name="hashValueSerializer">
+      <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"></bean>
+    </property>
+    <!-- 开启事务 -->
+    <property name="enableTransactionSupport" value="true" />
+  </bean>
+
+  <!-- 定义缓存管理器 -->
+  <!-- <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+    通过构造方法注入redisTemplate
+    <constructor-arg name="redisOperations" ref="redisTemplate" />
+    定义超时时间，单位秒
+    <property name="defaultExpiration" value="${redis.expiration}" />
+    支持事务
+    <property name="transactionAware" value="true" />
+    设置缓存器名称
+    <property name="cacheNames">
+      <list>
+        <value>redisCacheManager</value>
+      </list>
+    </property>
+  </bean> -->
+
+  <!-- 定义缓存管理器redisCacheManager。 注意：cache-manager默认值是cacheManager，你的缓存管理器id要是命名是cacheManager，这里可以省略 -->
+  <!-- 使用注解驱动 -->
+  <!-- <cache:annotation-driven cache-manager="redisCacheManager" /> -->
+
+  <!-- <cache:annotation-driven cache-manager="cacheManager" /> -->
+
+  <!-- Spring自己的缓存管理器，这里定义了缓存位置名称 ，即注解中的value -->
+  <!-- <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+    配置缓存区
+    <property name="caches">
+      <set>
+        配置缓存区，这里可以配置多个
+        <bean class="pers.chanus.yuntao.redis.RedisCache">
+          <property name="redisTemplate" ref="redisTemplate" />
+          定义缓存区名称
+          <property name="name" value="yuntaoCache" />
+        </bean>
+      </set>
+    </property>
+  </bean> -->
+
+  <!-- 配置spring-session -->
+  <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+    <!-- session过期时间，单位是秒 -->
+    <property name="maxInactiveIntervalInSeconds" value="3600"></property>
+  </bean>
+  
+</beans>
