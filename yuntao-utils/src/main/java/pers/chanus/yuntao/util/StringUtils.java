@@ -28,6 +28,12 @@ public class StringUtils {
 	public static final String EMPTY = "";
 	
 	/**
+	 * 字符串编码格式
+	 * @since 0.0.7
+	 */
+	public static final String CHARSET = "UTF-8";
+	
+	/**
 	 * 判断字符串是否为空或空格
 	 * 
 	 * @param s	源字符串
@@ -251,7 +257,7 @@ public class StringUtils {
 		try {
 			baos = new ByteArrayOutputStream();
 			gzos = new GZIPOutputStream(baos);
-			gzos.write(s.getBytes());
+			gzos.write(s.getBytes(CHARSET));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

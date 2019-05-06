@@ -24,8 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pers.chanus.yuntao.commons.constant.CacheConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.constant.MsgCode;
+import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.commons.pojo.SessionSave;
 import pers.chanus.yuntao.manager.common.CacheData;
+import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.manager.service.LoginUserService;
 import pers.chanus.yuntao.server.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.ConfigUtils;
@@ -47,6 +50,8 @@ import pers.chanus.yuntao.util.encrypt.RSAUtils;
 public class LoginController extends BaseController {
 	@Autowired
 	private LoginUserService loginUserService;
+	@Autowired
+	private LogService logService;
 	
 	/**
 	 * 用户跳转到登录界面
@@ -165,8 +170,11 @@ public class LoginController extends BaseController {
 			message = loginUserService.login(loginname, password, roleId, IpUtils.getIpAddress(getRequest()));
 		}
 		
-		if (message.getCode() == MsgCode.SUCCESS)// 存储登录账号信息
+		if (message.getCode() == MsgCode.SUCCESS) {// 存储登录账号信息
 			session.setAttribute("loginUser", message.getData());
+			if ("1".equals(CacheConsts.SYSTEM_PARAMS_MAP.get("sys_single_location_login")))
+				SessionSave.getSessionIdSave().put(loginname, session.getId());
+		}
 		
 		return message;
 	}
@@ -182,6 +190,37 @@ public class LoginController extends BaseController {
 		model.addAttribute("isCheckVerifyCode", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_verify_code"));
 		model.addAttribute("isCheckGoogleAuthenticator", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"));
 		return "login";
+	}
+	
+	/**
+	 * 检查账号是否在其他地方登录
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping(value = "check-login.do", produces = "application/json; charset=utf-8")
+	public Message checkLogin() {
+		LoginUser loginUser = LoginUser.getLoginUser();
+		if (loginUser == null) {
+			getSession().invalidate();
+			logService.insert(getRequest(), null, null, LogTypeEnum.LOGOUT, "登录状态异常：loginUser为空");
+			return Message.fail("请重新登录系统");
+		}
+		
+		String sessionId = SessionSave.getSessionIdSave().get(loginUser.getLoginNo());
+		if (StringUtils.isBlank(sessionId)) {
+			getSession().invalidate();
+			logService.insert(getRequest(), null, null, LogTypeEnum.LOGOUT, "登录状态异常：sessionId为空");
+			return Message.fail("请重新登录系统");
+		}
+		
+		String currentSessionId = getSession().getId();
+		if (!sessionId.equals(currentSessionId)) {
+			getSession().invalidate();
+			logService.insert(getRequest(), null, null, LogTypeEnum.LOGOUT, "登录状态异常：异地登录");
+			return Message.fail("当前账号已在其他地方登录");
+		}
+		
+		return Message.success("ok");
 	}
 
 }

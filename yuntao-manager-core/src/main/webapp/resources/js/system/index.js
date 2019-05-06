@@ -6,6 +6,7 @@ layui.config({
 	popup: '../../../js/popup' // 弹出框模块
 }).use([ 'index', 'layer', 'popup', 'form' ], function() {
 	var $ = layui.jquery, layer = layui.layer, popup = layui.popup, form = layui.form;
+	var singleLocationLogin = $('#singleLocationLogin').val();
 	
 	// 系统时间
 	setInterval(function() {
@@ -26,4 +27,18 @@ layui.config({
 		});
 		return false;
 	});
+	
+	// 检验用户是否在其他在地方登录
+	setInterval(function() {
+		if (singleLocationLogin !== '1')
+			return;
+		
+		$.post(ctx + '/check-login.do', function(data) {
+			if (data.code != 0) {
+				layer.msg(data.msg, {icon: 0, anim: 6, time: 2000}, function() {
+					window.parent.location.href = '../login';
+				});
+			}
+		});
+	}, 3000);
 });

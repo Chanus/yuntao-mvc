@@ -3,6 +3,8 @@
  */
 package pers.chanus.yuntao.commons.constant;
 
+import java.math.BigDecimal;
+
 /**
  * 系统常量配置
  * 
@@ -31,4 +33,7 @@ public class ConfigConsts {
 	public final static String ORIGIN_IOS = "2";
 	/** 来源： 手机Web */
 	public final static String ORIGIN_PHONE_WEB = "3";
+	
+	/** BigDecimal常量100 */
+	public static final BigDecimal DECIMAL_100 = new BigDecimal(100);
 }

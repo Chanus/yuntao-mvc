@@ -8,6 +8,7 @@
     <%@ include file="../public/header.jsp"%>
   </head>
   <body class="layui-layout-body">
+    <input type="hidden" id="singleLocationLogin" value="${singleLocationLogin }" autocomplete="off" class="layui-input">
     <div id="LAY_app">
       <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
@@ -154,6 +155,6 @@
     </div>
   
     <%@ include file="../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/index.js?v=0.0.1.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/index.js?v=0.0.7.1"></script>
   </body>
 </html>

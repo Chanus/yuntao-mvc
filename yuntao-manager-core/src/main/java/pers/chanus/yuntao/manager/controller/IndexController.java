@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import pers.chanus.yuntao.commons.constant.CacheConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.constant.MsgCode;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
@@ -52,6 +53,7 @@ public class IndexController extends BaseController {
 	@GetMapping(value = "index.do")
 	public String index(Model model) {
 		model.addAttribute("menus", getSession().getAttribute("menus"));
+		model.addAttribute("singleLocationLogin", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_single_location_login"));
 		
 		return "index/index";
 	}
