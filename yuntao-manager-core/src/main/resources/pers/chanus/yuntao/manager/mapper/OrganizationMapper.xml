@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.chanus.yuntao.manager.mapper.OrganizationMapper">
+  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.Organization">
+    <id column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="org_parent_id" jdbcType="INTEGER" property="orgParentId" />
+    <result column="org_short_name" jdbcType="VARCHAR" property="orgShortName" />
+    <result column="org_long_name" jdbcType="VARCHAR" property="orgLongName" />
+    <result column="org_location" jdbcType="VARCHAR" property="orgLocation" />
+    <result column="org_phone" jdbcType="VARCHAR" property="orgPhone" />
+    <result column="valid_status" jdbcType="CHAR" property="validStatus" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    org_id, org_code, org_name, org_parent_id, org_short_name, org_long_name, org_location, org_phone, valid_status, priority, gmt_create, gmt_modified
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_organization
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_organization
+    <where>
+      <choose>
+        <when test="list == null or list.size() == 0">
+          1 &lt;&gt; 1
+        </when>
+        <when test="list.size() == 1">
+          org_id = <foreach collection="list" item="id">#{id,jdbcType=INTEGER}</foreach>
+        </when>
+        <otherwise>
+          org_id in <foreach collection="list" item="id" open="(" separator="," close=")">#{id,jdbcType=INTEGER}</foreach>
+        </otherwise>
+      </choose>
+    </where>
+  </delete>
+  
+  <insert id="insertSelective" parameterType="pers.chanus.yuntao.manager.model.Organization">
+    insert into sys_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
+      <if test="orgName != null">
+        org_name,
+      </if>
+      <if test="orgParentId != null">
+        org_parent_id,
+      </if>
+      <if test="orgShortName != null">
+        org_short_name,
+      </if>
+      <if test="orgLongName != null">
+        org_long_name,
+      </if>
+      <if test="orgLocation != null">
+        org_location,
+      </if>
+      <if test="orgPhone != null">
+        org_phone,
+      </if>
+      <if test="validStatus != null">
+        valid_status,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgParentId != null">
+        #{orgParentId,jdbcType=INTEGER},
+      </if>
+      <if test="orgShortName != null">
+        #{orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLongName != null">
+        #{orgLongName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLocation != null">
+        #{orgLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPhone != null">
+        #{orgPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        #{validStatus,jdbcType=CHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="pers.chanus.yuntao.manager.model.Organization">
+    update sys_organization
+    <set>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgParentId != null">
+        org_parent_id = #{orgParentId,jdbcType=INTEGER},
+      </if>
+      <if test="orgShortName != null">
+        org_short_name = #{orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLongName != null">
+        org_long_name = #{orgLongName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLocation != null">
+        org_location = #{orgLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPhone != null">
+        org_phone = #{orgPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        valid_status = #{validStatus,jdbcType=CHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) from sys_organization
+    <where>
+      <if test="orgParentId != null">
+        and org_parent_id = #{orgParentId,jdbcType=INTEGER}
+      </if>
+      <if test="validStatus != null">
+        and valid_status = #{validStatus,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  
+  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_organization
+    <where>
+      <if test="orgParentId != null">
+        and org_parent_id = #{orgParentId,jdbcType=INTEGER}
+      </if>
+      <if test="validStatus != null">
+        and valid_status = #{validStatus,jdbcType=CHAR}
+      </if>
+    </where>
+    order by priority asc
+    <if test="pagination == true">
+      limit #{start,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+    </if>
+  </select>
+</mapper>

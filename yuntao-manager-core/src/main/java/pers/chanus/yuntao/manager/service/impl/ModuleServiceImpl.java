@@ -3,7 +3,6 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
+import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.ModuleMapper;
 import pers.chanus.yuntao.manager.mapper.RoleMapper;
@@ -74,9 +74,7 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module, Int
 		tree.append("{\"id\":0, \"pId\":0, \"name\":\"模块列表\", \"open\":true").append(", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"").append(", \"iconOpen\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"").append(", \"iconClose\":\"../../lib/zTree/zTreeStyle/img/diy/1_close.png\"}");
 		try {
 			// 构建模块列表目录节点
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("moduleParentId", 0);
-			List<Module> modules = mapper.list(params);
+			List<Module> modules = mapper.list(CustomMap.get().putNext("moduleParentId", 0));
 			if (!CollectionUtils.isEmpty(modules)) {
 				for (Module module : modules) {
 					tree.append(", {\"id\":").append(module.getModuleId()).append(", \"pId\":0, \"name\":\"").append(module.getModuleName()).append("\", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/9.png\"}");
