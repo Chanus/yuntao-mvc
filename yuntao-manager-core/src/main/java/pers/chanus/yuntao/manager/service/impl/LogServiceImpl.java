@@ -18,7 +18,6 @@ import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.server.syslog.Log;
 import pers.chanus.yuntao.server.syslog.LogMapper;
 import pers.chanus.yuntao.util.IpUtils;
-import pers.chanus.yuntao.util.StringUtils;
 
 /**
  * 系统日志接口实现
@@ -40,7 +39,7 @@ public class LogServiceImpl implements LogService {
 		sysLog.setOperateIp(IpUtils.getIpAddress(request));
 		sysLog.setOperateModuleId(moduleId);
 		sysLog.setOperateUrl(String.valueOf(request.getRequestURL()));// 请求URL
-		sysLog.setOperateContent(StringUtils.compress(content));// 操作内容
+		sysLog.setOperateContent(content);// 操作内容
 		sysLog.setOperateType(logType.name());
 		sysLog.setOperateTypeDesc(operateTypeDesc);
 		sysLog.setOperateTime(new Date());

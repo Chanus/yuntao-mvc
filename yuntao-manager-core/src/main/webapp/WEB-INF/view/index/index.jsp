@@ -59,12 +59,14 @@
                 <cite>${sessionScope.loginUser.loginNo }</cite>
               </a>
               <dl class="layui-nav-child">
-                <dd style="text-align: center;">
-                  <a lay-href="${ctx }/index/user/operator-info.do">个人资料</a>
-                </dd>
-                <dd style="text-align: center;">
-                  <a lay-href="${ctx }/index/user/update-own-password.do">修改密码</a>
-                </dd>
+                <c:if test="${sessionScope.loginUser.userType eq '0' or sessionScope.loginUser.userType eq '1' }">
+                  <dd style="text-align: center;">
+                    <a lay-href="${ctx }/index/user/operator-info.do">个人资料</a>
+                  </dd>
+                  <dd style="text-align: center;">
+                    <a lay-href="${ctx }/index/user/update-own-password.do">修改密码</a>
+                  </dd>
+                </c:if>
                 <dd style="text-align: center;">
                   <a href="javascript:;" id="reloadAuthority">刷新权限</a>
                 </dd>

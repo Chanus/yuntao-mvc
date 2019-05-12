@@ -29,6 +29,8 @@ public class Log implements Serializable {
 
     private String operateException;
 
+    private String operateContent;
+
     private String operateType;
 
     private String operateTypeDesc;
@@ -41,10 +43,6 @@ public class Log implements Serializable {
     private Date gmtCreate;
 
     private Date gmtModified;
-
-    private byte[] operateContent;
-
-    private String content;
 
     private String operateRoleName;
 
@@ -125,7 +123,15 @@ public class Log implements Serializable {
         this.operateException = operateException == null ? null : operateException.trim();
     }
 
-    public String getOperateType() {
+    public String getOperateContent() {
+		return operateContent;
+	}
+
+	public void setOperateContent(String operateContent) {
+		this.operateContent = operateContent;
+	}
+
+	public String getOperateType() {
         return operateType;
     }
 
@@ -172,22 +178,6 @@ public class Log implements Serializable {
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
     }
-
-    public byte[] getOperateContent() {
-        return operateContent;
-    }
-
-    public void setOperateContent(byte[] operateContent) {
-        this.operateContent = operateContent;
-    }
-
-	public String getContent() {
-		return this.operateContent == null ? content : new String(StringUtils.decompress(this.operateContent));
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
 
 	public String getOperateRoleName() {
 		return operateRoleName;

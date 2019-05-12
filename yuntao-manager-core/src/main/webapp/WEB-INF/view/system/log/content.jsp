@@ -37,7 +37,7 @@
         <div class="layui-form-item layui-form-text">
           <label class="layui-form-label">内容</label>
           <div class="layui-input-block">
-            <textarea name="content" class="layui-textarea" style="height: 300px;" disabled="disabled">${log.content }</textarea>
+            <textarea name="content" class="layui-textarea" style="height: 300px;" disabled="disabled">${log.operateContent }</textarea>
           </div>
         </div>
       </form>

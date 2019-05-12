@@ -10,13 +10,13 @@
     <result column="operate_url" jdbcType="VARCHAR" property="operateUrl" />
     <result column="operate_method" jdbcType="VARCHAR" property="operateMethod" />
     <result column="operate_exception" jdbcType="VARCHAR" property="operateException" />
+    <result column="operate_content" jdbcType="LONGVARCHAR" property="operateContent" />
     <result column="operate_type" jdbcType="VARCHAR" property="operateType" />
     <result column="operate_type_desc" jdbcType="VARCHAR" property="operateTypeDesc" />
     <result column="operate_consume_time" jdbcType="INTEGER" property="operateConsumeTime" />
     <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-    <result column="operate_content" jdbcType="LONGVARBINARY" property="operateContent" />
     
     <result column="role_name" jdbcType="VARCHAR" property="operateRoleName" />
     <result column="module_name" jdbcType="VARCHAR" property="operateModuleName" />
@@ -119,7 +119,7 @@
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
       <if test="operateContent != null">
-        #{operateContent,jdbcType=LONGVARBINARY},
+        #{operateContent,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -145,6 +145,9 @@
           <when test='operateType == "2"'>and operate_type = 'EXCEPTION'</when>
           <otherwise>and operate_type = #{operateType,jdbcType=VARCHAR}</otherwise>
         </choose>
+      </if>
+      <if test="operateContent != null">
+        and operate_content like concat('%', #{operateContent,jdbcType=LONGVARCHAR}, '%')
       </if>
     </where>
   </select>
@@ -175,6 +178,9 @@
           <when test='operateType == "2"'>and operate_type = 'EXCEPTION'</when>
           <otherwise>and operate_type = #{operateType,jdbcType=VARCHAR}</otherwise>
         </choose>
+      </if>
+      <if test="operateContent != null">
+        and operate_content like concat('%', #{operateContent,jdbcType=LONGVARCHAR}, '%')
       </if>
     </where>
     order by operate_time desc
