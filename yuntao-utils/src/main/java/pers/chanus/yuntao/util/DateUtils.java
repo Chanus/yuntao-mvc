@@ -145,10 +145,25 @@ public class DateUtils {
 	 * 获取昨天的yyyy-MM-dd格式字符串
 	 * 
 	 * @return 昨天的yyyy-MM-dd格式字符串
-	 * @see DateUtils#formatDate(Date, String)
+	 * @see DateUtils#getDateYesterday()
 	 * @since 0.0.5
 	 */
+	@Deprecated
 	public static String getYesterdayDateStr() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.add(Calendar.DATE, -1);
+		return formatDate(calendar.getTime(), DATE_FORMAT);
+	}
+	
+	/**
+	 * 获取昨天的yyyy-MM-dd格式字符串
+	 * 
+	 * @return 昨天的yyyy-MM-dd格式字符串
+	 * @see DateUtils#formatDate(Date, String)
+	 * @since 0.0.8
+	 */
+	public static String getDateYesterday() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		calendar.add(Calendar.DATE, -1);

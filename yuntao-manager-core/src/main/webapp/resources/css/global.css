@@ -143,11 +143,6 @@ span[class*="layui-badge"] {
 	background-color: #5FB878 !important;
 }
 
-/*禁用字体颜色*/
-.layui-disabled, .layui-disabled:hover {
-	color: #666 !important;
-}
-
 /** 对齐方式 */
 .text-l, .text-l th, .text-l td {
 	text-align: left;
