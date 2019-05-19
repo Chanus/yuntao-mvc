@@ -51,13 +51,10 @@ public class LogController extends BaseController {
 	@PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
 	public PageBean list() {
 		CustomMap params = getParams();
-		String opModuleName = (String) params.get("opModuleName");
-		String opTypeDesc = (String) params.get("opTypeDesc");
+		String operateContent = (String) params.get("operateContent");
 		try {
-			if (StringUtils.isNotBlank(opModuleName))
-				params.put("opModuleName", URLDecoder.decode(opModuleName, "UTF-8"));
-			if (StringUtils.isNotBlank(opTypeDesc))
-				params.put("opTypeDesc", URLDecoder.decode(opTypeDesc, "UTF-8"));
+			if (StringUtils.isNotBlank(operateContent))
+				params.put("operateContent", URLDecoder.decode(operateContent, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			LOGGER.error("查询系统日志转码异常", e);
 		}

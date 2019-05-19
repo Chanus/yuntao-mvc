@@ -20,7 +20,13 @@ layui.config({
 		cols : [[
 			{ field : 'operateNo', title : '操作账号', width : '10%', unresize : true, align : 'center' }, 
 			{ field : 'operateRoleName', title : '角色', width : '10%', unresize : true, align : 'center' }, 
-			{ field : 'operateModuleName', title : '模块', width : '10%', unresize : true, align : 'center' }, 
+			{ field : 'operateModuleId', title : '模块', width : '10%', unresize : true, align : 'center', templet : function(d) {
+				if (d.operateModuleId != null && d.operateModuleId != '') {
+					return d.operateModuleName + '(' + d.operateModuleId + ')';
+				} else {
+					return '';
+				}
+			} }, 
 			{ field : 'operateTypeDesc', title : '操作描述', unresize : true, align : 'center' }, 
 			{ field : 'operateConsumeTime', title : '耗时(毫秒)', width : '8%', unresize : true, align : 'center' }, 
 			{ field : 'operateIp', title : '操作IP', width : '12%', unresize : true, align : 'center' }, 
@@ -51,9 +57,11 @@ layui.config({
 				curr: 1 //重新从第 1 页开始
 			},
 			where: {
+				operateModuleId: $("#operateModuleId").val(),
 				operateNo: $("#operateNo").val(),
 				beginTime: $("#beginTime").val(),
 				endTime: $("#endTime").val(),
+				operateContent: encodeURI($("#operateContent").val()),
 				operateType: operateType
 			}
 		});

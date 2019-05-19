@@ -16,6 +16,14 @@
             <div class="layui-input-inline">
               <input type="text" id="operateNo" class="layui-input" placeholder="请输入操作账号" autocomplete="off">
             </div>
+            <label class="layui-form-label">模块代码</label>
+            <div class="layui-input-inline">
+              <input type="text" id="operateModuleId" class="layui-input" placeholder="请输入操作模块代码" autocomplete="off">
+            </div>
+            <label class="layui-form-label">操作内容</label>
+            <div class="layui-input-inline">
+              <input type="text" id="operateContent" class="layui-input" placeholder="请输入操作内容" autocomplete="off">
+            </div>
             <div class="layui-input-inline" style="width: 85px;">
               <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
             </div>
@@ -38,6 +46,6 @@
 		<a class="layui-btn layui-btn-xs" lay-event="content">日志内容</a>
   	</script>
     
-    <script type="text/javascript" src="${ctx }/js/system/log.js?v=0.0.1.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/log.js?v=0.0.8.3"></script>
   </body>
 </html>

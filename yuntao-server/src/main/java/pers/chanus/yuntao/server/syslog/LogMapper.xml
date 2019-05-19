@@ -133,6 +133,9 @@
       <if test="endTime != null">
         and operate_time &lt;= #{endTime,jdbcType=TIMESTAMP}
       </if>
+      <if test="operateModuleId != null">
+        and operate_module_id = #{operateModuleId,jdbcType=INTEGER}
+      </if>
       <if test="operateNo != null">
         and operate_no = #{operateNo,jdbcType=VARCHAR}
       </if>
@@ -165,6 +168,9 @@
       </if>
       <if test="endTime != null">
         and operate_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operateModuleId != null">
+        and operate_module_id = #{operateModuleId,jdbcType=INTEGER}
       </if>
       <if test="operateNo != null">
         and operate_no = #{operateNo,jdbcType=VARCHAR}
