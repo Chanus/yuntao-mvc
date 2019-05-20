@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="${parentPath}public/public.jsp" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <%@ include file="${parentPath}public/header.jsp" %>
+  </head>
+  <body>
+    <div class="pd-5">
+      <form class="layui-form layui-form-pane">
+        <input type="hidden" name="${pk.attributename}" value="${${classname}.${pk.attributename} }" autocomplete="off" class="layui-input">
+#foreach ($column in $columns)
+#if($column.columnName != $pk.columnName)
+        <div class="layui-form-item">
+          <label class="layui-form-label">${column.columnComment}#if($column.nullable == 'NO')<span class="red">*</span>#end</label>
+          <div class="layui-input-block">
+            <input type="text" name="${column.attributename}" #if($column.nullable == 'NO')required lay-verify="required"#end value="${${classname}.${column.attributename} }" placeholder="请输入${column.columnComment}" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+#end
+#end
+        <div class="layui-form-item text-c">
+          <div class="layui-inline">
+            <c:choose>
+              <c:when test="#literal()${#end cmd eq 'add' #literal()}#end">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="add">添加</button>
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="addAgain">保存并添加下一个</button>
+              </c:when>
+              <c:when test="#literal()${#end cmd eq 'update' #literal()}#end">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="update">确定</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+              </c:when>
+            </c:choose>
+            <span class="layui-btn layui-btn-primary" id="cancel">取消</span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <%@ include file="${parentPath}public/footer.jsp" %>
+    <script type="text/javascript" src="${ctx}/js/${jsPath}/${jsName}.js?v=${since}.1"></script>
+  </body>
+</html>

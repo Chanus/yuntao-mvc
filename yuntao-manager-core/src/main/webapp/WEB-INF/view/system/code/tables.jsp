@@ -18,11 +18,6 @@
             <div class="layui-input-inline" style="width: 85px;">
               <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
             </div>
-            <%-- <div class="layui-input-inline operator-div">
-              <c:if test="${powers['DOWNLOAD'] }">
-                <button id="generation" class="layui-btn layui-btn-normal">批量生成</button>
-              </c:if>
-            </div> --%>
           </div>
         </div>
       </div>
@@ -40,6 +35,6 @@
   	</script>
     
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.0.1.5"></script>
+    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.0.8.1"></script>
   </body>
 </html>

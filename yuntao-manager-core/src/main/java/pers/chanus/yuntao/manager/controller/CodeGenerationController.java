@@ -101,7 +101,7 @@ public class CodeGenerationController extends BaseController {
 		String[] tableNames = new String[] { tableName };
 		byte[] data = codeGenerationService.generateCode(tableSchema, tableNames, getParams());
 		response.reset();
-		response.setHeader("Content-Disposition", "attachment; filename=\"generate-code.zip\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\"yuntao-generate-code.zip\"");
 		response.addHeader("Content-Length", String.valueOf(data.length));
 		response.setContentType("application/octet-stream; charset=UTF-8");
 

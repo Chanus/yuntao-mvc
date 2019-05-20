@@ -4,7 +4,7 @@ import ${package}.model.${className};
 import pers.chanus.yuntao.server.service.BaseService;
 
 /**
- * ${tableComment}接口
+ * ${moduleName}接口
  * 
  * @author ${author}
  * @date ${dateTime}

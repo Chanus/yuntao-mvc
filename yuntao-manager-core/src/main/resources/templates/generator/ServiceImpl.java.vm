@@ -9,7 +9,7 @@ import ${package}.service.${className}Service;
 import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 
 /**
- * ${tableComment}接口实现
+ * ${moduleName}接口实现
  * 
  * @author ${author}
  * @date ${dateTime}

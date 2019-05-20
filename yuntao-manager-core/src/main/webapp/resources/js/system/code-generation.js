@@ -11,7 +11,6 @@ layui.config({
 		url : action_path + 'list.do',
 		method : 'post',
 		cols : [[
-			{ type : 'checkbox', width : 60, fixed : 'left' }, 
 			{ field : 'tableName', title : '表名称', width : '15%', unresize : true, align : 'center' }, 
 			{ field : 'tableType', title : '表类型', width : '8%', unresize : true, align : 'center' }, 
 			{ field : 'engine', title : '数据库引擎', width : '8%', unresize : true, align : 'center' }, 
@@ -35,14 +34,14 @@ layui.config({
 				curr: 1 //重新从第 1 页开始
 			},
 			where: {
-				tableName: $("#tableName").val(),
+				tableName: $('#tableName').val(),
 				v: new Date().getTime()
 			}
 		});
 	};
 	
 	// 搜索
-	$("#search").on('click', function() {
+	$('#search').on('click', function() {
 		reload();
 	});
 	

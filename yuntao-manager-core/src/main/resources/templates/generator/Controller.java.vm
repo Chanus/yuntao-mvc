@@ -20,7 +20,7 @@ import pers.chanus.yuntao.server.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 
 /**
- * ${tableComment}管理
+ * ${moduleName}
  * 
  * @author ${author}
  * @date ${dateTime}

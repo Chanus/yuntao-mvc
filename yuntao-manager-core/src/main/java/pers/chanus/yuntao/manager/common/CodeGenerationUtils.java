@@ -129,12 +129,10 @@ public class CodeGenerationUtils {
 		templates.add("templates/generator/Service.java.vm");
 		templates.add("templates/generator/ServiceImpl.java.vm");
 		templates.add("templates/generator/Controller.java.vm");
-//		templates.add("templates/generator/list.html.vm");
-//		templates.add("templates/generator/add.html.vm");
-//		templates.add("templates/generator/edit.html.vm");
-//		templates.add("templates/generator/list.js.vm");
-//		templates.add("templates/generator/add.js.vm");
-//		templates.add("templates/generator/edit.js.vm");
+		templates.add("templates/generator/list.jsp.vm");
+		templates.add("templates/generator/add-update.jsp.vm");
+		templates.add("templates/generator/list.js.vm");
+		templates.add("templates/generator/menu.sql.vm");
 		return templates;
 	}
 
@@ -195,12 +193,28 @@ public class CodeGenerationUtils {
 		// 封装模板数据
 		String packageName = (String) params.get("package");
 		String manyModule = (String) params.get("manyModule");
+		String pathName = (String) params.get("pathName");
 		params.put("tableName", table.getTableName());
 		params.put("tableComment", table.getTableComment());
 		params.put("pk", table.getPk());
 		params.put("className", table.getClassName());
 		params.put("classname", table.getClassname());
 		params.put("columns", table.getColumns());
+		String parentPath = null, jsPath = null, jsName = null;
+		if (StringUtils.isNotBlank(pathName)) {
+			if (pathName.charAt(0) == '/')
+				pathName = pathName.substring(1);
+			if (pathName.charAt(pathName.length() - 1) == '/')
+				pathName = pathName.substring(0, pathName.length() - 1);
+			
+			String[] pathArr = pathName.split("/");
+			parentPath = StringUtils.repeat("../", pathArr.length);
+			jsPath = pathArr.length == 1 ? pathName : pathName.substring(0, pathName.lastIndexOf("/"));
+			jsName = pathArr.length == 1 ? pathName : pathName.substring(pathName.lastIndexOf("/") + 1, pathName.length());
+		}
+		params.put("parentPath", parentPath);
+		params.put("jsPath", jsPath);
+		params.put("jsName", jsName);
 		params.put("dateTime", DateUtils.formatDateTime(new Date()));
 		VelocityContext context = new VelocityContext(params);
 
@@ -216,7 +230,7 @@ public class CodeGenerationUtils {
 
 			try {
 				// 添加到zip
-				zip.putNextEntry(new ZipEntry(getFileName(template, table.getClassname(), table.getClassName(), packageName, manyModule)));
+				zip.putNextEntry(new ZipEntry(getFileName(template, table.getClassname(), table.getClassName(), packageName, manyModule, pathName, jsPath, jsName)));
 				StreamUtils.write(stringWriter.toString(), zip, "UTF-8");
 				IOUtils.closeQuietly(stringWriter);
 				zip.closeEntry();
@@ -266,10 +280,13 @@ public class CodeGenerationUtils {
 	 * @param className	类名(首字母大写)
 	 * @param packageName	包名
 	 * @param manyModule	项目是否是多模块项目：0-否，1-是
+	 * @param pathName	URL标识
+	 * @param jsPath	js文件相对路径
+	 * @param jsName	js文件名
 	 * @return
 	 * @since 0.0.3
 	 */
-	public static String getFileName(String template, String classname, String className, String packageName, String manyModule) {
+	public static String getFileName(String template, String classname, String className, String packageName, String manyModule, String pathName, String jsPath, String jsName) {
 		packageName = packageName.replace(".", File.separator) + File.separator;
 
 		String rootPath = "src" + File.separator + "main" + File.separator;
@@ -299,28 +316,21 @@ public class CodeGenerationUtils {
 			return javaPath + (ConfigConsts.STATUS_YES.equals(manyModule) ? ("manager" + File.separator) : "") + "controller" + File.separator + className + "Controller.java";
 		}
 
-//		if (template.contains("list.html.vm")) {
-//			return "main" + File.separator + "resources" + File.separator + "templates" + File.separator + packageName + File.separator + classname + File.separator + classname + ".html";
-//		}
-//
-//		if (template.contains("add.html.vm")) {
-//			return "main" + File.separator + "resources" + File.separator + "templates" + File.separator + packageName + File.separator + classname + File.separator + "add.html";
-//		}
-//
-//		if (template.contains("edit.html.vm")) {
-//			return "main" + File.separator + "resources" + File.separator + "templates" + File.separator + packageName + File.separator + classname + File.separator + "edit.html";
-//		}
-//
-//		if (template.contains("list.js.vm")) {
-//			return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js" + File.separator + "appjs" + File.separator + packageName + File.separator + classname + File.separator + classname + ".js";
-//		}
-//		if (template.contains("add.js.vm")) {
-//			return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js" + File.separator + "appjs" + File.separator + packageName + File.separator + classname + File.separator + "add.js";
-//		}
-//
-//		if (template.contains("edit.js.vm")) {
-//			return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js" + File.separator + "appjs" + File.separator + packageName + File.separator + classname + File.separator + "edit.js";
-//		}
+		if (template.contains("list.jsp.vm")) {
+			return rootPath + "webapp" + File.separator + "WEB-INF" + File.separator + "view" + File.separator + pathName + File.separator + "list.jsp";
+		}
+
+		if (template.contains("add-update.jsp.vm")) {
+			return rootPath + "webapp" + File.separator + "WEB-INF" + File.separator + "view" + File.separator + pathName + File.separator + "add-update.jsp";
+		}
+
+		if (template.contains("list.js.vm")) {
+			return rootPath + "webapp" + File.separator + "resources" + File.separator + "js" + File.separator + jsPath + File.separator + jsName + ".js";
+		}
+
+		if (template.contains("menu.sql.vm")) {
+			return "menu.sql";
+		}
 
 		return null;
 	}
