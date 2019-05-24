@@ -119,4 +119,129 @@ public class SHAUtils {
 	public static String sha2512(String text) {
 		return digest(text, SHA2512);
 	}
+	
+	/**
+	 * SHA-1验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA1(String text, String ciphertext) {
+		return sha1(text).equals(ciphertext) ? true : false;
+	}
+	
+	/**
+	 * SHA-1根据密钥验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param key	密钥
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA1(String text, String key, String ciphertext) {
+		return verifySHA1(key + text, ciphertext);
+	}
+	
+	/**
+	 * SHA2-224验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA2224(String text, String ciphertext) {
+		return sha2224(text).equals(ciphertext) ? true : false;
+	}
+	
+	/**
+	 * SHA2-224根据密钥验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param key	密钥
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA2224(String text, String key, String ciphertext) {
+		return verifySHA2224(key + text, ciphertext);
+	}
+	
+	/**
+	 * SHA2-256验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA2256(String text, String ciphertext) {
+		return sha2256(text).equals(ciphertext) ? true : false;
+	}
+	
+	/**
+	 * SHA2-256根据密钥验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param key	密钥
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA2256(String text, String key, String ciphertext) {
+		return verifySHA2256(key + text, ciphertext);
+	}
+	
+	/**
+	 * SHA2-384验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA2384(String text, String ciphertext) {
+		return sha2384(text).equals(ciphertext) ? true : false;
+	}
+	
+	/**
+	 * SHA2-384根据密钥验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param key	密钥
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA2384(String text, String key, String ciphertext) {
+		return verifySHA2384(key + text, ciphertext);
+	}
+	
+	/**
+	 * SHA2-512验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA2512(String text, String ciphertext) {
+		return sha2512(text).equals(ciphertext) ? true : false;
+	}
+	
+	/**
+	 * SHA2-512根据密钥验证字符串
+	 * 
+	 * @param text	明文字符串
+	 * @param key	密钥
+	 * @param ciphertext	密文字符串
+	 * @return {@code true} 验证通过；{@code false} 验证不通过
+	 * @since 0.0.8
+	 */
+	public static boolean verifySHA2512(String text, String key, String ciphertext) {
+		return verifySHA2512(key + text, ciphertext);
+	}
 }

@@ -65,12 +65,12 @@ public class MD5Utils {
 	 * MD5验证字符串
 	 * 
 	 * @param text	明文字符串
-	 * @param md5	密文字符串
+	 * @param ciphertext	密文字符串
 	 * @return {@code true} 验证通过；{@code false} 验证不通过
 	 * @since 0.0.1
 	 */
-	public static boolean verify(String text, String md5) {
-		return md5(text).equals(md5) ? true : false;
+	public static boolean verify(String text, String ciphertext) {
+		return md5(text).equals(ciphertext) ? true : false;
 	}
 	
 	/**
@@ -78,11 +78,11 @@ public class MD5Utils {
 	 * 
 	 * @param text	明文字符串
 	 * @param key	密钥
-	 * @param md5	密文字符串
+	 * @param ciphertext	密文字符串
 	 * @return {@code true} 验证通过；{@code false} 验证不通过
 	 * @since 0.0.1
 	 */
-	public static boolean verify(String text, String key, String md5) {
-		return verify(key + text, md5);
+	public static boolean verify(String text, String key, String ciphertext) {
+		return verify(key + text, ciphertext);
 	}
 }
