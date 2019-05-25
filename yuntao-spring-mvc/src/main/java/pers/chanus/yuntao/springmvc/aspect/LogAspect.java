@@ -30,8 +30,8 @@ import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.server.annotation.SystemLog;
 import pers.chanus.yuntao.server.syslog.Log;
 import pers.chanus.yuntao.server.syslog.LogMapper;
+import pers.chanus.yuntao.util.CollectionUtils;
 import pers.chanus.yuntao.util.IpUtils;
-import pers.chanus.yuntao.util.StringUtils;
 
 /**
  * 系统日志切点类
@@ -157,7 +157,7 @@ public class LogAspect {
 			}
 		}
 		if (e != null) {
-			parameters.append("\r\n").append(e).append("\r\n").append(StringUtils.array2String(e.getStackTrace()));
+			parameters.append("\r\n").append(e).append("\r\n").append(CollectionUtils.join(e.getStackTrace()));
 		}
 		
 		return parameters.toString();

@@ -130,8 +130,10 @@ public class StringUtils {
 	 * @param link	key和value之间的连接符，如"="
 	 * @param separator	每组key和value之间的分割符，如"&"
 	 * @return {@code link}与{@code separator}连接和分割的字符串
+	 * @see CollectionUtils#join(Map, String, String)
 	 * @since 0.0.1
 	 */
+	@Deprecated
 	public static String map2String(Map<String, ?> map, String link, String separator) {
 		if (CollectionUtils.isEmpty(map))
 			return null;
@@ -149,8 +151,10 @@ public class StringUtils {
 	 * 
 	 * @param map	Map集合数据
 	 * @return key1=value1&key2=value2...格式字符串
+	 * @see CollectionUtils#join(Map)
 	 * @since 0.0.1
 	 */
+	@Deprecated
 	public static String map2String(Map<String, ?> map) {
 		return map2String(map, "=", "&");
 	}
@@ -161,8 +165,10 @@ public class StringUtils {
 	 * @param array	数据数组
 	 * @param separator	分割符
 	 * @return 以{@code separator}分割的字符串
+	 * @see CollectionUtils#join(Object[], String)
 	 * @since 0.0.1
 	 */
+	@Deprecated
 	public static String array2String(Object[] array, String separator) {
 		if (CollectionUtils.isEmpty(array) || isBlank(separator))
 			return null;
@@ -181,8 +187,10 @@ public class StringUtils {
 	 * 
 	 * @param array	数据数组
 	 * @return value1, value2...格式字符串
+	 * @see CollectionUtils#join(Object[])
 	 * @since 0.0.1
 	 */
+	@Deprecated
 	public static String array2String(Object[] array) {
 		return array2String(array, ",");
 	}

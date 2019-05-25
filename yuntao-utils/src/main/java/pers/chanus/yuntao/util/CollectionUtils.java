@@ -59,6 +59,7 @@ public class CollectionUtils {
 	public static Map<String, Object> sortMapByKey(Map<String, Object> map) {
 		if (isEmpty(map))
 			return null;
+		
 		Map<String, Object> sortMap = new TreeMap<String, Object>(new Comparator<String>() {
 			@Override
 			public int compare(String o1, String o2) {
@@ -66,6 +67,7 @@ public class CollectionUtils {
 			}
 		});
 		sortMap.putAll(map);
+		
 		return sortMap;
 	}
 
@@ -88,5 +90,130 @@ public class CollectionUtils {
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * 将集合以separator连接并以字符串的形式返回
+	 * 
+	 * @param collection	集合
+	 * @param separator	连接符
+	 * @return 返回以{@code separator}连接后的字符串
+	 * @since 0.0.8
+	 */
+	public static String join(Collection<?> collection, String separator) {
+		if (isEmpty(collection))
+			return null;
+		
+		StringBuilder sb = new StringBuilder();
+		for (Object o : collection) {
+			if (o != null && !"".equals(o.toString()))
+				sb.append(o.toString()).append(separator);
+		}
+		
+		return sb.substring(0, sb.length() - 1);
+	}
+	
+	/**
+	 * 将Map转换成指定字符连接和分割的字符串
+	 * 
+	 * @param map	Map集合数据
+	 * @param link	key和value之间的连接符，如"="
+	 * @param separator	每组key和value之间的分割符，如"&"
+	 * @return {@code link}与{@code separator}连接和分割的字符串
+	 * @since 0.0.8
+	 */
+	public static String join(Map<?, ?> map, String link, String separator) {
+		if (isEmpty(map))
+			return null;
+		
+		StringBuilder sb = new StringBuilder();
+		for (Map.Entry<?, ?> entry : map.entrySet()) {
+			sb.append(String.valueOf(entry.getKey())).append(link).append(String.valueOf(entry.getValue())).append(separator);
+		}
+		
+		return sb.substring(0, sb.length() - separator.length());
+	}
+	
+	/**
+	 * 将Map转换成"="连接和"&"分割的字符串
+	 * 
+	 * @param map	Map集合数据
+	 * @return key1=value1&key2=value2...格式字符串
+	 * @since 0.0.8
+	 */
+	public static String join(Map<?, ?> map) {
+		return join(map, "=", "&");
+	}
+
+	/**
+	 * 将Map的key以separator连接并以字符串的形式返回
+	 * 
+	 * @param map	Map集合数据
+	 * @param separator	连接符
+	 * @return {@code separator}连接的字符串
+	 * @since 0.0.8
+	 */
+	public static String keyJoin(Map<?, ?> map, String separator) {
+		if (isEmpty(map))
+			return null;
+		
+		StringBuilder sb = new StringBuilder();
+		for (Map.Entry<?, ?> entry : map.entrySet()) {
+			sb.append(String.valueOf(entry.getKey())).append(separator);
+		}
+		
+		return sb.substring(0, sb.length() - separator.length());
+	}
+
+	/**
+	 * 将Map的value以separator连接并以字符串的形式返回
+	 * 
+	 * @param map	Map集合数据
+	 * @param separator	连接符
+	 * @return {@code separator}连接的字符串
+	 * @since 0.0.8
+	 */
+	public static String valueJoin(Map<?, ?> map, String separator) {
+		if (isEmpty(map))
+			return null;
+
+		StringBuilder sb = new StringBuilder();
+		for (Map.Entry<?, ?> entry : map.entrySet()) {
+			sb.append(String.valueOf(entry.getValue())).append(separator);
+		}
+		
+		return sb.substring(0, sb.length() - separator.length());
+	}
+	
+	/**
+	 * 将数组以separator连接并以字符串的形式返回
+	 * 
+	 * @param array	数据数组
+	 * @param separator	分割符
+	 * @return 以{@code separator}连接的字符串
+	 * @since 0.0.8
+	 */
+	public static String join(Object[] array, String separator) {
+		if (isEmpty(array))
+			return null;
+		
+		StringBuffer sb = new StringBuffer();
+		for (Object object : array) {
+			if (object != null)
+				sb.append(object.toString()).append(separator);
+		}
+		
+		return sb.substring(0, sb.length() - separator.length());
+	}
+	
+	/**
+	 * 将数组以逗号连接并以字符串的形式返回
+	 * 
+	 * @param array	数据数组
+	 * @return value1, value2...格式字符串
+	 * @since 0.0.8
+	 */
+	public static String join(Object[] array) {
+		return join(array, ",");
 	}
 }
