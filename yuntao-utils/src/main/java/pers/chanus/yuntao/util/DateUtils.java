@@ -127,6 +127,17 @@ public class DateUtils {
 	}
 	
 	/**
+	 * 获取当天的yyyy-MM-dd HH:mm:ss格式字符串
+	 * 
+	 * @return 当天的yyyy-MM-dd HH:mm:ss格式字符串
+	 * @see DateUtils#formatDateTime(Date)
+	 * @since 0.0.8
+	 */
+	public static String getDateTimeToday() {
+		return formatDateTime(new Date());
+	}
+	
+	/**
 	 * 获取昨天的yyyy-MM-dd格式字符串
 	 * 
 	 * @return 昨天的yyyy-MM-dd格式字符串
@@ -164,10 +175,40 @@ public class DateUtils {
 	 * @since 0.0.8
 	 */
 	public static String getDateYesterday() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		calendar.add(Calendar.DATE, -1);
-		return formatDate(calendar.getTime(), DATE_FORMAT);
+		return formatDate(getDateTimeBeforeDay(new Date(), -1), DATE_FORMAT);
+	}
+	
+	/**
+	 * 获取昨天的yyyy-MM-dd HH:mm:ss格式字符串
+	 * 
+	 * @return 昨天的yyyy-MM-dd HH:mm:ss格式字符串
+	 * @see DateUtils#formatDateTime(Date)
+	 * @since 0.0.8
+	 */
+	public static String getDateTimeYesterday() {
+		return formatDateTime(getDateTimeBeforeDay(new Date(), -1));
+	}
+	
+	/**
+	 * 获取明天的yyyy-MM-dd格式字符串
+	 * 
+	 * @return 明天的yyyy-MM-dd格式字符串
+	 * @see DateUtils#formatDate(Date, String)
+	 * @since 0.0.8
+	 */
+	public static String getDateTomorrow() {
+		return formatDate(getDateTimeBeforeDay(new Date(), 1), DATE_FORMAT);
+	}
+	
+	/**
+	 * 获取明天的yyyy-MM-dd HH:mm:ss格式字符串
+	 * 
+	 * @return 明天的yyyy-MM-dd HH:mm:ss格式字符串
+	 * @see DateUtils#formatDateTime(Date)
+	 * @since 0.0.8
+	 */
+	public static String getDateTimeTomorrow() {
+		return formatDateTime(getDateTimeBeforeDay(new Date(), 1));
 	}
 	
 	/**
