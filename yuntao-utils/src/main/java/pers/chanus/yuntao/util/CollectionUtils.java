@@ -50,7 +50,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * 将{@code map}按{@code key}进行排序
+	 * 将{@code map}按{@code key}进行排序，按ASCII码从小到大排序
 	 * 
 	 * @param map	源Map集合
 	 * @return 排序后的Map集合
@@ -186,7 +186,7 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * 将数组以separator连接并以字符串的形式返回
+	 * 将数组以separator连接并以字符串的形式返回，排除空元素
 	 * 
 	 * @param array	数据数组
 	 * @param separator	分割符
@@ -199,7 +199,7 @@ public class CollectionUtils {
 		
 		StringBuffer sb = new StringBuffer();
 		for (Object object : array) {
-			if (object != null)
+			if (object != null && !"".equals(object))
 				sb.append(object.toString()).append(separator);
 		}
 		
