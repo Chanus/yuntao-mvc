@@ -143,12 +143,8 @@ public class LoginController extends BaseController {
 			if (!StringUtils.isNumeric(googleAuthenticatorCode))
 				return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
 			
-			GoogleAuthenticatorUtils googleAuthenticatorUtils = new GoogleAuthenticatorUtils();
-			googleAuthenticatorUtils.setWindowSize(5);
-			long t = System.currentTimeMillis();
 			String secret = ConfigUtils.getProperty("google.authenticator.secret");
-			
-			if (!googleAuthenticatorUtils.check_code(secret, Long.parseLong(googleAuthenticatorCode), t))
+			if (!GoogleAuthenticatorUtils.check_code(secret, Long.parseLong(googleAuthenticatorCode)))
 				return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
 		}
 

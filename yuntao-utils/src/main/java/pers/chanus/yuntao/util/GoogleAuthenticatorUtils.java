@@ -17,13 +17,13 @@ import org.apache.commons.codec.binary.Base64;
  */
 public class GoogleAuthenticatorUtils {
 	// 生成的key长度( Generate secret key length )
-	public static final int SECRET_SIZE = 10;
+	private static final int SECRET_SIZE = 10;
 
-	public static final String SEED = "g8GjEvTbW5oVSV7avL47357438reyhreyuryetredLDVKs2m0QN7vxRs2im5MDaNCWGmcD2rvcZx";
+	private static final String SEED = "g8GjEvTbW5oVSV7avL47357438reyhreyuryetredLDVKs2m0QN7vxRs2im5MDaNCWGmcD2rvcZx";
 	// Java实现随机数算法
-	public static final String RANDOM_NUMBER_ALGORITHM = "SHA1PRNG";
+	private static final String RANDOM_NUMBER_ALGORITHM = "SHA1PRNG";
 	// 最多可偏移的时间
-	int window_size = 3; // default 3 - max 17
+	public static int window_size = 3; // default 3 - max 17
 
 	/**
 	 * set the windows size. This is an integer value representing the number of 
@@ -92,12 +92,12 @@ public class GoogleAuthenticatorUtils {
 	/**
 	 * Check the code entered by the user to see if it is valid 验证code是否合法
 	 * 
-	 * @param secret	The users secret.
-	 * @param code	The code displayed on the users device
+	 * @param secret   The users secret.
+	 * @param code    The code displayed on the users device.
 	 * @param t	The time in msec (System.currentTimeMillis() for example)
 	 * @return
 	 */
-	public boolean check_code(String secret, long code, long timeMsec) {
+	public static boolean check_code(String secret, long code, long timeMsec) {
 		Base32 codec = new Base32();
 		byte[] decodedKey = codec.decode(secret);
 		// convert unix msec time into a 30 second "window"
@@ -124,6 +124,20 @@ public class GoogleAuthenticatorUtils {
 		}
 		// The validation code is invalid.
 		return false;
+	}
+	
+	/**
+	 * Check the code entered by the user to see if it is valid 验证code是否合法
+	 * 
+	 * @param secret   The users secret.
+	 * @param code     The code displayed on the users device.
+	 * @return
+	 */
+	public static boolean check_code(String secret, long code) {
+	    window_size = 5;
+        long t = System.currentTimeMillis();
+	    
+	    return check_code(secret, code, t);
 	}
 
 	private static int verify_code(byte[] key, long t) throws NoSuchAlgorithmException, InvalidKeyException {
