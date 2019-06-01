@@ -34,8 +34,11 @@ public class LogServiceImpl implements LogService {
 	@Override
 	public void insert(HttpServletRequest request, Integer moduleId, String content, LogTypeEnum logType, String operateTypeDesc) {
 		Log sysLog = new Log();
-		sysLog.setOperateNo(LoginUser.getLoginUser().getLoginNo());
-		sysLog.setOperateRoleId(LoginUser.getLoginUser().getRoleId());
+		LoginUser loginUser = LoginUser.getLoginUser();
+        String operateNo = loginUser == null ? "system" : loginUser.getLoginNo(), 
+               operateRoleId = loginUser == null ? "0" : loginUser.getRoleId();
+		sysLog.setOperateNo(operateNo);
+		sysLog.setOperateRoleId(operateRoleId);
 		sysLog.setOperateIp(IpUtils.getIpAddress(request));
 		sysLog.setOperateModuleId(moduleId);
 		sysLog.setOperateUrl(String.valueOf(request.getRequestURL()));// 请求URL

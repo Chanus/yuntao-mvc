@@ -20,7 +20,7 @@ public class GoogleAuthenticatorUtilsTest {
         String secret = GoogleAuthenticatorUtils.generateSecretKey();
         System.out.println("secret: " + secret);
         // 把这个qrcode生成二维码，用google身份验证器扫描二维码就能添加成功
-        String qrcode = GoogleAuthenticatorUtils.getQRBarcode("pay@gmail.com", secret);
+        String qrcode = GoogleAuthenticatorUtils.getQRBarcode("jinhe@gmail.com", secret);
         System.out.println("qrcode: " + qrcode);
     }
 }

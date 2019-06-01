@@ -2,18 +2,18 @@ var action_path = ctx + '/system/log/';
 layui.config({
 	base : '../../js/',
 	version : '0.0.1.1'
-}).use([ 'table', 'popup', 'element', 'util' ], function() {
-	var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, element = layui.element, util = layui.util;
+}).use([ 'table', 'popup', 'element' ], function() {
+	var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, element = layui.element;
 	var d = new Date(), operateType = '1';
 	
 	// 渲染表格
 	table.render({
 		elem : '#datas',
 		id : 'd',
-		url : action_path + 'list.do?v=' + new Date().getTime(),
+		url : action_path + 'list.do',
 		where : {
-			beginTime: d.getFullYear() + '-' + util.digit(d.getMonth() + 1) + '-' + util.digit(d.getDate()) + ' 00:00:00',
-			endTime: d.getFullYear() + '-' + util.digit(d.getMonth() + 1) + '-' + util.digit(d.getDate()) + ' 23:59:59',
+			beginTime: $('#beginTime').val(),
+			endTime: $('#endTime').val(),
 			operateType: '1'
 		},
 		method : 'post',
@@ -62,7 +62,8 @@ layui.config({
 				beginTime: $("#beginTime").val(),
 				endTime: $("#endTime").val(),
 				operateContent: encodeURI($("#operateContent").val()),
-				operateType: operateType
+				operateType: operateType,
+				v: new Date().getTime()
 			}
 		});
 	};
