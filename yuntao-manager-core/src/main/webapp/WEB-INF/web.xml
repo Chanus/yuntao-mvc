@@ -167,7 +167,7 @@
     </taglib>
     <taglib id="spring">
       <taglib-uri>http://www.springframework.org/tags</taglib-uri>
-      <taglib-location>spring/spring.tld</taglib-location>
+      <taglib-location>jstl/spring.tld</taglib-location>
     </taglib>
   </jsp-config>
   
