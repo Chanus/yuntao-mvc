@@ -9,7 +9,7 @@ layui.config({
 	table.render({
 		elem : '#datas',
 		id : 'd',
-		url : action_path + 'list.do?v=' + new Date().getTime(),
+		url : action_path + 'list.do',
 		where : {moduleParentId : 0},
 		method : 'post',
 		cols : [[
@@ -37,9 +37,10 @@ layui.config({
 				curr: 1 //重新从第 1 页开始
 			},
 			where : {
-				moduleParentId : moduleParentId
+				moduleParentId : moduleParentId,
+				v : new Date().getTime()
 			}
-		});
+		}, 'data');
 	};
 	
 	// 添加

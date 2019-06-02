@@ -8,7 +8,7 @@ layui.config({
 	table.render({
 		elem : '#datas',
 		id : 'd',
-		url : action_path + 'list.do?v=' + new Date().getTime(),
+		url : action_path + 'list.do',
 		method : 'post',
 		cols : [[
 			{ type : 'checkbox', width : 60, fixed : 'left' }, 
@@ -33,8 +33,11 @@ layui.config({
 		table.reload('d', {
 			page: {
 				curr: 1 //重新从第 1 页开始
+			},
+			where: {
+				v: new Date().getTime()
 			}
-		});
+		}, 'data');
 	};
 	
 	// 添加

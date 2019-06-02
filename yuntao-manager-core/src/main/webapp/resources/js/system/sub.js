@@ -9,7 +9,7 @@ layui.config({
 	table.render({
 		elem : '#datas',
 		id : 'd',
-		url : action_path + 'list.do?v=' + new Date().getTime(),
+		url : action_path + 'list.do',
 		method : 'post',
 		cols : [[
 			{ type : 'checkbox', width : 60, fixed : 'left' }, 
@@ -36,9 +36,10 @@ layui.config({
 			},
 			where: {
 				masterNo: $("#masterNo").val() === undefined ? null : $("#masterNo").val(),
-				subNo: $("#subNo").val()
+				subNo: $("#subNo").val(),
+				v: new Date().getTime()
 			}
-		});
+		}, 'data');
 	};
 	
 	// 搜索

@@ -36,7 +36,7 @@ layui.config({
 			where: {
 				v: new Date().getTime()
 			}
-		});
+		}, 'data');
 	};
 	
 	// 添加

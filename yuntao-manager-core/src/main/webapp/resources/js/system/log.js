@@ -65,7 +65,7 @@ layui.config({
 				operateType: operateType,
 				v: new Date().getTime()
 			}
-		});
+		}, 'data');
 	};
 	
 	// 搜索

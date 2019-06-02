@@ -10,7 +10,7 @@ layui.config({
 	table.render({
 		elem : '#datas',
 		id : 'd',
-		url : action_path + 'method-list.do?v=' + new Date().getTime(),
+		url : action_path + 'method-list.do',
 		where : {mpId : mpId},
 		method : 'post',
 		cols : [[
@@ -27,9 +27,10 @@ layui.config({
 	reload = function() {
 		table.reload('d', {
 			where : {
-				mpId : mpId
+				mpId : mpId,
+				v : new Date().getTime()
 			}
-		});
+		}, 'data');
 	};
 	
 	// 监听选择类名
