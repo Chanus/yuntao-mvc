@@ -2,8 +2,10 @@ var treeObj, reload, action_path = ctx + '/system/module/';
 layui.config({
 	base : '../../js/',
 	version : '0.0.1.1'
-}).use([ 'table', 'popup', 'form', 'operations' ], function() {
-	var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, form = layui.form, operations = layui.operations;
+}).extend({
+	iconPicker: '../lib/layuimodules/iconPicker' // 图标选择器模块
+}).use([ 'table', 'popup', 'form', 'operations', 'iconPicker' ], function() {
+	var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, form = layui.form, operations = layui.operations, iconPicker = layui.iconPicker;
 	
 	// 渲染表格
 	table.render({
@@ -87,6 +89,23 @@ layui.config({
 			});
 		}
 	});
+	
+	iconPicker.render({
+        // 选择器，推荐使用input
+        elem: '#iconPicker',
+        // 数据类型：fontClass/unicode，推荐使用fontClass
+        type: 'fontClass',
+        // 是否开启搜索：true/false
+        search: true,
+        // 是否开启分页
+        page: true,
+        // 每页显示数量，默认12
+        limit: 12,
+        // 点击回调
+        click: function (data) {
+            $('#moduleIcon').val('layui-icon ' + data.icon);
+        }
+    });
 	
 	// 增删改
 	var p = $('.layui-show', window.parent.document).children()[0].contentWindow;

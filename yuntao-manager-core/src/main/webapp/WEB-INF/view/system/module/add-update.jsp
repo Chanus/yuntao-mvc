@@ -60,7 +60,8 @@
         <div class="layui-form-item">
           <label class="layui-form-label">模块图标</label>
           <div class="layui-input-block">
-            <input type="text" name="moduleIcon" value="${module.moduleIcon }" placeholder="请输入模块图标" autocomplete="off" class="layui-input">
+            <input type="hidden" id="moduleIcon" name="moduleIcon" value="${module.moduleIcon }" autocomplete="off" class="layui-input">
+            <input type="text" id="iconPicker" value="${module.moduleIcon }" lay-filter="iconPicker" class="hide">
           </div>
         </div>
         <div class="layui-form-item" pane>
@@ -94,6 +95,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.0.1.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.0.1.9"></script>
   </body>
 </html>
