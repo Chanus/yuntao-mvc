@@ -306,6 +306,7 @@
       <id>production</id>
       <properties>
         <profiles.active>production</profiles.active>
+        <!--suppress UnresolvedMavenProperty -->
         <log.path>${catalina.home}/yuntao-manager-logs</log.path>
       </properties>
       <activation>
@@ -318,6 +319,7 @@
       <id>test</id>
       <properties>
         <profiles.active>test</profiles.active>
+        <!--suppress UnresolvedMavenProperty -->
         <log.path>${catalina.home}/yuntao-manager-logs</log.path>
       </properties>
     </profile>
@@ -326,6 +328,7 @@
       <id>development</id>
       <properties>
         <profiles.active>development</profiles.active>
+        <!--suppress UnresolvedMavenProperty -->
         <log.path>${catalina.home}/yuntao-manager-logs</log.path>
       </properties>
     </profile>
@@ -393,17 +396,19 @@
           <configuration>
             <webResources>
               <resource>
+                <!-- 元配置文件的目录，相对于pom.xml文件的路径 -->
                 <directory>src/main/webapp</directory>
                 <excludes>
                   <exclude>*/classes/</exclude>
                 </excludes>
               </resource>
             </webResources>
+            <!-- 打包的时候如果不想使用WEB-INF/classes，则在插件的配置内指定 <archiveClasses>true</archiveClasses>即可，这样会把项目的java文件打包成jar放到WEB-INF/lib内 -->
             <archiveClasses>true</archiveClasses>
+            <attachClasses>true</attachClasses>
             <archive>
               <index>true</index>
             </archive>
-            <encoding>${project.encoding}</encoding>
           </configuration>
         </plugin>
         <plugin>
