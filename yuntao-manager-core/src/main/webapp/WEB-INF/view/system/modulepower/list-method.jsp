@@ -41,9 +41,9 @@
     </div>
     <!-- 自定义模板 -->
     <script type="text/html" id="toolbar">
-		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-  	</script>
-    
+      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/system/module-power-method.js?v=0.1.1.1"></script>
   </body>

@@ -3,9 +3,9 @@ package pers.chanus.yuntao.manager.model;
 import java.io.Serializable;
 
 public class LoginUserView implements Serializable {
-	private static final long serialVersionUID = -798620052381070095L;
+    private static final long serialVersionUID = -798620052381070095L;
 
-	private String loginNo;
+    private String loginNo;
 
     private String loginName;
 
@@ -82,12 +82,12 @@ public class LoginUserView implements Serializable {
     }
 
     public String getAuthority() {
-		return authority;
-	}
+        return authority;
+    }
 
-	public void setAuthority(String authority) {
-		this.authority = authority == null ? null : authority.trim();
-	}
+    public void setAuthority(String authority) {
+        this.authority = authority == null ? null : authority.trim();
+    }
 
     public String getUserType() {
         return userType;
@@ -105,8 +105,8 @@ public class LoginUserView implements Serializable {
         this.headImage = headImage == null ? null : headImage.trim();
     }
 
-	@Override
-	public String toString() {
-		return "LoginUserView [loginNo=" + loginNo + ", loginName=" + loginName + ", password=" + password + ", roleId=" + roleId + ", masterNo=" + masterNo + ", masterRoleId=" + masterRoleId + ", validStatus=" + validStatus + ", authority=" + authority + ", userType=" + userType + ", headImage=" + headImage + "]";
-	}
+    @Override
+    public String toString() {
+        return "LoginUserView [loginNo=" + loginNo + ", loginName=" + loginName + ", password=" + password + ", roleId=" + roleId + ", masterNo=" + masterNo + ", masterRoleId=" + masterRoleId + ", validStatus=" + validStatus + ", authority=" + authority + ", userType=" + userType + ", headImage=" + headImage + "]";
+    }
 }

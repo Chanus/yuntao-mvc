@@ -13,7 +13,7 @@ import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 
 /**
  * IP白名单管理接口实现
- * 
+ *
  * @author Chanus
  * @date 2018-09-09 15:43:12
  * @since 0.0.1
@@ -21,14 +21,9 @@ import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 @Service
 public class WhiteIpServiceImpl extends BaseServiceImpl<WhiteIpMapper, WhiteIp, Integer> implements WhiteIpService {
 
-	@Autowired
-	public void setMapper(WhiteIpMapper mapper) {
-		this.mapper = mapper;
-	}
-
-	@Override
-	public String getFixedWhiteIps(String loginNo) {
-		return mapper.getFixedWhiteIps(loginNo);
-	}
+    @Autowired
+    public void setMapper(WhiteIpMapper mapper) {
+        this.mapper = mapper;
+    }
 
 }

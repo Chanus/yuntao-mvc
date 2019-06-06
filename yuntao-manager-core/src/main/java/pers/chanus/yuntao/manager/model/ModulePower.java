@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ModulePower implements Serializable {
-	private static final long serialVersionUID = 7581034261159771845L;
+    private static final long serialVersionUID = 7581034261159771845L;
 
-	private Integer mpId;
+    private Integer mpId;
 
     private Integer moduleId;
 
@@ -19,7 +19,7 @@ public class ModulePower implements Serializable {
     private Date gmtModified;
 
     private String moduleName;
-    
+
     private Integer hasPower;// 判断模块是否具有此权限，不为空则具有此权限
 
     public Integer getMpId() {
@@ -78,16 +78,16 @@ public class ModulePower implements Serializable {
         this.moduleName = moduleName == null ? null : moduleName.trim();
     }
 
-	public Integer getHasPower() {
-		return hasPower;
-	}
+    public Integer getHasPower() {
+        return hasPower;
+    }
 
-	public void setHasPower(Integer hasPower) {
-		this.hasPower = hasPower;
-	}
+    public void setHasPower(Integer hasPower) {
+        this.hasPower = hasPower;
+    }
 
-	@Override
-	public String toString() {
-		return "ModulePower [mpId=" + mpId + ", moduleId=" + moduleId + ", powerItem=" + powerItem + ", aliasName=" + aliasName + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "ModulePower [mpId=" + mpId + ", moduleId=" + moduleId + ", powerItem=" + powerItem + ", aliasName=" + aliasName + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }

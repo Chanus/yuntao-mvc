@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Power implements Serializable {
-	private static final long serialVersionUID = 7560674783061991206L;
+    private static final long serialVersionUID = 7560674783061991206L;
 
-	private Integer id;
+    private Integer id;
 
     private String powerItem;
 
@@ -86,8 +86,8 @@ public class Power implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-	@Override
-	public String toString() {
-		return "Power [id=" + id + ", powerItem=" + powerItem + ", powerName=" + powerName + ", remark=" + remark + ", priority=" + priority + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "Power [id=" + id + ", powerItem=" + powerItem + ", powerName=" + powerName + ", remark=" + remark + ", priority=" + priority + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }

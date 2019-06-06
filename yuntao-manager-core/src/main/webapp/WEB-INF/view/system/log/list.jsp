@@ -41,10 +41,10 @@
       <!-- 数据展示 -->
       <table class="layui-hide" id="datas" lay-filter="datas"></table>
     </div>
-    
+
     <script type="text/html" id="toolbar">
-		<a class="layui-btn layui-btn-xs" lay-event="content">日志内容</a>
-  	</script>
+      <a class="layui-btn layui-btn-xs" lay-event="content">日志内容</a>
+    </script>
     
     <script type="text/javascript" src="${ctx }/js/system/log.js?v=0.0.8.3"></script>
   </body>

@@ -9,18 +9,18 @@ import pers.chanus.yuntao.server.mapper.BaseMapper;
 
 /**
  * 组织机构表
- * 
+ *
  * @author Chanus
  * @date 2019-05-06 21:11:46
  * @since 0.0.8
  */
 public interface OrganizationMapper extends BaseMapper<Organization, Integer> {
-	@Select("select max(priority) from sys_organization where org_parent_id = #{orgParentId,jdbcType=INTEGER}")
-	Integer getMaxPriority(Integer orgParentId);
-	
-	@Select("select count(*) from sys_organization where org_parent_id = #{orgParentId,jdbcType=INTEGER}")
-	int hasChildren(Integer orgParentId);
-	
-	@Update("update sys_organization set priority = #{priority,jdbcType=INTEGER} where org_id = #{orgId,jdbcType=INTEGER}")
-	int priority(@Param("orgId") Integer orgId, @Param("priority") Integer priority);
+    @Select("select max(priority) from sys_organization where org_parent_id = #{orgParentId,jdbcType=INTEGER}")
+    Integer getMaxPriority(Integer orgParentId);
+
+    @Select("select count(*) from sys_organization where org_parent_id = #{orgParentId,jdbcType=INTEGER}")
+    int hasChildren(Integer orgParentId);
+
+    @Update("update sys_organization set priority = #{priority,jdbcType=INTEGER} where org_id = #{orgId,jdbcType=INTEGER}")
+    int priority(@Param("orgId") Integer orgId, @Param("priority") Integer priority);
 }

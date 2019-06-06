@@ -1,162 +1,168 @@
 @charset "utf-8";
 
 html {
-	background-color: #fff;
+    background-color: #fff;
 }
 
 /** 覆盖layui-disabled样式 */
 .layui-disabled, .layui-disabled:hover {
-	color: #666 !important;
+    color: #666 !important;
 }
 
 /** 顶部提示信息 */
 .layui-tip-item {
-	color: #393D49;
-	height: 50px;
-	line-height: 50px;
-	margin: 0 20px;
-	position: relative;
-	display: inline-block;
-	vertical-align: middle;
-	font-size: 14px;
+    color: #393D49;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 20px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
 }
 
 /** 个人信息 */
 .user_right {
-	text-align: center;
+    text-align: center;
 }
 
 .user_right p {
-	margin: 10px 0 25px;
-	font-size: 12px;
-	text-align: center;
-	color: #FF5722;
+    margin: 10px 0 25px;
+    font-size: 12px;
+    text-align: center;
+    color: #FF5722;
 }
 
 .user_right img#userFace {
-	width: 200px;
-	height: 200px;
-	margin-top: 20px;
-	cursor: pointer;
-	box-shadow: 0 0 50px #44576b;
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 50px #44576b;
 }
 
-@media screen and (max-width:450px) {
-	#userFaceBtn {
-		height: 30px;
-		line-height: 30px;
-		padding: 0 10px;
-		font-size: 12px;
-	}
-	.user_right img#userFace {
-		width: 100px;
-		height: 100px;
-		margin-top: 0;
-	}
-	.layui-col-xs12 .layui-form-label {
-		width: 60px;
-		padding-left: 0;
-	}
-	.layui-col-xs12 .layui-input-block, .layui-col-xs12 .layui-input-inline {
-		margin-left: 75px;
-	}
-	.layui-col-xs12 .layui-input-inline {
-		left: 0 !important;
-		width: auto !important;
-	}
-	.noFind {
-		padding-top: 0;
-	}
-	*[pc] {
-		display: none;
-	}
+@media screen and (max-width: 450px) {
+    #userFaceBtn {
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .user_right img#userFace {
+        width: 100px;
+        height: 100px;
+        margin-top: 0;
+    }
+
+    .layui-col-xs12 .layui-form-label {
+        width: 60px;
+        padding-left: 0;
+    }
+
+    .layui-col-xs12 .layui-input-block, .layui-col-xs12 .layui-input-inline {
+        margin-left: 75px;
+    }
+
+    .layui-col-xs12 .layui-input-inline {
+        left: 0 !important;
+        width: auto !important;
+    }
+
+    .noFind {
+        padding-top: 0;
+    }
+
+    *[pc] {
+        display: none;
+    }
 }
 
 /** 间距设置 */
 .pd-5 {
-	padding: 5px;
+    padding: 5px;
 }
 
 .pd-10 {
-	padding: 10px;
+    padding: 10px;
 }
 
 .pd-20 {
-	padding: 20px;
+    padding: 20px;
 }
 
 .mg-l-20 {
-	margin-left: 20px;
+    margin-left: 20px;
 }
 
 .mg-r-20 {
-	margin-right: 20px;
+    margin-right: 20px;
 }
 
 /** 页面树 */
 .page-tree {
-	width: 200px;
-	float: left;
-	background-color: #d9edf7;
-	border: 1px solid #ececff;
+    width: 200px;
+    float: left;
+    background-color: #d9edf7;
+    border: 1px solid #ececff;
 }
 
 .page-tree-list {
-	width: calc(100% - 210px);
-	float: right;
+    width: calc(100% - 210px);
+    float: right;
 }
 
 .operator-div {
-	margin-left: 50px !important;
+    margin-left: 50px !important;
 }
 
 /** 常用颜色 */
 .red {
-	color: #FF5722;
-	padding-left: 2px;
+    color: #FF5722;
+    padding-left: 2px;
 }
 
 .color-red {
-	color: #FF5722;
+    color: #FF5722;
 }
 
 .color-lightblue {
-	color: #4F94CD;
+    color: #4F94CD;
 }
 
 .color-lightgreen {
-	color: #5FB878;
+    color: #5FB878;
 }
 
 /** 字体加粗 */
 .b {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 /** span高度自适应 */
 span[class*="layui-badge"] {
-	height: auto;
+    height: auto;
 }
 
 /** 背景颜色 */
 .layui-bg-custom-lightgreen {
-	background-color: #5FB878 !important;
+    background-color: #5FB878 !important;
 }
 
 /** 对齐方式 */
 .text-l, .text-l th, .text-l td {
-	text-align: left;
+    text-align: left;
 }
 
 .text-c, .text-c th, .text-c td {
-	text-align: center;
+    text-align: center;
 }
 
 .text-r, .text-r th, .text-r td {
-	text-align: right;
+    text-align: right;
 }
 
 /*表格中操作按钮取消左间距*/
-td .layui-btn+.layui-btn {
-	margin-left: 0;
+td .layui-btn + .layui-btn {
+    margin-left: 0;
 }

@@ -40,25 +40,25 @@
     </div>
     <!-- 自定义模板 -->
     <script type="text/html" id="validStatusTpl">
-		{{# if(d.validStatus == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">已启用</span>
-		{{# }else if(d.validStatus == "0"){ }}<span class="layui-badge layui-bg-gray">已停用</span>
-		{{# }else{ }}{{ d.validStatus }}{{# } }}
-  	</script>
+      {{# if(d.validStatus == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">已启用</span>
+      {{# }else if(d.validStatus == "0"){ }}<span class="layui-badge layui-bg-gray">已停用</span>
+      {{# }else{ }}{{ d.validStatus }}{{# } }}
+    </script>
     <script type="text/html" id="toolbar">
-		{{# if(${powers.containsKey('UPDATE') }){ }}
-			<a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
-		{{# } }}
-		{{# if(${powers.containsKey('CONFIG') }){ }}
-			<a href="configure.do?subNo={{ d.operatorNo }}&masterRoleId={{ d.masterRoleId }}" class="layui-btn layui-btn-xs layui-bg-blue" lay-event="configure">配置权限</a>
-		{{# } }}
-		{{# if(${powers.containsKey('PASSWORD') }){ }}
-			<a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="password">修改密码</a>
-		{{# } }}
-		{{# if(${powers.containsKey('DELETE') }){ }}
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-		{{# } }}
-  	</script>
-    
+      {{# if(${powers.containsKey('UPDATE') }){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
+      {{# } }}
+      {{# if(${powers.containsKey('CONFIG') }){ }}
+        <a href="configure.do?subNo={{ d.operatorNo }}&masterRoleId={{ d.masterRoleId }}" class="layui-btn layui-btn-xs layui-bg-blue" lay-event="configure">配置权限</a>
+      {{# } }}
+      {{# if(${powers.containsKey('PASSWORD') }){ }}
+        <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="password">修改密码</a>
+      {{# } }}
+      {{# if(${powers.containsKey('DELETE') }){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      {{# } }}
+    </script>
+
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/system/sub.js?v=0.0.1.1"></script>
   </body>

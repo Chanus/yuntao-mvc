@@ -82,28 +82,28 @@
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/system/operator-info.js?v=0.0.1.1"></script>
     <script type="text/javascript">
-		var gmtCreate = '${operator.gmtCreate }';
-		var headImage = '${operator.headImage }' ? ('${parentCtx }' + '${operator.headImage }') : '${ctx }/images/head_image.jpg';
-      
-		layui.config({
-			base : '../../js/',
-			version : '0.0.1.1'
-		}).use([ 'jquery', 'laydate' ], function() {
-			var $ = layui.jquery, laydate = layui.laydate;
-			
-			// 头像
-			$('#userFace').attr('src', headImage);
-			
-			gmtCreate = gmtCreate ? datetime2Str(dateCST2GMT(gmtCreate)) : '';
-			// 日期时间选择器
-			laydate.render({
-				elem : '#gmtCreate',
-				type : 'datetime',
-				format : 'yyyy-MM-dd HH:mm:ss',
-				value: gmtCreate,
-				theme: 'grid',
-				btns: ['now', 'confirm']
-			});
+        var gmtCreate = '${operator.gmtCreate }';
+        var headImage = '${operator.headImage }' ? ('${parentCtx }' + '${operator.headImage }') : '${ctx }/images/head_image.jpg';
+
+        layui.config({
+            base: '../../js/',
+            version: '0.0.1.1'
+        }).use(['jquery', 'laydate'], function () {
+            var $ = layui.jquery, laydate = layui.laydate;
+
+            // 头像
+            $('#userFace').attr('src', headImage);
+
+            gmtCreate = gmtCreate ? datetime2Str(dateCST2GMT(gmtCreate)) : '';
+            // 日期时间选择器
+            laydate.render({
+                elem: '#gmtCreate',
+                type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss',
+                value: gmtCreate,
+                theme: 'grid',
+                btns: ['now', 'confirm']
+            });
         });
     </script>
   </body>

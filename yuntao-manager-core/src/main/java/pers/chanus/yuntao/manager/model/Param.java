@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Param implements Serializable {
-	private static final long serialVersionUID = 2142559998968841695L;
+    private static final long serialVersionUID = 2142559998968841695L;
 
-	private Integer id;
+    private Integer id;
 
     private String paramCode;
 
@@ -96,8 +96,8 @@ public class Param implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-	@Override
-	public String toString() {
-		return "Param [id=" + id + ", paramCode=" + paramCode + ", paramData=" + paramData + ", remark=" + remark + ", validStatus=" + validStatus + ", modifiedRoleId=" + modifiedRoleId + ", priority=" + priority + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "Param [id=" + id + ", paramCode=" + paramCode + ", paramData=" + paramData + ", remark=" + remark + ", validStatus=" + validStatus + ", modifiedRoleId=" + modifiedRoleId + ", priority=" + priority + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }

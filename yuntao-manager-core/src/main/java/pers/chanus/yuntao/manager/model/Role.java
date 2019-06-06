@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Role implements Serializable {
-	private static final long serialVersionUID = -3654625894207910719L;
+    private static final long serialVersionUID = -3654625894207910719L;
 
-	private Integer id;
+    private Integer id;
 
     private String roleId;
 
@@ -126,8 +126,8 @@ public class Role implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-	@Override
-	public String toString() {
-		return "Role [id=" + id + ", roleId=" + roleId + ", roleCode=" + roleCode + ", roleName=" + roleName + ", parentRoleId=" + parentRoleId + ", loginFlag=" + loginFlag + ", hasOperator=" + hasOperator + ", validStatus=" + validStatus + ", remark=" + remark + ", priority=" + priority + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "Role [id=" + id + ", roleId=" + roleId + ", roleCode=" + roleCode + ", roleName=" + roleName + ", parentRoleId=" + parentRoleId + ", loginFlag=" + loginFlag + ", hasOperator=" + hasOperator + ", validStatus=" + validStatus + ", remark=" + remark + ", priority=" + priority + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }

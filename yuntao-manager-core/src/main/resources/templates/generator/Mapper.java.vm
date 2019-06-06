@@ -5,11 +5,11 @@ import pers.chanus.yuntao.server.mapper.BaseMapper;
 
 /**
  * ${tableComment}
- * 
+ *
  * @author ${author}
  * @date ${dateTime}
  * @since ${since}
  */
 public interface ${className}Mapper extends BaseMapper<${className}, ${pk.attributeType}> {
-    
+
 }

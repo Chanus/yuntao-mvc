@@ -6,12 +6,12 @@ package ${package}.model;
 #set($hasJSONField=false)
 #foreach ($column in $columns)
 #if($column.attributeType == "BigDecimal")
-	#set($hasBigDecimal=true)
+    #set($hasBigDecimal=true)
 #elseif($column.attributeType == "Date")
-	#set($hasDate=true)
+    #set($hasDate=true)
 #end
 #if($column.dataType == 'datetime' || $column.dataType == 'timestamp' || $column.dataType == 'date')
-	#set($hasJSONField=true)
+    #set($hasJSONField=true)
 #end
 #end
 import java.io.Serializable;
@@ -28,54 +28,54 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * ${tableComment}
- * 
+ *
  * @author ${author}
  * @date ${dateTime}
  * @since ${since}
  */
 public class ${className} implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+    private static final long serialVersionUID = 1L;
+
 #foreach ($column in $columns)
-	// $column.columnComment
+    // $column.columnComment
 #if($column.dataType == 'datetime' || $column.dataType == 'timestamp')
-	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
 #elseif($column.dataType == 'date')
-	@JSONField(format = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
 #end
-	private $column.attributeType $column.attributename;
+    private $column.attributeType $column.attributename;
 #end
 #foreach ($column in $columns)
 
-	/**
-	 * 获取：${column.columnComment}
-	 */
-	public $column.attributeType get${column.attributeName}() {
-		return $column.attributename;
-	}
+    /**
+     * 获取：${column.columnComment}
+     */
+    public $column.attributeType get${column.attributeName}() {
+        return $column.attributename;
+    }
 
-	/**
-	 * 设置：${column.columnComment}
-	 */
-	public void set${column.attributeName}($column.attributeType $column.attributename) {
+    /**
+     * 设置：${column.columnComment}
+     */
+    public void set${column.attributeName}($column.attributeType $column.attributename) {
 #if($column.attributeType == 'String')
-		this.$column.attributename = $column.attributename == null ? null : ${column.attributename}.trim();
+        this.$column.attributename = $column.attributename == null ? null : ${column.attributename}.trim();
 #else
-		this.$column.attributename = $column.attributename;
+        this.$column.attributename = $column.attributename;
 #end
-	}
+    }
 #end
 
-	@Override
-	public String toString() {
-		return "${className} [" + 
+    @Override
+    public String toString() {
+        return "${className} [" +
 #foreach ($column in $columns)
 #if($velocityCount == 1)
-				"${column.attributename}=" + $column.attributename + 
+                "${column.attributename}=" + $column.attributename +
 #elseif($column.attributeType != 'byte[]')
-				", ${column.attributename}=" + $column.attributename + 
+                ", ${column.attributename}=" + $column.attributename +
 #end
 #end
-				"]";
-	}
+                "]";
+    }
 }

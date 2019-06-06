@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class WhiteIp implements Serializable {
-	private static final long serialVersionUID = -3654093253098142154L;
+    private static final long serialVersionUID = -3654093253098142154L;
 
-	private Integer id;
+    private Integer id;
 
     private String whiteIp;
 
@@ -86,8 +86,8 @@ public class WhiteIp implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-	@Override
-	public String toString() {
-		return "WhiteIp [id=" + id + ", whiteIp=" + whiteIp + ", loginNo=" + loginNo + ", remark=" + remark + ", fixedStatus=" + fixedStatus + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "WhiteIp [id=" + id + ", whiteIp=" + whiteIp + ", loginNo=" + loginNo + ", remark=" + remark + ", fixedStatus=" + fixedStatus + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }

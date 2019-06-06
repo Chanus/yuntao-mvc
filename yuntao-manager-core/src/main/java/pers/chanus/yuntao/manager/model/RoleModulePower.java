@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class RoleModulePower implements Serializable {
-	private static final long serialVersionUID = 3975361197766244676L;
+    private static final long serialVersionUID = 3975361197766244676L;
 
-	private Integer rmpId;
+    private Integer rmpId;
 
     private String roleId;
 
@@ -76,8 +76,8 @@ public class RoleModulePower implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-	@Override
-	public String toString() {
-		return "RoleModulePower [rmpId=" + rmpId + ", roleId=" + roleId + ", moduleId=" + moduleId + ", powerItem=" + powerItem + ", subNo=" + subNo + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "RoleModulePower [rmpId=" + rmpId + ", roleId=" + roleId + ", moduleId=" + moduleId + ", powerItem=" + powerItem + ", subNo=" + subNo + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }

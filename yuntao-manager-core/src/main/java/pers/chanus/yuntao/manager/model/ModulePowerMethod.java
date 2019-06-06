@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ModulePowerMethod implements Serializable {
-	private static final long serialVersionUID = 5917034100446628692L;
+    private static final long serialVersionUID = 5917034100446628692L;
 
-	private Integer mpmId;
+    private Integer mpmId;
 
     private Integer mpId;
 
@@ -66,8 +66,8 @@ public class ModulePowerMethod implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-	@Override
-	public String toString() {
-		return "ModulePowerMethod [mpmId=" + mpmId + ", mpId=" + mpId + ", className=" + className + ", url=" + url + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "ModulePowerMethod [mpmId=" + mpmId + ", mpId=" + mpId + ", className=" + className + ", url=" + url + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }

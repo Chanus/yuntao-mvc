@@ -9,7 +9,7 @@ import pers.chanus.yuntao.util.GoogleAuthenticatorUtils;
 
 /**
  * google身份验证器
- * 
+ *
  * @author Chanus
  * @date 2019-05-28 20:59:06
  * @since 0.0.8

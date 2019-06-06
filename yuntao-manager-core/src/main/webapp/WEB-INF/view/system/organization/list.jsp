@@ -28,18 +28,18 @@
     </div>
     <!-- 自定义模板 -->
     <script type="text/html" id="validStatusTpl">
-		{{# if(d.validStatus == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">已启用</span>
-		{{# }else if(d.validStatus == "0"){ }}<span class="layui-badge layui-bg-gray">已停用</span>
-		{{# }else{ }}{{ d.validStatus }}{{# } }}
-  	</script>
+      {{# if(d.validStatus == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">已启用</span>
+      {{# }else if(d.validStatus == "0"){ }}<span class="layui-badge layui-bg-gray">已停用</span>
+      {{# }else{ }}{{ d.validStatus }}{{# } }}
+    </script>
     <script type="text/html" id="toolbar">
-		{{# if(${powers.containsKey('UPDATE') }){ }}
-			<a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
-		{{# } }}
-		{{# if(${powers.containsKey('DELETE') }){ }}
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-		{{# } }}
-  	</script>
+      {{# if(${powers.containsKey('UPDATE') }){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
+      {{# } }}
+      {{# if(${powers.containsKey('DELETE') }){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      {{# } }}
+    </script>
     
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/jquery-1.12.4.min.js"></script>

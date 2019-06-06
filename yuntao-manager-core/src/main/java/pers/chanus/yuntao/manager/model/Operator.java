@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Operator implements Serializable {
-	private static final long serialVersionUID = -8513495354479579451L;
+    private static final long serialVersionUID = -8513495354479579451L;
 
-	private Integer id;
+    private Integer id;
 
     private String operatorNo;
 
@@ -98,13 +98,13 @@ public class Operator implements Serializable {
         this.masterRoleId = masterRoleId == null ? null : masterRoleId.trim();
     }
 
-	public String getAuthority() {
-		return authority;
-	}
+    public String getAuthority() {
+        return authority;
+    }
 
-	public void setAuthority(String authority) {
-		this.authority = authority == null ? null : authority.trim();
-	}
+    public void setAuthority(String authority) {
+        this.authority = authority == null ? null : authority.trim();
+    }
 
     public String getEmail() {
         return email;
@@ -170,24 +170,24 @@ public class Operator implements Serializable {
         this.roleName = roleName == null ? null : roleName.trim();
     }
 
-	public String getAesEmailKey() {
-		return aesEmailKey;
-	}
+    public String getAesEmailKey() {
+        return aesEmailKey;
+    }
 
-	public void setAesEmailKey(String aesEmailKey) {
-		this.aesEmailKey = aesEmailKey;
-	}
+    public void setAesEmailKey(String aesEmailKey) {
+        this.aesEmailKey = aesEmailKey;
+    }
 
-	public String getAesPhoneKey() {
-		return aesPhoneKey;
-	}
+    public String getAesPhoneKey() {
+        return aesPhoneKey;
+    }
 
-	public void setAesPhoneKey(String aesPhoneKey) {
-		this.aesPhoneKey = aesPhoneKey;
-	}
+    public void setAesPhoneKey(String aesPhoneKey) {
+        this.aesPhoneKey = aesPhoneKey;
+    }
 
-	@Override
-	public String toString() {
-		return "Operator [id=" + id + ", operatorNo=" + operatorNo + ", operatorName=" + operatorName + ", operatorPassword=" + operatorPassword + ", operatorRoleId=" + operatorRoleId + ", masterNo=" + masterNo + ", masterRoleId=" + masterRoleId + ", authority=" + authority + ", email=" + email + ", tel=" + tel + ", headImage=" + headImage + ", remark=" + remark + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "Operator [id=" + id + ", operatorNo=" + operatorNo + ", operatorName=" + operatorName + ", operatorPassword=" + operatorPassword + ", operatorRoleId=" + operatorRoleId + ", masterNo=" + masterNo + ", masterRoleId=" + masterRoleId + ", authority=" + authority + ", email=" + email + ", tel=" + tel + ", headImage=" + headImage + ", remark=" + remark + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }

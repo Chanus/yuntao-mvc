@@ -1,13 +1,13 @@
 package pers.chanus.yuntao.manager.mapper;
 
-import java.util.List;
-
 import pers.chanus.yuntao.manager.model.RoleModulePower;
 
+import java.util.List;
+
 public interface RoleModulePowerMapper {
-	int deleteByRoleId(String roleId);
-    
+    int deleteByRoleId(String roleId);
+
     int deleteBySubNo(String subNo);
-    
+
     int insertBatch(List<RoleModulePower> list);
 }

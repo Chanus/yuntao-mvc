@@ -10,7 +10,7 @@ import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 
 /**
  * ${moduleName}接口实现
- * 
+ *
  * @author ${author}
  * @date ${dateTime}
  * @since ${since}
@@ -18,9 +18,9 @@ import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 @Service
 public class ${className}ServiceImpl extends BaseServiceImpl<${className}Mapper, ${className}, ${pk.attributeType}> implements ${className}Service {
 
-	@Autowired
-	public void setMapper(${className}Mapper mapper) {
-		this.mapper = mapper;
-	}
+    @Autowired
+    public void setMapper(${className}Mapper mapper) {
+        this.mapper = mapper;
+    }
 
 }

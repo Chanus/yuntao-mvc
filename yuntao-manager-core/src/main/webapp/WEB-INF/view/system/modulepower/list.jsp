@@ -53,16 +53,16 @@
     </div>
     <!-- 自定义模板 -->
     <script type="text/html" id="toolbar">
-		{{# if(${powers.containsKey('UPDATE') }){ }}
-			<a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
-		{{# } }}
-		{{# if(${powers.containsKey('CONFIG') }){ }}
-			<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="configure">配置权限项URL</a>
-		{{# } }}
-		{{# if(${powers.containsKey('DELETE') }){ }}
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-		{{# } }}
-  	</script>
+      {{# if(${powers.containsKey('UPDATE') }){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
+      {{# } }}
+      {{# if(${powers.containsKey('CONFIG') }){ }}
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="configure">配置权限项URL</a>
+      {{# } }}
+      {{# if(${powers.containsKey('DELETE') }){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      {{# } }}
+    </script>
     
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/system/module-power.js?v=0.1.1.1"></script>

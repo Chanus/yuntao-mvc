@@ -3,9 +3,9 @@ package pers.chanus.yuntao.manager.model;
 import java.io.Serializable;
 
 public class ChinaArea implements Serializable {
-	private static final long serialVersionUID = -2057199923039898023L;
+    private static final long serialVersionUID = -2057199923039898023L;
 
-	private Integer areaId;
+    private Integer areaId;
 
     private Integer areaParentId;
 
@@ -45,8 +45,8 @@ public class ChinaArea implements Serializable {
         this.areaLevel = areaLevel == null ? null : areaLevel.trim();
     }
 
-	@Override
-	public String toString() {
-		return "ChinaArea [areaId=" + areaId + ", areaParentId=" + areaParentId + ", areaName=" + areaName + ", areaLevel=" + areaLevel + "]";
-	}
+    @Override
+    public String toString() {
+        return "ChinaArea [areaId=" + areaId + ", areaParentId=" + areaParentId + ", areaName=" + areaName + ", areaLevel=" + areaLevel + "]";
+    }
 }

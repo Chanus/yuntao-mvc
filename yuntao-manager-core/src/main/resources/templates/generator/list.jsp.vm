@@ -40,7 +40,7 @@
         {{# if(${powers.containsKey('DELETE')}){ }}
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         {{# } }}
-  	</script>
+    </script>
 
     <%@ include file="${parentPath}public/footer.jsp" %>
     <script type="text/javascript" src="${ctx}/js/${jsPath}/${jsName}.js?v=${since}.1"></script>

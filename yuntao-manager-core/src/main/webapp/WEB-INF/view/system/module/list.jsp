@@ -28,37 +28,37 @@
     </div>
     <!-- 自定义模板 -->
     <script type="text/html" id="moduleIsMenuTpl">
-		{{# if(d.moduleIsMenu == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">是</span>
-		{{# }else if(d.moduleIsMenu == "0"){ }}<span class="layui-badge layui-bg-gray">否</span>
-		{{# }else{ }}{{ d.moduleIsMenu }}{{# } }}
+      {{# if(d.moduleIsMenu == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">是</span>
+      {{# }else if(d.moduleIsMenu == "0"){ }}<span class="layui-badge layui-bg-gray">否</span>
+      {{# }else{ }}{{ d.moduleIsMenu }}{{# } }}
     </script>
     <script type="text/html" id="moduleForPermissionTpl">
-		{{# if(d.moduleForPermission == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">需要</span>
-		{{# }else if(d.moduleForPermission == "0"){ }}<span class="layui-badge layui-bg-gray">不需要</span>
-		{{# }else{ }}{{ d.moduleForPermission }}{{# } }}
+      {{# if(d.moduleForPermission == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">需要</span>
+      {{# }else if(d.moduleForPermission == "0"){ }}<span class="layui-badge layui-bg-gray">不需要</span>
+      {{# }else{ }}{{ d.moduleForPermission }}{{# } }}
     </script>
     <script type="text/html" id="moduleIconTpl">
-		{{# if(d.moduleIcon){ }}
-			<i class="{{ d.moduleIcon }}"></i>({{ d.moduleIcon }})
-		{{# } }}
+      {{# if(d.moduleIcon){ }}
+        <i class="{{ d.moduleIcon }}"></i>({{ d.moduleIcon }})
+      {{# } }}
     </script>
     <script type="text/html" id="validStatusTpl">
-		{{# if(d.validStatus == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">已启用</span>
-		{{# }else if(d.validStatus == "0"){ }}<span class="layui-badge layui-bg-gray">已停用</span>
-		{{# }else{ }}{{ d.validStatus }}{{# } }}
-  	</script>
+      {{# if(d.validStatus == "1"){ }}<span class="layui-badge layui-bg-custom-lightgreen">已启用</span>
+      {{# }else if(d.validStatus == "0"){ }}<span class="layui-badge layui-bg-gray">已停用</span>
+      {{# }else{ }}{{ d.validStatus }}{{# } }}
+    </script>
     <script type="text/html" id="toolbar">
-		{{# if(${powers.containsKey('UPDATE') }){ }}
-			<a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
-		{{# } }}
-		{{# if(${powers.containsKey('DELETE') }){ }}
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-		{{# } }}
-		{{# if(${powers.containsKey('PRIORITY') }){ }}
-			<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="up" title="提升优先级"><i class="layui-icon layui-icon-up"></i></a>
-			<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="down" title="降低优先级"><i class="layui-icon layui-icon-down"></i></a>
-		{{# } }}
-  	</script>
+      {{# if(${powers.containsKey('UPDATE') }){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
+      {{# } }}
+      {{# if(${powers.containsKey('DELETE') }){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      {{# } }}
+      {{# if(${powers.containsKey('PRIORITY') }){ }}
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="up" title="提升优先级"><i class="layui-icon layui-icon-up"></i></a>
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="down" title="降低优先级"><i class="layui-icon layui-icon-down"></i></a>
+      {{# } }}
+    </script>
     
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/jquery-1.12.4.min.js"></script>

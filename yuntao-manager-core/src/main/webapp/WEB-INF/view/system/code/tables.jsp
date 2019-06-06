@@ -26,13 +26,13 @@
     </div>
     <!-- 自定义模板 -->
     <script type="text/html" id="toolbar">
-		{{# if(d.tableType == 'BASE TABLE'){ }}
-			<a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="column">字典</a>
-		{{# } }}
-		{{# if(${powers.containsKey('DOWNLOAD') }){ }}
-			<a class="layui-btn layui-btn-xs" lay-event="generate">代码生成</a>
-		{{# } }}
-  	</script>
+      {{# if(d.tableType == 'BASE TABLE'){ }}
+        <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="column">字典</a>
+      {{# } }}
+      {{# if(${powers.containsKey('DOWNLOAD') }){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="generate">代码生成</a>
+      {{# } }}
+    </script>
     
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.0.8.1"></script>

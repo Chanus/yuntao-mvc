@@ -5,9 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 public class Module implements Serializable {
-	private static final long serialVersionUID = -4043140639207121275L;
+    private static final long serialVersionUID = -4043140639207121275L;
 
-	private Integer moduleId;
+    private Integer moduleId;
 
     private Integer moduleParentId;
 
@@ -34,9 +34,9 @@ public class Module implements Serializable {
     private Date gmtCreate;
 
     private Date gmtModified;
-    
+
     private List<Module> children;// 一级模块的子模块
-    
+
     private List<ModulePower> modulePowers;// 模块所具有的权限项
 
     public Integer getModuleId() {
@@ -88,14 +88,14 @@ public class Module implements Serializable {
     }
 
     public String getModuleForPermission() {
-		return moduleForPermission;
-	}
+        return moduleForPermission;
+    }
 
-	public void setModuleForPermission(String moduleForPermission) {
-		this.moduleForPermission = moduleForPermission == null ? null : moduleForPermission.trim();
-	}
+    public void setModuleForPermission(String moduleForPermission) {
+        this.moduleForPermission = moduleForPermission == null ? null : moduleForPermission.trim();
+    }
 
-	public String getModuleForAdmin() {
+    public String getModuleForAdmin() {
         return moduleForAdmin;
     }
 
@@ -151,24 +151,24 @@ public class Module implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-	public List<Module> getChildren() {
-		return children;
-	}
+    public List<Module> getChildren() {
+        return children;
+    }
 
-	public void setChildren(List<Module> children) {
-		this.children = children;
-	}
+    public void setChildren(List<Module> children) {
+        this.children = children;
+    }
 
-	public List<ModulePower> getModulePowers() {
-		return modulePowers;
-	}
+    public List<ModulePower> getModulePowers() {
+        return modulePowers;
+    }
 
-	public void setModulePowers(List<ModulePower> modulePowers) {
-		this.modulePowers = modulePowers;
-	}
+    public void setModulePowers(List<ModulePower> modulePowers) {
+        this.modulePowers = modulePowers;
+    }
 
-	@Override
-	public String toString() {
-		return "Module [moduleId=" + moduleId + ", moduleParentId=" + moduleParentId + ", moduleName=" + moduleName + ", moduleUrl=" + moduleUrl + ", moduleLevel=" + moduleLevel + ", moduleIsMenu=" + moduleIsMenu + ", moduleForPermission=" + moduleForPermission + ", moduleForAdmin=" + moduleForAdmin + ", moduleBelong=" + moduleBelong + ", moduleIcon=" + moduleIcon + ", remark=" + remark + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "Module [moduleId=" + moduleId + ", moduleParentId=" + moduleParentId + ", moduleName=" + moduleName + ", moduleUrl=" + moduleUrl + ", moduleLevel=" + moduleLevel + ", moduleIsMenu=" + moduleIsMenu + ", moduleForPermission=" + moduleForPermission + ", moduleForAdmin=" + moduleForAdmin + ", moduleBelong=" + moduleBelong + ", moduleIcon=" + moduleIcon + ", remark=" + remark + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }

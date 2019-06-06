@@ -13,7 +13,7 @@ import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 
 /**
  * 中国区划信息管理接口实现
- * 
+ *
  * @author Chanus
  * @date 2018-09-15 16:00:17
  * @since 0.0.1
@@ -21,9 +21,9 @@ import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 @Service
 public class ChinaAreaServiceImpl extends BaseServiceImpl<ChinaAreaMapper, ChinaArea, Integer> implements ChinaAreaService {
 
-	@Autowired
-	public void setMapper(ChinaAreaMapper mapper) {
-		this.mapper = mapper;
-	}
+    @Autowired
+    public void setMapper(ChinaAreaMapper mapper) {
+        this.mapper = mapper;
+    }
 
 }
