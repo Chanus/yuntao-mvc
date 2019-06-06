@@ -21,7 +21,7 @@ public class PageBean {
     /**
      * 信息代码
      */
-    private Integer code;
+    private int code;
 
     /**
      * 信息内容
@@ -31,7 +31,7 @@ public class PageBean {
     /**
      * 记录条数
      */
-    private Integer count;
+    private int count;
 
     /**
      * 记录对象
@@ -151,11 +151,11 @@ public class PageBean {
         return new PageBean(count, object, data);
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -167,11 +167,11 @@ public class PageBean {
         this.msg = msg;
     }
 
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(int count) {
         this.count = count;
     }
 

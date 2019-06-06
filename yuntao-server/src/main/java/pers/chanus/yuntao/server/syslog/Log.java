@@ -1,19 +1,18 @@
 package pers.chanus.yuntao.server.syslog;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import pers.chanus.yuntao.commons.constant.LogTypeEnum;
+import pers.chanus.yuntao.util.StringUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.util.StringUtils;
-
 public class Log implements Serializable {
-	private static final long serialVersionUID = -529685078374966607L;
+    private static final long serialVersionUID = -529685078374966607L;
 
-	private Long id;
+    private Long id;
 
     private String operateNo;
 
@@ -47,16 +46,17 @@ public class Log implements Serializable {
     private String operateRoleName;
 
     private String operateModuleName;
-    
-    private final static Map<String, String> LOGTYPE_MAP = new LinkedHashMap<String, String>();
+
+    private final static Map<String, String> LOGTYPE_MAP = new LinkedHashMap<>();
+
     static {
-		LOGTYPE_MAP.put(LogTypeEnum.LOGIN.name(), "登录系统");
-		LOGTYPE_MAP.put(LogTypeEnum.LOGOUT.name(), "退出系统");
-		LOGTYPE_MAP.put(LogTypeEnum.INSERT.name(), "添加");
-		LOGTYPE_MAP.put(LogTypeEnum.DELETE.name(), "删除");
-		LOGTYPE_MAP.put(LogTypeEnum.UPDATE.name(), "更新");
-		LOGTYPE_MAP.put(LogTypeEnum.SAVE.name(), "添加或更新");
-		LOGTYPE_MAP.put(LogTypeEnum.EXCEPTION.name(), "系统异常");
+        LOGTYPE_MAP.put(LogTypeEnum.LOGIN.name(), "登录系统");
+        LOGTYPE_MAP.put(LogTypeEnum.LOGOUT.name(), "退出系统");
+        LOGTYPE_MAP.put(LogTypeEnum.INSERT.name(), "添加");
+        LOGTYPE_MAP.put(LogTypeEnum.DELETE.name(), "删除");
+        LOGTYPE_MAP.put(LogTypeEnum.UPDATE.name(), "更新");
+        LOGTYPE_MAP.put(LogTypeEnum.SAVE.name(), "添加或更新");
+        LOGTYPE_MAP.put(LogTypeEnum.EXCEPTION.name(), "系统异常");
     }
 
     public Long getId() {
@@ -124,14 +124,14 @@ public class Log implements Serializable {
     }
 
     public String getOperateContent() {
-		return operateContent;
-	}
+        return operateContent;
+    }
 
-	public void setOperateContent(String operateContent) {
-		this.operateContent = operateContent;
-	}
+    public void setOperateContent(String operateContent) {
+        this.operateContent = operateContent;
+    }
 
-	public String getOperateType() {
+    public String getOperateType() {
         return operateType;
     }
 
@@ -140,7 +140,7 @@ public class Log implements Serializable {
     }
 
     public String getOperateTypeDesc() {
-    	return StringUtils.isBlank(operateTypeDesc) ? LOGTYPE_MAP.get(this.operateType) : operateTypeDesc;
+        return StringUtils.isBlank(operateTypeDesc) ? LOGTYPE_MAP.get(this.operateType) : operateTypeDesc;
     }
 
     public void setOperateTypeDesc(String operateTypeDesc) {
@@ -148,14 +148,14 @@ public class Log implements Serializable {
     }
 
     public Integer getOperateConsumeTime() {
-		return operateConsumeTime;
-	}
+        return operateConsumeTime;
+    }
 
-	public void setOperateConsumeTime(Integer operateConsumeTime) {
-		this.operateConsumeTime = operateConsumeTime;
-	}
+    public void setOperateConsumeTime(Integer operateConsumeTime) {
+        this.operateConsumeTime = operateConsumeTime;
+    }
 
-	public Date getOperateTime() {
+    public Date getOperateTime() {
         return operateTime;
     }
 
@@ -179,24 +179,24 @@ public class Log implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-	public String getOperateRoleName() {
-		return operateRoleName;
-	}
+    public String getOperateRoleName() {
+        return operateRoleName;
+    }
 
-	public void setOperateRoleName(String operateRoleName) {
-		this.operateRoleName = operateRoleName;
-	}
+    public void setOperateRoleName(String operateRoleName) {
+        this.operateRoleName = operateRoleName;
+    }
 
-	public String getOperateModuleName() {
-		return operateModuleName;
-	}
+    public String getOperateModuleName() {
+        return operateModuleName;
+    }
 
-	public void setOperateModuleName(String operateModuleName) {
-		this.operateModuleName = operateModuleName;
-	}
+    public void setOperateModuleName(String operateModuleName) {
+        this.operateModuleName = operateModuleName;
+    }
 
-	@Override
-	public String toString() {
-		return "Log [id=" + id + ", operateNo=" + operateNo + ", operateRoleId=" + operateRoleId + ", operateIp=" + operateIp + ", operateModuleId=" + operateModuleId + ", operateUrl=" + operateUrl + ", operateMethod=" + operateMethod + ", operateException=" + operateException + ", operateType=" + operateType + ", operateTypeDesc=" + operateTypeDesc + ", operateConsumeTime=" + operateConsumeTime + ", operateTime=" + operateTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+    @Override
+    public String toString() {
+        return "Log [id=" + id + ", operateNo=" + operateNo + ", operateRoleId=" + operateRoleId + ", operateIp=" + operateIp + ", operateModuleId=" + operateModuleId + ", operateUrl=" + operateUrl + ", operateMethod=" + operateMethod + ", operateException=" + operateException + ", operateType=" + operateType + ", operateTypeDesc=" + operateTypeDesc + ", operateConsumeTime=" + operateConsumeTime + ", operateTime=" + operateTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+    }
 }
