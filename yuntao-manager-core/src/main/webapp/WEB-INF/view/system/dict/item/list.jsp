@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="${parentPath}public/public.jsp" %>
+<%@ include file="../../../public/public.jsp" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <%@ include file="${parentPath}public/header.jsp" %>
+    <%@ include file="../../../public/header.jsp" %>
   </head>
   <body>
     <div class="pd-5">
@@ -11,13 +11,7 @@
       <div class="layui-form layui-form-pane">
         <div class="layui-inline">
           <div class="layui-form-item">
-            <label class="layui-form-label">${pk.columnComment}</label>
-            <div class="layui-input-inline">
-              <input type="text" id="${pk.attributename}" class="layui-input" placeholder="请输入${pk.columnComment}" autocomplete="off">
-            </div>
-            <div class="layui-input-inline" style="width: 85px;">
-              <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
-            </div>
+            <input type="hidden" id="dictCode" value="${dictCode }" autocomplete="off" class="layui-input">
             <div class="layui-input-inline operator-div">
               <c:if test="${ powers['ADD'] }">
                 <button id="add" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-add-circle-fine"></i>添加</button>
@@ -42,7 +36,7 @@
         {{# } }}
     </script>
 
-    <%@ include file="${parentPath}public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx}/js/${jsPath}/${jsName}.js?v=${since}.1"></script>
+    <%@ include file="../../../public/footer.jsp" %>
+    <script type="text/javascript" src="${ctx}/js/system/dict-item.js?v=0.1.1.1"></script>
   </body>
 </html>

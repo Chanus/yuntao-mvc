@@ -27,6 +27,9 @@ layui.config({
     // 重新加载
     reload = function () {
         table.reload('d', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            },
             where: {
                 mpId: mpId,
                 v: new Date().getTime()

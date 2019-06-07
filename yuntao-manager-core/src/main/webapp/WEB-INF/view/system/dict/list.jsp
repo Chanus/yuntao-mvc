@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="${parentPath}public/public.jsp" %>
+<%@ include file="../../public/public.jsp" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <%@ include file="${parentPath}public/header.jsp" %>
+    <%@ include file="../../public/header.jsp" %>
   </head>
   <body>
     <div class="pd-5">
@@ -11,9 +11,13 @@
       <div class="layui-form layui-form-pane">
         <div class="layui-inline">
           <div class="layui-form-item">
-            <label class="layui-form-label">${pk.columnComment}</label>
+            <label class="layui-form-label">字典集代码</label>
             <div class="layui-input-inline">
-              <input type="text" id="${pk.attributename}" class="layui-input" placeholder="请输入${pk.columnComment}" autocomplete="off">
+              <input type="text" id="dictCode" class="layui-input" placeholder="请输入字典集代码" autocomplete="off">
+            </div>
+            <label class="layui-form-label">字典集名称</label>
+            <div class="layui-input-inline">
+              <input type="text" id="dictName" class="layui-input" placeholder="请输入字典集名称" autocomplete="off">
             </div>
             <div class="layui-input-inline" style="width: 85px;">
               <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
@@ -37,12 +41,13 @@
         {{# if(${powers.containsKey('UPDATE')}){ }}
           <a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
         {{# } }}
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="dictItem">字典项</a>
         {{# if(${powers.containsKey('DELETE')}){ }}
           <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         {{# } }}
     </script>
 
-    <%@ include file="${parentPath}public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx}/js/${jsPath}/${jsName}.js?v=${since}.1"></script>
+    <%@ include file="../../public/footer.jsp" %>
+    <script type="text/javascript" src="${ctx}/js/system/dict.js?v=0.1.1.1"></script>
   </body>
 </html>
