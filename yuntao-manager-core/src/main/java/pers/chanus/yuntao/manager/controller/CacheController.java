@@ -6,6 +6,7 @@ package pers.chanus.yuntao.manager.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pers.chanus.yuntao.manager.common.CacheData;
+import pers.chanus.yuntao.manager.service.DictItemService;
 import pers.chanus.yuntao.manager.service.ParamService;
 
 import javax.annotation.PostConstruct;
@@ -21,6 +22,8 @@ import javax.annotation.PostConstruct;
 public class CacheController {
     @Autowired
     private ParamService paramService;
+    @Autowired
+    private DictItemService dictItemService;
 
     /**
      * 初始化RSA密钥RSA_KEYS_QUEUE
@@ -40,5 +43,15 @@ public class CacheController {
     @PostConstruct
     public void initSysParamsMap() {
         paramService.reloadParam();
+    }
+
+    /**
+     * 初始化系统字典数据SYSTEM_DICT_MAP
+     *
+     * @since 0.1.1
+     */
+    @PostConstruct
+    public void initSysDictMap() {
+        dictItemService.reloadDict();
     }
 }

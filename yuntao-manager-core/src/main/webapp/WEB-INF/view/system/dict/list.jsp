@@ -22,14 +22,13 @@
             <div class="layui-input-inline" style="width: 85px;">
               <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
             </div>
-            <div class="layui-input-inline operator-div">
-              <c:if test="${ powers['ADD'] }">
-                <button id="add" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-add-circle-fine"></i>添加</button>
-              </c:if>
-              <c:if test="${ powers['DELETE'] }">
-                <button id="delete" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-delete"></i>删除</button>
-              </c:if>
-            </div>
+            <c:if test="${ powers['ADD'] }">
+              <button id="add" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-add-circle-fine"></i>添加</button>
+            </c:if>
+            <c:if test="${ powers['DELETE'] }">
+              <button id="delete" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-delete"></i>删除</button>
+            </c:if>
+            <button id="reload" class="layui-btn"><i class="layui-icon layui-icon-refresh"></i>重载系统字典</button>
           </div>
         </div>
       </div>

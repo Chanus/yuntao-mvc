@@ -10,6 +10,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import pers.chanus.yuntao.manager.model.DictItem;
 import pers.chanus.yuntao.util.encrypt.RSAUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,13 @@ public class CacheData {
      * @since 0.1.1
      */
     public static final Map<String, String> SYSTEM_PARAMS_MAP = new HashMap<>();
+
+    /**
+     * 存储系统字典数据，Map的key为字典集代码，value为有序的字典项列表
+     *
+     * @since 0.1.1
+     */
+    public static final Map<String, LinkedList<DictItem>> SYSTEM_DICT_MAP = new HashMap<>();
 
     /**
      * 存储所有的请求URL及Controller类名，Map<Controller, List<URL>>

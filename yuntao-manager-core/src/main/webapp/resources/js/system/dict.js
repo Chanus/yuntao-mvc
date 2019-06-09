@@ -57,6 +57,25 @@ layui.config({
         popup.open(600, 500, '<i class="layui-icon layui-icon-add-circle"></i>添加数据字典集', action_path + 'add.do');
     });
 
+    // 重载系统字典
+    $("#reload").on('click', function () {
+        $.ajax({
+            type: 'post',
+            url: action_path + 'reload-dict.do',
+            dataType: 'json',
+            success: function (data) {
+                if (data.code === 0) {
+                    layer.msg(data.msg, {icon: 1, time: 1000});
+                } else {
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
+                }
+            },
+            error: function () {
+                layer.msg('请求异常，操作失败', {icon: 2, anim: 6, time: 2000});
+            }
+        });
+    });
+
     // 监听工具条
     table.on('tool(datas)', function (obj) {
         var data = obj.data; // 获得当前行数据
