@@ -21,10 +21,6 @@ public class ConfigConsts {
      * 状态：是
      */
     public final static String STATUS_YES = "1";
-    /**
-     * 状态：进行中
-     */
-    public final static String STATUS_HAND = "2";
 
     /**
      * 系统内置角色：超级管理员
@@ -55,5 +51,5 @@ public class ConfigConsts {
     /**
      * BigDecimal常量100
      */
-    public static final BigDecimal DECIMAL_100 = new BigDecimal(100);
+    public final static BigDecimal DECIMAL_100 = new BigDecimal(100);
 }

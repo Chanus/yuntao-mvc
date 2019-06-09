@@ -3,9 +3,6 @@
  */
 package pers.chanus.yuntao.commons.constant;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 系统缓存数据
  *
@@ -14,17 +11,5 @@ import java.util.Map;
  * @since 0.0.1
  */
 public class CacheConsts {
-    /**
-     * 存储服务器配置信息
-     *
-     * @since 0.0.1
-     */
-    public static Map<String, String> SERVER_CONFIG_MAP = new HashMap<>();
 
-    /**
-     * 存储系统参数配置信息
-     *
-     * @since 0.0.1
-     */
-    public static Map<String, String> SYSTEM_PARAMS_MAP = new HashMap<>();
 }

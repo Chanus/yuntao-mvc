@@ -1,4 +1,5 @@
 /*
+/*
  * Copyright (c) 2018, Chanus and/or its affiliates. All rights reserved.
  */
 package pers.chanus.yuntao.manager.controller;
@@ -8,11 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pers.chanus.yuntao.commons.constant.CacheConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.constant.MsgCode;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.model.Operator;
 import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.manager.service.OperatorService;
@@ -47,7 +48,7 @@ public class IndexController extends BaseController {
     @GetMapping(value = "index.do")
     public String index(Model model) {
         model.addAttribute("menus", getSession().getAttribute("menus"));
-        model.addAttribute("singleLocationLogin", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_single_location_login"));
+        model.addAttribute("singleLocationLogin", CacheData.SYSTEM_PARAMS_MAP.get("sys_single_location_login"));
 
         return "index/index";
     }

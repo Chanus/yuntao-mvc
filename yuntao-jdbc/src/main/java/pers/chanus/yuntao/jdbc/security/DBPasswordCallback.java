@@ -4,7 +4,6 @@
 package pers.chanus.yuntao.jdbc.security;
 
 import com.alibaba.druid.util.DruidPasswordCallback;
-import pers.chanus.yuntao.commons.constant.CacheConsts;
 import pers.chanus.yuntao.util.encrypt.AESUtils;
 
 import java.util.Properties;
@@ -18,7 +17,7 @@ import java.util.Properties;
  */
 public class DBPasswordCallback extends DruidPasswordCallback {
     private static final long serialVersionUID = 1100233602930489210L;
-    private static final String PRIVATE_KEY_STRING = "ChanusYuntaoJDBC";
+    private static final String KEY = "ChanusYuntaoJDBC";
 
     @Override
     public void setProperties(Properties properties) {
@@ -28,7 +27,7 @@ public class DBPasswordCallback extends DruidPasswordCallback {
         if (password != null && password.trim().length() > 0) {
             try {
                 // 这里的password是将jdbc.properties配置得到的密码进行解密之后的值，所以这里的代码是将密码进行解密
-                password = AESUtils.decrypt(CacheConsts.SERVER_CONFIG_MAP.get("jdbc_key") == null ? PRIVATE_KEY_STRING : CacheConsts.SERVER_CONFIG_MAP.get("jdbc_key"), password);
+                password = AESUtils.decrypt(KEY, password);
                 setPassword(password.toCharArray());
             } catch (Exception e) {
                 setPassword(password.toCharArray());

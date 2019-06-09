@@ -25,6 +25,13 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class CacheData {
     /**
+     * 存储系统参数配置信息
+     *
+     * @since 0.1.1
+     */
+    public static final Map<String, String> SYSTEM_PARAMS_MAP = new HashMap<>();
+
+    /**
      * 存储所有的请求URL及Controller类名，Map<Controller, List<URL>>
      *
      * @since 0.0.1

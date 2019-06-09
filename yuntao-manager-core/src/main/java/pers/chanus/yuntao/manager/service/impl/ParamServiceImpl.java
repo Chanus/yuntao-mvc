@@ -5,9 +5,9 @@ package pers.chanus.yuntao.manager.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.constant.CacheConsts;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.mapper.ParamMapper;
 import pers.chanus.yuntao.manager.model.Param;
 import pers.chanus.yuntao.manager.service.ParamService;
@@ -52,13 +52,10 @@ public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param, Intege
 
     @Override
     public Message reloadParam() {
-        CacheConsts.SYSTEM_PARAMS_MAP.clear();
+        CacheData.SYSTEM_PARAMS_MAP.clear();
         List<Param> params = mapper.listValidParam();
-        if (!CollectionUtils.isEmpty(params)) {
-            for (Param param : params) {
-                CacheConsts.SYSTEM_PARAMS_MAP.put(param.getParamCode(), param.getParamData());
-            }
-        }
+        if (!CollectionUtils.isEmpty(params))
+            params.forEach(param -> CacheData.SYSTEM_PARAMS_MAP.put(param.getParamCode(), param.getParamData()));
 
         return Message.success("系统参数重载成功");
     }

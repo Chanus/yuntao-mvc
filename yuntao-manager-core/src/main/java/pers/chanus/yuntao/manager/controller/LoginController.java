@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pers.chanus.yuntao.commons.constant.CacheConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.constant.MsgCode;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
@@ -59,8 +58,8 @@ public class LoginController extends BaseController {
      */
     @GetMapping(value = "login")
     public String login(Model model) {
-        model.addAttribute("isCheckVerifyCode", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_verify_code"));
-        model.addAttribute("isCheckGoogleAuthenticator", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"));
+        model.addAttribute("isCheckVerifyCode", CacheData.SYSTEM_PARAMS_MAP.get("sys_check_verify_code"));
+        model.addAttribute("isCheckGoogleAuthenticator", CacheData.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"));
         return "login";
     }
 
@@ -123,7 +122,7 @@ public class LoginController extends BaseController {
         Map<String, Object> params = getParams();
         String rsaPublicKey = (String) params.get("rsaPublicKey");
 
-        if ("1".equals(CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_verify_code"))) {// 需要验证码校验
+        if ("1".equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_check_verify_code"))) {// 需要验证码校验
             String verifyCode = (String) params.get("verifyCode");
             String realVerifyCode = (String) session.getAttribute("verifyCode");
 
@@ -137,7 +136,7 @@ public class LoginController extends BaseController {
             }
         }
 
-        if ("1".equals(CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"))) {// 启用谷歌验证器
+        if ("1".equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"))) {// 启用谷歌验证器
             String googleAuthenticatorCode = (String) params.get("googleAuthenticatorCode");
 
             if (StringUtils.isBlank(googleAuthenticatorCode))
@@ -169,7 +168,7 @@ public class LoginController extends BaseController {
 
         if (message.getCode() == MsgCode.SUCCESS) {// 存储登录账号信息
             session.setAttribute("loginUser", message.getData());
-            if ("1".equals(CacheConsts.SYSTEM_PARAMS_MAP.get("sys_single_location_login")))
+            if ("1".equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_single_location_login")))
                 SessionSave.getSessionIdSave().put(loginname, session.getId());
         }
 
@@ -185,8 +184,8 @@ public class LoginController extends BaseController {
     @GetMapping(value = "logout.do")
     public String logout(Model model) {
         getSession().invalidate();
-        model.addAttribute("isCheckVerifyCode", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_verify_code"));
-        model.addAttribute("isCheckGoogleAuthenticator", CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"));
+        model.addAttribute("isCheckVerifyCode", CacheData.SYSTEM_PARAMS_MAP.get("sys_check_verify_code"));
+        model.addAttribute("isCheckGoogleAuthenticator", CacheData.SYSTEM_PARAMS_MAP.get("sys_check_google_authenticator"));
         return "login";
     }
 

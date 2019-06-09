@@ -5,11 +5,11 @@ package pers.chanus.yuntao.manager.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.constant.CacheConsts;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.mapper.LoginUserViewMapper;
 import pers.chanus.yuntao.manager.mapper.ModuleMapper;
 import pers.chanus.yuntao.manager.mapper.RoleMapper;
@@ -50,7 +50,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             return Message.fail("登录密码不能为空");
 
         // 验证IP白名单
-        if (ConfigConsts.STATUS_YES.equals(CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_white_ip"))) {
+        if (ConfigConsts.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_check_white_ip"))) {
             if (StringUtils.isBlank(loginIp))
                 return Message.fail("登录IP为空");
 
@@ -110,7 +110,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             return Message.fail("登录密码不能为空");
 
         // 验证IP白名单
-        if (ConfigConsts.STATUS_YES.equals(CacheConsts.SYSTEM_PARAMS_MAP.get("sys_check_white_ip"))) {
+        if (ConfigConsts.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_check_white_ip"))) {
             if (StringUtils.isBlank(loginIp))
                 return Message.fail("登录IP为空");
 
