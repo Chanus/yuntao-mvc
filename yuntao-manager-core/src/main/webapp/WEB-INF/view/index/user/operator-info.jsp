@@ -18,49 +18,49 @@
           <p>请选择小于20KB的图片作为头像</p>
         </div>
         <div class="layui-col-md6 layui-col-xs12">
-          <input type="hidden" name="id" value="${operator.id }" autocomplete="off" class="layui-input">
+          <input type="hidden" name="id" value="${operator.id }" class="layui-input" autocomplete="off">
           <div class="layui-form-item">
             <label class="layui-form-label">账号</label>
             <div class="layui-input-block">
-              <input type="text" value="${operator.operatorNo }" readonly="readonly" disabled="disabled" autocomplete="off" class="layui-input layui-disabled">
+              <input type="text" value="${operator.operatorNo }" readonly="readonly" disabled="disabled" class="layui-input layui-disabled" autocomplete="off">
             </div>
           </div>
           <div class="layui-form-item">
             <label class="layui-form-label">名称<span class="red">*</span></label>
             <div class="layui-input-block">
-              <input type="text" name="operatorName" required lay-verify="required" value="${operator.operatorName }" autocomplete="off" class="layui-input">
+              <input type="text" name="operatorName" required lay-verify="required" value="${operator.operatorName }" class="layui-input" autocomplete="off">
             </div>
           </div>
           <div class="layui-form-item">
             <label class="layui-form-label">角色</label>
             <div class="layui-input-block">
-              <input type="text" value="${operator.roleName }" readonly="readonly" disabled="disabled" autocomplete="off" class="layui-input layui-disabled">
+              <input type="text" value="${operator.roleName }" readonly="readonly" disabled="disabled" class="layui-input layui-disabled" autocomplete="off">
             </div>
           </div>
           <c:if test="${operator.operatorRoleId eq '1' }">
             <div class="layui-form-item">
               <label class="layui-form-label">主账号</label>
               <div class="layui-input-block">
-                <input type="text" value="${operator.masterNo }" readonly="readonly" disabled="disabled" autocomplete="off" class="layui-input layui-disabled">
+                <input type="text" value="${operator.masterNo }" readonly="readonly" disabled="disabled" class="layui-input layui-disabled" autocomplete="off">
               </div>
             </div>
           </c:if>
           <div class="layui-form-item">
             <label class="layui-form-label">邮箱账号</label>
             <div class="layui-input-block">
-              <input type="text" name="email" lay-verify="email" lay-ignore="ignore" value="${operator.email }" autocomplete="off" class="layui-input">
+              <input type="text" name="email" lay-verify="email" lay-ignore="ignore" value="${operator.email }" class="layui-input" autocomplete="off">
             </div>
           </div>
           <div class="layui-form-item">
             <label class="layui-form-label">电话号码</label>
             <div class="layui-input-block">
-              <input type="text" name="tel" lay-verify="phone" lay-ignore="ignore" value="${operator.tel }" autocomplete="off" class="layui-input">
+              <input type="text" name="tel" lay-verify="phone" lay-ignore="ignore" value="${operator.tel }" class="layui-input" autocomplete="off">
             </div>
           </div>
           <div class="layui-form-item">
             <label class="layui-form-label">创建时间</label>
             <div class="layui-input-block">
-              <input type="text" id="gmtCreate" readonly="readonly" disabled="disabled" autocomplete="off" class="layui-input layui-disabled">
+              <input type="text" id="gmtCreate" readonly="readonly" disabled="disabled" class="layui-input layui-disabled" autocomplete="off">
             </div>
           </div>
           <div class="layui-form-item layui-form-text">

@@ -8,7 +8,7 @@
   <body>
     <div class="pd-5">
       <form class="layui-form layui-form-pane">
-        <input type="hidden" name="id" value="${role.id }" autocomplete="off" class="layui-input">
+        <input type="hidden" name="id" value="${role.id }" class="layui-input" autocomplete="off">
         <c:choose>
           <c:when test="${cmd eq 'add' }">
             <div class="layui-form-item">
@@ -27,7 +27,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">角色ID</label>
               <div class="layui-input-block">
-                <input type="text" name="roleId" readonly value="${role.roleId }" placeholder="请输入角色ID" autocomplete="off" class="layui-input">
+                <input type="text" name="roleId" readonly value="${role.roleId }" placeholder="请输入角色ID" class="layui-input" autocomplete="off">
               </div>
             </div>
           </c:otherwise>
@@ -35,13 +35,13 @@
         <div class="layui-form-item">
           <label class="layui-form-label">角色代码</label>
           <div class="layui-input-block">
-            <input type="text" name="roleCode" value="${role.roleCode }" placeholder="请输入角色代码" autocomplete="off" class="layui-input">
+            <input type="text" name="roleCode" value="${role.roleCode }" placeholder="请输入角色代码" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">角色名称<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="roleName" required lay-verify="required" value="${role.roleName }" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+            <input type="text" name="roleName" required lay-verify="required" value="${role.roleName }" placeholder="请输入角色名称" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item" pane>
@@ -71,7 +71,7 @@
           <div class="layui-form-item">
             <label class="layui-form-label">排序</label>
             <div class="layui-input-block">
-              <input type="text" name="priority" lay-verify="pinteger" lay-ignore="ignore" value="${role.priority }" placeholder="请输入角色排序优先级" autocomplete="off" class="layui-input">
+              <input type="text" name="priority" lay-verify="pinteger" lay-ignore="ignore" value="${role.priority }" placeholder="请输入角色排序优先级" class="layui-input" autocomplete="off">
             </div>
           </div>
         </c:if>

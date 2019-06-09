@@ -8,14 +8,14 @@
   <body>
     <div class="pd-5">
       <form class="layui-form layui-form-pane">
-        <input type="hidden" name="id" value="${dictItem.id }" autocomplete="off" class="layui-input">
-        <input type="hidden" name="dictCode" value="${dictItem.dictCode }" autocomplete="off" class="layui-input">
+        <input type="hidden" name="id" value="${dictItem.id }" class="layui-input" autocomplete="off">
+        <input type="hidden" name="dictCode" value="${dictItem.dictCode }" class="layui-input" autocomplete="off">
         <c:choose>
           <c:when test="${'add' eq cmd}">
             <div class="layui-form-item">
               <label class="layui-form-label">字典项代码<span class="red">*</span></label>
               <div class="layui-input-block">
-                <input type="text" name="itemCode" required lay-verify="required" value="${dictItem.itemCode }" placeholder="请输入字典项代码" autocomplete="off" class="layui-input">
+                <input type="text" name="itemCode" required lay-verify="required" value="${dictItem.itemCode }" placeholder="请输入字典项代码" class="layui-input" autocomplete="off">
               </div>
             </div>
           </c:when>
@@ -23,7 +23,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">字典项代码</label>
               <div class="layui-input-block">
-                <input type="text" name="itemCode" readonly value="${dictItem.itemCode }" autocomplete="off" class="layui-input layui-disabled">
+                <input type="text" name="itemCode" readonly value="${dictItem.itemCode }" class="layui-input layui-disabled" autocomplete="off">
               </div>
             </div>
           </c:otherwise>
@@ -31,19 +31,19 @@
         <div class="layui-form-item">
           <label class="layui-form-label">字典项名称<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="itemName" required lay-verify="required" value="${dictItem.itemName }" placeholder="请输入字典项名称" autocomplete="off" class="layui-input">
+            <input type="text" name="itemName" required lay-verify="required" value="${dictItem.itemName }" placeholder="请输入字典项名称" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">字典项值<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="itemData" required lay-verify="required" value="${dictItem.itemData }" placeholder="请输入字典项值" autocomplete="off" class="layui-input">
+            <input type="text" name="itemData" required lay-verify="required" value="${dictItem.itemData }" placeholder="请输入字典项值" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">排序<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="priority" required lay-verify="pinteger" value="${dictItem.priority }" placeholder="请输排序数字" autocomplete="off" class="layui-input">
+            <input type="text" name="priority" required lay-verify="pinteger" value="${dictItem.priority }" placeholder="请输排序数字" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item" pane>

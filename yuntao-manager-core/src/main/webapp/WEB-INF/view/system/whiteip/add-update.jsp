@@ -8,7 +8,7 @@
   <body>
     <div class="pd-5">
       <form class="layui-form layui-form-pane">
-        <input type="hidden" name="id" value="${whiteIp.id }" autocomplete="off" class="layui-input">
+        <input type="hidden" name="id" value="${whiteIp.id }" class="layui-input" autocomplete="off">
         <div class="layui-form-item layui-form-text">
           <label class="layui-form-label">白名单IP<span class="red">*</span></label>
           <div class="layui-input-block">

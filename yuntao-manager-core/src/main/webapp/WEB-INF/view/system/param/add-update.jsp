@@ -8,13 +8,13 @@
   <body>
     <div class="pd-5">
       <form class="layui-form layui-form-pane">
-        <input type="hidden" name="id" value="${parameter.id }" autocomplete="off" class="layui-input">
+        <input type="hidden" name="id" value="${parameter.id }" class="layui-input" autocomplete="off">
         <c:choose>
           <c:when test="${cmd eq 'add' }">
             <div class="layui-form-item">
               <label class="layui-form-label">参数代码<span class="red">*</span></label>
               <div class="layui-input-block">
-                <input type="text" name="paramCode" required lay-verify="required" value="${parameter.paramCode }" placeholder="请输入参数代码" autocomplete="off" class="layui-input">
+                <input type="text" name="paramCode" required lay-verify="required" value="${parameter.paramCode }" placeholder="请输入参数代码" class="layui-input" autocomplete="off">
               </div>
             </div>
           </c:when>
@@ -22,7 +22,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">参数代码</label>
               <div class="layui-input-block">
-                <input type="text" name="paramCode" required readonly lay-verify="required" value="${parameter.paramCode }" autocomplete="off" class="layui-input">
+                <input type="text" name="paramCode" required readonly lay-verify="required" value="${parameter.paramCode }" class="layui-input" autocomplete="off">
               </div>
             </div>
           </c:otherwise>
@@ -30,13 +30,13 @@
         <div class="layui-form-item">
           <label class="layui-form-label">参数值<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="paramData" required lay-verify="required" value="${parameter.paramData }" placeholder="请输入参数值" autocomplete="off" class="layui-input">
+            <input type="text" name="paramData" required lay-verify="required" value="${parameter.paramData }" placeholder="请输入参数值" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">可浏览角色</label>
           <div class="layui-input-block">
-            <input type="text" name="modifiedRoleId" value="${parameter.modifiedRoleId }" placeholder="请输入可浏览该参数的角色，多个以“,”分隔" autocomplete="off" class="layui-input">
+            <input type="text" name="modifiedRoleId" value="${parameter.modifiedRoleId }" placeholder="请输入可浏览该参数的角色，多个以“,”分隔" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item" pane>

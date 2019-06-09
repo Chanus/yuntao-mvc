@@ -8,7 +8,7 @@
     <%@ include file="../public/header.jsp"%>
   </head>
   <body class="layui-layout-body">
-    <input type="hidden" id="singleLocationLogin" value="${singleLocationLogin }" autocomplete="off" class="layui-input">
+    <input type="hidden" id="singleLocationLogin" value="${singleLocationLogin }" class="layui-input" autocomplete="off">
     <div id="LAY_app">
       <div class="layui-layout layui-layout-admin">
         <div class="layui-header">

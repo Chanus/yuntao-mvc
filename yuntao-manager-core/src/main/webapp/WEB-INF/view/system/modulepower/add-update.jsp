@@ -8,17 +8,17 @@
   <body>
     <div class="pd-5">
       <form class="layui-form layui-form-pane">
-        <input type="hidden" name="mpId" value="${modulePower.mpId }" autocomplete="off" class="layui-input">
+        <input type="hidden" name="mpId" value="${modulePower.mpId }" class="layui-input" autocomplete="off">
         <div class="layui-form-item">
           <label class="layui-form-label">权限代码</label>
           <div class="layui-input-block">
-            <input type="text" name="powerItem" required readonly lay-verify="required" value="${modulePower.powerItem }" placeholder="请输入权限代码" autocomplete="off" class="layui-input">
+            <input type="text" name="powerItem" required readonly lay-verify="required" value="${modulePower.powerItem }" placeholder="请输入权限代码" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">权限名称<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="aliasName" required lay-verify="required" value="${modulePower.aliasName }" placeholder="请输入权限名称" autocomplete="off" class="layui-input">
+            <input type="text" name="aliasName" required lay-verify="required" value="${modulePower.aliasName }" placeholder="请输入权限名称" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item text-c">

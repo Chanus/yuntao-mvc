@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<label class="layui-form-label date-description">日期</label>
-<div class="layui-input-inline" style="width: 120px;">
-  <input type="text" id="beginDate" class="layui-input" placeholder="请选择开始日期" readonly autocomplete="off">
-</div>
-<div class="layui-input-inline" style="width: 120px;">
-  <input type="text" id="endDate" class="layui-input" placeholder="请选择结束日期" readonly autocomplete="off">
+<div class="layui-inline">
+  <label class="layui-form-label date-description">日期</label>
+  <div class="layui-input-inline" style="width: 120px;">
+    <input type="text" id="beginDate" placeholder="请选择开始日期" readonly class="layui-input" autocomplete="off">
+  </div>
+  <div class="layui-input-inline" style="width: 120px;">
+    <input type="text" id="endDate" placeholder="请选择结束日期" readonly class="layui-input" autocomplete="off">
+  </div>
 </div>
 <script type="text/javascript">
     layui.config({

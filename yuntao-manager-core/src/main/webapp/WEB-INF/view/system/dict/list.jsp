@@ -9,25 +9,33 @@
     <div class="pd-5">
       <!-- 搜索条件 -->
       <div class="layui-form layui-form-pane">
-        <div class="layui-inline">
-          <div class="layui-form-item">
+        <div class="layui-form-item">
+          <div class="layui-inline">
             <label class="layui-form-label">字典集代码</label>
-            <div class="layui-input-inline">
-              <input type="text" id="dictCode" class="layui-input" placeholder="请输入字典集代码" autocomplete="off">
+            <div class="layui-input-block">
+              <input type="text" id="dictCode" placeholder="请输入字典集代码" class="layui-input" autocomplete="off">
             </div>
+          </div>
+          <div class="layui-inline">
             <label class="layui-form-label">字典集名称</label>
-            <div class="layui-input-inline">
-              <input type="text" id="dictName" class="layui-input" placeholder="请输入字典集名称" autocomplete="off">
+            <div class="layui-input-block">
+              <input type="text" id="dictName" placeholder="请输入字典集名称" class="layui-input" autocomplete="off">
             </div>
-            <div class="layui-input-inline" style="width: 85px;">
-              <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
-            </div>
-            <c:if test="${ powers['ADD'] }">
+          </div>
+          <div class="layui-inline">
+            <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
+          </div>
+          <c:if test="${powers['ADD'] }">
+            <div class="layui-inline">
               <button id="add" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-add-circle-fine"></i>添加</button>
-            </c:if>
-            <c:if test="${ powers['DELETE'] }">
+            </div>
+          </c:if>
+          <c:if test="${powers['DELETE'] }">
+            <div class="layui-inline">
               <button id="delete" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-delete"></i>删除</button>
-            </c:if>
+            </div>
+          </c:if>
+          <div class="layui-inline">
             <button id="reload" class="layui-btn"><i class="layui-icon layui-icon-refresh"></i>重载系统字典</button>
           </div>
         </div>

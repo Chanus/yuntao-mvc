@@ -8,13 +8,13 @@
   <body>
     <div class="pd-5">
       <form class="layui-form layui-form-pane">
-        <input type="hidden" name="id" value="${dict.id }" autocomplete="off" class="layui-input">
+        <input type="hidden" name="id" value="${dict.id }" class="layui-input" autocomplete="off">
         <c:choose>
           <c:when test="${'add' eq cmd}">
             <div class="layui-form-item">
               <label class="layui-form-label">字典集代码<span class="red">*</span></label>
               <div class="layui-input-block">
-                <input type="text" name="dictCode" required lay-verify="required" value="${dict.dictCode }" placeholder="请输入字典集代码" autocomplete="off" class="layui-input">
+                <input type="text" name="dictCode" required lay-verify="required" value="${dict.dictCode }" placeholder="请输入字典集代码" class="layui-input" autocomplete="off">
               </div>
             </div>
           </c:when>
@@ -22,7 +22,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">字典集代码</label>
               <div class="layui-input-block">
-                <input type="text" name="dictCode" readonly value="${dict.dictCode }" autocomplete="off" class="layui-input layui-disabled">
+                <input type="text" name="dictCode" readonly value="${dict.dictCode }" class="layui-input layui-disabled" autocomplete="off">
               </div>
             </div>
           </c:otherwise>
@@ -30,7 +30,7 @@
         <div class="layui-form-item">
           <label class="layui-form-label">字典集名称<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="dictName" required lay-verify="required" value="${dict.dictName }" placeholder="请输入字典集名称" autocomplete="off" class="layui-input">
+            <input type="text" name="dictName" required lay-verify="required" value="${dict.dictName }" placeholder="请输入字典集名称" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item" pane>

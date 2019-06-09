@@ -10,22 +10,22 @@
       <form class="layui-form layui-form-pane">
         <c:choose>
           <c:when test="${cmd eq 'add' }">
-            <input type="hidden" name="moduleParentId" value="${moduleId }" autocomplete="off" class="layui-input">
+            <input type="hidden" name="moduleParentId" value="${moduleId }" class="layui-input" autocomplete="off">
           </c:when>
           <c:otherwise>
-            <input type="hidden" name="moduleId" value="${module.moduleId }" autocomplete="off" class="layui-input">
+            <input type="hidden" name="moduleId" value="${module.moduleId }" class="layui-input" autocomplete="off">
           </c:otherwise>
         </c:choose>
         <div class="layui-form-item">
           <label class="layui-form-label">模块名称<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="moduleName" required lay-verify="required" value="${module.moduleName }" placeholder="请输入模块名称" autocomplete="off" class="layui-input">
+            <input type="text" name="moduleName" required lay-verify="required" value="${module.moduleName }" placeholder="请输入模块名称" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">模块URL</label>
           <div class="layui-input-block">
-            <input type="text" name="moduleUrl" value="${module.moduleUrl }" placeholder="请输入模块URL" autocomplete="off" class="layui-input">
+            <input type="text" name="moduleUrl" value="${module.moduleUrl }" placeholder="请输入模块URL" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item" pane>
@@ -60,7 +60,7 @@
         <div class="layui-form-item">
           <label class="layui-form-label">模块图标</label>
           <div class="layui-input-block">
-            <input type="hidden" id="moduleIcon" name="moduleIcon" value="${module.moduleIcon }" autocomplete="off" class="layui-input">
+            <input type="hidden" id="moduleIcon" name="moduleIcon" value="${module.moduleIcon }" class="layui-input" autocomplete="off">
             <input type="text" id="iconPicker" value="${module.moduleIcon }" lay-filter="iconPicker" class="hide">
           </div>
         </div>

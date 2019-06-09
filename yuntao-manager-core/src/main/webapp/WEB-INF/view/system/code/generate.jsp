@@ -8,35 +8,35 @@
   <body>
     <div class="pd-5">
       <form class="layui-form layui-form-pane">
-        <input type="hidden" name="tableSchema" value="${tableSchema }" autocomplete="off" class="layui-input">
+        <input type="hidden" name="tableSchema" value="${tableSchema }" class="layui-input" autocomplete="off">
         <div class="layui-form-item">
           <label class="layui-form-label">表名</label>
           <div class="layui-input-block">
-            <input type="text" name="tableName" readonly value="${tableName }" autocomplete="off" class="layui-input layui-disabled">
+            <input type="text" name="tableName" readonly value="${tableName }" class="layui-input layui-disabled" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">作者<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="author" required lay-verify="required" value="${author }" placeholder="请输入作者名称" autocomplete="off" class="layui-input">
+            <input type="text" name="author" required lay-verify="required" value="${author }" placeholder="请输入作者名称" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">版本号<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="since" required lay-verify="required" value="${since }" placeholder="请输入代码版本号" autocomplete="off" class="layui-input">
+            <input type="text" name="since" required lay-verify="required" value="${since }" placeholder="请输入代码版本号" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">包名<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="package" required lay-verify="required" value="${packageName }" placeholder="请输入代码包名" autocomplete="off" class="layui-input">
+            <input type="text" name="package" required lay-verify="required" value="${packageName }" placeholder="请输入代码包名" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">表前缀</label>
           <div class="layui-input-block">
-            <input type="text" name="tablePrefix" value="${tablePrefix }" placeholder="请输入表前缀" autocomplete="off" class="layui-input">
+            <input type="text" name="tablePrefix" value="${tablePrefix }" placeholder="请输入表前缀" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item" pane>
@@ -56,13 +56,13 @@
         <div class="layui-form-item">
           <label class="layui-form-label">URL标识</label>
           <div class="layui-input-block">
-            <input type="text" name="pathName" placeholder="请输入请求URL标识" autocomplete="off" class="layui-input">
+            <input type="text" name="pathName" placeholder="请输入请求URL标识" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">模块ID</label>
           <div class="layui-input-block">
-            <input type="text" name="moduleId" placeholder="请输入模块ID" autocomplete="off" class="layui-input">
+            <input type="text" name="moduleId" placeholder="请输入模块ID" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item text-c">

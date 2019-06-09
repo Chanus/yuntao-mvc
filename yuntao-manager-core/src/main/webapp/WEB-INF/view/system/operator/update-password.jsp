@@ -8,17 +8,17 @@
   <body>
     <div class="pd-5">
       <form class="layui-form layui-form-pane">
-        <input type="hidden" name="operatorNo" value="${operatorNo }" autocomplete="off" class="layui-input">
+        <input type="hidden" name="operatorNo" value="${operatorNo }" class="layui-input" autocomplete="off">
         <div class="layui-form-item">
           <label class="layui-form-label">新密码<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="password" name="password" required lay-verify="password" lay-data-length="6-16" lay-null-msg="请输入新密码" lay-error-msg="密码为6-16位非空字符" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+            <input type="password" name="password" required lay-verify="password" lay-data-length="6-16" lay-null-msg="请输入新密码" lay-error-msg="密码为6-16位非空字符" placeholder="请输入新密码" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">确认密码<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="password" name="password2" required lay-verify="password" lay-recheck="password" lay-data-length="6-16" lay-null-msg="请再次输入密码" lay-error-msg="密码为6-16位非空字符" placeholder="请再次输入密码" autocomplete="off" class="layui-input">
+            <input type="password" name="password2" required lay-verify="password" lay-recheck="password" lay-data-length="6-16" lay-null-msg="请再次输入密码" lay-error-msg="密码为6-16位非空字符" placeholder="请再次输入密码" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item text-c">

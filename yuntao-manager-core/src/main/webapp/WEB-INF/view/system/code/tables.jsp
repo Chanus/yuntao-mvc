@@ -9,15 +9,15 @@
     <div class="pd-5">
       <!-- 搜索条件 -->
       <div class="layui-form layui-form-pane">
-        <div class="layui-inline">
-          <div class="layui-form-item">
+        <div class="layui-form-item">
+          <div class="layui-inline">
             <label class="layui-form-label">表名称</label>
-            <div class="layui-input-inline">
-              <input type="text" id="tableName" class="layui-input" placeholder="请输入数据表名称" autocomplete="off">
+            <div class="layui-input-block">
+              <input type="text" id="tableName" placeholder="请输入数据表名称" class="layui-input" autocomplete="off">
             </div>
-            <div class="layui-input-inline" style="width: 85px;">
-              <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
-            </div>
+          </div>
+          <div class="layui-inline">
+            <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
           </div>
         </div>
       </div>

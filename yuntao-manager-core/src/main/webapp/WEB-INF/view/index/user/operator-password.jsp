@@ -11,21 +11,21 @@
         <div class="layui-form-item">
           <label class="layui-form-label">当前密码<span class="red">*</span></label>
           <div class="layui-input-inline">
-            <input type="password" name="oldPassword" required lay-verify="password" lay-data-length="6-16" lay-null-msg="请输入当前密码" lay-error-msg="密码为6-16位非空字符" placeholder="请输入当前密码" autocomplete="off" class="layui-input">
+            <input type="password" name="oldPassword" required lay-verify="password" lay-data-length="6-16" lay-null-msg="请输入当前密码" lay-error-msg="密码为6-16位非空字符" placeholder="请输入当前密码" class="layui-input" autocomplete="off">
           </div>
           <div class="layui-form-mid layui-word-aux">密码为6-16位非空字符</div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">新密码<span class="red">*</span></label>
           <div class="layui-input-inline">
-            <input type="password" name="newPassword" required lay-verify="password" lay-data-length="6-16" lay-null-msg="请输入新密码" lay-error-msg="密码为6-16位非空字符" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+            <input type="password" name="newPassword" required lay-verify="password" lay-data-length="6-16" lay-null-msg="请输入新密码" lay-error-msg="密码为6-16位非空字符" placeholder="请输入新密码" class="layui-input" autocomplete="off">
           </div>
           <div class="layui-form-mid layui-word-aux">密码为6-16位非空字符</div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">确认密码<span class="red">*</span></label>
           <div class="layui-input-inline">
-            <input type="password" name="newPassword2" required lay-verify="password" lay-recheck="newPassword" lay-data-length="6-16" lay-null-msg="请再次输入密码" lay-error-msg="密码为6-16位非空字符" placeholder="请再次输入密码" autocomplete="off" class="layui-input">
+            <input type="password" name="newPassword2" required lay-verify="password" lay-recheck="newPassword" lay-data-length="6-16" lay-null-msg="请再次输入密码" lay-error-msg="密码为6-16位非空字符" placeholder="请再次输入密码" class="layui-input" autocomplete="off">
           </div>
           <div class="layui-form-mid layui-word-aux">再次输入密码</div>
         </div>

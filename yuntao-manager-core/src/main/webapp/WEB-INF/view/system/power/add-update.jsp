@@ -8,17 +8,17 @@
   <body>
     <div class="pd-5">
       <form class="layui-form layui-form-pane">
-        <input type="hidden" name="id" value="${power.id }" autocomplete="off" class="layui-input">
+        <input type="hidden" name="id" value="${power.id }" class="layui-input" autocomplete="off">
         <div class="layui-form-item">
           <label class="layui-form-label">权限代码<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="powerItem" required <c:if test="${cmd eq 'update' }">readonly</c:if> lay-verify="required" value="${power.powerItem }" placeholder="请输入权限代码" autocomplete="off" class="layui-input">
+            <input type="text" name="powerItem" required <c:if test="${cmd eq 'update' }">readonly</c:if> lay-verify="required" value="${power.powerItem }" placeholder="请输入权限代码" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">权限名称<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="powerName" required lay-verify="required" value="${power.powerName }" placeholder="请输入权限名称" autocomplete="off" class="layui-input">
+            <input type="text" name="powerName" required lay-verify="required" value="${power.powerName }" placeholder="请输入权限名称" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item" pane>

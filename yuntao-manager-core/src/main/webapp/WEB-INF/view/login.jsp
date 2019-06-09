@@ -24,19 +24,19 @@
           <div class="layui-form-item">
             <label class="beg-login-icon layui-icon layui-icon-username"> </label>
             <input type="text" name="loginname" lay-verify="letternumline" lay-data-length="3-16" lay-null-msg="请输入登录账号"
-                   lay-error-msg="登录账号由3-16位字母数字下划线组成" placeholder="账号" autocomplete="off" class="layui-input">
+                   lay-error-msg="登录账号由3-16位字母数字下划线组成" placeholder="账号" class="layui-input" autocomplete="off">
           </div>
           <div class="layui-form-item">
             <label class="beg-login-icon layui-icon layui-icon-password"> </label>
             <input type="password" name="password" lay-verify="password" lay-data-length="6-16" lay-null-msg="请输入登录密码"
-                   lay-error-msg="登录密码由6-16位字符组成" placeholder="密码" autocomplete="off" class="layui-input">
+                   lay-error-msg="登录密码由6-16位字符组成" placeholder="密码" class="layui-input" autocomplete="off">
           </div>
           <c:if test="${isCheckVerifyCode eq '1' }">
             <div class="layui-form-item">
               <div class="beg-pull-left beg-login-veritycode">
                 <label class="beg-login-icon layui-icon layui-icon-vercode"> </label>
                 <input type="text" name="verifyCode" lay-verify="digit" lay-data-length="4" lay-null-msg="请输入验证码"
-                       lay-error-msg="验证码不正确" placeholder="验证码" autocomplete="off" class="layui-input">
+                       lay-error-msg="验证码不正确" placeholder="验证码" class="layui-input" autocomplete="off">
               </div>
               <div class="beg-pull-right">
                 <img id="img" title="点击更换" src="verify-code"/>

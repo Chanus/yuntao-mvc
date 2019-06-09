@@ -9,14 +9,20 @@
     <div class="pd-5">
       <!-- 搜索条件 -->
       <div class="layui-form layui-form-pane">
-        <div class="layui-input-inline operator-div">
+        <div class="layui-form-item">
           <c:if test="${powers['ADD'] }">
-            <button id="add" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-add-circle-fine"></i>添加</button>
+            <div class="layui-inline">
+              <button id="add" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-add-circle-fine"></i>添加</button>
+            </div>
           </c:if>
           <c:if test="${powers['DELETE'] }">
-            <button id="delete" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-delete"></i>删除</button>
+            <div class="layui-inline">
+              <button id="delete" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-delete"></i>删除</button>
+            </div>
           </c:if>
-          <button id="reload" class="layui-btn"><i class="layui-icon layui-icon-refresh"></i>重载系统参数</button>
+          <div class="layui-inline">
+            <button id="reload" class="layui-btn"><i class="layui-icon layui-icon-refresh"></i>重载系统参数</button>
+          </div>
         </div>
       </div>
       <!-- 数据展示 -->

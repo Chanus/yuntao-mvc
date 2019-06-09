@@ -9,24 +9,28 @@
     <div class="pd-5">
       <!-- 搜索条件 -->
       <div class="layui-form layui-form-pane">
-        <div class="layui-inline">
-          <div class="layui-form-item">
-            <%@ include file="../../public/datetime.jsp" %>
+        <div class="layui-form-item">
+          <%@ include file="../../public/datetime.jsp" %>
+          <div class="layui-inline">
             <label class="layui-form-label">操作账号</label>
-            <div class="layui-input-inline">
-              <input type="text" id="operateNo" class="layui-input" placeholder="请输入操作账号" autocomplete="off">
+            <div class="layui-input-block">
+              <input type="text" id="operateNo" placeholder="请输入操作账号" class="layui-input" autocomplete="off">
             </div>
+          </div>
+          <div class="layui-inline">
             <label class="layui-form-label">模块代码</label>
-            <div class="layui-input-inline">
-              <input type="text" id="operateModuleId" class="layui-input" placeholder="请输入操作模块代码" autocomplete="off">
+            <div class="layui-input-block">
+              <input type="text" id="operateModuleId" placeholder="请输入操作模块代码" class="layui-input" autocomplete="off">
             </div>
+          </div>
+          <div class="layui-inline">
             <label class="layui-form-label">操作内容</label>
-            <div class="layui-input-inline">
-              <input type="text" id="operateContent" class="layui-input" placeholder="请输入操作内容" autocomplete="off">
+            <div class="layui-input-block">
+              <input type="text" id="operateContent" placeholder="请输入操作内容" class="layui-input" autocomplete="off">
             </div>
-            <div class="layui-input-inline" style="width: 85px;">
-              <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
-            </div>
+          </div>
+          <div class="layui-inline">
+            <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
           </div>
         </div>
       </div>

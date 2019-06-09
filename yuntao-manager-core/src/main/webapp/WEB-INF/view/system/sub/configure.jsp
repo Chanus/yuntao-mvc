@@ -9,11 +9,9 @@
     <div class="pd-5">
       <!-- 搜索条件 -->
       <div class="layui-form layui-form-pane">
-        <div class="layui-input-inline operator-div">
-          <a href="${ctx }/system/sub/main.do" class="layui-btn layui-btn-small"><i class="layui-icon layui-icon-return"></i>返回</a>
-        </div>
+        <a href="${ctx }/system/sub/main.do" class="layui-btn layui-btn-small"><i class="layui-icon layui-icon-return"></i>返回</a>
       </div>
-      <input type="hidden" id="subNo" value="${subNo }" autocomplete="off" class="layui-input">
+      <input type="hidden" id="subNo" value="${subNo }" class="layui-input" autocomplete="off">
       <!-- 子账号权限列表 -->
       <table class="layui-table" lay-even>
         <thead>

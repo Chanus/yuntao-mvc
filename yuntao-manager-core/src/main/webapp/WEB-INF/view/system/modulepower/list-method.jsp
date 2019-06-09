@@ -9,9 +9,9 @@
     <div class="pd-5">
       <!-- 搜索条件 -->
       <div class="layui-form layui-form-pane">
-        <div class="layui-inline">
-          <div class="layui-form-item">
-            <input type="hidden" id="mpId" value="${mpId }" autocomplete="off" class="layui-input">
+        <div class="layui-form-item">
+          <div class="layui-inline">
+            <input type="hidden" id="mpId" value="${mpId }" class="layui-input" autocomplete="off">
             <label class="layui-form-label">类名</label>
             <div class="layui-input-inline" style="width: 500px;">
               <select name="className" id="className" lay-filter="className" lay-search>
@@ -22,7 +22,9 @@
               </select>
             </div>
           </div>
-          <div class="layui-form-item">
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-inline">
             <label class="layui-form-label">URL</label>
             <div class="layui-input-inline" style="width: 500px;">
               <select name="url" id="url" lay-filter="url" lay-search>
@@ -30,7 +32,9 @@
               </select>
             </div>
           </div>
-          <div class="layui-input-inline" style="width: 100%; text-align: center;">
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-inline" style="width: 100%; text-align: center;">
             <button id="add" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-add-circle-fine"></i>添加</button>
             <button id="delete" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-delete"></i>删除</button>
           </div>

@@ -34,7 +34,7 @@ layui.config({
                 curr: 1 //重新从第 1 页开始
             },
             where: {
-                operatorRoleId: roleId === -1 ? null : roleId,
+                operatorRoleId: roleId === '-1' ? null : roleId,
                 operatorNo: $("#operatorNo").val(),
                 v: new Date().getTime()
             }
