@@ -3,8 +3,8 @@
  */
 package pers.chanus.yuntao.util;
 
-import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 获取随机数工具类
@@ -27,44 +27,121 @@ public class RandomUtils {
      */
     private static final String NUMBERCHAR = "0123456789";
 
+    private static ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+
     /**
-     * 随机获取整数
+     * 随机获取{@code int}类型数字
      *
-     * @param min 最小值
-     * @param max 最大值
-     * @return {@code min}到{@code max}之间的整数
-     * @since 0.0.1
+     * @return {@code int}类型数字
+     * @since 0.1.1
      */
-    public static int getRandomInt(int min, int max) {
-        return min + new Double(Math.random() * (max - min + 1)).intValue();
+    public static int getRandomInt() {
+        return threadLocalRandom.nextInt();
     }
 
     /**
-     * 获取固定长度的随机数字
+     * 随机获取0到{@code bound}之间的{@code int}类型数字
      *
-     * @param length 数字长度
-     * @return {@code length}位数字字符串
+     * @param bound 最大值，必须为正数
+     * @return 0到{@code bound}之间的{@code int}类型数字
+     * @since 0.1.1
+     */
+    public static int getRandomInt(int bound) {
+        return threadLocalRandom.nextInt(bound);
+    }
+
+    /**
+     * 随机获取{@code origin}到{@code bound}之间的{@code int}类型数字
+     *
+     * @param origin 最小值
+     * @param bound 最大值
+     * @return {@code origin}到{@code bound}之间的{@code int}类型数字
      * @since 0.0.1
      */
-    public static String getRandomInt(int length) {
+    public static int getRandomInt(int origin, int bound) {
+        return threadLocalRandom.nextInt(origin, bound);
+    }
+
+    /**
+     * 获取固定长度的随机数字字符串
+     *
+     * @param length 数字字符串长度
+     * @return {@code length}位数字字符串
+     * @since 0.1.1
+     */
+    public static String getRandomDigits(int length) {
         StringBuilder result = new StringBuilder();
-        Random random = new Random();
+        int bound = NUMBERCHAR.length();
         for (int i = 0; i < length; i++) {
-            result.append(NUMBERCHAR.charAt(random.nextInt(NUMBERCHAR.length())));
+            result.append(NUMBERCHAR.charAt(threadLocalRandom.nextInt(bound)));
         }
         return result.toString();
     }
 
     /**
-     * 随机获取浮点数
+     * 随机获取{@code long}类型数字
      *
-     * @param min 最小值
-     * @param max 最大值
-     * @return {@code min}到{@code max}之间的浮点数
+     * @return {@code long}类型数字
+     * @since 0.1.1
+     */
+    public static long getRandomLong() {
+        return threadLocalRandom.nextLong();
+    }
+
+    /**
+     * 随机获取0到{@code bound}之间的{@code long}类型数字
+     *
+     * @param bound 最大值，必须为正数
+     * @return 0到{@code bound}之间的{@code long}类型数字
+     * @since 0.1.1
+     */
+    public static long getRandomLong(long bound) {
+        return threadLocalRandom.nextLong(bound);
+    }
+
+    /**
+     * 随机获取{@code origin}到{@code bound}之间的{@code long}类型数字
+     *
+     * @param origin 最小值
+     * @param bound 最大值
+     * @return {@code origin}到{@code bound}之间的{@code long}类型数字
      * @since 0.0.1
      */
-    public static double getRandomDouble(double min, double max) {
-        return min + (Math.random() * (max - min));
+    public static long getRandomLong(long origin, long bound) {
+        return threadLocalRandom.nextLong(origin, bound);
+    }
+
+    /**
+     * 随机获取{@code double}类型数字
+     *
+     * @return {@code double}类型数字
+     * @since 0.1.1
+     */
+    public static double getRandomDouble() {
+        return threadLocalRandom.nextDouble();
+    }
+
+    /**
+     * 随机获取0到{@code bound}之间的{@code double}类型数字
+     *
+     * @param bound 最大值，必须为正数
+     * @return 0到{@code bound}之间的{@code double}类型数字
+     * @since 0.1.1
+     */
+    public static double getRandomDouble(double bound) {
+        return threadLocalRandom.nextDouble(bound);
+    }
+
+    /**
+     * 随机获取{@code origin}到{@code bound}之间的{@code double}类型数字
+     *
+     * @param origin 最小值
+     * @param bound 最大值
+     * @return {@code origin}到{@code bound}之间的{@code double}类型数字
+     * @since 0.0.1
+     */
+    public static double getRandomDouble(double origin, double bound) {
+        return threadLocalRandom.nextDouble(origin, bound);
     }
 
     /**
@@ -74,7 +151,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static char getRandomChar() {
-        return (char) (getRandomInt(33, 126));
+        return (char) threadLocalRandom.nextInt(33, 126);
     }
 
     /**
@@ -84,7 +161,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static char getRandomNormalChar() {
-        return ALLCHAR.charAt(new Random().nextInt(ALLCHAR.length()));
+        return ALLCHAR.charAt(threadLocalRandom.nextInt(ALLCHAR.length()));
     }
 
     /**
@@ -94,7 +171,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static char getRandomLetterChar() {
-        return LETTERCHAR.charAt(new Random().nextInt(LETTERCHAR.length()));
+        return LETTERCHAR.charAt(threadLocalRandom.nextInt(LETTERCHAR.length()));
     }
 
     /**
@@ -121,9 +198,8 @@ public class RandomUtils {
      */
     public static String getRandomNormalString(int length) {
         StringBuilder result = new StringBuilder();
-        Random random = new Random();
         for (int i = 0; i < length; i++) {
-            result.append(ALLCHAR.charAt(random.nextInt(ALLCHAR.length())));
+            result.append(getRandomNormalChar());
         }
         return result.toString();
     }
@@ -137,9 +213,8 @@ public class RandomUtils {
      */
     public static String getRandomLetterString(int length) {
         StringBuilder result = new StringBuilder();
-        Random random = new Random();
         for (int i = 0; i < length; i++) {
-            result.append(LETTERCHAR.charAt(random.nextInt(LETTERCHAR.length())));
+            result.append(getRandomLetterChar());
         }
         return result.toString();
     }
@@ -147,47 +222,11 @@ public class RandomUtils {
     /**
      * 获取由时间戳和5位随机数字组成的纯数字字符串
      *
-     * @return 16位纯数字字符串
+     * @return 18位纯数字字符串
      * @since 0.0.1
      */
     public static String getRandomUniqueNo() {
-        return System.currentTimeMillis() + String.valueOf((int) ((Math.random() * 9 + 1) * 10000));
-    }
-
-    /**
-     * 根据UUID的hashCode值生成的纯数字字符串
-     *
-     * @param machineId 机器码，为1-9之间的数据
-     * @param length    生成字符串的长度(不包含一位机器码)，length必须大于10，否则默认10
-     * @return <code>length + 1</code>位纯数字字符串
-     * @since 0.0.4
-     */
-    public static String getUUIDUniqueNo(int machineId, int length) {
-        machineId = (machineId < 1 || machineId > 10) ? 1 : machineId;
-        length = length >= 10 ? length : 10;
-        int hashCodeV = UUID.randomUUID().toString().hashCode();
-        if (hashCodeV < 0) {// 有可能是负数
-            hashCodeV = -hashCodeV;
-        }
-
-        return machineId + String.format("%0" + length + "d", hashCodeV);
-    }
-
-    /**
-     * 获取由UUID的hashCode值和5位随机数字组成的纯数字字符串
-     *
-     * @param machineId 机器码，为1-9之间的数据
-     * @return 16位纯数字字符串
-     * @since 0.0.4
-     */
-    public static String getRandomUUIDUniqueNo(int machineId) {
-        machineId = (machineId < 1 || machineId > 10) ? 1 : machineId;
-        int hashCodeV = UUID.randomUUID().toString().hashCode();
-        if (hashCodeV < 0) {// 有可能是负数
-            hashCodeV = -hashCodeV;
-        }
-
-        return machineId + String.format("%015d", Long.parseLong(hashCodeV + String.valueOf((int) ((Math.random() * 9 + 1) * 10000))));
+        return System.currentTimeMillis() + String.valueOf((int) ((threadLocalRandom.nextDouble(1) * 9 + 1) * 10000));
     }
 
     /**
@@ -197,8 +236,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static String getLowercaseUUID() {
-        String s = UUID.randomUUID().toString();
-        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(19, 23) + s.substring(24);
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
     /**
