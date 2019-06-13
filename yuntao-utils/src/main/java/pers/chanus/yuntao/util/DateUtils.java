@@ -21,11 +21,18 @@ public class DateUtils {
      * 日期格式
      */
     private static final String DATE_FORMAT = "yyyy-MM-dd";
-
     /**
      * 日期时间格式
      */
     private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    /**
+     * 每日开始时刻00:00:00
+     */
+    private static final String START_TIME = " 00:00:00";
+    /**
+     * 每日结束时刻23:59:59
+     */
+    private static final String END_TIME = " 23:59:59";
 
     /**
      * 获取SimpleDateFormat对象
@@ -51,50 +58,6 @@ public class DateUtils {
     }
 
     /**
-     * 时间字符串转换成时间对象
-     *
-     * @param datestr 时间字符串
-     * @param format  时间格式
-     * @return 转换后的时间对象
-     * @since 0.0.1
-     */
-    public static Date parseDate(String datestr, String format) {
-        if (StringUtils.isBlank(datestr) || StringUtils.isBlank(format))
-            return null;
-
-        try {
-            return getDateFormat(format).parse(datestr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * 将时间转换成yyyy-MM-dd HH:mm:ss格式的字符串
-     *
-     * @param date 时间
-     * @return yyyy-MM-dd HH:mm:ss格式的字符串，若{@code date}为空，则返回null
-     * @see DateUtils#formatDate(Date, String)
-     * @since 0.0.1
-     */
-    public static String formatDateTime(Date date) {
-        return formatDate(date, DATETIME_FORMAT);
-    }
-
-    /**
-     * 将yyyy-MM-dd HH:mm:ss格式的时间字符串转换成时间
-     *
-     * @param datestr 时间字符串
-     * @return 时间对象，若{@code datestr}为空，则返回null
-     * @see DateUtils#parseDate(String, String)
-     * @since 0.0.1
-     */
-    public static Date parseDateTime(String datestr) {
-        return parseDate(datestr, DATETIME_FORMAT);
-    }
-
-    /**
      * 将时间转换成yyyy-MM-dd格式的字符串
      *
      * @param date 时间
@@ -107,15 +70,59 @@ public class DateUtils {
     }
 
     /**
+     * 将时间转换成yyyy-MM-dd HH:mm:ss格式的字符串
+     *
+     * @param datetime 时间
+     * @return yyyy-MM-dd HH:mm:ss格式的字符串，若{@code datetime}为空，则返回null
+     * @see DateUtils#formatDate(Date, String)
+     * @since 0.0.1
+     */
+    public static String formatDateTime(Date datetime) {
+        return formatDate(datetime, DATETIME_FORMAT);
+    }
+
+    /**
+     * 时间字符串转换成时间对象
+     *
+     * @param date   时间字符串
+     * @param format 时间格式
+     * @return 转换后的时间对象
+     * @since 0.0.1
+     */
+    public static Date parseDate(String date, String format) {
+        if (StringUtils.isBlank(date) || StringUtils.isBlank(format))
+            return null;
+
+        try {
+            return getDateFormat(format).parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * 将yyyy-MM-dd格式的字符串转换成时间
      *
-     * @param datestr 时间字符串
-     * @return 时间对象，若{@code datestr}为空，则返回null
+     * @param date 时间字符串
+     * @return 时间对象，若{@code date}为空，则返回null
      * @see DateUtils#parseDate(String, String)
      * @since 0.0.1
      */
-    public static Date parseDate(String datestr) {
-        return parseDate(datestr, DATE_FORMAT);
+    public static Date parseDate(String date) {
+        return parseDate(date, DATE_FORMAT);
+    }
+
+    /**
+     * 将yyyy-MM-dd HH:mm:ss格式的时间字符串转换成时间
+     *
+     * @param datetime 时间字符串
+     * @return 时间对象，若{@code datetime}为空，则返回null
+     * @see DateUtils#parseDate(String, String)
+     * @since 0.0.1
+     */
+    public static Date parseDateTime(String datetime) {
+        return parseDate(datetime, DATETIME_FORMAT);
     }
 
     /**
@@ -138,36 +145,6 @@ public class DateUtils {
      */
     public static String getDateTimeToday() {
         return formatDateTime(new Date());
-    }
-
-    /**
-     * 获取昨天的yyyy-MM-dd格式字符串
-     *
-     * @return 昨天的yyyy-MM-dd格式字符串
-     * @see DateUtils#getYesterdayDateStr()
-     * @since 0.0.1
-     */
-    @Deprecated
-    public static String getYdayDateStr() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.DATE, -1);
-        return formatDate(calendar.getTime(), DATE_FORMAT);
-    }
-
-    /**
-     * 获取昨天的yyyy-MM-dd格式字符串
-     *
-     * @return 昨天的yyyy-MM-dd格式字符串
-     * @see DateUtils#getDateYesterday()
-     * @since 0.0.5
-     */
-    @Deprecated
-    public static String getYesterdayDateStr() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.DATE, -1);
-        return formatDate(calendar.getTime(), DATE_FORMAT);
     }
 
     /**
@@ -222,7 +199,7 @@ public class DateUtils {
      * @since 0.0.1
      */
     public static Date getStartDateToday() {
-        return parseDate(getDateToday() + " 00:00:00", DATETIME_FORMAT);
+        return parseDate(getDateToday() + START_TIME, DATETIME_FORMAT);
     }
 
     /**
@@ -233,7 +210,7 @@ public class DateUtils {
      * @since 0.0.1
      */
     public static Date getEndDateToday() {
-        return parseDate(getDateToday() + " 23:59:59", DATETIME_FORMAT);
+        return parseDate(getDateToday() + END_TIME, DATETIME_FORMAT);
     }
 
     /**
@@ -359,11 +336,7 @@ public class DateUtils {
      * @since 0.0.1
      */
     public static long getDiffTimeInMillis(Date sourceDate, Date targetDate) {
-        Calendar sourceCalendar = Calendar.getInstance();
-        Calendar targetCalendar = Calendar.getInstance();
-        sourceCalendar.setTime(sourceDate);
-        targetCalendar.setTime(targetDate);
-        return targetCalendar.getTimeInMillis() - sourceCalendar.getTimeInMillis();
+        return Math.abs(sourceDate.getTime() - targetDate.getTime());
     }
 
     /**
@@ -497,7 +470,7 @@ public class DateUtils {
      * @since 0.0.5
      */
     public static boolean between(Date date, Date start, Date end) {
-        return date.after(start) && date.before(end);
+        return !date.before(start) && !date.after(end);
     }
 
     /**
