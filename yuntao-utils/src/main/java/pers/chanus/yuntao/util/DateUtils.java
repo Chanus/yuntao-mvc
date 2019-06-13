@@ -56,7 +56,6 @@ public class DateUtils {
      * @param datestr 时间字符串
      * @param format  时间格式
      * @return 转换后的时间对象
-     * @throws ParseException
      * @since 0.0.1
      */
     public static Date parseDate(String datestr, String format) {
