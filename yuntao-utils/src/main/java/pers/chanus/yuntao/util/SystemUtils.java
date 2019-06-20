@@ -112,11 +112,11 @@ public class SystemUtils {
                 while (enumIpAddr.hasMoreElements()) {
                     InetAddress ia = enumIpAddr.nextElement();
                     if (!ia.isLoopbackAddress() && !ia.isLinkLocalAddress() && ia.isSiteLocalAddress()) {
-                        sb.append(ia.getHostAddress());
+                        sb.append(ia.getHostAddress()).append(",");
                     }
                 }
             }
-            HOST_IP = sb.toString();
+            HOST_IP = sb.substring(0, sb.lastIndexOf(","));
         } catch (Exception e) {
             System.out.println("获取服务器本地IP出错");
         }
@@ -132,7 +132,7 @@ public class SystemUtils {
     /**
      * 可用的物理内存
      *
-     * @return
+     * @return 可用的物理内存
      * @since 0.0.5
      */
     public static long getFreePhysicalMemorySize() {
@@ -142,7 +142,7 @@ public class SystemUtils {
     /**
      * 已使用的物理内存
      *
-     * @return
+     * @return 已使用的物理内存
      * @since 0.0.5
      */
     public static long getUsedPhysicalMemorySize() {
@@ -152,7 +152,7 @@ public class SystemUtils {
     /**
      * 获取JVM总的内存空间
      *
-     * @return
+     * @return JVM总的内存空间
      * @since 0.0.5
      */
     public static long getTotalJVMMemorySize() {
@@ -162,7 +162,7 @@ public class SystemUtils {
     /**
      * 获取JVM空闲的内存空间
      *
-     * @return
+     * @return JVM空闲的内存空间
      * @since 0.0.5
      */
     public static long getFreeJVMMemorySize() {
@@ -172,7 +172,7 @@ public class SystemUtils {
     /**
      * 获取JVM已用的内存空间
      *
-     * @return
+     * @return JVM已用的内存空间
      * @since 0.0.5
      */
     public static long getUsedJVMMemorySize() {
@@ -182,7 +182,7 @@ public class SystemUtils {
     /**
      * 获取JVM最大的内存空间
      *
-     * @return
+     * @return JVM最大的内存空间
      * @since 0.0.5
      */
     public static long getMaxJVMMemorySize() {

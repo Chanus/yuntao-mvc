@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Chanus
  * @date 2019-06-11 19:07
- * @since 0.0.1
+ * @since 0.1.2
  */
 public class RandomUtilsTest {
     @Test
