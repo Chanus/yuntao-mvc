@@ -32,8 +32,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.Map;
 
 /**
@@ -154,7 +152,7 @@ public class LoginController extends BaseController {
         String roleId = (String) params.get("roleId");
         String password = (String) params.get("password");
         try {
-            password = new String(RSAUtils.decryptByPrivateKey(Base64.getDecoder().decode(password), CacheData.RSA_KEYS_MAP.get(rsaPublicKey)), StandardCharsets.UTF_8);
+            password = RSAUtils.decryptByPrivateKey(password, CacheData.RSA_KEYS_MAP.get(rsaPublicKey));
         } finally {
             CacheData.RSA_KEYS_MAP.remove(rsaPublicKey);
         }

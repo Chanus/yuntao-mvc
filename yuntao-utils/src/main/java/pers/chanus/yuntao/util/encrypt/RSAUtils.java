@@ -133,6 +133,18 @@ public class RSAUtils {
     }
 
     /**
+     * 公钥加密
+     *
+     * @param data      源数据
+     * @param publicKey 公钥(BASE64编码)
+     * @return 公钥加密后的数据
+     * @since 0.0.1
+     */
+    public static String encryptByPublicKey(String data, String publicKey) {
+        return Base64.getEncoder().encodeToString(encryptByPublicKey(data.getBytes(), publicKey));
+    }
+
+    /**
      * 私钥加密
      *
      * @param data       源数据
@@ -151,6 +163,18 @@ public class RSAUtils {
         } catch (Exception e) {
             throw new RuntimeException("encrypt by private key error.", e);
         }
+    }
+
+    /**
+     * 私钥加密
+     *
+     * @param data       源数据
+     * @param privateKey 私钥(BASE64编码)
+     * @return 公钥加密后的数据
+     * @since 0.0.1
+     */
+    public static String encryptByPrivateKey(String data, String privateKey) {
+        return Base64.getEncoder().encodeToString(encryptByPrivateKey(data.getBytes(), privateKey));
     }
 
     /**
@@ -175,6 +199,18 @@ public class RSAUtils {
     }
 
     /**
+     * 公钥解密
+     *
+     * @param data      已加密数据
+     * @param publicKey 公钥(BASE64编码)
+     * @return 公钥解密后的数据
+     * @since 0.0.1
+     */
+    public static String decryptByPublicKey(String data, String publicKey) {
+        return new String(decryptByPublicKey(Base64.getDecoder().decode(data), publicKey));
+    }
+
+    /**
      * 私钥解密
      *
      * @param data       已加密数据
@@ -196,9 +232,21 @@ public class RSAUtils {
     }
 
     /**
-     * 用私钥对信息生成数字签名
+     * 私钥解密
      *
      * @param data       已加密数据
+     * @param privateKey 私钥(BASE64编码)
+     * @return 私钥解密后的数据
+     * @since 0.0.1
+     */
+    public static String decryptByPrivateKey(String data, String privateKey) {
+        return new String(decryptByPrivateKey(Base64.getDecoder().decode(data), privateKey));
+    }
+
+    /**
+     * 用私钥对信息生成数字签名
+     *
+     * @param data       源数据
      * @param privateKey 私钥(BASE64编码)
      * @return 数字签名
      * @since 0.0.1
@@ -219,9 +267,21 @@ public class RSAUtils {
     }
 
     /**
+     * 用私钥对信息生成数字签名
+     *
+     * @param data       源数据
+     * @param privateKey 私钥(BASE64编码)
+     * @return 数字签名
+     * @since 0.0.1
+     */
+    public static String sign(String data, String privateKey) {
+        return sign(data.getBytes(), privateKey);
+    }
+
+    /**
      * 校验数字签名
      *
-     * @param data      已加密数据
+     * @param data      源数据
      * @param publicKey 公钥(BASE64编码)
      * @param sign      数字签名
      * @return {@code true} 校验数字签名成功；{@code false} 校验数字签名失败
@@ -240,5 +300,18 @@ public class RSAUtils {
         } catch (Exception e) {
             throw new RuntimeException("verify sign error.", e);
         }
+    }
+
+    /**
+     * 校验数字签名
+     *
+     * @param data      源数据
+     * @param publicKey 公钥(BASE64编码)
+     * @param sign      数字签名
+     * @return {@code true} 校验数字签名成功；{@code false} 校验数字签名失败
+     * @since 0.0.1
+     */
+    public static boolean verify(String data, String publicKey, String sign) {
+        return verify(data.getBytes(), publicKey, sign);
     }
 }
