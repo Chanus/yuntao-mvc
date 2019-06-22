@@ -12,7 +12,6 @@ package pers.chanus.yuntao.util.test.encrypt;
 import org.junit.Test;
 import pers.chanus.yuntao.util.encrypt.RSAUtils;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class RSAUtilsTest {
     }
 
     @Test
-    public void RSATest() throws UnsupportedEncodingException {
+    public void RSATest() {
         String text = "我是明文，请加密我！";
 
         // 公钥加密的密文每次都不一样

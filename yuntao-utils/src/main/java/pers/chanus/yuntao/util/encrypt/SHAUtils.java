@@ -23,13 +23,13 @@ public class SHAUtils {
 
     private static final String SHA1 = "SHA-1";
 
-    private static final String SHA2224 = "SHA-224";
+    private static final String SHA224 = "SHA-224";
 
-    private static final String SHA2256 = "SHA-256";
+    private static final String SHA256 = "SHA-256";
 
-    private static final String SHA2384 = "SHA-384";
+    private static final String SHA384 = "SHA-384";
 
-    private static final String SHA2512 = "SHA-512";
+    private static final String SHA512 = "SHA-512";
 
     /**
      * SHA1、SHA2摘要加密算法
@@ -78,47 +78,47 @@ public class SHAUtils {
     }
 
     /**
-     * SHA2-224加密
+     * SHA-224加密
      *
      * @param text 明文字符串
-     * @return SHA2-224加密后的密文字符串
+     * @return SHA-224加密后的密文字符串
      * @since 0.0.5
      */
-    public static String sha2224(String text) {
-        return digest(text, SHA2224);
+    public static String sha224(String text) {
+        return digest(text, SHA224);
     }
 
     /**
-     * SHA2-256加密
+     * SHA-256加密
      *
      * @param text 明文字符串
-     * @return SHA2-256加密后的密文字符串
+     * @return SHA-256加密后的密文字符串
      * @since 0.0.5
      */
-    public static String sha2256(String text) {
-        return digest(text, SHA2256);
+    public static String sha256(String text) {
+        return digest(text, SHA256);
     }
 
     /**
-     * SHA2-384加密
+     * SHA-384加密
      *
      * @param text 明文字符串
-     * @return SHA2-384加密后的密文字符串
+     * @return SHA-384加密后的密文字符串
      * @since 0.0.5
      */
-    public static String sha2384(String text) {
-        return digest(text, SHA2384);
+    public static String sha384(String text) {
+        return digest(text, SHA384);
     }
 
     /**
-     * SHA2-512加密
+     * SHA-512加密
      *
      * @param text 明文字符串
-     * @return SHA2-512加密后的密文字符串
+     * @return SHA-512加密后的密文字符串
      * @since 0.0.5
      */
-    public static String sha2512(String text) {
-        return digest(text, SHA2512);
+    public static String sha512(String text) {
+        return digest(text, SHA512);
     }
 
     /**
@@ -134,50 +134,50 @@ public class SHAUtils {
     }
 
     /**
-     * SHA2-224验证字符串
+     * SHA-224验证字符串
      *
      * @param text   明文字符串
      * @param cipher 密文字符串
      * @return {@code true} 验证通过；{@code false} 验证不通过
      * @since 0.0.8
      */
-    public static boolean verifySHA2224(String text, String cipher) {
-        return sha2224(text).equals(cipher);
+    public static boolean verifySHA224(String text, String cipher) {
+        return sha224(text).equals(cipher);
     }
 
     /**
-     * SHA2-256验证字符串
+     * SHA-256验证字符串
      *
      * @param text   明文字符串
      * @param cipher 密文字符串
      * @return {@code true} 验证通过；{@code false} 验证不通过
      * @since 0.0.8
      */
-    public static boolean verifySHA2256(String text, String cipher) {
-        return sha2256(text).equals(cipher);
+    public static boolean verifySHA256(String text, String cipher) {
+        return sha256(text).equals(cipher);
     }
 
     /**
-     * SHA2-384验证字符串
+     * SHA-384验证字符串
      *
      * @param text   明文字符串
      * @param cipher 密文字符串
      * @return {@code true} 验证通过；{@code false} 验证不通过
      * @since 0.0.8
      */
-    public static boolean verifySHA2384(String text, String cipher) {
-        return sha2384(text).equals(cipher);
+    public static boolean verifySHA384(String text, String cipher) {
+        return sha384(text).equals(cipher);
     }
 
     /**
-     * SHA2-512验证字符串
+     * SHA-512验证字符串
      *
      * @param text   明文字符串
      * @param cipher 密文字符串
      * @return {@code true} 验证通过；{@code false} 验证不通过
      * @since 0.0.8
      */
-    public static boolean verifySHA2512(String text, String cipher) {
-        return sha2512(text).equals(cipher);
+    public static boolean verifySHA512(String text, String cipher) {
+        return sha512(text).equals(cipher);
     }
 }
