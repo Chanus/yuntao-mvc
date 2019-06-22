@@ -60,7 +60,7 @@ public class MD5Utils {
      * @since 0.0.1
      */
     public static String md5(String text, String key) {
-        return md5(key + text);
+        return md5(text + key);
     }
 
     /**
@@ -79,12 +79,12 @@ public class MD5Utils {
      * MD5根据密钥验证字符串
      *
      * @param text   明文字符串
-     * @param key    密钥
      * @param cipher 密文字符串
+     * @param key    密钥
      * @return {@code true} 验证通过；{@code false} 验证不通过
      * @since 0.0.1
      */
-    public static boolean verify(String text, String key, String cipher) {
-        return verify(key + text, cipher);
+    public static boolean verify(String text, String cipher, String key) {
+        return verify(text + key, cipher);
     }
 }

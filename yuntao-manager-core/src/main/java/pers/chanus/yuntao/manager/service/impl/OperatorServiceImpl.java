@@ -116,7 +116,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             String operatorPassword = mapper.getPassword(operatorNo);
             if (StringUtils.isBlank(operatorPassword))
                 return Message.fail("用户不存在");
-            if (!MD5Utils.verify(oldPassword, operatorNo, operatorPassword))
+            if (!MD5Utils.verify(oldPassword, operatorPassword, operatorNo))
                 return Message.fail("旧密码不正确");
         }
 

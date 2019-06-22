@@ -70,7 +70,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             return Message.fail("当前用户不存在");
         if (ConfigConsts.STATUS_NO.equals(loginUserView.getValidStatus()))
             return Message.fail("当前用户不可用");
-        if (!MD5Utils.verify(password, loginNo, loginUserView.getPassword()))
+        if (!MD5Utils.verify(password, loginUserView.getPassword(), loginNo))
             return Message.fail("登录密码不正确");
 
         Role role = roleMapper.getLoginStatus(loginUserView.getRoleId());
@@ -130,7 +130,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             return Message.fail("当前用户不存在");
         if (ConfigConsts.STATUS_NO.equals(loginUserView.getValidStatus()))
             return Message.fail("当前用户不可用");
-        if (!MD5Utils.verify(password, loginNo, loginUserView.getPassword()))
+        if (!MD5Utils.verify(password, loginUserView.getPassword(), loginNo))
             return Message.fail("登录密码不正确");
         if (StringUtils.isBlank(loginUserView.getRoleId()))
             return Message.fail("当前用户角色不存在");

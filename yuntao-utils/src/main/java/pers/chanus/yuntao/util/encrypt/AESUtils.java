@@ -8,6 +8,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
 
@@ -19,10 +20,6 @@ import java.util.Base64;
  * @since 0.0.1
  */
 public class AESUtils {
-    /**
-     * 默认编码方式
-     */
-    private static final String DEFAULT_ENCODING = "UTF-8";
     /**
      * AES加密
      */
@@ -57,7 +54,7 @@ public class AESUtils {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(KEY_ALGORITHM);
             // 设置密钥长度128
             SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
-            secureRandom.setSeed(seed.getBytes(DEFAULT_ENCODING));
+            secureRandom.setSeed(seed.getBytes(StandardCharsets.UTF_8));
             keyGenerator.init(128, secureRandom);
             // 生成密钥
             SecretKey secretKey = keyGenerator.generateKey();
@@ -82,10 +79,10 @@ public class AESUtils {
     public static String encrypt(final String key, final String value, final String vector) {
         try {
             // 兼容128位任意字符串和createKey生成的Base64转码的密钥字符串
-            byte[] b = key.length() == 16 ? key.getBytes(DEFAULT_ENCODING) : Base64.getDecoder().decode(key);
+            byte[] b = key.length() == 16 ? key.getBytes(StandardCharsets.UTF_8) : Base64.getDecoder().decode(key);
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM_CBC);
-            cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM), new IvParameterSpec(vector.getBytes(DEFAULT_ENCODING)));
-            return Base64.getEncoder().encodeToString(cipher.doFinal(value.getBytes(DEFAULT_ENCODING)));
+            cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM), new IvParameterSpec(vector.getBytes(StandardCharsets.UTF_8)));
+            return Base64.getEncoder().encodeToString(cipher.doFinal(value.getBytes(StandardCharsets.UTF_8)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -128,10 +125,10 @@ public class AESUtils {
     public static String decrypt(final String key, final String value, final String vector) {
         try {
             // 兼容128位任意字符串和createKey生成的Base64转码的密钥字符串
-            byte[] b = key.length() == 16 ? key.getBytes(DEFAULT_ENCODING) : Base64.getDecoder().decode(key);
+            byte[] b = key.length() == 16 ? key.getBytes(StandardCharsets.UTF_8) : Base64.getDecoder().decode(key);
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM_CBC);
-            cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM), new IvParameterSpec(vector.getBytes(DEFAULT_ENCODING)));
-            return new String(cipher.doFinal(Base64.getDecoder().decode(value)), DEFAULT_ENCODING);
+            cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM), new IvParameterSpec(vector.getBytes(StandardCharsets.UTF_8)));
+            return new String(cipher.doFinal(Base64.getDecoder().decode(value)), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -173,13 +170,13 @@ public class AESUtils {
     public static String encryptWithEcb(String key, String value) {
         try {
             // 兼容128位任意字符串和createKey生成的Base64转码的密钥字符串
-            byte[] b = key.length() == 16 ? key.getBytes(DEFAULT_ENCODING) : Base64.getDecoder().decode(key);
+            byte[] b = key.length() == 16 ? key.getBytes(StandardCharsets.UTF_8) : Base64.getDecoder().decode(key);
             // 创建密码器
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM_ECB);
             // 使用密钥初始化，设置为加密模式
             cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM));
             // 通过Base64转码加密数据后返回
-            return Base64.getEncoder().encodeToString(cipher.doFinal(value.getBytes(DEFAULT_ENCODING)));
+            return Base64.getEncoder().encodeToString(cipher.doFinal(value.getBytes(StandardCharsets.UTF_8)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -198,13 +195,13 @@ public class AESUtils {
     public static String decryptWithEcb(String key, String value) {
         try {
             // 兼容128位任意字符串和createKey生成的Base64转码的密钥字符串
-            byte[] b = key.length() == 16 ? key.getBytes(DEFAULT_ENCODING) : Base64.getDecoder().decode(key);
+            byte[] b = key.length() == 16 ? key.getBytes(StandardCharsets.UTF_8) : Base64.getDecoder().decode(key);
             // 创建密码器
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM_ECB);
             // 使用密钥初始化，设置为解密模式
             cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM));
             // 返回解密后数据
-            return new String(cipher.doFinal(Base64.getDecoder().decode(value)), DEFAULT_ENCODING);
+            return new String(cipher.doFinal(Base64.getDecoder().decode(value)), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }
