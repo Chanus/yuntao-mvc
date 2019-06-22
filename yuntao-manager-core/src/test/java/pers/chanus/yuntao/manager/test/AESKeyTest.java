@@ -17,7 +17,7 @@ import pers.chanus.yuntao.util.encrypt.AESUtils;
 public class AESKeyTest {
     @Test
     public void createAESKey() {
-        System.out.println("手机号加密密钥：" + AESUtils.createKey("CHANUS_PHONE"));
-        System.out.println("邮箱账号加密密钥：" + AESUtils.createKey("CHANUS_EMAIL"));
+        System.out.println("手机号加密密钥：" + AESUtils.generateKey("CHANUS_PHONE"));
+        System.out.println("邮箱账号加密密钥：" + AESUtils.generateKey("CHANUS_EMAIL"));
     }
 }

@@ -48,7 +48,7 @@ public class AESUtils {
      * @return AES加密密钥字符串
      * @since 0.0.1
      */
-    public static String createKey(final String seed) {
+    public static String generateKey(final String seed) {
         try {
             // 实例化
             KeyGenerator keyGenerator = KeyGenerator.getInstance(KEY_ALGORITHM);
@@ -70,19 +70,19 @@ public class AESUtils {
     /**
      * AES CBC模式加密数据
      *
-     * @param key    128位的密钥字符串，或createKey方法生成的密钥字符串
-     * @param value  待加密内容
+     * @param text   待加密内容
+     * @param key    128位的密钥字符串，或generateKey方法生成的密钥字符串
      * @param vector 128位的初始化向量字符串
      * @return Base64转码后的加密数据
      * @since 0.0.1
      */
-    public static String encrypt(final String key, final String value, final String vector) {
+    public static String encrypt(final String text, final String key, final String vector) {
         try {
-            // 兼容128位任意字符串和createKey生成的Base64转码的密钥字符串
+            // 兼容128位任意字符串和generateKey生成的Base64转码的密钥字符串
             byte[] b = key.length() == 16 ? key.getBytes(StandardCharsets.UTF_8) : Base64.getDecoder().decode(key);
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM_CBC);
             cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM), new IvParameterSpec(vector.getBytes(StandardCharsets.UTF_8)));
-            return Base64.getEncoder().encodeToString(cipher.doFinal(value.getBytes(StandardCharsets.UTF_8)));
+            return Base64.getEncoder().encodeToString(cipher.doFinal(text.getBytes(StandardCharsets.UTF_8)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,42 +93,42 @@ public class AESUtils {
     /**
      * AES CBC模式加密数据，使用默认初始化向量
      *
-     * @param key   128位的密钥字符串，或createKey方法生成的密钥字符串
-     * @param value 待加密内容
+     * @param text 待加密内容
+     * @param key  128位的密钥字符串，或generateKey方法生成的密钥字符串
      * @return Base64转码后的加密数据
      * @since 0.0.1
      */
-    public static String encrypt(final String key, final String value) {
-        return encrypt(key, value, INIT_VECTOR);
+    public static String encrypt(final String text, final String key) {
+        return encrypt(text, key, INIT_VECTOR);
     }
 
     /**
      * AES CBC模式加密数据，使用默认密钥和初始化向量
      *
-     * @param value 待加密内容
+     * @param text 待加密内容
      * @return Base64转码后的加密数据
      * @since 0.0.1
      */
-    public static String encrypt(final String value) {
-        return encrypt(DEFAULT_KEY, value, INIT_VECTOR);
+    public static String encrypt(final String text) {
+        return encrypt(text, DEFAULT_KEY, INIT_VECTOR);
     }
 
     /**
      * AES CBC模式解密数据
      *
-     * @param key    128位的密钥字符串，或createKey方法生成的密钥字符串
-     * @param value  待解密内容
+     * @param text   待解密内容
+     * @param key    128位的密钥字符串，或generateKey方法生成的密钥字符串
      * @param vector 128位的初始化向量字符串
      * @return 解密后数据
      * @since 0.0.1
      */
-    public static String decrypt(final String key, final String value, final String vector) {
+    public static String decrypt(final String text, final String key, final String vector) {
         try {
-            // 兼容128位任意字符串和createKey生成的Base64转码的密钥字符串
+            // 兼容128位任意字符串和generateKey生成的Base64转码的密钥字符串
             byte[] b = key.length() == 16 ? key.getBytes(StandardCharsets.UTF_8) : Base64.getDecoder().decode(key);
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM_CBC);
             cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM), new IvParameterSpec(vector.getBytes(StandardCharsets.UTF_8)));
-            return new String(cipher.doFinal(Base64.getDecoder().decode(value)), StandardCharsets.UTF_8);
+            return new String(cipher.doFinal(Base64.getDecoder().decode(text)), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -139,44 +139,44 @@ public class AESUtils {
     /**
      * AES CBC模式解密数据，使用默认初始化向量
      *
-     * @param key   128位的密钥字符串，或createKey方法生成的密钥字符串
-     * @param value 待解密内容
+     * @param text 待解密内容
+     * @param key  128位的密钥字符串，或generateKey方法生成的密钥字符串
      * @return 解密后数据
      * @since 0.0.1
      */
-    public static String decrypt(String key, String value) {
-        return decrypt(key, value, INIT_VECTOR);
+    public static String decrypt(String text, String key) {
+        return decrypt(text, key, INIT_VECTOR);
     }
 
     /**
      * AES CBC模式解密数据，使用默认密钥和初始化向量
      *
-     * @param value 待解密内容
+     * @param text 待解密内容
      * @return 解密后数据
      * @since 0.0.1
      */
-    public static String decrypt(String value) {
-        return decrypt(DEFAULT_KEY, value, INIT_VECTOR);
+    public static String decrypt(String text) {
+        return decrypt(text, DEFAULT_KEY, INIT_VECTOR);
     }
 
     /**
      * AES ECB模式加密数据
      *
-     * @param key   128位的密钥字符串，或createKey方法生成的密钥字符串
-     * @param value 待加密内容
+     * @param text 待加密内容
+     * @param key  128位的密钥字符串，或generateKey方法生成的密钥字符串
      * @return Base64转码后的加密数据
      * @since 0.0.1
      */
-    public static String encryptWithEcb(String key, String value) {
+    public static String encryptWithEcb(String text, String key) {
         try {
-            // 兼容128位任意字符串和createKey生成的Base64转码的密钥字符串
+            // 兼容128位任意字符串和generateKey生成的Base64转码的密钥字符串
             byte[] b = key.length() == 16 ? key.getBytes(StandardCharsets.UTF_8) : Base64.getDecoder().decode(key);
             // 创建密码器
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM_ECB);
             // 使用密钥初始化，设置为加密模式
             cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM));
             // 通过Base64转码加密数据后返回
-            return Base64.getEncoder().encodeToString(cipher.doFinal(value.getBytes(StandardCharsets.UTF_8)));
+            return Base64.getEncoder().encodeToString(cipher.doFinal(text.getBytes(StandardCharsets.UTF_8)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -187,21 +187,21 @@ public class AESUtils {
     /**
      * AES ECB模式解密数据
      *
-     * @param key   128位的密钥字符串，或createKey方法生成的密钥字符串
-     * @param value 待解密内容
+     * @param text 待解密内容
+     * @param key  128位的密钥字符串，或generateKey方法生成的密钥字符串
      * @return 解密后数据
      * @since 0.0.1
      */
-    public static String decryptWithEcb(String key, String value) {
+    public static String decryptWithEcb(String text, String key) {
         try {
-            // 兼容128位任意字符串和createKey生成的Base64转码的密钥字符串
+            // 兼容128位任意字符串和generateKey生成的Base64转码的密钥字符串
             byte[] b = key.length() == 16 ? key.getBytes(StandardCharsets.UTF_8) : Base64.getDecoder().decode(key);
             // 创建密码器
             Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM_ECB);
             // 使用密钥初始化，设置为解密模式
             cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(b, KEY_ALGORITHM));
             // 返回解密后数据
-            return new String(cipher.doFinal(Base64.getDecoder().decode(value)), StandardCharsets.UTF_8);
+            return new String(cipher.doFinal(Base64.getDecoder().decode(text)), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }

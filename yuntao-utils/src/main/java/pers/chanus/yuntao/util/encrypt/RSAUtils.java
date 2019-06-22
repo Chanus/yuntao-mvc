@@ -282,12 +282,12 @@ public class RSAUtils {
      * 校验数字签名
      *
      * @param data      源数据
-     * @param publicKey 公钥(BASE64编码)
      * @param sign      数字签名
+     * @param publicKey 公钥(BASE64编码)
      * @return {@code true} 校验数字签名成功；{@code false} 校验数字签名失败
      * @since 0.0.1
      */
-    public static boolean verify(byte[] data, String publicKey, String sign) {
+    public static boolean verify(byte[] data, String sign, String publicKey) {
         try {
             byte[] keyBytes = Base64.getDecoder().decode(publicKey);
             X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(keyBytes);
@@ -306,12 +306,12 @@ public class RSAUtils {
      * 校验数字签名
      *
      * @param data      源数据
-     * @param publicKey 公钥(BASE64编码)
      * @param sign      数字签名
+     * @param publicKey 公钥(BASE64编码)
      * @return {@code true} 校验数字签名成功；{@code false} 校验数字签名失败
      * @since 0.0.1
      */
-    public static boolean verify(String data, String publicKey, String sign) {
-        return verify(data.getBytes(), publicKey, sign);
+    public static boolean verify(String data, String sign, String publicKey) {
+        return verify(data.getBytes(), sign, publicKey);
     }
 }

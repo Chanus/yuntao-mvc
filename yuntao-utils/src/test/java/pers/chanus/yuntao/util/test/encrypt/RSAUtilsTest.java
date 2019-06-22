@@ -69,8 +69,8 @@ public class RSAUtilsTest {
         System.out.println("数字签名：" + signature1);
         System.out.println("数字签名：" + signature2);
 
-        boolean b1 = RSAUtils.verify(text.getBytes(), publicKey, signature1);
-        boolean b2 = RSAUtils.verify(text, publicKey, signature2);
+        boolean b1 = RSAUtils.verify(text.getBytes(), signature1, publicKey);
+        boolean b2 = RSAUtils.verify(text, signature2, publicKey);
         System.out.println("验签结果：" + b1);
         System.out.println("验签结果：" + b2);
     }
