@@ -9,7 +9,7 @@
  */
 package pers.chanus.yuntao.manager.test;
 
-import pers.chanus.yuntao.util.encrypt.AESUtils;
+import pers.chanus.yuntao.jdbc.security.DBPasswordCallback;
 
 /**
  * 生成JDBC连接密码密文
@@ -21,10 +21,6 @@ import pers.chanus.yuntao.util.encrypt.AESUtils;
 public class JdbcPasswordTest {
     public static void main(String[] args) {
         String password = "123456";
-        String key = "ChanusYuntaoJDBC";
-        String ciphertext = AESUtils.encrypt(key, password);
-        System.out.println("加密后密码：" + ciphertext);
-        String plaintext = AESUtils.decrypt(key, ciphertext);
-        System.out.println("解密后密码：" + plaintext);
+        System.out.println("加密后密码：" + DBPasswordCallback.encrypt(password));
     }
 }

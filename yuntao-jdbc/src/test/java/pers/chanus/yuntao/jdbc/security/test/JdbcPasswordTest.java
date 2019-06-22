@@ -4,8 +4,7 @@
 package pers.chanus.yuntao.jdbc.security.test;
 
 import org.junit.Test;
-
-import pers.chanus.yuntao.util.encrypt.AESUtils;
+import pers.chanus.yuntao.jdbc.security.DBPasswordCallback;
 
 /**
  * 加密jdbc连接密码测试
@@ -19,10 +18,7 @@ public class JdbcPasswordTest {
     public void encryptionJdbcPasswordTest() {
         String password = "123456";
         String key = "ChanusYuntaoJDBC";
-        System.out.println("加密前：" + password);
-        password = AESUtils.encrypt(key, password);
-        System.out.println("加密后：" + password);
-        password = AESUtils.decrypt(key, password);
-        System.out.println("解密后：" + password);
+        System.out.println("加密后：" + DBPasswordCallback.encrypt(password));
+        System.out.println("加密后：" + DBPasswordCallback.encrypt(password, key));
     }
 }

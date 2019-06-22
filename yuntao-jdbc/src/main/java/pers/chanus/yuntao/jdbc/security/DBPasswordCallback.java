@@ -27,11 +27,34 @@ public class DBPasswordCallback extends DruidPasswordCallback {
         if (password != null && password.trim().length() > 0) {
             try {
                 // 这里的password是将jdbc.properties配置得到的密码进行解密之后的值，所以这里的代码是将密码进行解密
-                password = AESUtils.decrypt(KEY, password);
+                password = AESUtils.decrypt(password, KEY);
                 setPassword(password.toCharArray());
             } catch (Exception e) {
                 setPassword(password.toCharArray());
             }
         }
+    }
+
+    /**
+     * 获取数据库密码密文
+     *
+     * @param password 数据库密码明文
+     * @return 数据库密码密文
+     * @since 0.1.2
+     */
+    public static String encrypt(String password) {
+        return AESUtils.encrypt(password, KEY);
+    }
+
+    /**
+     * 获取数据库密码密文
+     *
+     * @param password 数据库密码明文
+     * @param key      秘钥
+     * @return 数据库密码密文
+     * @since 0.1.2
+     */
+    public static String encrypt(String password, String key) {
+        return AESUtils.encrypt(password, key);
     }
 }
