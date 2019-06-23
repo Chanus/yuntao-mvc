@@ -152,7 +152,7 @@ public class OperatorController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "修改操作员密码", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleId, description = "修改操作员密码", logType = LogTypeEnum.UPDATE, ignore = true)
     @PostMapping(value = "password.do", produces = "application/json; charset=utf-8")
     public Message password(String operatorNo, String password) {
         return operatorService.updatePassword(operatorNo, null, password, false);

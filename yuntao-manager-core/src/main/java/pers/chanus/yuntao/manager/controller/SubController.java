@@ -144,7 +144,7 @@ public class SubController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "修改子账号密码", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleId, description = "修改子账号密码", logType = LogTypeEnum.UPDATE, ignore = true)
     @PostMapping(value = "password.do", produces = "application/json; charset=utf-8")
     public Message password(String subNo, String password) {
         return operatorService.updatePassword(subNo, null, password, false);

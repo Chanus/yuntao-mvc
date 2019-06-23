@@ -20,7 +20,7 @@ import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.service.LoginUserService;
 import pers.chanus.yuntao.util.CollectionUtils;
 import pers.chanus.yuntao.util.StringUtils;
-import pers.chanus.yuntao.util.encrypt.MD5Utils;
+import pers.chanus.yuntao.util.encrypt.SHAUtils;
 
 import java.util.List;
 
@@ -70,7 +70,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             return Message.fail("当前用户不存在");
         if (ConfigConsts.STATUS_NO.equals(loginUserView.getValidStatus()))
             return Message.fail("当前用户不可用");
-        if (!MD5Utils.verify(password, loginUserView.getPassword(), loginNo))
+        if (!SHAUtils.verifySHA256(password + loginNo, loginUserView.getPassword()))
             return Message.fail("登录密码不正确");
 
         Role role = roleMapper.getLoginStatus(loginUserView.getRoleId());
@@ -130,7 +130,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             return Message.fail("当前用户不存在");
         if (ConfigConsts.STATUS_NO.equals(loginUserView.getValidStatus()))
             return Message.fail("当前用户不可用");
-        if (!MD5Utils.verify(password, loginUserView.getPassword(), loginNo))
+        if (!SHAUtils.verifySHA256(password + loginNo, loginUserView.getPassword()))
             return Message.fail("登录密码不正确");
         if (StringUtils.isBlank(loginUserView.getRoleId()))
             return Message.fail("当前用户角色不存在");

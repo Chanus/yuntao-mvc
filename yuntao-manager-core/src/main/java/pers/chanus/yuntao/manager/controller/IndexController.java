@@ -150,7 +150,7 @@ public class IndexController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(description = "修改个人密码", logType = LogTypeEnum.UPDATE)
+    @SystemLog(description = "修改个人密码", logType = LogTypeEnum.UPDATE, ignore = true)
     @PostMapping(value = "user/update-own-password.do", produces = "application/json; charset=utf-8")
     public Message updateOwnPassword(String oldPassword, String newPassword) {
         return operatorService.updatePassword(LoginUser.getLoginUser().getLoginNo(), oldPassword, newPassword, true);

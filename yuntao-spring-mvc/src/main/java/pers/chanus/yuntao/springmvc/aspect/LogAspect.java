@@ -29,6 +29,7 @@ import pers.chanus.yuntao.util.IpUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 系统日志切点类
@@ -70,7 +71,7 @@ public class LogAspect {
         if (systemLog == null)
             return proceedingJoinPoint.proceed();
 
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
 
         LoginUser loginUser = LoginUser.getLoginUser();// 登录用户信息
 
@@ -104,7 +105,7 @@ public class LogAspect {
                     }
                 }
                 if (object instanceof Message && ((Message) object).getCode() == MsgCode.SUCCESS) {// 操作成功
-                    log.setOperateContent(getParameters(proceedingJoinPoint, null));// 操作内容
+                    log.setOperateContent(getParameters(proceedingJoinPoint, null, systemLog.ignore()));// 操作内容
                     log.setOperateConsumeTime((int) (System.currentTimeMillis() - start));
                     logMapper.insertSelective(log);
                 }
@@ -112,7 +113,7 @@ public class LogAspect {
                 LOGGER.error(ex.getMessage(), ex);
                 log.setOperateType(LogTypeEnum.EXCEPTION.name());
                 log.setOperateException(ex.getClass().getName());// 异常代码
-                log.setOperateContent(getParameters(proceedingJoinPoint, ex));// 异常信息
+                log.setOperateContent(getParameters(proceedingJoinPoint, ex, systemLog.ignore()));// 异常信息
                 log.setOperateConsumeTime((int) (System.currentTimeMillis() - start));
                 logMapper.insertSelective(log);
             }
@@ -142,20 +143,25 @@ public class LogAspect {
      *
      * @param joinPoint
      * @param e
-     * @return
+     * @param ignore
+     * @return 请求的参数信息
      * @since 0.0.1
      */
-    private String getParameters(JoinPoint joinPoint, Throwable e) {
+    private String getParameters(JoinPoint joinPoint, Throwable e, boolean ignore) {
         StringBuilder parameters = new StringBuilder();
-        if (joinPoint.getArgs() != null && joinPoint.getArgs().length > 0) {
-            for (int i = 0; i < joinPoint.getArgs().length; i++) {
-                try {
-                    parameters.append(JSON.toJSONString(joinPoint.getArgs()[i])).append(";");
-                } catch (Exception ignored) {
-                }
+        if (!ignore) {
+            int length = joinPoint.getArgs() == null ? 0 : joinPoint.getArgs().length;
+            if (length > 0) {
+                for (int i = 0; i < length; i++) {
+                    try {
+                        parameters.append(JSON.toJSONString(joinPoint.getArgs()[i])).append(";");
+                    } catch (Exception ignored) {
+                    }
 
+                }
             }
         }
+
         if (e != null) {
             parameters.append("\r\n").append(e).append("\r\n").append(CollectionUtils.join(e.getStackTrace()));
         }

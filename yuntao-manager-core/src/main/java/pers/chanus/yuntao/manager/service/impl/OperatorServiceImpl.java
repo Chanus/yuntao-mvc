@@ -21,7 +21,7 @@ import pers.chanus.yuntao.manager.service.OperatorService;
 import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 import pers.chanus.yuntao.util.CollectionUtils;
 import pers.chanus.yuntao.util.StringUtils;
-import pers.chanus.yuntao.util.encrypt.MD5Utils;
+import pers.chanus.yuntao.util.encrypt.SHAUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             return Message.fail("账号已存在");
 
         if (StringUtils.isNotBlank(t.getOperatorPassword()))
-            t.setOperatorPassword(MD5Utils.md5(t.getOperatorPassword(), t.getOperatorNo()));
+            t.setOperatorPassword(SHAUtils.sha256(t.getOperatorPassword() + t.getOperatorNo()));
 
         // 添加子账号时
         if (ConfigConsts.ROLE_SUB_1.equals(t.getOperatorRoleId())) {
@@ -77,7 +77,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
     @Override
     public Message update(Operator t) {
         if (StringUtils.isNotBlank(t.getOperatorPassword()))
-            t.setOperatorPassword(MD5Utils.md5(t.getOperatorPassword(), t.getOperatorNo()));
+            t.setOperatorPassword(SHAUtils.sha256(t.getOperatorPassword() + t.getOperatorNo()));
 
         t.setAesEmailKey(AESKeyConsts.KEY_EMAIL);
         t.setAesPhoneKey(AESKeyConsts.KEY_PHONE);
@@ -116,11 +116,11 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             String operatorPassword = mapper.getPassword(operatorNo);
             if (StringUtils.isBlank(operatorPassword))
                 return Message.fail("用户不存在");
-            if (!MD5Utils.verify(oldPassword, operatorPassword, operatorNo))
+            if (!SHAUtils.verifySHA256(oldPassword + operatorNo, operatorPassword))
                 return Message.fail("旧密码不正确");
         }
 
-        mapper.updatePassword(operatorNo, MD5Utils.md5(newPassword, operatorNo));
+        mapper.updatePassword(operatorNo, SHAUtils.sha256(newPassword + operatorNo));
 
         return Message.success("密码修改成功");
     }
