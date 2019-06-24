@@ -18,7 +18,6 @@ import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.manager.service.LoginUserService;
 import pers.chanus.yuntao.server.annotation.SystemLog;
-import pers.chanus.yuntao.springmvc.ConfigUtils;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 import pers.chanus.yuntao.util.GoogleAuthenticatorUtils;
 import pers.chanus.yuntao.util.IpUtils;
@@ -143,7 +142,7 @@ public class LoginController extends BaseController {
             if (!StringUtils.isNumeric(googleAuthenticatorCode))
                 return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
 
-            String secret = ConfigUtils.getProperty("google.authenticator.secret");
+            String secret = CacheData.SYSTEM_PARAMS_MAP.get("sys_google_authenticator_secret");
             if (!GoogleAuthenticatorUtils.check_code(secret, Long.parseLong(googleAuthenticatorCode)))
                 return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
         }
