@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * 生成验证码图片
@@ -101,8 +100,6 @@ public class VerifyCodeUtils {
         // 定义图像buffer
         BufferedImage buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = buffImg.createGraphics();
-        // 创建一个随机数生成器类
-        Random random = new Random();
         // 将图像填充为白色
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, width, height);
@@ -116,20 +113,33 @@ public class VerifyCodeUtils {
         // randomCode用于保存随机产生的验证码，以便用户登录后进行验证。
         StringBuffer randomCode = new StringBuffer();
         // 随机产生codeCount数字的验证码。
-        String randomString;
+        char randomChar;
         for (int i = 0; i < codeCount; i++) {
             // 得到随机产生的验证码数字。
-            randomString = String.valueOf(codeSequence[random.nextInt(codeSequence.length)]);
+            randomChar = codeSequence[RandomUtils.getRandomInt(codeSequence.length)];
             // 用随机产生的颜色将验证码绘制到图像中。
-            g.setColor(new Color(255, 0, 0));
-            g.drawString(randomString, i * codeWidth + x, y);
+            g.setColor(getRandomColor());
+            g.drawString(String.valueOf(randomChar), i * codeWidth + x, y);
             // 将产生的四个随机数组合在一起。
-            randomCode.append(randomString);
+            randomCode.append(randomChar);
         }
 
         Map<String, Object> map = new HashMap<>();
         map.put("randomCode", randomCode);
         map.put("buffImg", buffImg);
         return map;
+    }
+
+    /**
+     * 获取随机颜色
+     *
+     * @return 随机颜色
+     * @since 0.1.3
+     */
+    private Color getRandomColor() {
+        int r = RandomUtils.getRandomInt(0, 255);
+        int g = RandomUtils.getRandomInt(0, 255);
+        int b = RandomUtils.getRandomInt(0, 255);
+        return new Color(r, g, b);
     }
 }
