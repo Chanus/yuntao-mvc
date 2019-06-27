@@ -138,14 +138,14 @@ public class CodeGenerationUtils {
      * @param table   表信息
      * @param columns 列信息
      * @param params  自动生成代码参数配置
-     *                package	代码包名
-     *                author	作者
-     *                since	版本号
-     *                tablePrefix	表前缀
-     *                autoRemovePrefix	是否自动去除前缀：0-否，1-是
-     *                manyModule	项目是否是多模块项目：0-否，1-是
-     *                pathName	URL标识
-     *                moduleId	模块ID
+     *                package   代码包名
+     *                author    作者
+     *                since 版本号
+     *                tablePrefix   表前缀
+     *                autoRemovePrefix  是否自动去除前缀：0-否，1-是
+     *                manyModule    项目是否是多模块项目：0-否，1-是
+     *                pathName  URL标识
+     *                moduleId  模块ID
      * @param zip     zip压缩输出流
      * @since 0.0.3
      */
