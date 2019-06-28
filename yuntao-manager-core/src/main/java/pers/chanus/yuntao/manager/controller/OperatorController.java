@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
+import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
@@ -62,7 +63,12 @@ public class OperatorController extends BaseController {
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
     public PageBean list() {
-        return operatorService.listPagination(getParams());
+        CustomMap params = getParams();
+        String loginRoleId = LoginUser.getLoginUser().getMasterRoleId();
+        if (!ConfigConsts.ROLE_ADMIN_0.equals(loginRoleId))
+            params.put("loginRoleId", loginRoleId);
+
+        return operatorService.listPagination(params);
     }
 
     /**

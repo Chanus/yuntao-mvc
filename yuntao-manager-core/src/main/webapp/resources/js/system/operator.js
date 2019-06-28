@@ -34,7 +34,7 @@ layui.config({
                 curr: 1 //重新从第 1 页开始
             },
             where: {
-                operatorRoleId: roleId === '-1' ? null : roleId,
+                operatorRoleId: roleId === -1 ? null : roleId,
                 operatorNo: $("#operatorNo").val(),
                 v: new Date().getTime()
             }
@@ -87,7 +87,7 @@ var setting = {
     callback: {
         onAsyncSuccess: function () {// 异步加载完成后默认选中根节点
             treeObj = $.fn.zTree.getZTreeObj("roles");
-            var selNode = treeObj.getNodeByParam("id", "-1");
+            var selNode = treeObj.getNodeByParam("level", "0");
             treeObj.selectNode(selNode);
         },
         onClick: function (event, treeId, treeNode) {
@@ -97,7 +97,7 @@ var setting = {
                 $("#add").css('display', '');
             }
             // 点击节点重新加载操作员列表
-            reload(treeNode.id);
+            reload(treeNode.level === 0 ? -1 : treeNode.id);
         }
     },
     data: {

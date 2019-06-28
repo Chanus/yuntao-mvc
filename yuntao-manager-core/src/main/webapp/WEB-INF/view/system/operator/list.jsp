@@ -48,14 +48,16 @@
       {{# }else{ }}{{ d.validStatus }}{{# } }}
     </script>
     <script type="text/html" id="toolbar">
-      {{# if(${powers.containsKey('UPDATE') }){ }}
-        <a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
-      {{# } }}
-      {{# if(${powers.containsKey('PASSWORD') }){ }}
-        <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="password">修改密码</a>
-      {{# } }}
-      {{# if(${powers.containsKey('DELETE') }){ }}
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      {{# if(${sessionScope.loginUser.masterRoleId } != d.operatorRoleId){ }}
+        {{# if(${powers.containsKey('UPDATE') }){ }}
+          <a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
+        {{# } }}
+        {{# if(${powers.containsKey('PASSWORD') }){ }}
+          <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="password">修改密码</a>
+        {{# } }}
+        {{# if(${powers.containsKey('DELETE') }){ }}
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        {{# } }}
       {{# } }}
     </script>
     

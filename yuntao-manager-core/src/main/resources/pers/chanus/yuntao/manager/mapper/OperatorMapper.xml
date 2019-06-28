@@ -226,6 +226,9 @@
       <if test="validStatus != null">
         and valid_status = #{validStatus,jdbcType=CHAR}
       </if>
+      <if test="loginRoleId != null">
+        and operator_role_id like concat(#{loginRoleId,jdbcType=VARCHAR}, '%')
+      </if>
     </where>
   </select>
   
@@ -244,6 +247,9 @@
       </if>
       <if test="validStatus != null">
         and sys_operator.valid_status = #{validStatus,jdbcType=CHAR}
+      </if>
+      <if test="loginRoleId != null">
+        and operator_role_id like concat(#{loginRoleId,jdbcType=VARCHAR}, '%')
       </if>
     </where>
     order by operator_role_id asc

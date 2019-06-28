@@ -57,7 +57,7 @@ public class ParamController extends BaseController {
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
     public PageBean list() {
-        return paramService.listPagination(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleId()));
+        return paramService.listPagination(getParams().putNext("loginRoleId", LoginUser.getLoginUser().getMasterRoleId()));
     }
 
     /**

@@ -143,8 +143,8 @@
       <if test="validStatus != null">
         and valid_status = #{validStatus,jdbcType=CHAR}
       </if>
-      <if test='modifiedRoleId != null and modifiedRoleId != "0"'>
-        and FIND_IN_SET(#{modifiedRoleId,jdbcType=VARCHAR},modified_role_id)
+      <if test='loginRoleId != null and loginRoleId != "0"'>
+        and FIND_IN_SET(#{loginRoleId,jdbcType=VARCHAR},if(modified_role_id is not null and modified_role_id &lt;&gt; '', modified_role_id, #{loginRoleId,jdbcType=VARCHAR}))
       </if>
     </where>
   </select>
@@ -160,8 +160,8 @@
       <if test="validStatus != null">
         and valid_status = #{validStatus,jdbcType=CHAR}
       </if>
-      <if test='modifiedRoleId != null and modifiedRoleId != "0"'>
-        and FIND_IN_SET(#{modifiedRoleId,jdbcType=VARCHAR},modified_role_id)
+      <if test='loginRoleId != null and loginRoleId != "0"'>
+        and FIND_IN_SET(#{loginRoleId,jdbcType=VARCHAR},if(modified_role_id is not null and modified_role_id &lt;&gt; '', modified_role_id, #{loginRoleId,jdbcType=VARCHAR}))
       </if>
     </where>
     order by priority asc
