@@ -27,6 +27,10 @@ public class ConfigConsts {
      */
     public final static String ROLE_ADMIN_0 = "0";
     /**
+     * 系统内置角色：系统操作员
+     */
+    public final static String ROLE_ADMIN_10 = "10";
+    /**
      * 系统内置角色：子账号
      */
     public final static String ROLE_SUB_1 = "1";

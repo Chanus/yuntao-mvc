@@ -14,7 +14,7 @@
         <div class="layui-form-item">
           <label class="layui-form-label">${column.columnComment}#if($column.nullable == 'NO')<span class="red">*</span>#end</label>
           <div class="layui-input-block">
-            <input type="text" name="${column.attributename}" #if($column.nullable == 'NO')required lay-verify="required"#end value="${${classname}.${column.attributename} }" placeholder="请输入${column.columnComment}" class="layui-input" autocomplete="off">
+            <input type="text" name="${column.attributename}"#if($column.nullable == 'NO') required lay-verify="required"#end value="${${classname}.${column.attributename} }" placeholder="请输入${column.columnComment}" class="layui-input" autocomplete="off">
           </div>
         </div>
 #end
