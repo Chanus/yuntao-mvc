@@ -44,7 +44,7 @@ layui.config({
                 dictName: encodeURI($('#dictName').val()),
                 v: new Date().getTime()
             }
-        }, 'data');
+        });
     };
 
     // 搜索

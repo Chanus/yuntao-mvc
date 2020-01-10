@@ -3,7 +3,7 @@
   <parent>
     <groupId>yuntao</groupId>
     <artifactId>yuntao</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.4</version>
   </parent>
   <artifactId>yuntao-mybatis-generator</artifactId>
   <name>${project.artifactId}</name>

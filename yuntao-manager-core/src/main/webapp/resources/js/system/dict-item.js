@@ -49,7 +49,7 @@ layui.config({
                 dictCode: dictCode,
                 v: new Date().getTime()
             }
-        }, 'data');
+        });
     };
 
     // 添加

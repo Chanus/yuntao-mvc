@@ -43,7 +43,7 @@ layui.config({
                 orgParentId: orgParentId,
                 v: new Date().getTime()
             }
-        }, 'data');
+        });
     };
 
     // 添加

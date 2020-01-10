@@ -38,7 +38,7 @@ layui.config({
                 powerItem: powerItem,
                 v: new Date().getTime()
             }
-        }, 'data');
+        });
     };
 
     // 搜索

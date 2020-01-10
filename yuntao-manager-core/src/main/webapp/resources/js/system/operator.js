@@ -38,7 +38,7 @@ layui.config({
                 operatorNo: $("#operatorNo").val(),
                 v: new Date().getTime()
             }
-        }, 'data');
+        });
     };
 
     // 搜索

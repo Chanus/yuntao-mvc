@@ -40,7 +40,7 @@ layui.config({
                 subNo: $("#subNo").val(),
                 v: new Date().getTime()
             }
-        }, 'data');
+        });
     };
 
     // 搜索

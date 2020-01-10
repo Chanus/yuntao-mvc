@@ -43,7 +43,7 @@ layui.config({
                 moduleParentId: moduleParentId,
                 v: new Date().getTime()
             }
-        }, 'data');
+        });
     };
 
     // 添加

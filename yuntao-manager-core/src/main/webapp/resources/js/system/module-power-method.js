@@ -34,7 +34,7 @@ layui.config({
                 mpId: mpId,
                 v: new Date().getTime()
             }
-        }, 'data');
+        });
     };
 
     // 监听选择类名

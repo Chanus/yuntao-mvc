@@ -34,7 +34,7 @@ layui.config({
                 ${pk.attributename}: $('#${pk.attributename}').val(),
                 v: new Date().getTime()
             }
-        }, 'data');
+        });
     };
 
     // 搜索
