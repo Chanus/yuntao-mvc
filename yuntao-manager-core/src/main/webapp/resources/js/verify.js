@@ -47,6 +47,10 @@ layui.config({
             if (verify.isNull($('input[name="' + $(item).attr('name') + '"]:checked').val()))
                 return verify.nullMsg(item, '复选框必选');
         },
+        mustcheckboxlike: function (value, item) {
+            if (verify.isNull($('input[name^="' + $(item).attr('checkname') + '"]:checked').val()))
+                return verify.nullMsg(item, '复选框必选');
+        },
         // 校验手机号码(大陆)
         phone: function (value, item) {
             var r = verify.validate(value, item, 'phone');
