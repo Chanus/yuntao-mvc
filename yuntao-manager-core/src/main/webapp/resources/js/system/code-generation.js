@@ -46,11 +46,6 @@ layui.config({
         reload();
     });
 
-    // 添加
-    $("#add").on('click', function () {
-        popup.open(600, 700, '<i class="layui-icon layui-icon-add-circle"></i>添加子账号', action_path + 'add.do');
-    });
-
     // 监听工具条
     table.on('tool(datas)', function (obj) {
         var data = obj.data; // 获得当前行数据

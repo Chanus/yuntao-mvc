@@ -11,9 +11,10 @@ layui.define(['form', 'table'], function (exports) {
     var $ = layui.jquery,
         form = layui.form,
         table = layui.table,
+        p0 = $('.layui-show', window.parent.document),
         p;
-    if ($('.layui-show', window.parent.document) && $('.layui-show', window.parent.document).children()[0]) {
-        p = $('.layui-show', window.parent.document).children()[0].contentWindow;
+    if (p0 && p0.children()[p0.length - 1]) {
+        p = p0.children()[p0.length - 1].contentWindow;
     }
 
     var operations = {

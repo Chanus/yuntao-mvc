@@ -129,7 +129,7 @@ layui.config({
     });
 
     // 增删改
-    var p = $('.layui-show', window.parent.document).children()[0].contentWindow;
+    var p0 = $('.layui-show', window.parent.document), p = p0.children()[p0.length - 1].contentWindow;
     operations.id = 'mpId';
     operations.updateUrl = action_path + 'update.do';
     operations.delUrl = action_path + 'delete.do';
