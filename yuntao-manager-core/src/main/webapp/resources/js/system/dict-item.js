@@ -70,7 +70,7 @@ layui.config({
     });
 
     // 增删改
-    var p0 = $('.layui-layer-content', window.parent.document), p = p0.children()[p0.length - 1].contentWindow;
+    var p = $('.layui-layer-content', window.parent.document).children()[0].contentWindow;
     operations.id = 'id';
     operations.addUrl = action_path + 'add.do';
     operations.commonAddFunc = function () {

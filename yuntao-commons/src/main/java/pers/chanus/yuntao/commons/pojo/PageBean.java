@@ -44,6 +44,13 @@ public class PageBean {
     private List<?> data;
 
     /**
+     * 记录统计行
+     *
+     * @since 0.1.5
+     */
+    private Object totalRow;
+
+    /**
      * 构造方法，初始化{@code code}和{@code count}
      *
      * @since 0.0.1
@@ -97,6 +104,22 @@ public class PageBean {
     }
 
     /**
+     * 构造方法，初始化{@code code}、{@code count}、{@code data}和{@code totalRow}
+     *
+     * @param count  记录条数
+     * @param data   记录列表
+     * @param totalRow 记录统计行
+     * @since 0.1.5
+     */
+    public PageBean(Integer count, List<?> data, Object totalRow) {
+        super();
+        this.code = 0;
+        this.count = count;
+        this.data = data;
+        this.totalRow = totalRow;
+    }
+
+    /**
      * 设置{@code count}和{@code data}
      *
      * @param count 记录条数
@@ -127,6 +150,22 @@ public class PageBean {
     }
 
     /**
+     * 设置{@code count}、{@code data}和{@code totalRow}
+     *
+     * @param count  记录条数
+     * @param data   记录列表
+     * @param totalRow 记录统计行
+     * @return 当前{@code PageBean}实例
+     * @since 0.1.5
+     */
+    public PageBean init(Integer count, List<?> data, Object totalRow) {
+        this.count = count;
+        this.data = data;
+        this.totalRow = totalRow;
+        return this;
+    }
+
+    /**
      * 分页
      *
      * @param count 记录条数
@@ -149,6 +188,19 @@ public class PageBean {
      */
     public static PageBean pagination(Integer count, Object object, List<?> data) {
         return new PageBean(count, object, data);
+    }
+
+    /**
+     * 分页，带统计行
+     *
+     * @param count  记录条数
+     * @param data   记录列表
+     * @param totalRow 记录统计行
+     * @return {@code PageBean}实例
+     * @since 0.1.5
+     */
+    public static PageBean pagination(Integer count, List<?> data, Object totalRow) {
+        return new PageBean(count, data, totalRow);
     }
 
     public int getCode() {
@@ -191,8 +243,16 @@ public class PageBean {
         this.data = data;
     }
 
+    public Object getTotalRow() {
+        return totalRow;
+    }
+
+    public void setTotalRow(Object totalRow) {
+        this.totalRow = totalRow;
+    }
+
     @Override
     public String toString() {
-        return "PageBean [code=" + code + ", msg=" + msg + ", count=" + count + ", object=" + object + ", data=" + data + "]";
+        return "PageBean [code=" + code + ", msg=" + msg + ", count=" + count + ", object=" + object + ", data=" + data + ", totalRow=" + totalRow + "]";
     }
 }
