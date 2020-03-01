@@ -3,6 +3,9 @@
  */
 package pers.chanus.yuntao.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -67,5 +70,131 @@ public class IpUtils {
         }
 
         return ipAddress;
+    }
+
+    /**
+     * 获取{@code ip}对应的物理地址信息
+     *
+     * @param ip    IP地址
+     * @return {@code ip}对应的物理地址信息
+     * @author Chanus
+     * @date 2020-03-01 13:55:34
+     * @since 0.1.5
+     */
+    public static IpAddress getIpPhysicalAddress(String ip) {
+        String url = "http://api.pi.do/api/v1/queryip" + "?ip=" +  ip;
+        IpAddress ipAddress = new IpAddress();
+        try {
+            String result = HttpUtils.get(url);
+            JSONObject json = JSON.parseObject(result);
+            int code = json.getInteger("statuscode");
+            if (code == 0) {
+                JSONObject data = json.getJSONObject("data");
+                JSONObject ipInfo = data.getJSONObject("ipInfo");
+                ipAddress.setCode(0);
+                ipAddress.setIp(data.getString("ip"));
+                ipAddress.setCountry(ipInfo.getString("Country"));
+                ipAddress.setProvince(ipInfo.getString("Province"));
+                ipAddress.setCity(ipInfo.getString("City"));
+                ipAddress.setIsp(ipInfo.getString("ISP"));
+            }
+
+        } catch (Exception e) {
+            ipAddress.setCode(-1);
+        }
+
+        return ipAddress;
+    }
+
+    /**
+     * IP物理地址
+     *
+     * @author Chanus
+     * @date 2020-03-01 13:47:15
+     * @since 0.1.5
+     */
+    public static class IpAddress {
+        /**
+         * 状态码，0标识成功 ，非0表示失败
+         */
+        private int code;
+
+        /**
+         * IP地址
+         */
+        private String ip;
+
+        /**
+         * 国家
+         */
+        private String country;
+
+        /**
+         * 省
+         */
+        private String province;
+
+        /**
+         * 城市
+         */
+        private String city;
+
+        /**
+         * 运营商
+         */
+        private String isp;
+
+        public int getCode() {
+            return code;
+        }
+
+        public void setCode(int code) {
+            this.code = code;
+        }
+
+        public String getIp() {
+            return ip;
+        }
+
+        public void setIp(String ip) {
+            this.ip = ip;
+        }
+
+        public String getCountry() {
+            return country;
+        }
+
+        public void setCountry(String country) {
+            this.country = country;
+        }
+
+        public String getProvince() {
+            return province;
+        }
+
+        public void setProvince(String province) {
+            this.province = province;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getIsp() {
+            return isp;
+        }
+
+        public void setIsp(String isp) {
+            this.isp = isp;
+        }
+
+        @Override
+        public String toString() {
+            return "IpAddress [code=" + code + ", ip=" + ip + ", country=" + country + ", province=" + province + ", city=" + city + ", isp=" + isp + "]";
+        }
     }
 }
