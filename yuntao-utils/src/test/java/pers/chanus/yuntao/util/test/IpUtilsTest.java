@@ -22,7 +22,7 @@ import pers.chanus.yuntao.util.IpUtils;
 public class IpUtilsTest {
     @Test
     public void getIpPhysicalAddressTest() {
-        String ip = "36.4.195.250";
+        String ip = "127.0.0.1";
 
         IpUtils.IpAddress ipAddress = IpUtils.getIpPhysicalAddress(ip);
         System.out.println(ipAddress.toString());

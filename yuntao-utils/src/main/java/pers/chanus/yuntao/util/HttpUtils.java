@@ -3,12 +3,7 @@
  */
 package pers.chanus.yuntao.util;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -46,8 +41,8 @@ public class HttpUtils {
      * @since 0.0.1
      */
     public static String get(final String url) {
-        InputStream is = null;
-        ByteArrayOutputStream baos = null;
+        StringBuilder result = new StringBuilder();// 返回的结果
+        BufferedReader bufferedReader = null;
         try {
             // 创建URL对象
             URL connURL = new URL(url);
@@ -66,25 +61,22 @@ public class HttpUtils {
             // Map<String, List<String>> headers = httpConn.getHeaderFields();
 
             if (connection.getResponseCode() == 200) {
-                is = connection.getInputStream();
-                baos = new ByteArrayOutputStream();
-                int len;
-                byte[] buf = new byte[128];
+                bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
 
-                while ((len = is.read(buf)) != -1) {
-                    baos.write(buf, 0, len);
+                String line;
+                // 读取返回的内容
+                while ((line = bufferedReader.readLine()) != null) {
+                    result.append(line);
                 }
-                baos.flush();
-                return baos.toString();
             } else {
                 throw new RuntimeException("response code is not 200 ... ");
             }
         } catch (Exception e) {
             throw new RuntimeException("Request exception", e);
         } finally {
-            IOUtils.close(is);
-            IOUtils.close(baos);
+            IOUtils.close(bufferedReader);
         }
+        return result.toString();
     }
 
     /**

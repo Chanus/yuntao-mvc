@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -84,6 +85,7 @@ public class IpUtils {
     public static IpAddress getIpPhysicalAddress(String ip) {
         String url = "http://api.pi.do/api/v1/queryip" + "?ip=" +  ip;
         IpAddress ipAddress = new IpAddress();
+        ipAddress.setIp(ip);
         try {
             String result = HttpUtils.get(url);
             JSONObject json = JSON.parseObject(result);
@@ -92,16 +94,38 @@ public class IpUtils {
                 JSONObject data = json.getJSONObject("data");
                 JSONObject ipInfo = data.getJSONObject("ipInfo");
                 ipAddress.setCode(0);
-                ipAddress.setIp(data.getString("ip"));
                 ipAddress.setCountry(ipInfo.getString("Country"));
                 ipAddress.setProvince(ipInfo.getString("Province"));
                 ipAddress.setCity(ipInfo.getString("City"));
                 ipAddress.setIsp(ipInfo.getString("ISP"));
-            }
-
+            } else
+                ipAddress.setCode(-1);
         } catch (Exception e) {
             ipAddress.setCode(-1);
         }
+
+        return ipAddress;
+    }
+
+    /**
+     * 获取{@code ip}对应的物理地址信息，若IP为内网IP或是外网IP则对应的国家、省、市和运营商为空
+     *
+     * @param ip    IP地址
+     * @return {@code ip}对应的物理地址信息
+     * @author Chanus
+     * @date 2020-03-01 15:55:14
+     * @since 0.1.5
+     */
+    public static IpAddress getIpPhysicalAddressReal(String ip) {
+        IpAddress ipAddress = getIpPhysicalAddress(ip);
+        if ("0".equals(ipAddress.getCountry()))
+            ipAddress.setCountry(null);
+        if ("0".equals(ipAddress.getProvince()))
+            ipAddress.setProvince(null);
+        if ("0".equals(ipAddress.getCity()) || "内网IP".equals(ipAddress.getCity()))
+            ipAddress.setCity(null);
+        if ("0".equals(ipAddress.getIsp()) || "内网IP".equals(ipAddress.getIsp()))
+            ipAddress.setIsp(null);
 
         return ipAddress;
     }
@@ -113,7 +137,9 @@ public class IpUtils {
      * @date 2020-03-01 13:47:15
      * @since 0.1.5
      */
-    public static class IpAddress {
+    public static class IpAddress implements Serializable {
+        private static final long serialVersionUID = -1L;
+
         /**
          * 状态码，0标识成功 ，非0表示失败
          */
