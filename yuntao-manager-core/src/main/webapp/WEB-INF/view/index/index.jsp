@@ -104,7 +104,14 @@
                       <c:forEach var="menu2" items="${menu.children }">
                         <c:if test="${menu2.moduleIsMenu eq '1' }">
                           <dd data-name="${menu2.moduleId }">
-                            <a lay-href="${ctx }/${menu2.moduleUrl }"> <i class="${menu2.moduleIcon }"></i> ${menu2.moduleName }</a>
+                            <c:choose>
+                              <c:when test="${menu2.moduleTarget eq '1' }">
+                                <a href="${ctx }/${menu2.moduleUrl }" target="_blank"> <i class="${menu2.moduleIcon }"></i> ${menu2.moduleName }</a>
+                              </c:when>
+                              <c:otherwise>
+                                <a lay-href="${ctx }/${menu2.moduleUrl }"> <i class="${menu2.moduleIcon }"></i> ${menu2.moduleName }</a>
+                              </c:otherwise>
+                            </c:choose>
                           </dd>
                         </c:if>
                       </c:forEach>

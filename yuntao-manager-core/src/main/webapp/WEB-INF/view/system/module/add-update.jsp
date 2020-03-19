@@ -64,6 +64,16 @@
             <input type="text" id="iconPicker" value="${module.moduleIcon }" lay-filter="iconPicker" class="hide">
           </div>
         </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">打开位置</label>
+          <div class="layui-input-block">
+            <select name="moduleTarget" lay-filter="moduleTarget">
+              <option value="" <c:if test="${empty module.moduleTarget }">selected="selected"</c:if>></option>
+              <option value="0" <c:if test="${module.moduleTarget eq '0' }">selected="selected"</c:if>>页签</option>
+              <option value="1" <c:if test="${module.moduleTarget eq '1' }">selected="selected"</c:if>>新页面</option>
+            </select>
+          </div>
+        </div>
         <div class="layui-form-item" pane>
           <label class="layui-form-label">状态<span class="red">*</span></label>
           <div class="layui-input-block">
@@ -95,6 +105,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.0.1.9"></script>
+    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.1.6.2"></script>
   </body>
 </html>

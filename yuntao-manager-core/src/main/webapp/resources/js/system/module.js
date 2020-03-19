@@ -23,8 +23,16 @@ layui.config({
             {field: 'moduleIsMenu', title: '是否菜单', width: '8%', unresize: true, align: 'center', templet: '#moduleIsMenuTpl'},
             {field: 'moduleForPermission', title: '设置权限', width: '8%', unresize: true, align: 'center', templet: '#moduleForPermissionTpl'},
             {field: 'moduleIcon', title: '模块图标', width: '15%', unresize: true, align: 'center', templet: '#moduleIconTpl'},
+            {field: 'moduleTarget', title: '打开位置', width: '8%', unresize: true, align: 'center', templet: function (d) {
+                if (d.moduleTarget === '0')
+                    return '页签';
+                else if (d.moduleTarget === '1')
+                    return '新页面';
+                else
+                    return '';
+            }},
             {field: 'validStatus', title: '状态', width: '8%', unresize: true, align: 'center', templet: '#validStatusTpl'},
-            {fixed: 'right', title: '操作', width: '20%', unresize: true, align: 'center', toolbar: '#toolbar'}
+            {fixed: 'right', title: '操作', width: '15%', unresize: true, align: 'center', toolbar: '#toolbar'}
         ]],
         page: true,
         limits: [10, 15, 20, 25],
