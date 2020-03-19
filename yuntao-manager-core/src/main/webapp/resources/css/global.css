@@ -162,3 +162,10 @@ span[class*="layui-badge"] {
 td .layui-btn + .layui-btn {
     margin-left: 0;
 }
+
+.layui-nav .fa {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    margin-top: -7px;
+}

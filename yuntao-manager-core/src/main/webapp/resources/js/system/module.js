@@ -57,7 +57,7 @@ layui.config({
     // 添加
     $("#add").on('click', function () {
         var nodes = treeObj.getSelectedNodes();
-        popup.open(600, 700, '<i class="layui-icon layui-icon-add-circle"></i>添加模块', action_path + 'add.do?moduleId=' + nodes[0].id);
+        popup.open(650, 700, '<i class="layui-icon layui-icon-add-circle"></i>添加模块', action_path + 'add.do?moduleId=' + nodes[0].id);
     });
 
     // 监听工具条
@@ -66,7 +66,7 @@ layui.config({
         var layEvent = obj.event; // 获得lay-event对应的值
         // var tr = obj.tr; // 获得当前行tr的DOM对象
         if (layEvent === 'update') {// 编辑
-            popup.open(600, 700, '<i class="layui-icon layui-icon-edit"></i>编辑模块', action_path + 'update.do?moduleId=' + data.moduleId);
+            popup.open(650, 700, '<i class="layui-icon layui-icon-edit"></i>编辑模块', action_path + 'update.do?moduleId=' + data.moduleId);
         } else if (layEvent === 'del') {// 删除
             operations.del({ids: [data.moduleId]}, action_path + 'delete.do', init);
         } else if (layEvent === 'up' || layEvent === 'down') {// 调整优先级
@@ -102,8 +102,8 @@ layui.config({
     iconPicker.render({
         // 选择器，推荐使用input
         elem: '#iconPicker',
-        // 数据类型：fontClass/unicode，推荐使用fontClass
-        type: 'fontClass',
+        // 数据类型：layuiIcon/layuiIconUnicode/awesomeIcon/allClass
+        type: 'allClass',
         // 是否开启搜索：true/false
         search: true,
         // 是否开启分页
@@ -112,7 +112,11 @@ layui.config({
         limit: 12,
         // 点击回调
         click: function (data) {
-            $('#moduleIcon').val('layui-icon ' + data.icon);
+            if (data.icon.indexOf('layui-icon-') === 0) {
+                $('#moduleIcon').val('layui-icon ' + data.icon);
+            } else if (data.icon.indexOf('fa-') === 0) {
+                $('#moduleIcon').val('fa ' + data.icon + ' fa-fw');
+            }
         }
     });
 
