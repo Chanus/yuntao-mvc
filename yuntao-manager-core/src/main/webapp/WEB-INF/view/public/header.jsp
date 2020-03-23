@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${ctx }/lib/layuiadmin/style/admin.css" media="all">
 <link rel="stylesheet" href="${ctx }/font/font-awesome-4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="${ctx }/css/global.css?v=0.1.6.3"/>
+<link rel="stylesheet" href="${ctx }/css/layui-form-sm.css?v=0.1.6.1"/>
 <link rel="shortcut icon" href="${ctx }/images/favicon.ico" type="image/x-icon"/>
 <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 <!--[if lt IE 9]>
