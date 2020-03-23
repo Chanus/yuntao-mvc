@@ -41,6 +41,8 @@ layui.define(['layer'], function (exports) {
 
             if (full)
                 layer.full(layerIndex);
+
+            return layerIndex;
         },
 
         /**
@@ -73,6 +75,8 @@ layui.define(['layer'], function (exports) {
 
             if (full)
                 layer.full(layerIndex);
+
+            return layerIndex;
         },
 
         /**

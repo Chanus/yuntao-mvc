@@ -163,6 +163,7 @@ td .layui-btn + .layui-btn {
     margin-left: 0;
 }
 
+/*菜单栏适应FontAwesome图标*/
 .layui-nav .fa {
     position: absolute;
     top: 50%;
