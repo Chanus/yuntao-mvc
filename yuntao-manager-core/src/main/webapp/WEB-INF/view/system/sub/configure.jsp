@@ -18,7 +18,7 @@
           <tr>
             <th width="150px" style="text-align: center;">模块</th>
             <th colspan="2" style="text-align: center;">【${subNo }】菜单/权限</th>
-            <th width="60px" style="text-align: center;">全选<input type="checkbox" id="selectAll" style="width:16px;height:16px;"></th>
+            <th width="60px" style="text-align: center;"><input type="checkbox" id="selectAll" style="width:16px;height:16px;"></th>
           </tr>
         </thead>
         <tbody>

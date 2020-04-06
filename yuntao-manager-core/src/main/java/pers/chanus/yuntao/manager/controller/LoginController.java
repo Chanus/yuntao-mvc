@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.constant.MsgCode;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
@@ -165,7 +166,7 @@ public class LoginController extends BaseController {
 
         if (message.getCode() == MsgCode.SUCCESS) {// 存储登录账号信息
             session.setAttribute("loginUser", message.getData());
-            if ("1".equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_single_location_login")))
+            if (ConfigConsts.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_single_location_login")))
                 SessionSave.getSessionIdSave().put(loginname, session.getId());
         }
 
