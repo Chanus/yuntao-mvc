@@ -26,6 +26,9 @@ import java.util.concurrent.TimeUnit;
 public class RandomUtilsTest {
     @Test
     public void getRandomIntTest() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(RandomUtils.getRandomInt(10));
+        }
         int i1 = RandomUtils.getRandomInt();
         int i2 = RandomUtils.getRandomInt(100);
         int i3 = RandomUtils.getRandomInt(100, 1000);

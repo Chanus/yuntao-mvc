@@ -38,5 +38,9 @@ public enum LogTypeEnum {
     /**
      * 系统异常
      */
-    EXCEPTION
+    EXCEPTION,
+    /**
+     * 定时任务
+     */
+    SCHEDULER
 }

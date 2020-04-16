@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.service.DictItemService;
 import pers.chanus.yuntao.manager.service.ParamService;
+import pers.chanus.yuntao.manager.service.ScheduleJobService;
 
 import javax.annotation.PostConstruct;
 
@@ -24,6 +25,8 @@ public class CacheController {
     private ParamService paramService;
     @Autowired
     private DictItemService dictItemService;
+    @Autowired
+    private ScheduleJobService scheduleJobService;
 
     /**
      * 初始化RSA密钥RSA_KEYS_QUEUE
@@ -53,5 +56,15 @@ public class CacheController {
     @PostConstruct
     public void initSysDictMap() {
         dictItemService.reloadDict();
+    }
+
+    /**
+     * 启动定时任务
+     *
+     * @since 0.1.7
+     */
+    @PostConstruct
+    public void startScheduleJob() {
+        scheduleJobService.startAll();
     }
 }

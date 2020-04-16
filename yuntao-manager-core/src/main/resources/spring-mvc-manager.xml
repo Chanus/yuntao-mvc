@@ -12,7 +12,7 @@
 
   <!-- 由于将spring content和spring MVC分配置文件设置，所以这里就只扫描MVC中controller所在的包 其他包的内容交给spring content来处理。 -->
   <context:component-scan base-package="pers.chanus.yuntao.manager.controller"/>
-  
+
   <interceptors>
     <!-- 请求验证 -->
     <interceptor>

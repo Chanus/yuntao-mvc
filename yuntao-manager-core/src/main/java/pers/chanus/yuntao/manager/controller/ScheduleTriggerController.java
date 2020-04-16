@@ -1,6 +1,4 @@
-package ${package}.controller;
-
-import java.util.Arrays;
+package pers.chanus.yuntao.manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,120 +7,117 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.ModulePowerUtils;
-import ${package}.model.${className};
-import ${package}.service.${className}Service;
+import pers.chanus.yuntao.manager.model.ScheduleTrigger;
+import pers.chanus.yuntao.manager.service.ScheduleTriggerService;
 import pers.chanus.yuntao.server.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 
+import java.util.Arrays;
+
 /**
- * ${moduleName}
+ * 定时任务触发器管理
  *
- * @author ${author}
- * @date ${dateTime}
- * @since ${since}
+ * @author Chanus
+ * @date 2020-04-13 23:47:09
+ * @since 0.1.7
  */
 @Controller
-@RequestMapping("${pathName}")
-public class ${className}Controller extends BaseController {
+@RequestMapping("system/job/trigger")
+public class ScheduleTriggerController extends BaseController {
     @Autowired
-    private ${className}Service ${classname}Service;
-#if("$!moduleId" != "")
+    private ScheduleTriggerService scheduleTriggerService;
 
-    private final int currentModuleId = ${moduleId};
-#end
+    private final int currentModuleId = 1013;
 
     /**
      * 首页
-     *
+     * @param jobId 定时任务ID
      * @param model
      * @return
      */
     @GetMapping(value = "main.do")
-    public String main(Model model) {
+    public String main(Integer jobId, Model model) {
         model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
-        return "${pathName}/list";
+        model.addAttribute("jobId", jobId);
+        return "system/job/trigger/list";
     }
 
     /**
      * 分页查询
-     *
      * @return
      */
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
     public PageBean list() {
-        return ${classname}Service.listPagination(getParams());
+        return scheduleTriggerService.listPagination(getParams());
     }
 
     /**
      * 跳转到添加页面
-     *
+     * @param jobId 定时任务ID
      * @param model
      * @return
      */
     @GetMapping(value = "add.do")
-    public String add(Model model) {
-        model.addAttribute("${classname}", new ${className}());
+    public String add(Integer jobId, Model model) {
+        ScheduleTrigger scheduleTrigger = new ScheduleTrigger();
+        scheduleTrigger.setJobId(jobId);
+        model.addAttribute("scheduleTrigger", scheduleTrigger);
         model.addAttribute("cmd", "add");
-        return "${pathName}/add-update";
+        return "system/job/trigger/add-update";
     }
 
     /**
      * 添加
-     *
-     * @param ${classname}
+     * @param scheduleTrigger
      * @return
      */
     @ResponseBody
     @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
-    public Message add(${className} ${classname}) {
-        return ${classname}Service.insert(${classname});
+    public Message add(ScheduleTrigger scheduleTrigger) {
+        return scheduleTriggerService.insert(scheduleTrigger);
     }
 
     /**
      * 跳转到修改页面
-     *
-     * @param ${pk.attributename}    主键
+     * @param id    主键
      * @param model
      * @return
      */
     @GetMapping(value = "update.do")
-    public String update(${pk.attributeType} ${pk.attributename}, Model model) {
-        model.addAttribute("${classname}", ${classname}Service.get(${pk.attributename}));
+    public String update(Integer id, Model model) {
+        model.addAttribute("scheduleTrigger", scheduleTriggerService.get(id));
         model.addAttribute("cmd", "update");
-        return "${pathName}/add-update";
+        return "system/job/trigger/add-update";
     }
 
     /**
      * 修改
-     *
-     * @param ${classname}
+     * @param scheduleTrigger
      * @return
      */
     @ResponseBody
     @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
-    public Message update(${className} ${classname}) {
-        return ${classname}Service.update(${classname});
+    public Message update(ScheduleTrigger scheduleTrigger) {
+        return scheduleTriggerService.update(scheduleTrigger);
     }
 
     /**
      * 删除/批量删除
-     *
      * @param ids 被删除记录主键数组
      * @return
      */
     @ResponseBody
     @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
-    public Message delete(${pk.attributeType}[]ids) {
-        return ${classname}Service.delete(Arrays.asList(ids));
+    public Message delete(Integer[]ids) {
+        return scheduleTriggerService.delete(Arrays.asList(ids));
     }
 
 }

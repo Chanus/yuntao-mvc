@@ -49,6 +49,22 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
+    public void insert(String operateNo, String operateRoleId, Integer moduleId, String operateMethod, String content, LogTypeEnum logType, String operateTypeDesc, Integer operateConsumeTime) {
+        Log log = new Log();
+        log.setOperateNo(operateNo);
+        log.setOperateRoleId(operateRoleId);
+        log.setOperateModuleId(moduleId);
+        log.setOperateMethod(operateMethod);
+        log.setOperateContent(content);
+        log.setOperateType(logType.name());
+        log.setOperateTypeDesc(operateTypeDesc);
+        log.setOperateConsumeTime(operateConsumeTime);
+        log.setOperateTime(new Date());
+
+        logMapper.insertSelective(log);
+    }
+
+    @Override
     public Log get(Long id) {
         return logMapper.getById(id);
     }

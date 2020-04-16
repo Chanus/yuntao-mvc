@@ -29,6 +29,7 @@
         // 日期时间选择器
         laydate.render({
             elem: '#beginTime',
+            trigger: 'click',
             type: 'datetime',
             format: 'yyyy-MM-dd HH:mm:ss',
             value: initBeginTime,
@@ -37,6 +38,7 @@
         });
         laydate.render({
             elem: '#endTime',
+            trigger: 'click',
             type: 'datetime',
             format: 'yyyy-MM-dd HH:mm:ss',
             value: initEndTime,

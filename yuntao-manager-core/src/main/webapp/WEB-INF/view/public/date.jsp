@@ -30,6 +30,8 @@
         // 日期时间选择器
         laydate.render({
             elem: '#beginDate',
+            trigger: 'click',
+            type: 'date',
             format: 'yyyy-MM-dd',
             value: initBeginDate,
             theme: 'grid',
@@ -37,6 +39,8 @@
         });
         laydate.render({
             elem: '#endDate',
+            trigger: 'click',
+            type: 'date',
             format: 'yyyy-MM-dd',
             value: initEndDate,
             theme: 'grid',

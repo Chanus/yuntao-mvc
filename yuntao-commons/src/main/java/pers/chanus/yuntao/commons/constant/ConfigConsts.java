@@ -23,6 +23,21 @@ public class ConfigConsts {
     public final static String STATUS_YES = "1";
 
     /**
+     * 定时任务状态：停止
+     */
+    public final static String STATUS_JOB_STOP = "0";
+
+    /**
+     * 定时任务状态：启动
+     */
+    public final static String STATUS_JOB_START = "1";
+
+    /**
+     * 定时任务状态：暂停
+     */
+    public final static String STATUS_JOB_PAUSE = "2";
+
+    /**
      * 系统内置角色：超级管理员
      */
     public final static String ROLE_ADMIN_0 = "0";

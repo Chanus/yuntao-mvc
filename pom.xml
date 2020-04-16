@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>yuntao</groupId>
   <artifactId>yuntao</artifactId>
-  <version>0.1.6</version>
+  <version>0.1.7</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   
@@ -35,7 +35,7 @@
     <slf4j.api.version>1.7.26</slf4j.api.version>
     <logback.version>1.2.3</logback.version>
     <jcl.version>1.7.26</jcl.version>
-    <quartz.version>2.3.0</quartz.version>
+    <quartz.version>2.3.2</quartz.version>
     <dom4j.version>1.6.1</dom4j.version>
     <org.json.version>20180813</org.json.version>
     <fasterxml.jackson.version>2.9.8</fasterxml.jackson.version>

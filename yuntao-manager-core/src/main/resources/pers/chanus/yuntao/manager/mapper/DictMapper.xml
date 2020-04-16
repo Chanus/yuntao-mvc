@@ -23,9 +23,9 @@
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete sys_dict, sys_dict_item from sys_dict, sys_dict_item
+    delete sys_dict, sys_dict_item from sys_dict
+    left join sys_dict_item on sys_dict.dict_code = sys_dict_item.dict_code
     <where>
-      sys_dict.dict_code = sys_dict_item.dict_code
       <choose>
         <when test="list == null or list.size() == 0">
           and 1 &lt;&gt; 1

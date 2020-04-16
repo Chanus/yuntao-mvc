@@ -31,6 +31,21 @@ public interface LogService {
     void insert(HttpServletRequest request, Integer moduleId, String content, LogTypeEnum logType, String operateTypeDesc);
 
     /**
+     * 添加系统日志
+     *
+     * @param operateNo          操作账号
+     * @param operateRoleId      操作账号角色
+     * @param moduleId           模块代码，可选
+     * @param operateMethod      方法描述
+     * @param content            日志内容，可选
+     * @param logType            日志类型，必需
+     * @param operateTypeDesc    操作类型描述，可选
+     * @param operateConsumeTime 操作耗时
+     * @since 0.1.7
+     */
+    void insert(String operateNo, String operateRoleId, Integer moduleId, String operateMethod, String content, LogTypeEnum logType, String operateTypeDesc, Integer operateConsumeTime);
+
+    /**
      * 获取系统日志内容
      *
      * @param id

@@ -3,7 +3,7 @@
   <parent>
     <groupId>yuntao</groupId>
     <artifactId>yuntao</artifactId>
-    <version>0.1.6</version>
+    <version>0.1.7</version>
   </parent>
   <artifactId>yuntao-utils</artifactId>
   <name>${project.artifactId}</name>
@@ -21,6 +21,11 @@
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
+    </dependency>
+    <!-- Quartz定时任务 -->
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
     </dependency>
   </dependencies>
   

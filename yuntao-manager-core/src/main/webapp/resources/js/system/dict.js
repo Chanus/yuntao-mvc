@@ -15,14 +15,14 @@ layui.config({
             {field : 'id', title : 'ID', width : '6%', unresize : true, align : 'center', fixed : 'left' },
             {field: 'dictCode', title: '字典集代码', width: '10%', unresize: true, align: 'center'},
             {field: 'dictName', title: '字典集名称', width: '10%', unresize: true, align: 'center'},
-            { field : 'validStatus', title : '状态', width : '8%', unresize : true, align : 'center', templet : function(d) {
+            {field : 'validStatus', title : '状态', width : '8%', unresize : true, align : 'center', templet : function(d) {
                 if (d.validStatus === '0')
                     return '<span class="layui-badge layui-bg-gray">已停用</span>';
                 else if (d.validStatus === '1')
                     return '<span class="layui-badge layui-bg-custom-lightgreen">已启用</span>';
                 else
                     return d.validStatus;
-            } },
+            }},
             {field: 'remark', title: '备注', unresize: true, align: 'center'},
             {fixed: 'right', title: '操作', width: '20%', unresize: true, align: 'center', toolbar: '#toolbar'}
         ]],

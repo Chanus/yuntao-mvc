@@ -57,6 +57,7 @@ public class Log implements Serializable {
         LOGTYPE_MAP.put(LogTypeEnum.UPDATE.name(), "更新");
         LOGTYPE_MAP.put(LogTypeEnum.SAVE.name(), "添加或更新");
         LOGTYPE_MAP.put(LogTypeEnum.EXCEPTION.name(), "系统异常");
+        LOGTYPE_MAP.put(LogTypeEnum.SCHEDULER.name(), "定时任务");
     }
 
     public Long getId() {
