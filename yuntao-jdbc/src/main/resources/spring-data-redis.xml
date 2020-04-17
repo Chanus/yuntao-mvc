@@ -16,7 +16,7 @@
     <property name="locations">
       <list>
         <value>classpath:redis.properties</value><!-- 如果是类路径下这样加载 -->
-        <!--<value>/WEB-INF/redis.properties</value> --><!-- 如果是WEB-INFO路径下这样加载 -->
+        <!--<value>/WEB-INF/redis.properties</value> --><!-- 如果是WEB-INF路径下这样加载 -->
       </list>
     </property>
     <property name="ignoreUnresolvablePlaceholders" value="true"/>
