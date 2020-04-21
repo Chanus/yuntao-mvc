@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="${ctx }/lib/layui/css/modules/layer/default/layer.css" media="all"/>
     <link rel="stylesheet" href="${ctx }/css/login.css"/>
     <link rel="shortcut icon" href="${ctx }/images/favicon.ico" type="image/x-icon"/>
-    <title>系统登录</title>
+    <title>系统登录</title>
   </head>
   <body class="beg-login-bg">
     <div class="beg-login-box">
       <header>
-        <h1>系统登录</h1>
+        <h1>系统登录</h1>
       </header>
       <div class="beg-login-main">
         <form class="layui-form" method="post">
@@ -29,7 +29,7 @@
           <div class="layui-form-item">
             <label class="beg-login-icon layui-icon layui-icon-password"> </label>
             <input type="password" name="password" lay-verify="password" lay-data-length="6-16" lay-null-msg="请输入登录密码"
-                   lay-error-msg="登录密码由6-16位字符组成" placeholder="密码" class="layui-input" autocomplete="off">
+                   lay-error-msg="登录密码由6-16位字符组成" placeholder="密码" class="layui-input" autocomplete="off">
           </div>
           <c:if test="${isCheckVerifyCode eq '1' }">
             <div class="layui-form-item">
