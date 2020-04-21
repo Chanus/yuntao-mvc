@@ -27,8 +27,6 @@ public class RandomUtils {
      */
     private static final String NUMBERCHAR = "0123456789";
 
-    private static ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
-
     /**
      * 随机获取{@code int}类型数字
      *
@@ -36,7 +34,7 @@ public class RandomUtils {
      * @since 0.1.1
      */
     public static int getRandomInt() {
-        return threadLocalRandom.nextInt();
+        return ThreadLocalRandom.current().nextInt();
     }
 
     /**
@@ -47,7 +45,7 @@ public class RandomUtils {
      * @since 0.1.1
      */
     public static int getRandomInt(int bound) {
-        return threadLocalRandom.nextInt(bound);
+        return ThreadLocalRandom.current().nextInt(bound);
     }
 
     /**
@@ -59,7 +57,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static int getRandomInt(int origin, int bound) {
-        return threadLocalRandom.nextInt(origin, bound);
+        return ThreadLocalRandom.current().nextInt(origin, bound);
     }
 
     /**
@@ -73,7 +71,7 @@ public class RandomUtils {
         StringBuilder result = new StringBuilder();
         int bound = NUMBERCHAR.length();
         for (int i = 0; i < length; i++) {
-            result.append(NUMBERCHAR.charAt(threadLocalRandom.nextInt(bound)));
+            result.append(NUMBERCHAR.charAt(ThreadLocalRandom.current().nextInt(bound)));
         }
         return result.toString();
     }
@@ -85,7 +83,7 @@ public class RandomUtils {
      * @since 0.1.1
      */
     public static long getRandomLong() {
-        return threadLocalRandom.nextLong();
+        return ThreadLocalRandom.current().nextLong();
     }
 
     /**
@@ -96,7 +94,7 @@ public class RandomUtils {
      * @since 0.1.1
      */
     public static long getRandomLong(long bound) {
-        return threadLocalRandom.nextLong(bound);
+        return ThreadLocalRandom.current().nextLong(bound);
     }
 
     /**
@@ -108,7 +106,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static long getRandomLong(long origin, long bound) {
-        return threadLocalRandom.nextLong(origin, bound);
+        return ThreadLocalRandom.current().nextLong(origin, bound);
     }
 
     /**
@@ -118,7 +116,7 @@ public class RandomUtils {
      * @since 0.1.1
      */
     public static double getRandomDouble() {
-        return threadLocalRandom.nextDouble();
+        return ThreadLocalRandom.current().nextDouble();
     }
 
     /**
@@ -129,7 +127,7 @@ public class RandomUtils {
      * @since 0.1.1
      */
     public static double getRandomDouble(double bound) {
-        return threadLocalRandom.nextDouble(bound);
+        return ThreadLocalRandom.current().nextDouble(bound);
     }
 
     /**
@@ -141,7 +139,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static double getRandomDouble(double origin, double bound) {
-        return threadLocalRandom.nextDouble(origin, bound);
+        return ThreadLocalRandom.current().nextDouble(origin, bound);
     }
 
     /**
@@ -151,7 +149,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static char getRandomChar() {
-        return (char) threadLocalRandom.nextInt(33, 126);
+        return (char) ThreadLocalRandom.current().nextInt(33, 126);
     }
 
     /**
@@ -161,7 +159,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static char getRandomNormalChar() {
-        return ALLCHAR.charAt(threadLocalRandom.nextInt(ALLCHAR.length()));
+        return ALLCHAR.charAt(ThreadLocalRandom.current().nextInt(ALLCHAR.length()));
     }
 
     /**
@@ -171,7 +169,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static char getRandomLetterChar() {
-        return LETTERCHAR.charAt(threadLocalRandom.nextInt(LETTERCHAR.length()));
+        return LETTERCHAR.charAt(ThreadLocalRandom.current().nextInt(LETTERCHAR.length()));
     }
 
     /**
@@ -226,7 +224,7 @@ public class RandomUtils {
      * @since 0.0.1
      */
     public static String getRandomUniqueNo() {
-        return System.currentTimeMillis() + String.valueOf((int) ((threadLocalRandom.nextDouble(1) * 9 + 1) * 10000));
+        return System.currentTimeMillis() + String.valueOf((int) ((ThreadLocalRandom.current().nextDouble(1) * 9 + 1) * 10000));
     }
 
     /**
