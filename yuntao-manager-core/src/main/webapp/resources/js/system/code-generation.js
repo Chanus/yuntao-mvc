@@ -60,8 +60,8 @@ layui.config({
 
     // 确认生成代码时触发
     form.on('submit(generate)', function (data) {
-        location.href = action_path + 'generate-download.do?tableSchema=' + data.field.tableSchema + '&tableName=' + data.field.tableName + '&author=' + data.field.author + '&since=' + data.field.since + '&package=' + data.field["package"]
-            + '&tablePrefix=' + data.field.tablePrefix + '&autoRemovePrefix=' + data.field.autoRemovePrefix + '&manyModule=' + data.field.manyModule + '&pathName=' + data.field.pathName + '&moduleId=' + data.field.moduleId;
+        location.href = action_path + 'generate-download.do?tableSchema=' + data.field.tableSchema + '&tableName=' + data.field.tableName + '&author=' + data.field.author + '&since=' + data.field.since + '&serverPackage=' + data.field.serverPackage
+            + '&controllerPackage=' + data.field.controllerPackage + '&tablePrefix=' + data.field.tablePrefix + '&autoRemovePrefix=' + data.field.autoRemovePrefix + '&pathName=' + data.field.pathName + '&moduleId=' + data.field.moduleId;
         return false;
     });
 });

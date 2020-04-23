@@ -1,6 +1,6 @@
-package ${package}.mapper;
+package ${serverPackage}.mapper;
 
-import ${package}.model.${className};
+import ${serverPackage}.model.${className};
 import pers.chanus.yuntao.server.mapper.BaseMapper;
 
 /**

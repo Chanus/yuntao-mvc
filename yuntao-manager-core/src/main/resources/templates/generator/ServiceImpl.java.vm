@@ -1,11 +1,11 @@
-package ${package}.service.impl;
+package ${serverPackage}.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ${package}.mapper.${className}Mapper;
-import ${package}.model.${className};
-import ${package}.service.${className}Service;
+import ${serverPackage}.mapper.${className}Mapper;
+import ${serverPackage}.model.${className};
+import ${serverPackage}.service.${className}Service;
 import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 
 /**

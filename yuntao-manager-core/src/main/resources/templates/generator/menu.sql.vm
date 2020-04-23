@@ -11,8 +11,8 @@ set @deleteMpId = (select mp_id from sys_module_power where module_id = ${module
 set @updateMpId = (select mp_id from sys_module_power where module_id = ${moduleId} and power_item = 'UPDATE');
 
 -- 菜单权限对应请求URL
-INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@viewMpId, '${package}.controller.${className}Controller', '/${pathName}/main.do');
-INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@viewMpId, '${package}.controller.${className}Controller', '/${pathName}/list.do');
-INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@addMpId, '${package}.controller.${className}Controller', '/${pathName}/add.do');
-INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@deleteMpId, '${package}.controller.${className}Controller', '/${pathName}/delete.do');
-INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@updateMpId, '${package}.controller.${className}Controller', '/${pathName}/update.do');
+INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@viewMpId, '${controllerPackage}.controller.${className}Controller', '/${pathName}/main.do');
+INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@viewMpId, '${controllerPackage}.controller.${className}Controller', '/${pathName}/list.do');
+INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@addMpId, '${controllerPackage}.controller.${className}Controller', '/${pathName}/add.do');
+INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@deleteMpId, '${controllerPackage}.controller.${className}Controller', '/${pathName}/delete.do');
+INSERT INTO `sys_module_power_method`(`mp_id`, `class_name`, `url`) VALUES (@updateMpId, '${controllerPackage}.controller.${className}Controller', '/${pathName}/update.do');

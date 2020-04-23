@@ -138,12 +138,12 @@ public class CodeGenerationUtils {
      * @param table   表信息
      * @param columns 列信息
      * @param params  自动生成代码参数配置
-     *                package   代码包名
+     *                serverPackage   服务类代码包名
+     *                controllerPackage   控制器代码包名
      *                author    作者
      *                since 版本号
      *                tablePrefix   表前缀
      *                autoRemovePrefix  是否自动去除前缀：0-否，1-是
-     *                manyModule    项目是否是多模块项目：0-否，1-是
      *                pathName  URL标识
      *                moduleId  模块ID
      * @param zip     zip压缩输出流
@@ -187,8 +187,8 @@ public class CodeGenerationUtils {
         Velocity.init(prop);
 
         // 封装模板数据
-        String packageName = (String) params.get("package");
-        String manyModule = (String) params.get("manyModule");
+        String serverPackage = (String) params.get("serverPackage");
+        String controllerPackage = (String) params.get("controllerPackage");
         String pathName = (String) params.get("pathName");
         params.put("tableName", table.getTableName());
         params.put("tableComment", table.getTableComment());
@@ -226,7 +226,7 @@ public class CodeGenerationUtils {
 
             try {
                 // 添加到zip
-                String fileName = getFileName(template, table.getClassName(), packageName, manyModule, pathName, jsPath, jsName);
+                String fileName = getFileName(template, table.getClassName(), serverPackage, controllerPackage, pathName, jsPath, jsName);
                 if (StringUtils.isNotBlank(fileName))
                     zip.putNextEntry(new ZipEntry(fileName));
                 StreamUtils.write(stringWriter.toString(), zip, "UTF-8");
@@ -273,44 +273,46 @@ public class CodeGenerationUtils {
     /**
      * 获取文件名
      *
-     * @param template    模板
-     * @param className   类名(首字母大写)
-     * @param packageName 包名
-     * @param manyModule  项目是否是多模块项目：0-否，1-是
-     * @param pathName    URL标识
-     * @param jsPath      js文件相对路径
-     * @param jsName      js文件名
+     * @param template          模板
+     * @param className         类名(首字母大写)
+     * @param serverPackage     服务类包名
+     * @param controllerPackage 控制器包名
+     * @param pathName          URL标识
+     * @param jsPath            js文件相对路径
+     * @param jsName            js文件名
      * @return
      * @since 0.0.3
      */
-    public static String getFileName(String template, String className, String packageName, String manyModule, String pathName, String jsPath, String jsName) {
-        packageName = packageName.replace(".", File.separator) + File.separator;
+    public static String getFileName(String template, String className, String serverPackage, String controllerPackage, String pathName, String jsPath, String jsName) {
+        serverPackage = serverPackage.replace(".", File.separator) + File.separator;
+        controllerPackage = controllerPackage.replace(".", File.separator) + File.separator;
 
         String rootPath = "src" + File.separator + "main" + File.separator;
-        String javaPath = rootPath + "java" + File.separator + packageName;
+        String javaServerPath = rootPath + "java" + File.separator + serverPackage;
+        String javaControllerPath = rootPath + "java" + File.separator + controllerPackage;
 
         if (template.contains("model.java.vm")) {
-            return javaPath + (ConfigConsts.STATUS_YES.equals(manyModule) ? ("server" + File.separator) : "") + "model" + File.separator + className + ".java";
+            return javaServerPath + "model" + File.separator + className + ".java";
         }
 
         if (template.contains("Mapper.java.vm")) {
-            return javaPath + (ConfigConsts.STATUS_YES.equals(manyModule) ? ("server" + File.separator) : "") + "mapper" + File.separator + className + "Mapper.java";
+            return javaServerPath + "mapper" + File.separator + className + "Mapper.java";
         }
 
         if (template.contains("Mapper.xml.vm")) {
-            return rootPath + "resources" + File.separator + packageName + (ConfigConsts.STATUS_YES.equals(manyModule) ? ("server" + File.separator) : "") + "mapper" + File.separator + className + "Mapper.xml";
+            return rootPath + "resources" + File.separator + serverPackage + "mapper" + File.separator + className + "Mapper.xml";
         }
 
         if (template.contains("Service.java.vm")) {
-            return javaPath + (ConfigConsts.STATUS_YES.equals(manyModule) ? ("server" + File.separator) : "") + "service" + File.separator + className + "Service.java";
+            return javaServerPath + "service" + File.separator + className + "Service.java";
         }
 
         if (template.contains("ServiceImpl.java.vm")) {
-            return javaPath + (ConfigConsts.STATUS_YES.equals(manyModule) ? ("server" + File.separator) : "") + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+            return javaServerPath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
         }
 
         if (template.contains("Controller.java.vm")) {
-            return javaPath + (ConfigConsts.STATUS_YES.equals(manyModule) ? ("manager" + File.separator) : "") + "controller" + File.separator + className + "Controller.java";
+            return javaControllerPath + "controller" + File.separator + className + "Controller.java";
         }
 
         if (template.contains("list.jsp.vm")) {

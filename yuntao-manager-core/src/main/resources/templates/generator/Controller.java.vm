@@ -1,4 +1,4 @@
-package ${package}.controller;
+package ${controllerPackage}.controller;
 
 import java.util.Arrays;
 
@@ -14,8 +14,8 @@ import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.ModulePowerUtils;
-import ${package}.model.${className};
-import ${package}.service.${className}Service;
+import ${serverPackage}.model.${className};
+import ${serverPackage}.service.${className}Service;
 import pers.chanus.yuntao.server.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 

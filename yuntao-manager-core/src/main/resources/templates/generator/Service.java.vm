@@ -1,6 +1,6 @@
-package ${package}.service;
+package ${serverPackage}.service;
 
-import ${package}.model.${className};
+import ${serverPackage}.model.${className};
 import pers.chanus.yuntao.server.service.BaseService;
 
 /**

@@ -28,9 +28,15 @@
           </div>
         </div>
         <div class="layui-form-item">
-          <label class="layui-form-label">包名<span class="red">*</span></label>
+          <label class="layui-form-label">服务类包名<span class="red">*</span></label>
           <div class="layui-input-block">
-            <input type="text" name="package" required lay-verify="required" value="${packageName }" placeholder="请输入代码包名" class="layui-input" autocomplete="off">
+            <input type="text" name="serverPackage" required lay-verify="required" value="${serverPackage }" placeholder="请输入服务类代码包名" class="layui-input" autocomplete="off">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">控制器包名<span class="red">*</span></label>
+          <div class="layui-input-block">
+            <input type="text" name="controllerPackage" required lay-verify="required" value="${controllerPackage }" placeholder="请输入控制器代码包名" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
@@ -44,13 +50,6 @@
           <div class="layui-input-block">
             <input type="radio" name="autoRemovePrefix" lay-verify="mustradio" value="1" title="自动去除" <c:if test="${autoRemovePrefix == '1' }">checked</c:if>>
             <input type="radio" name="autoRemovePrefix" value="0" title="不自动去除" <c:if test="${empty autoRemovePrefix or autoRemovePrefix == '0' }">checked</c:if>>
-          </div>
-        </div>
-        <div class="layui-form-item" pane>
-          <label class="layui-form-label">多模块项目</label>
-          <div class="layui-input-block">
-            <input type="radio" name="manyModule" lay-verify="mustradio" value="1" title="多模块" <c:if test="${empty manyModule or manyModule == '1' }">checked</c:if>>
-            <input type="radio" name="manyModule" value="0" title="单模块" <c:if test="${manyModule == '0' }">checked</c:if>>
           </div>
         </div>
         <div class="layui-form-item">
@@ -74,6 +73,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.0.1.5"></script>
+    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.1.7.4"></script>
   </body>
 </html>
