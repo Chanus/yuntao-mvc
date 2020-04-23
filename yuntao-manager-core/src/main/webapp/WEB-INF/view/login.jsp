@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="${ctx }/lib/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="${ctx }/lib/layui/css/modules/layer/default/layer.css" media="all"/>
-    <link rel="stylesheet" href="${ctx }/css/login.css"/>
+    <link rel="stylesheet" href="${ctx }/css/login.css?v=0.1.7.1"/>
     <link rel="shortcut icon" href="${ctx }/images/favicon.ico" type="image/x-icon"/>
     <title>系统登录</title>
   </head>
