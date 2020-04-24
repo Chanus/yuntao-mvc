@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 日期时间工具类，适应于jdk 1.8及以上版本
@@ -43,6 +44,10 @@ public class LocalDateTimeUtils {
      * 时间格式，带毫秒数
      */
     private static final DateTimeFormatter TIME_MILLIS_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
+    /**
+     * 日期时间格式，java.util.Date原始格式
+     */
+    private static final DateTimeFormatter ORIGINAL_DATETIME_FORMATTER = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
 
     /**
      * 获取DateTimeFormatter对象
@@ -253,6 +258,17 @@ public class LocalDateTimeUtils {
      */
     public static LocalTime parseTimeMillis(String localTimeMillis) {
         return StringUtils.isBlank(localTimeMillis) ? null : LocalTime.parse(localTimeMillis, TIME_MILLIS_FORMATTER);
+    }
+
+    /**
+     * EEE MMM dd HH:mm:ss zzz yyyy格式字符串转{@code LocalDateTime}日期时间对象
+     *
+     * @param originalDateTime 日期时间字符串，为空时返回{@code null}
+     * @return {@code LocalDateTime}日期时间对象
+     * @since 0.1.7
+     */
+    public static LocalDateTime parseOriginalDateTime(String originalDateTime) {
+        return StringUtils.isBlank(originalDateTime) ? null : ZonedDateTime.parse(originalDateTime, ORIGINAL_DATETIME_FORMATTER).toLocalDateTime();
     }
 
     /**

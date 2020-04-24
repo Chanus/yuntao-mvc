@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -25,6 +26,10 @@ public class DateUtils {
      * 日期时间格式
      */
     private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    /**
+     * java.util.Date原始格式
+     */
+    private static final String ORIGINAL_DATETIME_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
     /**
      * 每日开始时刻00:00:00
      */
@@ -123,6 +128,25 @@ public class DateUtils {
      */
     public static Date parseDateTime(String datetime) {
         return parseDate(datetime, DATETIME_FORMAT);
+    }
+
+    /**
+     * 将EEE MMM dd HH:mm:ss zzz yyyy格式的时间字符串转换成时间
+     *
+     * @param originalDateTime EEE MMM dd HH:mm:ss zzz yyyy格式时间字符串
+     * @return 时间对象，若{@code datetime}为空，则返回null
+     * @since 0.1.7
+     */
+    public static Date parseOriginalDateTime(String originalDateTime) {
+        if (StringUtils.isBlank(originalDateTime))
+            return null;
+
+        try {
+            return new SimpleDateFormat(ORIGINAL_DATETIME_FORMAT, Locale.ENGLISH).parse(originalDateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

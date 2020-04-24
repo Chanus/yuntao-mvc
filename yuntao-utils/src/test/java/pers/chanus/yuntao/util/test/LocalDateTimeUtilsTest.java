@@ -302,4 +302,11 @@ public class LocalDateTimeUtilsTest {
         LocalTime end3 = LocalDateTimeUtils.parseTimeMillis("22:11:33.123");
         System.out.println("判断时间范围：" + LocalDateTimeUtils.between(LocalTime.now(), start3, end3));
     }
+
+    @Test
+    public void parseOriginalDateTimeTest() {
+        String originalDateTime = "Fri Apr 24 22:50:23 CST 2020";
+        LocalDateTime localDateTime = LocalDateTimeUtils.parseOriginalDateTime(originalDateTime);
+        System.out.println(localDateTime);
+    }
 }

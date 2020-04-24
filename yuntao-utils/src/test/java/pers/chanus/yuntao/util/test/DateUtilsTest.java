@@ -12,6 +12,7 @@ package pers.chanus.yuntao.util.test;
 import org.junit.Test;
 import pers.chanus.yuntao.util.DateUtils;
 
+import java.text.ParseException;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.TimeZone;
@@ -188,5 +189,11 @@ public class DateUtilsTest {
         System.out.println(DateUtils.convertDateByTimeZone(date, TimeZone.getDefault(), TimeZone.getTimeZone("Asia/Shanghai")));
         System.out.println(DateUtils.convertDateByTimeZone(date, TimeZone.getTimeZone("Asia/Shanghai"), TimeZone.getDefault()));
         System.out.println(DateUtils.convertDateByTimeZone(date, TimeZone.getTimeZone(ZoneId.of("GMT+10:00")), TimeZone.getTimeZone(ZoneId.of("GMT+12:00"))));
+    }
+
+    @Test
+    public void parseCSTTest() throws ParseException {
+        String originalDateTime = "Fri Apr 24 22:50:23 CST 2020";
+        System.out.println(DateUtils.parseOriginalDateTime(originalDateTime));
     }
 }
