@@ -3,10 +3,7 @@
  */
 package pers.chanus.yuntao.util;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * 集合工具类
@@ -210,5 +207,39 @@ public class CollectionUtils {
      */
     public static String join(Object[] array) {
         return join(array, ",");
+    }
+
+    /**
+     * 数组去重
+     *
+     * @param array 数据数组
+     * @return 去重后的数据数组
+     * @since 0.1.7
+     */
+    public static Object[] uniqueArray(Object[] array) {
+        return isEmpty(array) ? null : new TreeSet<>(Arrays.asList(array)).toArray();
+    }
+
+    /**
+     * 数组去重，并转化为以{@code separator}连接的字符串
+     *
+     * @param array 数据数组
+     * @param separator 分割符
+     * @return 以{@code separator}连接的字符串
+     * @since 0.1.7
+     */
+    public static String uniqueArray2String(Object[] array, String separator) {
+        return isEmpty(array) ? null : join(new TreeSet<>(Arrays.asList(array)).toArray(), separator);
+    }
+
+    /**
+     * 数组去重，并转化为以逗号连接的字符串
+     *
+     * @param array 数据数组
+     * @return 以逗号连接的字符串
+     * @since 0.1.7
+     */
+    public static String uniqueArray2String(Object[] array) {
+        return uniqueArray2String(array, ",");
     }
 }
