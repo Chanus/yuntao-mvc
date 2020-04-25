@@ -200,6 +200,17 @@ public class StringUtils {
     }
 
     /**
+     * 将布尔型数据转换为字符串
+     *
+     * @param b 布尔型数据
+     * @return b为{@code true}时返回"1"，b为空或者{@code false}时返回"0"
+     * @since 0.1.7
+     */
+    public static String boolean2String(Boolean b) {
+        return (b != null && b) ? "1" : "0";
+    }
+
+    /**
      * 验证字符串是否由数字和分隔符组成的
      *
      * @param str       由指定分隔符分割的字符串，如1,02,3,4,55，不能为空
