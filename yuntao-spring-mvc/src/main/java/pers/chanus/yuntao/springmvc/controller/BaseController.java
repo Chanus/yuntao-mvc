@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pers.chanus.yuntao.commons.constant.MsgCode;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.util.IOUtils;
 import pers.chanus.yuntao.util.RandomUtils;
 import pers.chanus.yuntao.util.StringUtils;
 
@@ -90,6 +91,31 @@ public abstract class BaseController {
         }
 
         return params;
+    }
+
+    /**
+     * 读取HTTP请求的body内容
+     *
+     * @return HTTP请求的body字符串
+     * @since 0.1.7
+     */
+    protected String getRequestBody() {
+        BufferedReader bufferedReader = null;
+        StringBuffer stringBuffer = new StringBuffer();
+        try {
+            bufferedReader = getRequest().getReader();
+            String s = null;
+            while((s = bufferedReader.readLine()) != null) {
+                stringBuffer.append(s);
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(bufferedReader);
+        }
+
+        return stringBuffer.toString();
     }
 
     /**
