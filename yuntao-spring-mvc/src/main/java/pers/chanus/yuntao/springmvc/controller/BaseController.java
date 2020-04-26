@@ -101,12 +101,12 @@ public abstract class BaseController {
      */
     protected String getRequestBody() {
         BufferedReader bufferedReader = null;
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
         try {
             bufferedReader = getRequest().getReader();
-            String s = null;
+            String s;
             while((s = bufferedReader.readLine()) != null) {
-                stringBuffer.append(s);
+                stringBuilder.append(s);
             }
             bufferedReader.close();
         } catch (IOException e) {
@@ -115,7 +115,7 @@ public abstract class BaseController {
             IOUtils.closeQuietly(bufferedReader);
         }
 
-        return stringBuffer.toString();
+        return stringBuilder.toString();
     }
 
     /**
