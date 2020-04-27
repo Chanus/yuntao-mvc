@@ -42,19 +42,19 @@ public class ModulePowerServiceImpl extends BaseServiceImpl<ModulePowerMapper, M
     @Override
     public Message insertMethod(ModulePowerMethod modulePowerMethod) {
         modulePowerMethodMapper.insertSelective(modulePowerMethod);
-        return Message.success("添加成功");
+        return Message.addSuccess();
     }
 
     @Override
     public Message updateMethod(ModulePowerMethod modulePowerMethod) {
         modulePowerMethodMapper.updateByPrimaryKeySelective(modulePowerMethod);
-        return Message.success("修改成功");
+        return Message.updateSuccess();
     }
 
     @Override
     public Message deleteMethod(Collection<Integer> ids) {
         modulePowerMethodMapper.deleteByPrimaryKey(ids);
-        return Message.success("删除成功");
+        return Message.deleteSuccess();
     }
 
 }

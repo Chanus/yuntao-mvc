@@ -60,7 +60,7 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
     @Override
     public Message insert(T t) {
         mapper.insertSelective(t);
-        return Message.success("添加成功");
+        return Message.addSuccess();
     }
 
     /**
@@ -73,7 +73,7 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
     @Override
     public Message update(T t) {
         mapper.updateByPrimaryKeySelective(t);
-        return Message.success("修改成功");
+        return Message.updateSuccess();
     }
 
     /**
@@ -86,7 +86,7 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
     @Override
     public Message delete(PK pk) {
         mapper.deleteByPrimaryKey(Collections.singletonList(pk));
-        return Message.success("删除成功");
+        return Message.deleteSuccess();
     }
 
     /**
@@ -99,7 +99,7 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
     @Override
     public Message delete(Collection<PK> pks) {
         mapper.deleteByPrimaryKey(pks);
-        return Message.success("删除成功");
+        return Message.deleteSuccess();
     }
 
     /**

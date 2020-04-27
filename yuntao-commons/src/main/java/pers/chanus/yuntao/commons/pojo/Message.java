@@ -158,6 +158,86 @@ public class Message {
         return new Message(MsgCode.FAIL, msg);
     }
 
+    /**
+     * 添加成功
+     *
+     * @return {@code Message}实例
+     * @since 0.1.7
+     */
+    public static Message addSuccess() {
+        return success(MsgCode.MSG_ADD_SUCCESS);
+    }
+
+    /**
+     * 添加失败
+     *
+     * @return {@code Message}实例
+     * @since 0.1.7
+     */
+    public static Message addFail() {
+        return fail(MsgCode.MSG_ADD_FAIL);
+    }
+
+    /**
+     * 删除成功
+     *
+     * @return {@code Message}实例
+     * @since 0.1.7
+     */
+    public static Message deleteSuccess() {
+        return success(MsgCode.MSG_DELETE_SUCCESS);
+    }
+
+    /**
+     * 删除失败
+     *
+     * @return {@code Message}实例
+     * @since 0.1.7
+     */
+    public static Message deleteFail() {
+        return fail(MsgCode.MSG_DELETE_FAIL);
+    }
+
+    /**
+     * 修改成功
+     *
+     * @return {@code Message}实例
+     * @since 0.1.7
+     */
+    public static Message updateSuccess() {
+        return success(MsgCode.MSG_UPDATE_SUCCESS);
+    }
+
+    /**
+     * 修改失败
+     *
+     * @return {@code Message}实例
+     * @since 0.1.7
+     */
+    public static Message updateFail() {
+        return fail(MsgCode.MSG_UPDATE_FAIL);
+    }
+
+    /**
+     * 操作成功
+     *
+     * @return {@code Message}实例
+     * @since 0.1.7
+     */
+    public static Message operateSuccess() {
+        return success(MsgCode.MSG_OPERATE_SUCCESS);
+    }
+
+    /**
+     * 操作失败
+     *
+     * @return {@code Message}实例
+     * @since 0.1.7
+     */
+    public static Message operateFail() {
+        return fail(MsgCode.MSG_OPERATE_FAIL);
+    }
+
     public int getCode() {
         return code;
     }

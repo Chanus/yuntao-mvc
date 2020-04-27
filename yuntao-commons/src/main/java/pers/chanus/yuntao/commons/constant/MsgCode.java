@@ -21,6 +21,47 @@ public class MsgCode {
     public final static int FAIL = 1;
 
     /**
+     * 添加成功
+     * @since 0.1.7
+     */
+    public final static String MSG_ADD_SUCCESS = "添加成功";
+    /**
+     * 添加失败
+     * @since 0.1.7
+     */
+    public final static String MSG_ADD_FAIL = "添加失败";
+    /**
+     * 删除成功
+     * @since 0.1.7
+     */
+    public final static String MSG_DELETE_SUCCESS = "删除成功";
+    /**
+     * 删除失败
+     * @since 0.1.7
+     */
+    public final static String MSG_DELETE_FAIL = "删除失败";
+    /**
+     * 修改成功
+     * @since 0.1.7
+     */
+    public final static String MSG_UPDATE_SUCCESS = "修改成功";
+    /**
+     * 修改失败
+     * @since 0.1.7
+     */
+    public final static String MSG_UPDATE_FAIL = "修改失败";
+    /**
+     * 操作成功
+     * @since 0.1.7
+     */
+    public final static String MSG_OPERATE_SUCCESS = "操作成功";
+    /**
+     * 操作失败
+     * @since 0.1.7
+     */
+    public final static String MSG_OPERATE_FAIL = "操作失败";
+
+    /**
      * 通用错误代码{@code 99999}：未知错误
      */
     public final static int UNKNOW_ERROR = 99999;
