@@ -1,5 +1,6 @@
 package pers.chanus.yuntao.manager.service;
 
+import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.model.Dict;
 import pers.chanus.yuntao.server.service.BaseService;
 
@@ -11,5 +12,11 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @since 0.1.1
  */
 public interface DictService extends BaseService<Dict, Integer> {
-
+    /**
+     * 重载字典数据
+     *
+     * @return
+     * @since 0.1.7
+     */
+    Message reloadDict();
 }

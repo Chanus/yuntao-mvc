@@ -143,4 +143,33 @@
       limit #{start,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
     </if>
   </select>
+
+  <resultMap id="DictResultMap" type="pers.chanus.yuntao.manager.model.Dict">
+    <id column="p_id" jdbcType="INTEGER" property="id" />
+    <result column="p_dict_code" jdbcType="VARCHAR" property="dictCode" />
+    <result column="p_dict_name" jdbcType="VARCHAR" property="dictName" />
+    <result column="p_valid_status" jdbcType="CHAR" property="validStatus" />
+    <collection property="dictItems" ofType="pers.chanus.yuntao.manager.model.DictItem">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="dict_code" jdbcType="VARCHAR" property="dictCode" />
+      <result column="item_code" jdbcType="VARCHAR" property="itemCode" />
+      <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+      <result column="item_data" jdbcType="VARCHAR" property="itemData" />
+      <result column="valid_status" jdbcType="CHAR" property="validStatus" />
+    </collection>
+  </resultMap>
+
+  <select id="listWithDictItems" parameterType="java.lang.String" resultMap="DictResultMap">
+    select
+    sys_dict.id p_id, sys_dict.dict_code p_dict_code, sys_dict.dict_name p_dict_name, sys_dict.valid_status p_valid_status,
+    sys_dict_item.id, sys_dict_item.dict_code, item_code, item_name, item_data, sys_dict_item.valid_status
+    from sys_dict
+    inner join sys_dict_item on sys_dict_item.dict_code = sys_dict.dict_code
+    <where>
+      <if test="validStatus != null">
+        and sys_dict.valid_status = '1' and sys_dict_item.valid_status = '1'
+      </if>
+    </where>
+    order by sys_dict.id asc, priority asc
+  </select>
 </mapper>

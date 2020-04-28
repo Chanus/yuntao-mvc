@@ -35,9 +35,9 @@
           </div>
         </div>
         <div class="layui-form-item">
-          <label class="layui-form-label">字典项值<span class="red">*</span></label>
+          <label class="layui-form-label">字典项值</label>
           <div class="layui-input-block">
-            <input type="text" name="itemData" required lay-verify="required" value="${dictItem.itemData }" placeholder="请输入字典项值" class="layui-input" autocomplete="off">
+            <input type="text" name="itemData" value="${dictItem.itemData }" placeholder="请输入字典项值" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">

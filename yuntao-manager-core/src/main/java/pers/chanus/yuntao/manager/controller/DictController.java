@@ -13,7 +13,6 @@ import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import pers.chanus.yuntao.manager.model.Dict;
-import pers.chanus.yuntao.manager.service.DictItemService;
 import pers.chanus.yuntao.manager.service.DictService;
 import pers.chanus.yuntao.server.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
@@ -35,8 +34,6 @@ import java.util.Arrays;
 public class DictController extends BaseController {
     @Autowired
     private DictService dictService;
-    @Autowired
-    private DictItemService dictItemService;
 
     private final int currentModuleId = 1012;
 
@@ -139,7 +136,7 @@ public class DictController extends BaseController {
     @ResponseBody
     @PostMapping(value = "reload-dict.do", produces = "application/json; charset=utf-8")
     public Message reloadDict() {
-        return dictItemService.reloadDict();
+        return dictService.reloadDict();
     }
 
 }

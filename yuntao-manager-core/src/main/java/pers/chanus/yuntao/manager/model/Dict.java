@@ -4,6 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 系统字典集表
@@ -31,6 +32,8 @@ public class Dict implements Serializable {
     // 更新时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date gmtModified;
+
+    private List<DictItem> dictItems;
 
     /**
      * 获取：ID
@@ -128,6 +131,14 @@ public class Dict implements Serializable {
      */
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public List<DictItem> getDictItems() {
+        return dictItems;
+    }
+
+    public void setDictItems(List<DictItem> dictItems) {
+        this.dictItems = dictItems;
     }
 
     @Override

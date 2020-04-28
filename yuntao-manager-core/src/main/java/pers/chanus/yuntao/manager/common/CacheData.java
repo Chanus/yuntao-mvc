@@ -37,7 +37,14 @@ public class CacheData {
      *
      * @since 0.1.1
      */
-    public static final Map<String, LinkedList<DictItem>> SYSTEM_DICT_MAP = new HashMap<>();
+    public static final Map<String, List<DictItem>> SYSTEM_DICT_MAP = new HashMap<>();
+
+    /**
+     * 存储系统字典项数据，Map的key为“字典集代码-字典项代码”，value为字典项名称
+     *
+     * @since 0.1.7
+     */
+    public static final Map<String, String> SYSTEM_DICT_ITEM_MAP = new HashMap<>();
 
     /**
      * 存储所有的请求URL及Controller类名，Map<Controller, List<URL>>

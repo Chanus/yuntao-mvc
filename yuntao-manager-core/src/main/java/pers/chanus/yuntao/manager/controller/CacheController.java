@@ -6,7 +6,7 @@ package pers.chanus.yuntao.manager.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pers.chanus.yuntao.manager.common.CacheData;
-import pers.chanus.yuntao.manager.service.DictItemService;
+import pers.chanus.yuntao.manager.service.DictService;
 import pers.chanus.yuntao.manager.service.ParamService;
 import pers.chanus.yuntao.manager.service.ScheduleJobService;
 
@@ -24,7 +24,7 @@ public class CacheController {
     @Autowired
     private ParamService paramService;
     @Autowired
-    private DictItemService dictItemService;
+    private DictService dictService;
     @Autowired
     private ScheduleJobService scheduleJobService;
 
@@ -49,13 +49,13 @@ public class CacheController {
     }
 
     /**
-     * 初始化系统字典数据SYSTEM_DICT_MAP
+     * 初始化系统字典数据SYSTEM_DICT_MAP，SYSTEM_DICT_ITEM_MAP
      *
      * @since 0.1.1
      */
     @PostConstruct
     public void initSysDictMap() {
-        dictItemService.reloadDict();
+        dictService.reloadDict();
     }
 
     /**

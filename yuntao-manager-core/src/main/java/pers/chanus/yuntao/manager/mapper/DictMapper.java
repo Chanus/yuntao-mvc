@@ -3,6 +3,8 @@ package pers.chanus.yuntao.manager.mapper;
 import pers.chanus.yuntao.manager.model.Dict;
 import pers.chanus.yuntao.server.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * 系统字典集表
  *
@@ -11,5 +13,5 @@ import pers.chanus.yuntao.server.mapper.BaseMapper;
  * @since 0.1.1
  */
 public interface DictMapper extends BaseMapper<Dict, Integer> {
-
+    List<Dict> listWithDictItems(String validStatus);
 }
