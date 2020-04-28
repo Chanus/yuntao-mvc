@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 16/04/2020 13:28:58
+ Date: 28/04/2020 21:16:53
 */
 
 SET NAMES utf8mb4;
@@ -3193,7 +3193,7 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_dict`;
 CREATE TABLE `sys_dict` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `dict_code` varchar(20) NOT NULL COMMENT '字典集代码',
+  `dict_code` varchar(50) NOT NULL COMMENT '字典集代码',
   `dict_name` varchar(50) NOT NULL COMMENT '字典集名称',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
   `valid_status` char(1) NOT NULL DEFAULT '1' COMMENT '状态：0-停用，1-启用',
@@ -3215,8 +3215,8 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_dict_item`;
 CREATE TABLE `sys_dict_item` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `dict_code` varchar(30) NOT NULL COMMENT '字典集代码',
-  `item_code` varchar(30) NOT NULL COMMENT '字典项代码',
+  `dict_code` varchar(50) NOT NULL COMMENT '字典集代码',
+  `item_code` varchar(50) NOT NULL COMMENT '字典项代码',
   `item_name` varchar(50) NOT NULL COMMENT '字典项名称',
   `item_data` varchar(100) NOT NULL COMMENT '字典项值',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
@@ -3546,7 +3546,7 @@ CREATE TABLE `sys_operator` (
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `operator_no` (`operator_no`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='操作员表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='操作员表';
 
 -- ----------------------------
 -- Records of sys_operator
@@ -3555,6 +3555,7 @@ BEGIN;
 INSERT INTO `sys_operator` VALUES (1, 'root', 'root', '97da10d6a688e01e08944d2339eefb163fb5a9e066641c70f2f377f2173b36b8', '0', '', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '超级管理员', '1', '2018-09-04 14:16:55', '2020-03-26 18:55:49');
 INSERT INTO `sys_operator` VALUES (2, 'admin', 'admin', '2daceebc4e31654d326ae7889b397ed50ff7e5afff374d1f89525865fd87efe0', '10', '', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '2018-09-09 12:11:47', '2019-06-23 22:49:38');
 INSERT INTO `sys_operator` VALUES (3, 'system', 'system', 'a491ce8907a6e5ec70f24450793f886f3e20afd4cf70e9f6daa02e666d720fc5', '10', '', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '2019-01-05 17:51:31', '2019-06-23 22:49:48');
+INSERT INTO `sys_operator` VALUES (4, 'Administrator', 'Administrator', 'f1c4598719723cb341ab439c74baf60141f7151e20b16d91f345f7646421de9d', '0', '', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '', '1', '2020-04-20 14:11:40', '2020-04-20 14:11:40');
 COMMIT;
 
 -- ----------------------------
@@ -3606,8 +3607,8 @@ CREATE TABLE `sys_param` (
 -- Records of sys_param
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_param` VALUES (1, 'sys_check_verify_code', '1', '登录时是否验证验证码：0-不验证，1-验证', '1', '0', 1, '2018-09-04 17:46:30', '2019-05-19 17:55:21');
-INSERT INTO `sys_param` VALUES (2, 'sys_check_google_authenticator', '0', '登录时是否验证谷歌验证器：0-不验证，1-验证', '1', '0', 2, '2019-03-06 16:26:43', '2019-05-19 17:55:28');
+INSERT INTO `sys_param` VALUES (1, 'sys_check_verify_code', '1', '登录时是否验证验证码：0-不验证，1-验证', '1', '0', 1, '2018-09-04 17:46:30', '2020-04-23 23:43:24');
+INSERT INTO `sys_param` VALUES (2, 'sys_check_google_authenticator', '0', '登录时是否验证谷歌验证器：0-不验证，1-验证', '1', '0', 2, '2019-03-06 16:26:43', '2020-04-23 23:44:18');
 INSERT INTO `sys_param` VALUES (3, 'sys_google_authenticator_secret', 'BUX5OUIKAG2UZWED', '登录时谷歌验证器密钥', '1', '0', 3, '2019-06-24 13:38:30', '2019-06-24 13:39:22');
 INSERT INTO `sys_param` VALUES (4, 'sys_check_white_ip', '0', '登录时是否验证IP白名单：0-不验证，1-验证', '1', '0', 4, '2018-09-04 17:55:15', '2019-06-24 13:38:46');
 INSERT INTO `sys_param` VALUES (5, 'sys_single_location_login', '0', '登录时是否验证单一位置登录：0-不验证，即同一账号可以同时在多处登录，1-验证，即同一账号只能同时在一处登录', '1', '0', 5, '2019-05-06 18:12:17', '2019-06-24 13:38:48');
