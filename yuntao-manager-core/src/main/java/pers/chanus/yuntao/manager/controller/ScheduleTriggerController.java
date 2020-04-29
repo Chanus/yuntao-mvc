@@ -116,7 +116,7 @@ public class ScheduleTriggerController extends BaseController {
     @ResponseBody
     @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
-    public Message delete(Integer[]ids) {
+    public Message delete(Integer[] ids) {
         return scheduleTriggerService.delete(Arrays.asList(ids));
     }
 

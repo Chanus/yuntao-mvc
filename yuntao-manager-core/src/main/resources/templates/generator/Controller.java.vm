@@ -121,7 +121,7 @@ public class ${className}Controller extends BaseController {
     @ResponseBody
     @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
-    public Message delete(${pk.attributeType}[]ids) {
+    public Message delete(${pk.attributeType}[] ids) {
         return ${classname}Service.delete(Arrays.asList(ids));
     }
 
