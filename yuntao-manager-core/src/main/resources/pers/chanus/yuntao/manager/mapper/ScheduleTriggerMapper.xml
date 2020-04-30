@@ -146,12 +146,22 @@
       <if test="triggerCron != null">
         trigger_cron = #{triggerCron,jdbcType=VARCHAR},
       </if>
-      <if test="triggerStartTime != null">
-        trigger_start_time = #{triggerStartTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="triggerEndTime != null">
-        trigger_end_time = #{triggerEndTime,jdbcType=TIMESTAMP},
-      </if>
+      <choose>
+        <when test="triggerStartTime != null">
+          trigger_start_time = #{triggerStartTime,jdbcType=TIMESTAMP},
+        </when>
+        <otherwise>
+          trigger_start_time = NULL,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="triggerEndTime != null">
+          trigger_end_time = #{triggerEndTime,jdbcType=TIMESTAMP},
+        </when>
+        <otherwise>
+          trigger_end_time = NULL,
+        </otherwise>
+      </choose>
       <if test="triggerData != null">
         trigger_data = #{triggerData,jdbcType=VARCHAR},
       </if>
