@@ -20,7 +20,7 @@
           <div class="layui-inline">
             <label class="layui-form-label">模块代码</label>
             <div class="layui-input-block">
-              <input type="text" id="operateModuleId" placeholder="请输入操作模块代码" class="layui-input" autocomplete="off">
+              <input type="text" id="operateModuleCode" placeholder="请输入操作模块代码" class="layui-input" autocomplete="off">
             </div>
           </div>
           <div class="layui-inline">
@@ -50,6 +50,6 @@
       <a class="layui-btn layui-btn-xs" lay-event="content">日志内容</a>
     </script>
     
-    <script type="text/javascript" src="${ctx }/js/system/log.js?v=0.0.8.3"></script>
+    <script type="text/javascript" src="${ctx }/js/system/log.js?v=0.1.8.1"></script>
   </body>
 </html>

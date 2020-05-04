@@ -28,7 +28,7 @@ public class DictItemController extends BaseController {
     @Autowired
     private DictItemService dictItemService;
 
-    private final int currentModuleId = 1012;
+    private final String currentModuleCode = "DICT";
 
     /**
      * 首页
@@ -38,7 +38,7 @@ public class DictItemController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(@ModelAttribute("dictCode") String dictCode, Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/dict/item/list";
     }
 
@@ -73,7 +73,7 @@ public class DictItemController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(DictItem dictItem) {
         return dictItemService.insert(dictItem);
@@ -98,7 +98,7 @@ public class DictItemController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(DictItem dictItem) {
         return dictItemService.update(dictItem);
@@ -110,7 +110,7 @@ public class DictItemController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return dictItemService.delete(Arrays.asList(ids));

@@ -35,7 +35,7 @@ public class ParamController extends BaseController {
     @Autowired
     private ParamService paramService;
 
-    private final int currentModuleId = 1007;
+    private final String currentModuleCode = "PARAM";
 
     /**
      * 首页
@@ -45,7 +45,7 @@ public class ParamController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/param/list";
     }
 
@@ -80,7 +80,7 @@ public class ParamController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(Param param) {
         return paramService.insert(param);
@@ -107,7 +107,7 @@ public class ParamController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(Param param) {
         return paramService.update(param);
@@ -120,7 +120,7 @@ public class ParamController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return paramService.delete(Arrays.asList(ids));
@@ -132,7 +132,7 @@ public class ParamController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "调整系统参数优先级", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "调整系统参数优先级", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "priority.do", produces = "application/json; charset=utf-8")
     public Message priority() {
         return paramService.priority(getParams());

@@ -14,7 +14,7 @@ layui.config({
         method: 'post',
         cols: [[
             {type: 'checkbox', width: 60, fixed: 'left'},
-            {field: 'moduleId', title: '模块代码', width: '10%', unresize: true, align: 'center'},
+            {field: 'moduleCode', title: '模块代码', width: '10%', unresize: true, align: 'center'},
             {field: 'moduleName', title: '模块名称', width: '20%', unresize: true, align: 'center'},
             {field: 'powerItem', title: '权限代码', width: '15%', unresize: true, align: 'center'},
             {field: 'aliasName', title: '权限名称', width: '15%', unresize: true, align: 'center'},
@@ -34,7 +34,7 @@ layui.config({
                 curr: 1 //重新从第 1 页开始
             },
             where: {
-                moduleId: moduleId,
+                moduleCode: moduleCode,
                 powerItem: powerItem,
                 v: new Date().getTime()
             }
@@ -51,7 +51,7 @@ layui.config({
     form.on('select(moduleParentId)', function (data) {
         moduleParentId = data.value;
         if (moduleParentId) {
-            $('#moduleId option:gt(0)').remove();
+            $('#moduleCode option:gt(0)').remove();
             $.post({
                 url: ctx + '/system/module/modules.do',
                 data: {moduleParentId: moduleParentId},
@@ -59,22 +59,22 @@ layui.config({
                 success: function (data) {
                     var selectHtml = '';
                     $.each(data, function (n, value) {
-                        selectHtml += '<option value="' + value.moduleId + '">' + value.moduleName + '</option>';
+                        selectHtml += '<option value="' + value.moduleCode + '">' + value.moduleName + '</option>';
                     });
-                    $('#moduleId').append(selectHtml);
+                    $('#moduleCode').append(selectHtml);
                     form.render();
                 }
             });
         } else {
-            $("#moduleId option:gt(0)").remove();
+            $("#moduleCode option:gt(0)").remove();
             form.render();
         }
     });
 
     // 监听选择二级模块
-    var moduleId;
-    form.on('select(moduleId)', function (data) {
-        moduleId = data.value;
+    var moduleCode;
+    form.on('select(moduleCode)', function (data) {
+        moduleCode = data.value;
     });
 
     // 监听权限项下拉列表
@@ -86,7 +86,7 @@ layui.config({
 
     // 添加
     $("#add").on('click', function () {
-        if (!moduleId) {
+        if (!moduleCode) {
             layer.msg('请选择模块', {icon: 2, anim: 6, time: 1000});
             return false;
         }
@@ -97,7 +97,7 @@ layui.config({
 
         var loading = layer.load(2, {shade: [0.2, '#000']});//0.2透明度的白色背景
         $.post(action_path + 'add.do', {
-            moduleId: moduleId,
+            moduleCode: moduleCode,
             powerItem: powerItem,
             aliasName: powerName
         }, function (data) {

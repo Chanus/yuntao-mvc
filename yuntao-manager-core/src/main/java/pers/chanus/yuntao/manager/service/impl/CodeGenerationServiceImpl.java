@@ -13,6 +13,7 @@ import pers.chanus.yuntao.manager.mapper.DataBaseTableMapper;
 import pers.chanus.yuntao.manager.mapper.ModuleMapper;
 import pers.chanus.yuntao.manager.model.DataBaseColumn;
 import pers.chanus.yuntao.manager.model.DataBaseTable;
+import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.service.CodeGenerationService;
 import pers.chanus.yuntao.util.IOUtils;
 import pers.chanus.yuntao.util.StringUtils;
@@ -68,11 +69,16 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
             table = dataBaseTableMapper.get(tableSchema, tableName);
             // 查询列信息
             columns = dataBaseColumnMapper.list(CustomMap.get().putNext("tableSchema", tableSchema).putNext("tableName", tableName));
-            // 获取模块名称
+            // 获取模块代码和模块名称
             String moduleId = (String) params.get("moduleId");
-            String moduleName = null;
-            if (StringUtils.isNotBlank(moduleId))
-                moduleName = moduleMapper.getModuleName(Integer.parseInt(moduleId));
+            String moduleCode = null, moduleName = null;
+            if (StringUtils.isNotBlank(moduleId)) {
+                Module module = moduleMapper.selectByPrimaryKey(Integer.parseInt(moduleId));
+                moduleCode = module == null ? null : module.getModuleCode();
+                moduleName = module == null ? null : module.getModuleName();
+            }
+
+            params.put("moduleCode", StringUtils.isBlank(moduleCode) ? table.getTableName().toUpperCase() : moduleCode);
             params.put("moduleName", StringUtils.isBlank(moduleName) ? table.getTableComment() : moduleName);
             // 生成代码
             CodeGenerationUtils.generateCode(table, columns, params, zip);

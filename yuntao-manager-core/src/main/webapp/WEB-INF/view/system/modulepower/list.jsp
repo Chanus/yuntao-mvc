@@ -21,7 +21,7 @@
               </select>
             </div>
             <div class="layui-input-inline">
-              <select name="moduleId" id="moduleId" lay-filter="moduleId" lay-search>
+              <select name="moduleCode" id="moduleCode" lay-filter="moduleCode" lay-search>
                 <option value="">选择二级模块</option>
               </select>
             </div>
@@ -69,6 +69,6 @@
     </script>
     
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/module-power.js?v=0.1.1.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/module-power.js?v=0.1.8.1"></script>
   </body>
 </html>

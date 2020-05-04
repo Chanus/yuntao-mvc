@@ -49,6 +49,6 @@
     </script>
 
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/module-power-method.js?v=0.1.1.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/module-power-method.js?v=0.1.8.1"></script>
   </body>
 </html>

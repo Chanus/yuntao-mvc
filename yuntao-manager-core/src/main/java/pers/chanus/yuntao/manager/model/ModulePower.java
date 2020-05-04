@@ -8,7 +8,7 @@ public class ModulePower implements Serializable {
 
     private Integer mpId;
 
-    private Integer moduleId;
+    private String moduleCode;
 
     private String powerItem;
 
@@ -30,12 +30,12 @@ public class ModulePower implements Serializable {
         this.mpId = mpId;
     }
 
-    public Integer getModuleId() {
-        return moduleId;
+    public String getModuleCode() {
+        return moduleCode;
     }
 
-    public void setModuleId(Integer moduleId) {
-        this.moduleId = moduleId;
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode == null ? null : moduleCode.trim();
     }
 
     public String getPowerItem() {
@@ -88,6 +88,13 @@ public class ModulePower implements Serializable {
 
     @Override
     public String toString() {
-        return "ModulePower [mpId=" + mpId + ", moduleId=" + moduleId + ", powerItem=" + powerItem + ", aliasName=" + aliasName + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "ModulePower [" +
+                "mpId=" + mpId +
+                ", moduleCode=" + moduleCode +
+                ", powerItem=" + powerItem +
+                ", aliasName=" + aliasName +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                "]";
     }
 }

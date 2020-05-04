@@ -25,6 +25,6 @@ public interface ModuleMapper extends BaseMapper<Module, Integer> {
 
     List<String> listUrl(@Param("roleId") String roleId, @Param("subNo") String subNo);
 
-    @Select("select module_name from sys_module where module_id = #{moduleId,jdbcType=INTEGER}")
-    String getModuleName(Integer moduleId);
+    @Select("select count(*) from sys_module where module_code = #{moduleCode,jdbcType=VARCHAR}")
+    int checkModuleCode(String moduleCode);
 }

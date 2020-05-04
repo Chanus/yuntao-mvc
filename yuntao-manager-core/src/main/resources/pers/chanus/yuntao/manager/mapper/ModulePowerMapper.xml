@@ -3,7 +3,7 @@
 <mapper namespace="pers.chanus.yuntao.manager.mapper.ModulePowerMapper">
   <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.ModulePower">
     <id column="mp_id" jdbcType="INTEGER" property="mpId" />
-    <result column="module_id" jdbcType="INTEGER" property="moduleId" />
+    <result column="module_code" jdbcType="VARCHAR" property="moduleCode" />
     <result column="power_item" jdbcType="VARCHAR" property="powerItem" />
     <result column="alias_name" jdbcType="VARCHAR" property="aliasName" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
@@ -13,7 +13,7 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    mp_id, module_id, power_item, alias_name, gmt_create, gmt_modified
+    mp_id, module_code, power_item, alias_name, gmt_create, gmt_modified
   </sql>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -46,8 +46,8 @@
       <if test="mpId != null">
         mp_id,
       </if>
-      <if test="moduleId != null">
-        module_id,
+      <if test="moduleCode != null">
+        module_code,
       </if>
       <if test="powerItem != null">
         power_item,
@@ -66,8 +66,8 @@
       <if test="mpId != null">
         #{mpId,jdbcType=INTEGER},
       </if>
-      <if test="moduleId != null">
-        #{moduleId,jdbcType=INTEGER},
+      <if test="moduleCode != null">
+        #{moduleCode,jdbcType=VARCHAR},
       </if>
       <if test="powerItem != null">
         #{powerItem,jdbcType=VARCHAR},
@@ -87,8 +87,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="pers.chanus.yuntao.manager.model.ModulePower">
     update sys_module_power
     <set>
-      <if test="moduleId != null">
-        module_id = #{moduleId,jdbcType=INTEGER},
+      <if test="moduleCode != null">
+        module_code = #{moduleCode,jdbcType=VARCHAR},
       </if>
       <if test="powerItem != null">
         power_item = #{powerItem,jdbcType=VARCHAR},
@@ -109,8 +109,8 @@
   <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from sys_module_power
     <where>
-      <if test="moduleId != null">
-        module_id = #{moduleId,jdbcType=INTEGER}
+      <if test="moduleCode != null">
+        module_code = #{moduleCode,jdbcType=VARCHAR}
       </if>
       <if test="powerItem != null">
         and power_item = #{powerItem,jdbcType=VARCHAR}
@@ -120,12 +120,12 @@
   
   <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
-    mp_id, sys_module_power.module_id, power_item, alias_name, module_name
+    mp_id, sys_module_power.module_code, power_item, alias_name, module_name
     from sys_module_power, sys_module
     <where>
-      sys_module_power.module_id = sys_module.module_id
-      <if test="moduleId != null">
-        and sys_module_power.module_id = #{moduleId,jdbcType=INTEGER}
+      sys_module_power.module_code = sys_module.module_code
+      <if test="moduleCode != null">
+        and sys_module_power.module_code = #{moduleCode,jdbcType=VARCHAR}
       </if>
       <if test="powerItem != null">
         and power_item = #{powerItem,jdbcType=VARCHAR}

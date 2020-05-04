@@ -34,7 +34,7 @@ public class WhiteIpController extends BaseController {
     @Autowired
     private WhiteIpService whiteIpService;
 
-    private final int currentModuleId = 1008;
+    private final String currentModuleCode = "WHITE_IP";
 
     /**
      * 首页
@@ -44,7 +44,7 @@ public class WhiteIpController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/whiteip/list";
     }
 
@@ -79,7 +79,7 @@ public class WhiteIpController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(WhiteIp whiteIp) {
         return whiteIpService.insert(whiteIp);
@@ -106,7 +106,7 @@ public class WhiteIpController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(WhiteIp whiteIp) {
         return whiteIpService.update(whiteIp);
@@ -119,7 +119,7 @@ public class WhiteIpController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return whiteIpService.delete(Arrays.asList(ids));

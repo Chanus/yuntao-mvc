@@ -33,7 +33,7 @@ public class ${className}Controller extends BaseController {
     private ${className}Service ${classname}Service;
 #if("$!moduleId" != "")
 
-    private final int currentModuleId = ${moduleId};
+    private final String currentModuleCode = "${moduleCode}";
 #end
 
     /**
@@ -44,7 +44,7 @@ public class ${className}Controller extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "${pathName}/list";
     }
 
@@ -79,7 +79,7 @@ public class ${className}Controller extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(${className} ${classname}) {
         return ${classname}Service.insert(${classname});
@@ -106,7 +106,7 @@ public class ${className}Controller extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(${className} ${classname}) {
         return ${classname}Service.update(${classname});
@@ -119,7 +119,7 @@ public class ${className}Controller extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(${pk.attributeType}[] ids) {
         return ${classname}Service.delete(Arrays.asList(ids));

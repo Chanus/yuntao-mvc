@@ -39,7 +39,7 @@
                     <td width="180px" align="center">${item2.moduleName }</td>
                     <td align="left">
                       <c:forEach var="item3" items="${item2.modulePowers }" varStatus="status3">
-                        <input type="checkbox" id="module_power_${item2.moduleId }_${item3.mpId }" value="${item2.moduleId }_${item3.powerItem }" <c:if test="${!empty item3.hasPower }">checked</c:if> style="width:16px;height:16px;">${item3.aliasName }
+                        <input type="checkbox" id="module_power_${item2.moduleId }_${item3.mpId }" value="${item2.moduleCode }_${item3.powerItem }" <c:if test="${!empty item3.hasPower }">checked</c:if> style="width:16px;height:16px;">${item3.aliasName }
                       </c:forEach>
                     </td>
                     <td align="center"><input type="checkbox" id="module_${item2.moduleId }" style="width:16px;height:16px;"></td>
@@ -47,7 +47,7 @@
                 </c:forEach>
               </c:forEach>
               <tr>
-                <td colspan="4" align="center"><button id="grant" class="layui-btn layui-btn-normal"><i class="layui-icon">授权</button></td>
+                <td colspan="4" align="center"><button id="grant" class="layui-btn layui-btn-normal">授权</button></td>
               </tr>
             </c:otherwise>
           </c:choose>

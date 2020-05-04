@@ -41,7 +41,7 @@ public class SubController extends BaseController {
     @Autowired
     private ModuleService moduleService;
 
-    private final int currentModuleId = 1006;
+    private final String currentModuleCode = "SUB";
 
     /**
      * 首页
@@ -51,7 +51,7 @@ public class SubController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/sub/list";
     }
 
@@ -86,7 +86,7 @@ public class SubController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(Operator operator) {
         operator.setOperatorRoleId(ConfigConsts.ROLE_SUB_1);
@@ -117,7 +117,7 @@ public class SubController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(Operator operator) {
         return operatorService.update(operator);
@@ -144,7 +144,7 @@ public class SubController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "修改子账号密码", logType = LogTypeEnum.UPDATE, ignore = true)
+    @SystemLog(module = currentModuleCode, description = "修改子账号密码", logType = LogTypeEnum.UPDATE, ignore = true)
     @PostMapping(value = "password.do", produces = "application/json; charset=utf-8")
     public Message password(String subNo, String password) {
         return operatorService.updatePassword(subNo, null, password, false);
@@ -157,7 +157,7 @@ public class SubController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return operatorService.delete(Arrays.asList(ids));
@@ -188,7 +188,7 @@ public class SubController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "子账号授权", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "子账号授权", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "configure.do", produces = "application/json; charset=utf-8")
     public Message configure(String subNo, String[] modulePowers) {
         return operatorService.grantSubModulePower(subNo, modulePowers);

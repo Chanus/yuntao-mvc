@@ -41,7 +41,7 @@ public class OperatorController extends BaseController {
     @Autowired
     private RoleService roleService;
 
-    private final int currentModuleId = 1005;
+    private final String currentModuleCode = "OPERATOR";
 
     /**
      * 首页
@@ -51,7 +51,7 @@ public class OperatorController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/operator/list";
     }
 
@@ -104,7 +104,7 @@ public class OperatorController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(Operator operator) {
         return operatorService.insert(operator);
@@ -131,7 +131,7 @@ public class OperatorController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(Operator operator) {
         return operatorService.update(operator);
@@ -158,7 +158,7 @@ public class OperatorController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "修改操作员密码", logType = LogTypeEnum.UPDATE, ignore = true)
+    @SystemLog(module = currentModuleCode, description = "修改操作员密码", logType = LogTypeEnum.UPDATE, ignore = true)
     @PostMapping(value = "password.do", produces = "application/json; charset=utf-8")
     public Message password(String operatorNo, String password) {
         return operatorService.updatePassword(operatorNo, null, password, false);
@@ -171,7 +171,7 @@ public class OperatorController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return operatorService.delete(Arrays.asList(ids));

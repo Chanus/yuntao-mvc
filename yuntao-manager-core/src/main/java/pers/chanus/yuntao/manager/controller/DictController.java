@@ -35,7 +35,7 @@ public class DictController extends BaseController {
     @Autowired
     private DictService dictService;
 
-    private final int currentModuleId = 1012;
+    private final String currentModuleCode = "DICT";
 
     /**
      * 首页
@@ -44,7 +44,7 @@ public class DictController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/dict/list";
     }
 
@@ -85,7 +85,7 @@ public class DictController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(Dict dict) {
         return dictService.insert(dict);
@@ -110,7 +110,7 @@ public class DictController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(Dict dict) {
         return dictService.update(dict);
@@ -122,7 +122,7 @@ public class DictController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return dictService.delete(Arrays.asList(ids));

@@ -44,6 +44,13 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module, Int
 
     @Override
     public Message insert(Module t) {
+        // 验证模块代码是否已存在
+        if (StringUtils.isNotBlank(t.getModuleCode())) {
+            int count = mapper.checkModuleCode(t.getModuleCode());
+            if (count > 0)
+                return Message.fail("模块代码已存在");
+        }
+
         Integer maxModuleId = mapper.getMaxModuleId(t.getModuleParentId());
         if (maxModuleId == null) {// 不存在同级模块
             if (t.getModuleParentId() == 0)// 一级模块

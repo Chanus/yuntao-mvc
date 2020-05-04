@@ -83,8 +83,7 @@ public class LogAspect {
             log.setOperateRoleId(loginUser.getRoleId());
         }
         log.setOperateIp(IpUtils.getIpAddress(request));
-        if (systemLog.module() != -1)
-            log.setOperateModuleId(systemLog.module());
+        log.setOperateModuleCode(systemLog.module());
         log.setOperateUrl(String.valueOf(request.getRequestURL()));// 请求URL
         log.setOperateMethod(proceedingJoinPoint.getTarget().getClass().getName() + "." + proceedingJoinPoint.getSignature().getName() + "()");// 方法描述
         log.setOperateType(systemLog.logType().name());

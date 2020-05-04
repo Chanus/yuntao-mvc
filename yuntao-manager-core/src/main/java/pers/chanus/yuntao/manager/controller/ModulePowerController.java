@@ -46,7 +46,7 @@ public class ModulePowerController extends BaseController {
     @Autowired
     private PowerService powerService;
 
-    private final int currentModuleId = 1003;
+    private final String currentModuleCode = "MODULE_POWER";
 
     /**
      * 首页
@@ -56,7 +56,7 @@ public class ModulePowerController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         model.addAttribute("modules1", moduleService.list(CustomMap.get().putNext("moduleParentId", 0)));
         model.addAttribute("powerItems", powerService.list(CustomMap.get().putNext("validStatus", ConfigConsts.STATUS_YES)));
         return "system/modulepower/list";
@@ -93,7 +93,7 @@ public class ModulePowerController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(ModulePower modulePower) {
         return modulePowerService.insert(modulePower);
@@ -120,7 +120,7 @@ public class ModulePowerController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(ModulePower modulePower) {
         return modulePowerService.update(modulePower);
@@ -133,7 +133,7 @@ public class ModulePowerController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return modulePowerService.delete(Arrays.asList(ids));
@@ -188,7 +188,7 @@ public class ModulePowerController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "添加模块权限项方法", logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, description = "添加模块权限项方法", logType = LogTypeEnum.INSERT)
     @PostMapping(value = "method-add.do", produces = "application/json; charset=utf-8")
     public Message methodAdd(ModulePowerMethod modulePowerMethod) {
         return modulePowerService.insertMethod(modulePowerMethod);
@@ -203,7 +203,7 @@ public class ModulePowerController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "修改模块权限项方法", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "修改模块权限项方法", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "method-update.do", produces = "application/json; charset=utf-8")
     public Message methodUpdate(Integer mpmId, String className, String url) {
         ModulePowerMethod modulePowerMethod = new ModulePowerMethod();
@@ -220,7 +220,7 @@ public class ModulePowerController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "删除模块权限项方法", logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, description = "删除模块权限项方法", logType = LogTypeEnum.DELETE)
     @PostMapping(value = "method-delete.do", produces = "application/json; charset=utf-8")
     public Message methodDelete(Integer[] ids) {
         return modulePowerService.deleteMethod(Arrays.asList(ids));

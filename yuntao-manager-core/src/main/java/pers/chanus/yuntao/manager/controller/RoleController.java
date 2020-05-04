@@ -41,7 +41,7 @@ public class RoleController extends BaseController {
     @Autowired
     private ModuleService moduleService;
 
-    private final int currentModuleId = 1004;
+    private final String currentModuleCode = "ROLE";
 
     /**
      * 首页
@@ -51,7 +51,7 @@ public class RoleController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/role/list";
     }
 
@@ -98,7 +98,7 @@ public class RoleController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(Role role) {
         return roleService.insert(role);
@@ -125,7 +125,7 @@ public class RoleController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(Role role) {
         return roleService.update(role);
@@ -138,7 +138,7 @@ public class RoleController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return roleService.delete(Arrays.asList(ids));
@@ -164,7 +164,7 @@ public class RoleController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "角色授权", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "角色授权", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "grant.do", produces = "application/json; charset=utf-8")
     public Message grant(String roleId, String[] modulePowers) {
         return roleService.grantRoleModulePower(roleId, modulePowers);

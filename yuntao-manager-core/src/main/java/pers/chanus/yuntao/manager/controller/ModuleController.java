@@ -36,7 +36,7 @@ public class ModuleController extends BaseController {
     @Autowired
     private ModuleService moduleService;
 
-    private final int currentModuleId = 1002;
+    private final String currentModuleCode = "MODULE";
 
     /**
      * 首页
@@ -46,7 +46,7 @@ public class ModuleController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/module/list";
     }
 
@@ -95,7 +95,7 @@ public class ModuleController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(Module module) {
         return moduleService.insert(module);
@@ -122,7 +122,7 @@ public class ModuleController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(Module module) {
         return moduleService.update(module);
@@ -135,7 +135,7 @@ public class ModuleController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return moduleService.delete(Arrays.asList(ids));
@@ -147,7 +147,7 @@ public class ModuleController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "调整模块优先级", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "调整模块优先级", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "priority.do", produces = "application/json; charset=utf-8")
     public Message priority() {
         return moduleService.priority(getParams());

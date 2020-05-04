@@ -88,7 +88,7 @@
           <td width="180px" align="center">{{ d[i].children[j].moduleName }}</td>
           <td align="left">
             {{# for(var k = 0; k < d[i].children[j].modulePowers.length; k++){ }}
-              <input type="checkbox" id="module_power_{{ d[i].children[j].moduleId }}_{{ d[i].children[j].modulePowers[k].mpId }}" value="{{ d[i].children[j].moduleId }}_{{ d[i].children[j].modulePowers[k].powerItem }}" {{# if(d[i].children[j].modulePowers[k].hasPower){ }}checked{{# } }} style="width:16px;height:16px;">
+              <input type="checkbox" id="module_power_{{ d[i].children[j].moduleId }}_{{ d[i].children[j].modulePowers[k].mpId }}" value="{{ d[i].children[j].moduleCode }}_{{ d[i].children[j].modulePowers[k].powerItem }}" {{# if(d[i].children[j].modulePowers[k].hasPower){ }}checked{{# } }} style="width:16px;height:16px;">
               {{ d[i].children[j].modulePowers[k].aliasName }}
             {{# } }}
           </td>
@@ -99,7 +99,7 @@
       {{# if(d.currentRoleId != '0' && ${sessionScope.loginUser.roleId } != d.currentRoleId && ${powers.containsKey('CONFIG') }){ }}
       <tr>
         <td colspan="4" align="center">
-          <button id="grant" class="layui-btn layui-btn-normal"><i class="layui-icon">授权</button>
+          <button id="grant" class="layui-btn layui-btn-normal">授权</button>
         </td>
       </tr>
       {{# } }}

@@ -22,7 +22,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface SystemLog {
-    int module() default -1;
+    String module() default "";
 
     String description() default "";
 

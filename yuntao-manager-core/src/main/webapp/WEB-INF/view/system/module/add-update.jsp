@@ -17,6 +17,12 @@
           </c:otherwise>
         </c:choose>
         <div class="layui-form-item">
+          <label class="layui-form-label">模块代码</label>
+          <div class="layui-input-block">
+            <input type="text" name="moduleCode" value="${module.moduleCode }" placeholder="请输入模块代码" class="layui-input" autocomplete="off">
+          </div>
+        </div>
+        <div class="layui-form-item">
           <label class="layui-form-label">模块名称<span class="red">*</span></label>
           <div class="layui-input-block">
             <input type="text" name="moduleName" required lay-verify="required" value="${module.moduleName }" placeholder="请输入模块名称" class="layui-input" autocomplete="off">
@@ -105,6 +111,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.1.6.2"></script>
+    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.1.8.1"></script>
   </body>
 </html>

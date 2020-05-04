@@ -17,9 +17,10 @@ layui.config({
         method: 'post',
         cols: [[
             {type: 'checkbox', width: 60, fixed: 'left'},
-            {field: 'moduleId', title: '模块代码', width: '8%', unresize: true, align: 'center', fixed: 'left'},
+            {field: 'moduleId', title: '模块ID', width: '8%', unresize: true, align: 'center', fixed: 'left'},
+            {field: 'moduleCode', title: '模块代码', width: '10%', unresize: true, align: 'center'},
             {field: 'moduleName', title: '模块名称', width: '10%', unresize: true, align: 'center'},
-            {field: 'moduleUrl', title: '模块URL', unresize: true, align: 'center'},
+            {field: 'moduleUrl', title: '模块URL', width: '15%', unresize: true, align: 'center'},
             {field: 'moduleIsMenu', title: '是否菜单', width: '8%', unresize: true, align: 'center', templet: '#moduleIsMenuTpl'},
             {field: 'moduleForPermission', title: '设置权限', width: '8%', unresize: true, align: 'center', templet: '#moduleForPermissionTpl'},
             {field: 'moduleIcon', title: '模块图标', width: '15%', unresize: true, align: 'center', templet: '#moduleIconTpl'},

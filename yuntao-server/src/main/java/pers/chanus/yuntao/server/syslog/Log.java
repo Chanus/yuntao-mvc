@@ -20,7 +20,7 @@ public class Log implements Serializable {
 
     private String operateIp;
 
-    private Integer operateModuleId;
+    private String operateModuleCode;
 
     private String operateUrl;
 
@@ -92,12 +92,12 @@ public class Log implements Serializable {
         this.operateIp = operateIp;
     }
 
-    public Integer getOperateModuleId() {
-        return operateModuleId;
+    public String getOperateModuleCode() {
+        return operateModuleCode;
     }
 
-    public void setOperateModuleId(Integer operateModuleId) {
-        this.operateModuleId = operateModuleId;
+    public void setOperateModuleCode(String operateModuleCode) {
+        this.operateModuleCode = operateModuleCode == null ? null : operateModuleCode.trim();
     }
 
     public String getOperateUrl() {
@@ -198,6 +198,21 @@ public class Log implements Serializable {
 
     @Override
     public String toString() {
-        return "Log [id=" + id + ", operateNo=" + operateNo + ", operateRoleId=" + operateRoleId + ", operateIp=" + operateIp + ", operateModuleId=" + operateModuleId + ", operateUrl=" + operateUrl + ", operateMethod=" + operateMethod + ", operateException=" + operateException + ", operateType=" + operateType + ", operateTypeDesc=" + operateTypeDesc + ", operateConsumeTime=" + operateConsumeTime + ", operateTime=" + operateTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "Log [" +
+                "id=" + id +
+                ", operateNo=" + operateNo +
+                ", operateRoleId=" + operateRoleId +
+                ", operateIp=" + operateIp +
+                ", operateModuleCode=" + operateModuleCode +
+                ", operateUrl=" + operateUrl +
+                ", operateMethod=" + operateMethod +
+                ", operateException=" + operateException +
+                ", operateType=" + operateType +
+                ", operateTypeDesc=" + operateTypeDesc +
+                ", operateConsumeTime=" + operateConsumeTime +
+                ", operateTime=" + operateTime +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                "]";
     }
 }

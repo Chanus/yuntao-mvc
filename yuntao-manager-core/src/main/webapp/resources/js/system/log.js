@@ -20,9 +20,9 @@ layui.config({
         cols: [[
             {field: 'operateNo', title: '操作账号', width: '10%', unresize: true, align: 'center'},
             {field: 'operateRoleName', title: '角色', width: '10%', unresize: true, align: 'center'},
-            {field: 'operateModuleId', title: '模块', width: '10%', unresize: true, align: 'center', templet: function (d) {
-                if (d.operateModuleId != null && d.operateModuleId !== '') {
-                    return d.operateModuleName + '(' + d.operateModuleId + ')';
+            {field: 'operateModuleCode', title: '模块', width: '10%', unresize: true, align: 'center', templet: function (d) {
+                if (d.operateModuleCode != null && d.operateModuleCode !== '') {
+                    return d.operateModuleName + '(' + d.operateModuleCode + ')';
                 } else {
                     return '';
                 }
@@ -57,7 +57,7 @@ layui.config({
                 curr: 1 //重新从第 1 页开始
             },
             where: {
-                operateModuleId: $("#operateModuleId").val(),
+                operateModuleCode: $("#operateModuleCode").val(),
                 operateNo: $("#operateNo").val(),
                 beginTime: $("#beginTime").val(),
                 endTime: $("#endTime").val(),

@@ -32,7 +32,7 @@ public class OrganizationController extends BaseController {
     @Autowired
     private OrganizationService organizationService;
 
-    private final int currentModuleId = 1011;
+    private final String currentModuleCode = "ORGANIZATION";
 
     /**
      * 首页
@@ -42,7 +42,7 @@ public class OrganizationController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/organization/list";
     }
 
@@ -90,7 +90,7 @@ public class OrganizationController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(Organization organization) {
         return organizationService.insert(organization);
@@ -117,7 +117,7 @@ public class OrganizationController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(Organization organization) {
         return organizationService.update(organization);
@@ -131,7 +131,7 @@ public class OrganizationController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "修改排序", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "修改排序", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "priority.do", produces = "application/json; charset=utf-8")
     public Message priority(Integer orgId, Integer priority) {
         return organizationService.priority(orgId, priority);
@@ -144,7 +144,7 @@ public class OrganizationController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return organizationService.delete(Arrays.asList(ids));

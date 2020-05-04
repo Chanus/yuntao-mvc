@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.Module">
     <id column="module_id" jdbcType="INTEGER" property="moduleId" />
     <result column="module_parent_id" jdbcType="INTEGER" property="moduleParentId" />
+    <result column="module_code" jdbcType="VARCHAR" property="moduleCode" />
     <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
     <result column="module_url" jdbcType="VARCHAR" property="moduleUrl" />
     <result column="module_level" jdbcType="CHAR" property="moduleLevel" />
@@ -20,7 +21,7 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    module_id, module_parent_id, module_name, module_url, module_level, module_is_menu, module_for_permission, 
+    module_id, module_parent_id, module_code, module_name, module_url, module_level, module_is_menu, module_for_permission,
     module_for_admin, module_belong, module_icon, module_target, remark, valid_status, gmt_create, gmt_modified
   </sql>
   
@@ -58,6 +59,9 @@
       </if>
       <if test="moduleParentId != null">
         module_parent_id,
+      </if>
+      <if test="moduleCode != null">
+        module_code,
       </if>
       <if test="moduleName != null">
         module_name,
@@ -105,6 +109,9 @@
       </if>
       <if test="moduleParentId != null">
         #{moduleParentId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleCode != null">
+        #{moduleCode,jdbcType=VARCHAR},
       </if>
       <if test="moduleName != null">
         #{moduleName,jdbcType=VARCHAR},
@@ -154,6 +161,14 @@
       <if test="moduleParentId != null">
         module_parent_id = #{moduleParentId,jdbcType=INTEGER},
       </if>
+      <choose>
+        <when test="moduleCode != null and moduleCode != ''">
+          module_code = #{moduleCode,jdbcType=VARCHAR},
+        </when>
+        <otherwise>
+          module_code = NULL,
+        </otherwise>
+      </choose>
       <if test="moduleName != null">
         module_name = #{moduleName,jdbcType=VARCHAR},
       </if>
@@ -253,6 +268,7 @@
   
   <resultMap id="RoleModulePowerMap" type="pers.chanus.yuntao.manager.model.Module">
     <id column="p_module_id" jdbcType="INTEGER" property="moduleId" />
+    <result column="p_module_code" jdbcType="VARCHAR" property="moduleCode" />
     <result column="p_module_name" jdbcType="VARCHAR" property="moduleName" />
     <result column="p_module_icon" jdbcType="VARCHAR" property="moduleIcon" />
     <result column="p_module_target" jdbcType="CHAR" property="moduleTarget" />
@@ -260,6 +276,7 @@
     <collection property="children" ofType="pers.chanus.yuntao.manager.model.Module">
       <id column="module_id" jdbcType="INTEGER" property="moduleId" />
       <result column="module_parent_id" jdbcType="INTEGER" property="moduleParentId" />
+      <result column="module_code" jdbcType="VARCHAR" property="moduleCode" />
       <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
       <result column="module_url" jdbcType="VARCHAR" property="moduleUrl" />
       <result column="module_icon" jdbcType="VARCHAR" property="moduleIcon" />
@@ -267,7 +284,7 @@
       <result column="module_is_menu" jdbcType="CHAR" property="moduleIsMenu" />
       <collection property="modulePowers" ofType="pers.chanus.yuntao.manager.model.ModulePower">
         <id column="mp_id" jdbcType="INTEGER" property="mpId" />
-        <result column="smp_module_id" jdbcType="INTEGER" property="moduleId" />
+        <result column="smp_module_code" jdbcType="VARCHAR" property="moduleCode" />
         <result column="power_item" jdbcType="VARCHAR" property="powerItem" />
         <result column="alias_name" jdbcType="VARCHAR" property="aliasName" />
         <result column="has_power" jdbcType="INTEGER" property="hasPower" />
@@ -277,11 +294,12 @@
   
   <select id="listRoleModulePowerForAdmin" resultMap="RoleModulePowerMap">
     select 
-    sm1.module_id p_module_id, sm1.module_name p_module_name, sm2.module_id, sm2.module_name,
-    smp.mp_id, smp.module_id smp_module_id, smp.power_item, smp.alias_name, '1' has_power
+    sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name,
+    sm2.module_id, sm2.module_code, sm2.module_name,
+    smp.mp_id, smp.module_code smp_module_code, smp.power_item, smp.alias_name, '1' has_power
     from sys_module sm1
     inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-    inner join sys_module_power smp on sm2.module_id = smp.module_id
+    inner join sys_module_power smp on sm2.module_code = smp.module_code
     inner join sys_power sp on smp.power_item = sp.power_item
     where sm1.module_parent_id = 0
     and sm1.module_for_permission = '1'
@@ -295,20 +313,21 @@
     <choose>
       <when test='parentRoleId == "0"'>
         select 
-        sm1.module_id p_module_id, sm1.module_name p_module_name, sm2.module_id, sm2.module_name,
-        smp.mp_id, smp.module_id smp_module_id, smp.power_item, smp.alias_name, srmp.rmp_id has_power
+        sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name,
+        sm2.module_id, sm2.module_code, sm2.module_name,
+        smp.mp_id, smp.module_code smp_module_code, smp.power_item, smp.alias_name, srmp.rmp_id has_power
         from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        left join sys_role_module_power srmp on sm2.module_id = srmp.module_id and smp.power_item = srmp.power_item and srmp.role_id = #{roleId,jdbcType=VARCHAR}
+        left join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{roleId,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
-		and sm1.module_for_admin = '0'
+        and sm1.module_for_admin = '0'
         and sm1.module_belong in ('0', '2')
         and sm1.valid_status = '1'
         and sm2.module_for_permission = '1'
-		and sm2.module_for_admin = '0'
+        and sm2.module_for_admin = '0'
         and sm2.module_belong in ('0', '2')
         and sm2.valid_status = '1'
         and sp.valid_status = '1'
@@ -316,14 +335,15 @@
       </when>
       <otherwise>
         select 
-        sm1.module_id p_module_id, sm1.module_name p_module_name, sm2.module_id, sm2.module_name,
-        smp.mp_id, smp.module_id smp_module_id, smp.power_item, smp.alias_name, srmp2.rmp_id has_power
+        sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name,
+        sm2.module_id, sm2.module_code, sm2.module_name,
+        smp.mp_id, smp.module_code smp_module_code, smp.power_item, smp.alias_name, srmp2.rmp_id has_power
         from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_id = srmp.module_id and smp.power_item = srmp.power_item and srmp.role_id = #{parentRoleId,jdbcType=VARCHAR}
-		left join sys_role_module_power srmp2 on sm2.module_id = srmp2.module_id and smp.power_item = srmp2.power_item and srmp2.role_id = #{roleId,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{parentRoleId,jdbcType=VARCHAR}
+        left join sys_role_module_power srmp2 on sm2.module_code = srmp2.module_code and smp.power_item = srmp2.power_item and srmp2.role_id = #{roleId,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
         and sm1.module_for_admin = '0'
@@ -343,13 +363,14 @@
     <choose>
       <when test="masterRoleId == 0">
         select 
-        sm1.module_id p_module_id, sm1.module_name p_module_name, sm2.module_id, sm2.module_name,
-        smp.mp_id, smp.module_id smp_module_id, smp.power_item, smp.alias_name, srmp.rmp_id has_power
+        sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name,
+        sm2.module_id, sm2.module_code, sm2.module_name,
+        smp.mp_id, smp.module_code smp_module_code, smp.power_item, smp.alias_name, srmp.rmp_id has_power
         from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        left join sys_role_module_power srmp on sm2.module_id = srmp.module_id and smp.power_item = srmp.power_item and srmp.sub_no = #{subNo,jdbcType=VARCHAR}
+        left join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.sub_no = #{subNo,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
         and sm1.valid_status = '1'
@@ -361,14 +382,15 @@
       </when>
       <otherwise>
         select 
-        sm1.module_id p_module_id, sm1.module_name p_module_name, sm2.module_id, sm2.module_name,
-        smp.mp_id, smp.module_id smp_module_id, smp.power_item, smp.alias_name, submp.rmp_id has_power
+        sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name,
+        sm2.module_id, sm2.module_code, sm2.module_name,
+        smp.mp_id, smp.module_code smp_module_code, smp.power_item, smp.alias_name, submp.rmp_id has_power
         from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_id = srmp.module_id and smp.power_item = srmp.power_item and srmp.role_id = #{masterRoleId,jdbcType=VARCHAR}
-        left join sys_role_module_power submp on sm2.module_id = submp.module_id and smp.power_item = submp.power_item and submp.sub_no = #{subNo,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{masterRoleId,jdbcType=VARCHAR}
+        left join sys_role_module_power submp on sm2.module_code = submp.module_code and smp.power_item = submp.power_item and submp.sub_no = #{subNo,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
         and sm1.module_for_admin = '0'
@@ -387,12 +409,12 @@
     <choose>
       <when test='roleId == "0"'>
         select 
-        sm1.module_id p_module_id, sm1.module_name p_module_name, sm1.module_icon p_module_icon, sm1.module_target p_module_target,
-        sm1.module_is_menu p_module_is_menu, sm2.module_id, sm2.module_parent_id, sm2.module_name, sm2.module_url, sm2.module_icon,
+        sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name, sm1.module_icon p_module_icon, sm1.module_target p_module_target,
+        sm1.module_is_menu p_module_is_menu, sm2.module_id, sm2.module_parent_id, sm2.module_code, sm2.module_name, sm2.module_url, sm2.module_icon,
         sm2.module_target, sm2.module_is_menu, smp.mp_id, smp.power_item
         from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
@@ -406,14 +428,14 @@
       </when>
       <when test='roleId == "1"'>
         select 
-        sm1.module_id p_module_id, sm1.module_name p_module_name, sm1.module_icon p_module_icon, sm1.module_target p_module_target,
-        sm1.module_is_menu p_module_is_menu, sm2.module_id, sm2.module_parent_id, sm2.module_name, sm2.module_url, sm2.module_icon,
+        sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name, sm1.module_icon p_module_icon, sm1.module_target p_module_target,
+        sm1.module_is_menu p_module_is_menu, sm2.module_id, sm2.module_parent_id, sm2.module_code, sm2.module_name, sm2.module_url, sm2.module_icon,
         sm2.module_target, sm2.module_is_menu, smp.mp_id, smp.power_item
         from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_id = srmp.module_id and smp.power_item = srmp.power_item and srmp.sub_no = #{subNo,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.sub_no = #{subNo,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
         and sm1.module_for_admin = '0'
@@ -426,14 +448,14 @@
       </when>
       <otherwise>
         select 
-        sm1.module_id p_module_id, sm1.module_name p_module_name, sm1.module_icon p_module_icon, sm1.module_target p_module_target, sm1.module_is_menu p_module_is_menu,
-        sm2.module_id, sm2.module_parent_id, sm2.module_name, sm2.module_url, sm2.module_icon, sm2.module_target, sm2.module_is_menu,
+        sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name, sm1.module_icon p_module_icon, sm1.module_target p_module_target, sm1.module_is_menu p_module_is_menu,
+        sm2.module_id, sm2.module_parent_id, sm2.module_code, sm2.module_name, sm2.module_url, sm2.module_icon, sm2.module_target, sm2.module_is_menu,
         smp.mp_id, smp.power_item
         from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_id = srmp.module_id and smp.power_item = srmp.power_item and srmp.role_id = #{roleId,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{roleId,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
         and sm1.module_for_admin = '0'
@@ -455,9 +477,9 @@
       <when test='roleId == "1"'>
         select distinct url from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_id = srmp.module_id and smp.power_item = srmp.power_item and srmp.sub_no = #{subNo,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.sub_no = #{subNo,jdbcType=VARCHAR}
         inner join sys_module_power_method smpm on smp.mp_id = smpm.mp_id
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
@@ -470,7 +492,7 @@
         union
         select distinct url from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_module_power_method smpm on smp.mp_id = smpm.mp_id
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '0'
@@ -483,9 +505,9 @@
       <otherwise>
         select distinct url from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_id = srmp.module_id and smp.power_item = srmp.power_item and srmp.role_id = #{roleId,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{roleId,jdbcType=VARCHAR}
         inner join sys_module_power_method smpm on smp.mp_id = smpm.mp_id
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
@@ -498,7 +520,7 @@
         union
         select distinct url from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
-        inner join sys_module_power smp on sm2.module_id = smp.module_id
+        inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_module_power_method smpm on smp.mp_id = smpm.mp_id
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '0'

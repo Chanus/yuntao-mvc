@@ -26,12 +26,12 @@ public class ModulePowerUtils {
      * 获取用户的模块权限
      *
      * @param session
-     * @param moduleId 模块ID
+     * @param moduleCode 模块代码
      * @return 用户的模块权限列表
      * @since 0.0.1
      */
     @SuppressWarnings("unchecked")
-    public static List<ModulePower> getModulePowers(HttpSession session, Integer moduleId) {
+    public static List<ModulePower> getModulePowers(HttpSession session, String moduleCode) {
         List<Module> menus = (List<Module>) ((LoginUser) session.getAttribute("loginUser")).getMenus();
         if (CollectionUtils.isEmpty(menus))
             return null;
@@ -43,7 +43,7 @@ public class ModulePowerUtils {
             // 遍历二级模块菜单
             for (Module module2 : module1.getChildren()) {
                 // 返回该模块的权限组
-                if (moduleId.equals(module2.getModuleId()))
+                if (moduleCode.equals(module2.getModuleCode()))
                     return module2.getModulePowers();
             }
         }
@@ -55,12 +55,12 @@ public class ModulePowerUtils {
      * 获取用户的模块权限
      *
      * @param session
-     * @param moduleId 模块ID
+     * @param moduleCode 模块代码
      * @return 用户的模块权限Map集合
      * @since 0.0.1
      */
-    public static Map<String, Boolean> getPowers(HttpSession session, Integer moduleId) {
-        List<ModulePower> modulePowers = getModulePowers(session, moduleId);
+    public static Map<String, Boolean> getPowers(HttpSession session, String moduleCode) {
+        List<ModulePower> modulePowers = getModulePowers(session, moduleCode);
         Map<String, Boolean> powerMap = new HashMap<>();
         if (!CollectionUtils.isEmpty(modulePowers)) {
             for (ModulePower power : modulePowers) {
@@ -75,7 +75,7 @@ public class ModulePowerUtils {
     /**
      * 判断用户是否具有指定的模块权限
      *
-     * @param modulePowers  模块ID
+     * @param modulePowers  模块权限项
      * @param powerItem 权限项
      * @return {@code true} 有权限；{@code false} 没有权限
      * @since 0.0.1

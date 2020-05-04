@@ -30,7 +30,7 @@ public class LogServiceImpl implements LogService {
     private LogMapper logMapper;
 
     @Override
-    public void insert(HttpServletRequest request, Integer moduleId, String content, LogTypeEnum logType, String operateTypeDesc) {
+    public void insert(HttpServletRequest request, String moduleCode, String content, LogTypeEnum logType, String operateTypeDesc) {
         Log sysLog = new Log();
         LoginUser loginUser = LoginUser.getLoginUser();
         String operateNo = loginUser == null ? "system" : loginUser.getLoginNo(),
@@ -38,7 +38,7 @@ public class LogServiceImpl implements LogService {
         sysLog.setOperateNo(operateNo);
         sysLog.setOperateRoleId(operateRoleId);
         sysLog.setOperateIp(IpUtils.getIpAddress(request));
-        sysLog.setOperateModuleId(moduleId);
+        sysLog.setOperateModuleCode(moduleCode);
         sysLog.setOperateUrl(String.valueOf(request.getRequestURL()));// 请求URL
         sysLog.setOperateContent(content);// 操作内容
         sysLog.setOperateType(logType.name());
@@ -49,11 +49,11 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public void insert(String operateNo, String operateRoleId, Integer moduleId, String operateMethod, String content, LogTypeEnum logType, String operateTypeDesc, Integer operateConsumeTime) {
+    public void insert(String operateNo, String operateRoleId, String moduleCode, String operateMethod, String content, LogTypeEnum logType, String operateTypeDesc, Integer operateConsumeTime) {
         Log log = new Log();
         log.setOperateNo(operateNo);
         log.setOperateRoleId(operateRoleId);
-        log.setOperateModuleId(moduleId);
+        log.setOperateModuleCode(moduleCode);
         log.setOperateMethod(operateMethod);
         log.setOperateContent(content);
         log.setOperateType(logType.name());

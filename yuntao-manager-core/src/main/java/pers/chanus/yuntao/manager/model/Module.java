@@ -11,6 +11,8 @@ public class Module implements Serializable {
 
     private Integer moduleParentId;
 
+    private String moduleCode;
+
     private String moduleName;
 
     private String moduleUrl;
@@ -55,6 +57,14 @@ public class Module implements Serializable {
 
     public void setModuleParentId(Integer moduleParentId) {
         this.moduleParentId = moduleParentId;
+    }
+
+    public String getModuleCode() {
+        return moduleCode;
+    }
+
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode == null ? null : moduleCode.trim();
     }
 
     public String getModuleName() {
@@ -179,6 +189,23 @@ public class Module implements Serializable {
 
     @Override
     public String toString() {
-        return "Module [moduleId=" + moduleId + ", moduleParentId=" + moduleParentId + ", moduleName=" + moduleName + ", moduleUrl=" + moduleUrl + ", moduleLevel=" + moduleLevel + ", moduleIsMenu=" + moduleIsMenu + ", moduleForPermission=" + moduleForPermission + ", moduleForAdmin=" + moduleForAdmin + ", moduleBelong=" + moduleBelong + ", moduleIcon=" + moduleIcon + ", moduleTarget=" + moduleTarget + ", remark=" + remark + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "Module [" +
+                "moduleId=" + moduleId +
+                ", moduleParentId=" + moduleParentId +
+                ", moduleCode=" + moduleCode +
+                ", moduleName=" + moduleName +
+                ", moduleUrl=" + moduleUrl +
+                ", moduleLevel=" + moduleLevel +
+                ", moduleIsMenu=" + moduleIsMenu +
+                ", moduleForPermission=" + moduleForPermission +
+                ", moduleForAdmin=" + moduleForAdmin +
+                ", moduleBelong=" + moduleBelong +
+                ", moduleIcon=" + moduleIcon +
+                ", moduleTarget=" + moduleTarget +
+                ", remark=" + remark +
+                ", validStatus=" + validStatus +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                "]";
     }
 }

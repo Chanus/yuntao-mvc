@@ -34,7 +34,7 @@ public class ScheduleJobController extends BaseController {
     @Autowired
     private ScheduleJobService scheduleJobService;
 
-    private final int currentModuleId = 1013;
+    private final String currentModuleCode = "JOB";
 
     /**
      * 初始化加载定时任务，启动默认状态为启用的所有定时任务
@@ -51,7 +51,7 @@ public class ScheduleJobController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/job/list";
     }
 
@@ -83,7 +83,7 @@ public class ScheduleJobController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(ScheduleJob scheduleJob) {
         scheduleJob.setValidStatus(ConfigConsts.STATUS_NO);// 添加定时任务时默认为未启动
@@ -109,7 +109,7 @@ public class ScheduleJobController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(ScheduleJob scheduleJob) {
         return scheduleJobService.update(scheduleJob);
@@ -121,7 +121,7 @@ public class ScheduleJobController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return scheduleJobService.delete(Arrays.asList(ids));
@@ -133,7 +133,7 @@ public class ScheduleJobController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "启动定时任务", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "启动定时任务", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "start.do", produces = "application/json; charset=utf-8")
     public Message start(Integer id) {
         return scheduleJobService.start(id);
@@ -145,7 +145,7 @@ public class ScheduleJobController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "暂停定时任务", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "暂停定时任务", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "pause.do", produces = "application/json; charset=utf-8")
     public Message pause(Integer id) {
         return scheduleJobService.pause(id);
@@ -157,7 +157,7 @@ public class ScheduleJobController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "恢复定时任务", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "恢复定时任务", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "resume.do", produces = "application/json; charset=utf-8")
     public Message resume(Integer id) {
         return scheduleJobService.resume(id);
@@ -169,7 +169,7 @@ public class ScheduleJobController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "停止定时任务", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "停止定时任务", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "stop.do", produces = "application/json; charset=utf-8")
     public Message stop(Integer id) {
         return scheduleJobService.stop(id);
@@ -181,7 +181,7 @@ public class ScheduleJobController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, description = "立即执行定时任务", logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, description = "立即执行定时任务", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "trigger.do", produces = "application/json; charset=utf-8")
     public Message trigger(Integer id) {
         return scheduleJobService.trigger(id);

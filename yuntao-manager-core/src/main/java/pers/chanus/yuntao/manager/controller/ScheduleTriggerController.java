@@ -31,7 +31,7 @@ public class ScheduleTriggerController extends BaseController {
     @Autowired
     private ScheduleTriggerService scheduleTriggerService;
 
-    private final int currentModuleId = 1013;
+    private final String currentModuleCode = "JOB";
 
     /**
      * 首页
@@ -41,7 +41,7 @@ public class ScheduleTriggerController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Integer jobId, Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleId));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         model.addAttribute("jobId", jobId);
         return "system/job/trigger/list";
     }
@@ -77,7 +77,7 @@ public class ScheduleTriggerController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.INSERT)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(ScheduleTrigger scheduleTrigger) {
         return scheduleTriggerService.insert(scheduleTrigger);
@@ -102,7 +102,7 @@ public class ScheduleTriggerController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.UPDATE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "update.do", produces = "application/json; charset=utf-8")
     public Message update(ScheduleTrigger scheduleTrigger) {
         return scheduleTriggerService.update(scheduleTrigger);
@@ -114,7 +114,7 @@ public class ScheduleTriggerController extends BaseController {
      * @return
      */
     @ResponseBody
-    @SystemLog(module = currentModuleId, logType = LogTypeEnum.DELETE)
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
     @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
     public Message delete(Integer[] ids) {
         return scheduleTriggerService.delete(Arrays.asList(ids));
