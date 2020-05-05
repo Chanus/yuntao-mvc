@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
 <link rel="stylesheet" href="${ctx }/lib/layui/css/layui.css" media="all"/>
 <link rel="stylesheet" href="${ctx }/lib/layui/css/modules/layer/default/layer.css" media="all"/>
-<link rel="stylesheet" href="${ctx }/lib/layuiadmin/style/admin.css" media="all">
+<link rel="stylesheet" href="${ctx }/lib/layuiadmin/style/admin.css?v=0.1.8.1" media="all">
 <link rel="stylesheet" href="${ctx }/font/font-awesome-4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="${ctx }/css/global.css?v=0.1.6.3"/>
 <link rel="stylesheet" href="${ctx }/css/layui-form-sm.css?v=0.1.6.2"/>

@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 04/05/2020 23:50:15
+ Date: 05/05/2020 16:20:19
 */
 
 SET NAMES utf8mb4;
@@ -3389,7 +3389,7 @@ CREATE TABLE `sys_module_power` (
   KEY `power_item` (`power_item`) USING BTREE,
   KEY `module_code` (`module_code`),
   CONSTRAINT `sys_module_power_ibfk_1` FOREIGN KEY (`module_code`) REFERENCES `sys_module` (`module_code`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项关系表';
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项关系表';
 
 -- ----------------------------
 -- Records of sys_module_power
@@ -3452,6 +3452,7 @@ INSERT INTO `sys_module_power` VALUES (54, 'JOB', 'VIEW', '浏览', '2020-04-12 
 INSERT INTO `sys_module_power` VALUES (55, 'JOB', 'ADD', '添加', '2020-04-12 19:28:22', '2020-05-04 11:43:31');
 INSERT INTO `sys_module_power` VALUES (56, 'JOB', 'DELETE', '删除', '2020-04-12 19:28:22', '2020-05-04 11:43:31');
 INSERT INTO `sys_module_power` VALUES (57, 'JOB', 'UPDATE', '编辑', '2020-04-12 19:28:22', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (58, 'LOG', 'DELETE', '删除', '2020-05-05 09:28:01', '2020-05-05 09:28:01');
 COMMIT;
 
 -- ----------------------------
@@ -3468,7 +3469,7 @@ CREATE TABLE `sys_module_power_method` (
   PRIMARY KEY (`mpm_id`) USING BTREE,
   KEY `sys_module_power_method_ibfk_1` (`mp_id`),
   CONSTRAINT `sys_module_power_method_ibfk_1` FOREIGN KEY (`mp_id`) REFERENCES `sys_module_power` (`mp_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项方法配置表';
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项方法配置表';
 
 -- ----------------------------
 -- Records of sys_module_power_method
@@ -3585,6 +3586,9 @@ INSERT INTO `sys_module_power_method` VALUES (108, 57, 'pers.chanus.yuntao.manag
 INSERT INTO `sys_module_power_method` VALUES (109, 57, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/resume.do', '2020-04-15 13:19:15', '2020-04-15 13:19:15');
 INSERT INTO `sys_module_power_method` VALUES (110, 57, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/stop.do', '2020-04-15 13:19:28', '2020-04-15 13:19:28');
 INSERT INTO `sys_module_power_method` VALUES (111, 57, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/trigger.do', '2020-04-15 17:16:33', '2020-04-15 17:16:33');
+INSERT INTO `sys_module_power_method` VALUES (112, 58, 'pers.chanus.yuntao.manager.controller.LogController', '/system/log/delete.do', '2020-05-05 09:32:15', '2020-05-05 09:32:15');
+INSERT INTO `sys_module_power_method` VALUES (113, 58, 'pers.chanus.yuntao.manager.controller.LogController', '/system/log/clear.do', '2020-05-05 09:33:29', '2020-05-05 09:33:29');
+INSERT INTO `sys_module_power_method` VALUES (114, 11, 'pers.chanus.yuntao.manager.controller.ModuleController', '/system/module/transfer.do', '2020-05-05 10:41:48', '2020-05-05 10:41:48');
 COMMIT;
 
 -- ----------------------------
@@ -3707,7 +3711,7 @@ INSERT INTO `sys_power` VALUES (6, 'PASSWORD', '修改密码', '模块修改密�
 INSERT INTO `sys_power` VALUES (7, 'PRIORITY', '调整优先级', '调整优先级权限', 7, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
 INSERT INTO `sys_power` VALUES (8, 'UPDATE', '编辑', '模块编辑权限', 4, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
 INSERT INTO `sys_power` VALUES (9, 'UPLOAD', '上传', '上传资源权限', 9, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
-INSERT INTO `sys_power` VALUES (10, 'VIEW', '浏览', '模块浏览权限', 1, '1', '2018-09-04 15:18:18', '2020-04-16 00:38:35');
+INSERT INTO `sys_power` VALUES (10, 'VIEW', '浏览', '模块浏览权限', 1, '1', '2018-09-04 15:18:18', '2020-05-05 13:56:10');
 INSERT INTO `sys_power` VALUES (11, 'DEPOSIT', '充值', '充值权限', 11, '1', '2020-05-04 15:15:00', '2020-05-04 15:16:34');
 INSERT INTO `sys_power` VALUES (12, 'WITHDRAW', '提现', '提现权限', 12, '1', '2020-05-04 15:15:16', '2020-05-04 15:16:44');
 COMMIT;
