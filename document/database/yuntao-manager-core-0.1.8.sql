@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 05/05/2020 16:20:19
+ Date: 05/05/2020 17:13:34
 */
 
 SET NAMES utf8mb4;
@@ -3279,7 +3279,7 @@ CREATE TABLE `sys_dict_item` (
   `dict_code` varchar(50) NOT NULL COMMENT '字典集代码',
   `item_code` varchar(50) NOT NULL COMMENT '字典项代码',
   `item_name` varchar(50) NOT NULL COMMENT '字典项名称',
-  `item_data` varchar(100) NOT NULL COMMENT '字典项值',
+  `item_data` varchar(100) DEFAULT NULL COMMENT '字典项值',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
   `valid_status` char(1) NOT NULL DEFAULT '1' COMMENT '状态：0-停用，1-启用',
   `priority` int(10) unsigned NOT NULL COMMENT '优先级',
@@ -3467,7 +3467,7 @@ CREATE TABLE `sys_module_power_method` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`mpm_id`) USING BTREE,
-  KEY `sys_module_power_method_ibfk_1` (`mp_id`),
+  KEY `mp_id` (`mp_id`),
   CONSTRAINT `sys_module_power_method_ibfk_1` FOREIGN KEY (`mp_id`) REFERENCES `sys_module_power` (`mp_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项方法配置表';
 
