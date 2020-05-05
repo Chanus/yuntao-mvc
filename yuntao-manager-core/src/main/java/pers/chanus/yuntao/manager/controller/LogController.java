@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
+import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
+import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import pers.chanus.yuntao.manager.service.LogService;
+import pers.chanus.yuntao.server.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 import pers.chanus.yuntao.util.StringUtils;
 
@@ -33,13 +37,17 @@ public class LogController extends BaseController {
     @Autowired
     private LogService logService;
 
+    private final String currentModuleCode = "LOG";
+
     /**
      * 首页
      *
+     * @param model
      * @return
      */
     @GetMapping(value = "main.do")
-    public String main() {
+    public String main(Model model) {
+        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         return "system/log/list";
     }
 
@@ -73,5 +81,30 @@ public class LogController extends BaseController {
     public String content(Long id, Model model) {
         model.addAttribute("log", logService.get(id));
         return "system/log/content";
+    }
+
+    /**
+     * 删除
+     *
+     * @param id 被删除记录主键
+     * @return
+     */
+    @ResponseBody
+    @SystemLog(module = currentModuleCode, logType = LogTypeEnum.DELETE)
+    @PostMapping(value = "delete.do", produces = "application/json; charset=utf-8")
+    public Message delete(Integer id) {
+        return logService.delete(id);
+    }
+
+    /**
+     * 清除日志
+     *
+     * @return
+     */
+    @ResponseBody
+    @SystemLog(module = currentModuleCode, description = "清除日志", logType = LogTypeEnum.DELETE)
+    @PostMapping(value = "clear.do", produces = "application/json; charset=utf-8")
+    public Message clear() {
+        return logService.clear();
     }
 }

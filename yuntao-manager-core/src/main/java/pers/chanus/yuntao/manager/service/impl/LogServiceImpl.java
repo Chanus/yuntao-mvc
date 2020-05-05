@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
+import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.server.syslog.Log;
@@ -87,4 +88,15 @@ public class LogServiceImpl implements LogService {
         return logMapper.getLastLoginInfo(operateNo);
     }
 
+    @Override
+    public Message delete(Integer id) {
+        logMapper.delete(id);
+        return Message.deleteSuccess();
+    }
+
+    @Override
+    public Message clear() {
+        logMapper.clear();
+        return Message.success("清除日志成功");
+    }
 }

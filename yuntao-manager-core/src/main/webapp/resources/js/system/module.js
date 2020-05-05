@@ -97,6 +97,31 @@ layui.config({
                 }
                 layer.close(index);
             });
+        } else if (layEvent === 'transfer') {// 模块迁移
+            layer.prompt({
+                title: '请输入要迁移到的模块ID'
+            }, function(value, index){
+                $.ajax({
+                    type: 'post',
+                    url: action_path + 'transfer.do',
+                    data: {moduleId: data.moduleId, moduleParentId: value},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code === 0) {
+                            layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                                $(".layui-laypage-btn")[0].click();
+                                init();
+                            });
+                        } else {
+                            layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
+                        }
+                    },
+                    error: function () {
+                        layer.msg('请求异常，操作失败', {icon: 2, anim: 6, time: 2000});
+                    }
+                });
+                layer.close(index);
+            });
         }
     });
 

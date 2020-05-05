@@ -74,4 +74,14 @@ public interface ModuleService extends BaseService<Module, Integer> {
      * @since 0.0.1
      */
     List<String> listUrl(String roleId, String subNo);
+
+    /**
+     * 模块迁移
+     *
+     * @param moduleId  待迁移的模块ID
+     * @param moduleParentId    要迁移到的模块ID
+     * @return
+     * @since 0.1.8
+     */
+    Message transfer(Integer moduleId, Integer moduleParentId);
 }

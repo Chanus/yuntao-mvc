@@ -165,4 +165,40 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module, Int
         return mapper.listUrl(roleId, subNo);
     }
 
+    @Transactional
+    @Override
+    public Message transfer(Integer moduleId, Integer moduleParentId) {
+        if (moduleId == null)
+            return Message.fail("待迁移的模块ID为空");
+        if (moduleParentId == null)
+            return Message.fail("要迁移到的模块ID为空");
+
+        // 验证模块是否存在
+        Module module = mapper.selectByPrimaryKey(moduleId);
+        if (module == null)
+            return Message.fail("待迁移的模块不存在");
+        Module parentModule = mapper.selectByPrimaryKey(moduleParentId);
+        if (parentModule == null)
+            return Message.fail("要迁移到的模块不存在");
+
+        // 更新待迁移的模块
+        Integer maxModuleId = mapper.getMaxModuleId(moduleParentId);
+        if (maxModuleId == null) {// 不存在同级模块
+            maxModuleId = Integer.parseInt(moduleParentId + "01");
+        } else {// 存在同级模块
+            maxModuleId++;
+        }
+        String maxModuleLevel = mapper.getMaxModuleLevel(moduleParentId);
+        if (StringUtils.isBlank(maxModuleLevel)) {// 不存在同级模块
+            maxModuleLevel = parentModule.getModuleLevel() + "01";
+        } else {// 存在同级模块
+            maxModuleLevel = String.valueOf(Integer.parseInt(maxModuleLevel) + 1);
+        }
+        mapper.update(moduleId, maxModuleId, moduleParentId, maxModuleLevel);
+
+        // 调整比待迁移的模块的层级低的模块层级
+        mapper.bottom(module.getModuleParentId(), module.getModuleLevel());
+
+        return Message.success("迁移成功");
+    }
 }

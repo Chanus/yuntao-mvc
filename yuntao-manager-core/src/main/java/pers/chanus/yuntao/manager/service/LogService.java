@@ -5,6 +5,7 @@ package pers.chanus.yuntao.manager.service;
 
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
+import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.server.syslog.Log;
 
@@ -71,4 +72,21 @@ public interface LogService {
      * @since 0.0.1
      */
     Log getLastLoginInfo(String operateNo);
+
+    /**
+     * 删除日期记录
+     *
+     * @param id    日志ID
+     * @return
+     * @since 0.1.8
+     */
+    Message delete(Integer id);
+
+    /**
+     * 清除日期记录
+     *
+     * @return
+     * @since 0.1.8
+     */
+    Message clear();
 }

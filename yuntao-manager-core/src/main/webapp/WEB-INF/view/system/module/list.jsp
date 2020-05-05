@@ -62,11 +62,14 @@
         <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="up" title="提升优先级"><i class="layui-icon layui-icon-up"></i></a>
         <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="down" title="降低优先级"><i class="layui-icon layui-icon-down"></i></a>
       {{# } }}
+      {{# if(${powers.containsKey('UPDATE') } && d.moduleParentId != 0){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="transfer">迁移</a>
+      {{# } }}
     </script>
     
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${ctx }/lib/zTree/jquery.ztree.core.min.js"></script>
-    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.1.8.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.1.8.2"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../../public/public.jsp" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -32,6 +33,11 @@
           <div class="layui-inline">
             <button id="search" class="layui-btn"><i class="layui-icon layui-icon-search"></i>搜索</button>
           </div>
+          <c:if test="${powers['DELETE'] }">
+            <div class="layui-inline">
+              <button id="clear" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-delete"></i>清除日志</button>
+            </div>
+          </c:if>
         </div>
       </div>
       
@@ -48,8 +54,11 @@
 
     <script type="text/html" id="toolbar">
       <a class="layui-btn layui-btn-xs" lay-event="content">日志内容</a>
+      {{# if(${powers.containsKey('DELETE')}){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      {{# } }}
     </script>
     
-    <script type="text/javascript" src="${ctx }/js/system/log.js?v=0.1.8.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/log.js?v=0.1.8.2"></script>
   </body>
 </html>

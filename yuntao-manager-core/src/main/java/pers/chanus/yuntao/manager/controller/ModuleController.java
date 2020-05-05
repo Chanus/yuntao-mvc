@@ -163,4 +163,19 @@ public class ModuleController extends BaseController {
     public List<Module> modules() {
         return moduleService.list(getParams());
     }
+
+    /**
+     * 模块迁移
+     *
+     * @param moduleId 待迁移的模块ID
+     * @param moduleParentId 要迁移到的模块ID
+     * @return
+     */
+    @ResponseBody
+    @SystemLog(module = currentModuleCode, description = "模块迁移", logType = LogTypeEnum.UPDATE)
+    @PostMapping(value = "transfer.do", produces = "application/json; charset=utf-8")
+    public Message transfer(Integer moduleId, Integer moduleParentId) {
+        LOGGER.info("moduleId = {}, moduleParentId = {}", moduleId, moduleParentId);
+        return moduleService.transfer(moduleId, moduleParentId);
+    }
 }

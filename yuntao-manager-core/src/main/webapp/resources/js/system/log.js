@@ -2,8 +2,8 @@ var action_path = ctx + '/system/log/';
 layui.config({
     base: '../../js/',
     version: '0.0.1.1'
-}).use(['table', 'popup', 'element'], function () {
-    var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, element = layui.element;
+}).use(['table', 'popup', 'element', 'operations'], function () {
+    var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, element = layui.element, operations = layui.operations;
     var operateType = '1';
 
     // 渲染表格
@@ -47,7 +47,33 @@ layui.config({
         // var tr = obj.tr; // 获得当前行tr的DOM对象
         if (layEvent === 'content') {// 操作内容
             popup.open(800, 700, '<i class="layui-icon layui-icon-about"></i>操作内容', action_path + 'content.do?id=' + data.id);
+        } else if (layEvent === 'del') {// 删除
+            operations.del(data.id, action_path + 'delete.do');
         }
+    });
+
+    // 清除日志
+    $('#clear').on('click', function () {
+        layer.confirm('确定清除所有日志吗？', {icon: 3, title: '提示'}, function (index) {
+            $.ajax({
+                type: 'post',
+                url: action_path + 'clear.do',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code === 0) {
+                        layer.msg(data.msg, {time: 1000}, function () {
+                            reload();
+                        });
+                    } else {
+                        layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
+                    }
+                },
+                error: function () {
+                    layer.msg('请求异常，操作失败', {icon: 2, anim: 6, time: 2000});
+                }
+            });
+            layer.close(index);
+        });
     });
 
     // 重新加载
