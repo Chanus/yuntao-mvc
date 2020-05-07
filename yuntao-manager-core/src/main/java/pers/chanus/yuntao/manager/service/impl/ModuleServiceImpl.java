@@ -145,7 +145,7 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module, Int
         if (ConfigConsts.ROLE_ADMIN_0.equals(roleId)) {// 超级管理员
             return mapper.listRoleModulePowerForAdmin();
         } else {
-            Role role = roleMapper.getByRoleId(roleId);
+            Role role = roleMapper.get(roleId);
             return ConfigConsts.STATUS_YES.equals(role.getLoginFlag()) ? mapper.listRoleModulePowerForNotAdmin(roleId, role.getParentRoleId()) : null;
         }
     }

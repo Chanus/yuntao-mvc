@@ -21,7 +21,7 @@ public interface ScheduleJobMapper extends BaseMapper<ScheduleJob, Integer> {
     @Update("update sys_schedule_job set valid_status = #{arg1,jdbcType=CHAR} where id = #{arg0,jdbcType=INTEGER}")
     int updateValidStatus(Integer id, String validStatus);
 
-    ScheduleJob getScheduleJobById(Integer id);
+    ScheduleJob getScheduleJob(Integer id);
 
     List<ScheduleJob> listScheduleJob();
 }

@@ -85,7 +85,7 @@ public class IndexController extends BaseController {
      */
     @GetMapping(value = "user/operator-info.do")
     public String operatorInfo(Model model) {
-        model.addAttribute("operator", operatorService.getByOperatorNo(LoginUser.getLoginUser().getLoginNo()));
+        model.addAttribute("operator", operatorService.get(LoginUser.getLoginUser().getLoginNo()));
         return "index/user/operator-info";
     }
 

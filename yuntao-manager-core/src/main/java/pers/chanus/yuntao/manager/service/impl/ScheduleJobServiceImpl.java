@@ -62,7 +62,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
 
     @Override
     public Message start(Integer id) {
-        ScheduleJob scheduleJob = mapper.getScheduleJobById(id);
+        ScheduleJob scheduleJob = mapper.getScheduleJob(id);
         // 定时任务状态为停止时才可以启动
         if (!ConfigConsts.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
             return Message.fail("定时任务未停止");
@@ -135,7 +135,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
 
     @Override
     public Message stop(Integer id) {
-        ScheduleJob scheduleJob = mapper.getScheduleJobById(id);
+        ScheduleJob scheduleJob = mapper.getScheduleJob(id);
         Map<String, String> triggerMap = new HashMap<>();
         List<ScheduleTrigger> scheduleTriggers = scheduleJob.getScheduleTriggers();
         if (!CollectionUtils.isEmpty(scheduleTriggers)) {

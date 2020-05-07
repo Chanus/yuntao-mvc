@@ -209,7 +209,7 @@
     </if>
   </select>
   
-  <select id="getByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_role

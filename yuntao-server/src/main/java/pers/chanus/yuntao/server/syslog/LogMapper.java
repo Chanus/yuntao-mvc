@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface LogMapper {
-    Log getById(Long id);
+    Log get(Long id);
 
     int insertSelective(Log record);
 

@@ -22,7 +22,7 @@
     <result column="module_name" jdbcType="VARCHAR" property="operateModuleName" />
   </resultMap>
   
-  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select operate_no, operate_url, operate_method, operate_exception, operate_content, operate_type from sys_log where id = #{id,jdbcType=BIGINT}
   </select>
   

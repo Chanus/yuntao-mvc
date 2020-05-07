@@ -6,7 +6,7 @@ import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.server.mapper.BaseMapper;
 
 public interface RoleMapper extends BaseMapper<Role, Integer> {
-    Role getByRoleId(String roleId);
+    Role get(String roleId);
 
     @Select("select login_flag, valid_status from sys_role where role_id = #{roleId,jdbcType=VARCHAR}")
     Role getLoginStatus(String roleId);

@@ -96,12 +96,12 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
     }
 
     @Override
-    public Operator getById(Integer id) {
+    public Operator get(Integer id) {
         return mapper.getById(id, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
     }
 
     @Override
-    public Operator getByOperatorNo(String operatorNo) {
+    public Operator get(String operatorNo) {
         return mapper.getByOperatorNo(operatorNo, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
     }
 

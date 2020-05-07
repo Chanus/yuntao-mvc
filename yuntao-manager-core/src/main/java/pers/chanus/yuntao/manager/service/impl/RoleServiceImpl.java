@@ -56,7 +56,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
     public String createTree(Map<String, Object> params) {
         StringBuilder tree = new StringBuilder("[");
         // 当前角色
-        Role r = mapper.getByRoleId((String) params.get("roleId"));
+        Role r = mapper.get((String) params.get("roleId"));
         // 构建一个角色列表根节点
         tree.append("{\"id\":\"").append(r.getParentRoleId()).append("\", \"pId\":\"-1\", \"name\":\"角色列表\", \"open\":true").append(", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"").append(", \"iconOpen\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"").append(", \"iconClose\":\"../../lib/zTree/zTreeStyle/img/diy/1_close.png\"}");
         try {

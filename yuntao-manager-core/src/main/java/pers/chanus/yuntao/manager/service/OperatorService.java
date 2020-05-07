@@ -24,7 +24,7 @@ public interface OperatorService extends BaseService<Operator, Integer> {
      * @return
      * @since 0.0.1
      */
-    Operator getById(Integer id);
+    Operator get(Integer id);
 
     /**
      * 根据操作员账号查询操作员信息
@@ -33,7 +33,7 @@ public interface OperatorService extends BaseService<Operator, Integer> {
      * @return
      * @since 0.0.1
      */
-    Operator getByOperatorNo(String operatorNo);
+    Operator get(String operatorNo);
 
     /**
      * 修改密码，操作员修改个人密码时旧密码不能为空

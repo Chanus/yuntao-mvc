@@ -119,7 +119,7 @@ public class OperatorController extends BaseController {
      */
     @GetMapping(value = "update.do")
     public String update(Integer id, Model model) {
-        model.addAttribute("operator", operatorService.getById(id));
+        model.addAttribute("operator", operatorService.get(id));
         model.addAttribute("cmd", "update");
         return "system/operator/add-update";
     }

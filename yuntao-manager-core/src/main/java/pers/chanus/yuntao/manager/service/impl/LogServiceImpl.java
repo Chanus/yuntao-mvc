@@ -67,7 +67,7 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public Log get(Long id) {
-        return logMapper.getById(id);
+        return logMapper.get(id);
     }
 
     @Override
