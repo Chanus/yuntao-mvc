@@ -3,10 +3,8 @@
  */
 package pers.chanus.yuntao.util;
 
-import java.io.Closeable;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.charset.Charset;
 
 /**
  * I/O工具类
@@ -46,6 +44,74 @@ public class IOUtils {
     public static void write(final String data, final OutputStream os, final String encoding) throws IOException {
         if (data != null)
             os.write(data.getBytes(encoding));
+    }
+
+    /**
+     * String 转为流
+     *
+     * @param content     内容
+     * @param charsetName 编码
+     * @return 字节流
+     * @since 0.1.8
+     */
+    public static ByteArrayInputStream toStream(String content, String charsetName) {
+        return toStream(content, Charset.forName(charsetName));
+    }
+
+    /**
+     * String 转为流
+     *
+     * @param content 内容
+     * @param charset 编码
+     * @return 字节流
+     * @since 0.1.8
+     */
+    public static ByteArrayInputStream toStream(String content, Charset charset) {
+        if (content == null) {
+            return null;
+        }
+        return toStream(content.getBytes(charset));
+    }
+
+    /**
+     * String 转为UTF-8编码的字节流流
+     *
+     * @param content 内容
+     * @return 字节流
+     * @since 0.1.8
+     */
+    public static ByteArrayInputStream toUtf8Stream(String content) {
+        return toStream(content, "utf-8");
+    }
+
+    /**
+     * 文件转为流
+     *
+     * @param file 文件
+     * @return {@link FileInputStream}
+     * @since 0.1.8
+     */
+    public static FileInputStream toStream(File file) {
+        try {
+            return new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * String 转为流
+     *
+     * @param content 内容bytes
+     * @return 字节流
+     * @since 0.1.8
+     */
+    public static ByteArrayInputStream toStream(byte[] content) {
+        if (content == null) {
+            return null;
+        }
+        return new ByteArrayInputStream(content);
     }
 
     /**

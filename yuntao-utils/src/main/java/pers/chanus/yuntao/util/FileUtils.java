@@ -89,6 +89,8 @@ public class FileUtils {
      * @since 0.0.1
      */
     public static void write(String path, String content, boolean append) {
+        if (StringUtils.isBlank(path))
+            return;
         if (StringUtils.isBlank(content))
             return;
 
@@ -203,7 +205,7 @@ public class FileUtils {
     }
 
     /**
-     * 获取文件扩展名
+     * 获取文件扩展名，扩展名不带“.”
      *
      * @param path 文件路径
      * @return 文件扩展名
@@ -218,6 +220,23 @@ public class FileUtils {
             return null;
 
         return (path.lastIndexOf(File.separator) >= extensionPosi) ? null : path.substring(extensionPosi + 1);
+    }
+
+    /**
+     * 获取文件扩展名，扩展名不带“.”
+     *
+     * @param file 文件
+     * @return 文件扩展名
+     * @since 0.1.8
+     */
+    public static String getFileExtension(File file) {
+        if (file == null)
+            return null;
+
+        if (file.isDirectory())
+            return null;
+
+        return getFileExtension(file.getName());
     }
 
     /**
@@ -339,15 +358,33 @@ public class FileUtils {
      * 创建文件目录
      *
      * @param directory 文件目录
-     * @return {@code true} 创建成功；{@code false} 创建失败
-     * @since 0.0.1
+     * @return 创建的目录
+     * @since 0.1.8
      */
-    public static boolean makeDirs(String directory) {
+    public static File mkdirs(String directory) {
         if (StringUtils.isBlank(directory))
-            return false;
+            return null;
 
-        File folder = new File(directory);
-        return (folder.exists() && folder.isDirectory()) || folder.mkdirs();
+        File dir = new File(directory);
+
+        return mkdirs(dir);
+    }
+
+    /**
+     * 创建文件目录
+     *
+     * @param dir 文件目录
+     * @return 创建的目录
+     * @since 0.1.8
+     */
+    public static File mkdirs(File dir) {
+        if (dir == null)
+            return null;
+
+        if (!dir.exists() || !dir.isDirectory())
+            dir.mkdirs();
+
+        return dir;
     }
 
     /**

@@ -3,6 +3,7 @@
  */
 package pers.chanus.yuntao.util;
 
+import java.awt.*;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -245,5 +246,16 @@ public class RandomUtils {
      */
     public static String getUppercaseUUID() {
         return getLowercaseUUID().toUpperCase();
+    }
+
+    /**
+     * 生成随机颜色
+     *
+     * @return 随机颜色
+     * @since 0.1.8
+     */
+    public static Color getRandomColor() {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        return new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255));
     }
 }
