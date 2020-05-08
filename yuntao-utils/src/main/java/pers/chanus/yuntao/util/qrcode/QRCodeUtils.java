@@ -12,6 +12,7 @@ package pers.chanus.yuntao.util.qrcode;
 import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
+import pers.chanus.yuntao.util.StringUtils;
 import pers.chanus.yuntao.util.image.ImageUtils;
 import pers.chanus.yuntao.util.image.Img;
 
@@ -196,26 +197,95 @@ public class QRCodeUtils {
      * @since 0.1.8
      */
     public static BufferedImage generate(BarcodeFormat format, QRCodeConfig config) {
-        final BitMatrix bitMatrix = encode(config.getContent(), format, config);
-        final BufferedImage image = toImage(bitMatrix, config.getForeColor(), config.getBackColor());
+        final BitMatrix bitMatrix = encode(format, config);
+        BufferedImage image = toImage(bitMatrix, config.getForeColor(), config.getBackColor());
+
+        int qrWidth = image.getWidth();
+        int qrHeight = image.getHeight();
+
+        // 处理logo图片
         final Image logoImage = config.getLogoImage();
         if (logoImage != null && BarcodeFormat.QR_CODE == format) {
             // 只有二维码可以贴图
-            final int qrWidth = image.getWidth();
-            final int qrHeight = image.getHeight();
+            final float logoRatio = config.getLogoRatio();
             int width;
             int height;
             // 按照最短的边做比例缩放
             if (qrWidth < qrHeight) {
-                width = (int) (qrWidth * config.getLogoRatio());
+                width = (int) (qrWidth * logoRatio);
                 height = logoImage.getHeight(null) * width / logoImage.getWidth(null);
             } else {
-                height = (int) (qrHeight * config.getLogoRatio());
+                height = (int) (qrHeight * logoRatio);
                 width = logoImage.getWidth(null) * height / logoImage.getHeight(null);
             }
 
             Img.from(image).pressImage(Img.from(logoImage).round(0.3).getImg(), new Rectangle(width, height), 1);
         }
+
+        // 处理下方文字
+        String desc = config.getDesc();
+        if (StringUtils.isNotBlank(desc)) {
+            Graphics g = image.getGraphics();
+            // 设置文字字体
+            int whiteWidth = config.getHeight() - config.getBottomEnd()[1];
+            Font font = new Font("宋体", Font.PLAIN, config.getFontSize());
+            int fontHeight = g.getFontMetrics(font).getHeight();
+            // 计算需要多少行
+            int lineNum = 1;
+            int currentLineLen = 0;
+            for (int i = 0; i < desc.length(); i++) {
+                char c = desc.charAt(i);
+                int charWidth = g.getFontMetrics(font).charWidth(c);
+                if (currentLineLen + charWidth > qrWidth) {
+                    lineNum++;
+                    currentLineLen = 0;
+                    continue;
+                }
+                currentLineLen += charWidth;
+            }
+            int totalFontHeight = fontHeight * lineNum;
+            int wordTopMargin = 4;
+            BufferedImage bufferedImage = new BufferedImage(qrWidth, qrHeight + totalFontHeight + wordTopMargin - whiteWidth,
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics g1 = bufferedImage.getGraphics();
+            if (totalFontHeight + wordTopMargin - whiteWidth > 0) {
+                g1.setColor(Color.WHITE);
+                g1.fillRect(0, qrHeight, qrWidth, totalFontHeight + wordTopMargin - whiteWidth);
+            }
+            g1.setColor(new Color(QRCodeConfig.BLACK));
+            g1.setFont(font);
+            int startX = (78 - (12 * desc.length())) / 2;
+            g1.drawImage(image, 0, 0, null);
+            qrWidth = config.getBottomEnd()[0] - config.getBottomStart()[0];
+            qrHeight = config.getBottomEnd()[1] + 1;
+            currentLineLen = 0;
+            int currentLineIndex = 0;
+            int baseLo = g1.getFontMetrics().getAscent();
+            for (int i = 0; i < desc.length(); i++) {
+                String c = desc.substring(i, i + 1);
+                int charWidth = g.getFontMetrics(font).stringWidth(c);
+                if (currentLineLen + charWidth > qrWidth) {
+                    currentLineIndex++;
+                    currentLineLen = 0;
+                    g1.drawString(c, currentLineLen + startX - 5,
+                            -5 + qrHeight + baseLo + fontHeight * (currentLineIndex) + wordTopMargin);
+                    currentLineLen = charWidth;
+                    continue;
+                }
+                g1.drawString(c, currentLineLen + startX - 5,
+                        -5 + qrHeight + baseLo + fontHeight * (currentLineIndex) + wordTopMargin);
+                currentLineLen += charWidth;
+            }
+
+            // 处理二维码下日期
+            String date = config.getDate();
+            if (StringUtils.isNotBlank(date)) {
+                g1.drawString(date, 5, 6 + qrHeight + baseLo + fontHeight * (currentLineIndex) + wordTopMargin);
+                g1.dispose();
+            }
+            image = bufferedImage;
+        }
+
         return image;
     }
 
@@ -223,13 +293,12 @@ public class QRCodeUtils {
      * 将文本内容编码为条形码或二维码<br>
      * 只有二维码时QRCodeConfig中的图片才有效
      *
-     * @param content 文本内容
      * @param format  格式枚举
      * @param config  二维码配置信息
      * @return {@link BitMatrix}
      * @since 0.1.8
      */
-    public static BitMatrix encode(String content, BarcodeFormat format, QRCodeConfig config) {
+    public static BitMatrix encode(BarcodeFormat format, QRCodeConfig config) {
         final MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         if (config == null) {
             // 默认配置
@@ -237,7 +306,7 @@ public class QRCodeUtils {
         }
         BitMatrix bitMatrix = null;
         try {
-            bitMatrix = multiFormatWriter.encode(content, format, config.getWidth(), config.getHeight(), config.toHints());
+            bitMatrix = multiFormatWriter.encode(config.getContent(), format, config.getWidth(), config.getHeight(), config.toHints());
         } catch (WriterException e) {
             e.printStackTrace();
         }
@@ -249,27 +318,26 @@ public class QRCodeUtils {
      * 将文本内容编码为条形码或二维码<br>
      * 只有二维码时QRCodeConfig中的图片才有效
      *
-     * @param content 文本内容
      * @param format  格式枚举
+     * @param content 文本内容
      * @param width   宽度
      * @param height  高度
      * @return {@link BitMatrix}
      * @since 0.1.8
      */
-    public static BitMatrix encode(String content, BarcodeFormat format, int width, int height) {
-        return encode(content, format, new QRCodeConfig(width, height));
+    public static BitMatrix encode(BarcodeFormat format, String content, int width, int height) {
+        return encode(format, new QRCodeConfig(content, width, height));
     }
 
     /**
      * 将文本内容编码为二维码
      *
-     * @param content 文本内容
      * @param config  二维码配置信息
      * @return {@link BitMatrix}
      * @since 0.1.8
      */
-    public static BitMatrix encode(String content, QRCodeConfig config) {
-        return encode(content, BarcodeFormat.QR_CODE, config);
+    public static BitMatrix encode(QRCodeConfig config) {
+        return encode(BarcodeFormat.QR_CODE, config);
     }
 
     /**
@@ -282,7 +350,7 @@ public class QRCodeUtils {
      * @since 0.1.8
      */
     public static BitMatrix encode(String content, int width, int height) {
-        return encode(content, BarcodeFormat.QR_CODE, width, height);
+        return encode(BarcodeFormat.QR_CODE, content, width, height);
     }
 
     /**

@@ -28,28 +28,32 @@ import java.io.File;
  * @since 0.1.8
  */
 public class QRCodeUtilsTest {
+    // private String path = "F:/";// windows
+    private String path = "/Users/Chanus/Documents/";// mac
+
     @Test
     public void generateTest1() {
         String imageName = System.currentTimeMillis() + ".png";
-        String qrCodePath = "F:\\" + imageName;
+        String qrCodePath = path + imageName;
         QRCodeUtils.generate("test", 300, 300, new File(qrCodePath));
     }
 
     @Test
     public void generateTest2() {
         String imageName = System.currentTimeMillis() + ".png";
-        String qrCodePath = "F:\\" + imageName;
+        String qrCodePath = path + imageName;
         QRCodeConfig config = QRCodeConfig.create().setContent("1234567890")
-                .setWidth(400).setHeight(400).setForeColor(Color.RED).setBackColor(Color.GRAY)
-                .setMargin(1).setFontSize(18).setLogoImage("C:\\Users\\admin\\Downloads\\0.jpg")
-                .setLogoRatio(0.2f).setDesc("测试二维码").setDate(DateUtils.getDateToday());
+                .setWidth(400).setHeight(400).setForeColor(Color.GREEN).setBackColor(Color.WHITE)
+                .setMargin(1).setFontSize(18).setLogoImage(path + "头像.jpg")
+                .setLogoRatio(0.2f).setDesc("测试二维码").setDate(DateUtils.getDateToday())
+                .setBottomStart(new int[]{0, 350}).setBottomEnd(new int[]{350,350});
         QRCodeUtils.generate(config, new File(qrCodePath));
     }
 
     @Test
     public void generateTest3() {
         String imageName = System.currentTimeMillis() + ".png";
-        String qrCodePath = "F:\\" + imageName;
+        String qrCodePath = path + imageName;
         BufferedImage image = QRCodeUtils.generate(BarcodeFormat.CODE_128, "11111111", 1000, 300);
         ImageUtils.write(image, new File(qrCodePath));
     }
@@ -57,7 +61,7 @@ public class QRCodeUtilsTest {
     @Test
     public void generateTest4() {
         String imageName = System.currentTimeMillis() + ".png";
-        String qrCodePath = "F:\\" + imageName;
+        String qrCodePath = path + imageName;
         QRCodeConfig config = QRCodeConfig.create().setContent("1234567890")
                 .setWidth(400).setHeight(400).setForeColor(Color.GREEN).setBackColor(Color.LIGHT_GRAY)
                 .setMargin(1).setFontSize(18);
@@ -66,13 +70,13 @@ public class QRCodeUtilsTest {
 
     @Test
     public void decode1() {
-        String string = QRCodeUtils.decode(new File("F:\\1588931478213.png"));
+        String string = QRCodeUtils.decode(new File(path + "1588938888244.png"));
         System.out.println(string);
     }
 
     @Test
     public void decode2() {
-        String string = QRCodeUtils.decode("F:\\1588931752556.png");
+        String string = QRCodeUtils.decode(path + "1588938932468.png");
         System.out.println(string);
     }
 }

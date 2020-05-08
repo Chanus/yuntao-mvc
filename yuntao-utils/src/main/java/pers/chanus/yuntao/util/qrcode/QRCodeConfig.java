@@ -25,8 +25,8 @@ import java.util.HashMap;
  * @since 0.1.8
  */
 public class QRCodeConfig {
-    private static final int BLACK = 0xFF000000;
-    private static final int WHITE = 0xFFFFFFFF;
+    public static final int BLACK = 0xFF000000;
+    public static final int WHITE = 0xFFFFFFFF;
     /**
      * 编码格式
      */
