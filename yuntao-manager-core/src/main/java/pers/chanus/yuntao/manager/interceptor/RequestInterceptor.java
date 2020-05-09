@@ -7,7 +7,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.springmvc.LicenseUtils;
 import pers.chanus.yuntao.util.CollectionUtils;
 import pers.chanus.yuntao.util.StringUtils;
 
@@ -25,6 +24,7 @@ import javax.servlet.http.HttpSession;
  */
 public class RequestInterceptor implements HandlerInterceptor {
     private static final String LOGIN_URL = "/relogin";
+    private static final String LICENSE_URL = "/license";
 
     @Override
     public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3) {
@@ -40,20 +40,10 @@ public class RequestInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
         // 验证授权信息
         ServletContext servletContext = request.getServletContext();
-        String license = (String) servletContext.getAttribute("license");
-        String rsaPublicKey = (String) servletContext.getAttribute("rsaPublicKey");
-        Message message = LicenseUtils.verify(license, rsaPublicKey);
-        System.out.println(message.toString());
+        Message message = (Message) servletContext.getAttribute("licenseMessage");
         if (message.getCode() != 0) {
-            // 判断是否为ajax请求
-            if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
-                response.sendRedirect(request.getContextPath() + LOGIN_URL);
-                response.getWriter().print("{\"code\":1,\"msg\":\"请上传证书\"}");
-                return false;
-            } else {
-                response.sendRedirect(request.getContextPath() + LOGIN_URL);
-                return false;
-            }
+            response.sendRedirect(request.getContextPath() + LICENSE_URL);
+            return false;
         }
 
         HttpSession session = request.getSession(true);

@@ -30,7 +30,7 @@ public class LicenseUtils {
      *
      * @param name       产品名称
      * @param version    产品版本号
-     * @param macAddress 设备MAC地址
+     * @param macAddress 设备MAC地址，多个用","分隔
      * @param limit      证书时效
      * @param privateKey RSA私钥
      * @return 证书内容
@@ -49,7 +49,7 @@ public class LicenseUtils {
      *
      * @param name       产品名称
      * @param version    产品版本号
-     * @param macAddress 设备MAC地址
+     * @param macAddress 设备MAC地址，多个用","分隔
      * @param limit      证书时效
      * @param privateKey RSA私钥
      * @param path       文件路径
@@ -60,6 +60,14 @@ public class LicenseUtils {
         FileUtils.write(path, ciphertext, false);
     }
 
+    /**
+     * 校验证书信息
+     *
+     * @param license   证书密文
+     * @param publicKey RSA公钥
+     * @return
+     * @since 0.1.8
+     */
     public static Message verify(String license, String publicKey) {
         if (StringUtils.isBlank(license))
             return Message.fail("证书不存在");
@@ -82,7 +90,7 @@ public class LicenseUtils {
         if (!SHAUtils.verifySHA256(signText, sign))
             return Message.fail("证书异常，签名不一致");
 
-        if (!SystemUtils.HOST_MAC.equalsIgnoreCase(map.get("macAddress")))
+        if (!StringUtils.contains(macAddress, SystemUtils.HOST_MAC))
             return Message.fail("机器码不一致");
 
         if (StringUtils.isBlank(limit))

@@ -219,4 +219,14 @@ public class LoginController extends BaseController {
         return Message.success("ok");
     }
 
+    /**
+     * 跳转到证书无效提示页面
+     *
+     * @return
+     */
+    @GetMapping(value = "license")
+    public String license() {
+        return "license";
+    }
+
 }
