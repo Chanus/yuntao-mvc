@@ -5,11 +5,13 @@ package pers.chanus.yuntao.springmvc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
 import pers.chanus.yuntao.util.StringUtils;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import java.io.File;
+import java.nio.file.Files;
 
 /**
  * 初始化全局参数
@@ -36,6 +38,15 @@ public class ConfigServlet extends HttpServlet {
             servletContext.setAttribute("system_name", ConfigUtils.getProperty("system.name"));
             servletContext.setAttribute("system_version", ConfigUtils.getProperty("system.version"));
             servletContext.setAttribute("system_copyright", ConfigUtils.getProperty("system.copyright"));
+
+            // 获取验证授权信息
+            File licenseFile = new ClassPathResource("lic/license.lic").getFile();
+            File rsaFile = new ClassPathResource("lic/rsa_pub.txt").getFile();
+            String license = new String(Files.readAllBytes(licenseFile.toPath()));
+            String rsaPublicKey = new String(Files.readAllBytes(rsaFile.toPath()));
+
+            servletContext.setAttribute("license", license);
+            servletContext.setAttribute("rsaPublicKey", rsaPublicKey);
         } catch (Exception e) {
             LOGGER.error("系统初始化参数配置有误", e);
         }

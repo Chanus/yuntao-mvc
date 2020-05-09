@@ -9,8 +9,6 @@
  */
 package pers.chanus.yuntao.util;
 
-import com.sun.xml.internal.ws.util.UtilException;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -1204,7 +1202,7 @@ public class NumberUtils {
         }
         // 加入逻辑判断，确保begin<end并且size不能大于该表示范围
         if ((end - begin) < size) {
-            throw new UtilException("Size is larger than range between begin and end!");
+            throw new RuntimeException("Size is larger than range between begin and end!");
         }
         // 种子你可以随意生成，但不能重复
         int[] seed = new int[end - begin];
@@ -1243,7 +1241,7 @@ public class NumberUtils {
         }
         // 加入逻辑判断，确保begin<end并且size不能大于该表示范围
         if ((end - begin) < size) {
-            throw new UtilException("Size is larger than range between begin and end!");
+            throw new RuntimeException("Size is larger than range between begin and end!");
         }
 
         Random ran = new Random();

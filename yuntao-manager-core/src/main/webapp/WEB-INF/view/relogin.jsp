@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${ctx }/lib/layui/css/modules/layer/default/layer.css" media="all"/>
     <link rel="shortcut icon" href="${ctx }/images/favicon.ico" type="image/x-icon"/>
     <script type="text/javascript" src="${ctx }/lib/layui/layui.js"></script>
-    <title>重新登录</title>
+    <title>重新登录</title>
   </head>
   <body>
     <script type="text/javascript">

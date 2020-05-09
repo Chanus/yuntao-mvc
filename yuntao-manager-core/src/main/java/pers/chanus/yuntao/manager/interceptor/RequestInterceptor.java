@@ -6,9 +6,12 @@ package pers.chanus.yuntao.manager.interceptor;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
+import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.springmvc.LicenseUtils;
 import pers.chanus.yuntao.util.CollectionUtils;
 import pers.chanus.yuntao.util.StringUtils;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,6 +38,24 @@ public class RequestInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
+        // 验证授权信息
+        ServletContext servletContext = request.getServletContext();
+        String license = (String) servletContext.getAttribute("license");
+        String rsaPublicKey = (String) servletContext.getAttribute("rsaPublicKey");
+        Message message = LicenseUtils.verify(license, rsaPublicKey);
+        System.out.println(message.toString());
+        if (message.getCode() != 0) {
+            // 判断是否为ajax请求
+            if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+                response.sendRedirect(request.getContextPath() + LOGIN_URL);
+                response.getWriter().print("{\"code\":1,\"msg\":\"请上传证书\"}");
+                return false;
+            } else {
+                response.sendRedirect(request.getContextPath() + LOGIN_URL);
+                return false;
+            }
+        }
+
         HttpSession session = request.getSession(true);
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");// 登录账号信息
 

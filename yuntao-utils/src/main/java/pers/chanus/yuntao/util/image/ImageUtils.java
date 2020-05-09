@@ -9,7 +9,6 @@
  */
 package pers.chanus.yuntao.util.image;
 
-import com.sun.xml.internal.ws.util.UtilException;
 import pers.chanus.yuntao.util.FileUtils;
 import pers.chanus.yuntao.util.IOUtils;
 import pers.chanus.yuntao.util.NumberUtils;
@@ -1323,7 +1322,7 @@ public class ImageUtils {
             try {
                 return Font.createFont(Font.TYPE1_FONT, fontFile);
             } catch (Exception e1) {
-                throw new UtilException(e);
+                throw new RuntimeException(e);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -1347,7 +1346,7 @@ public class ImageUtils {
             try {
                 return Font.createFont(Font.TYPE1_FONT, fontStream);
             } catch (Exception e1) {
-                throw new UtilException(e1);
+                throw new RuntimeException(e1);
             }
         } catch (IOException e) {
             e.printStackTrace();
