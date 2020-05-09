@@ -208,8 +208,8 @@ public class QRCodeUtils {
         if (logoImage != null && BarcodeFormat.QR_CODE == format) {
             // 只有二维码可以贴图
             final float logoRatio = config.getLogoRatio();
-            int width;
-            int height;
+            int width;// logo宽度
+            int height;// logo高度
             // 按照最短的边做比例缩放
             if (qrWidth < qrHeight) {
                 width = (int) (qrWidth * logoRatio);
@@ -219,70 +219,68 @@ public class QRCodeUtils {
                 width = logoImage.getWidth(null) * height / logoImage.getHeight(null);
             }
 
-            Img.from(image).pressImage(Img.from(logoImage).round(0.3).getImg(), new Rectangle(width, height), 1);
+            Img.from(image).pressImage(Img.from(logoImage).round(config.getLogoRadius()).getImg(), new Rectangle(width, height), 1);
         }
 
         // 处理下方文字
-        String desc = config.getDesc();
-        if (StringUtils.isNotBlank(desc)) {
+        String text = config.getText();
+        if (StringUtils.isNotBlank(text)) {
             Graphics g = image.getGraphics();
+            // 文字起始位置，即文字左边距
+            int textLRMargin = config.getTextLRMargin();
+            // 文字与二维码之间的间距
+            int textTBMargin = config.getTextTBMargin();
             // 设置文字字体
-            int whiteWidth = config.getHeight() - config.getBottomEnd()[1];
             Font font = new Font("宋体", Font.PLAIN, config.getFontSize());
             int fontHeight = g.getFontMetrics(font).getHeight();
             // 计算需要多少行
             int lineNum = 1;
             int currentLineLen = 0;
-            for (int i = 0; i < desc.length(); i++) {
-                char c = desc.charAt(i);
-                int charWidth = g.getFontMetrics(font).charWidth(c);
-                if (currentLineLen + charWidth > qrWidth) {
-                    lineNum++;
-                    currentLineLen = 0;
-                    continue;
-                }
-                currentLineLen += charWidth;
-            }
-            int totalFontHeight = fontHeight * lineNum;
-            int wordTopMargin = 4;
-            BufferedImage bufferedImage = new BufferedImage(qrWidth, qrHeight + totalFontHeight + wordTopMargin - whiteWidth,
-                    BufferedImage.TYPE_INT_RGB);
-            Graphics g1 = bufferedImage.getGraphics();
-            if (totalFontHeight + wordTopMargin - whiteWidth > 0) {
-                g1.setColor(Color.WHITE);
-                g1.fillRect(0, qrHeight, qrWidth, totalFontHeight + wordTopMargin - whiteWidth);
-            }
-            g1.setColor(new Color(QRCodeConfig.BLACK));
-            g1.setFont(font);
-            int startX = (78 - (12 * desc.length())) / 2;
-            g1.drawImage(image, 0, 0, null);
-            qrWidth = config.getBottomEnd()[0] - config.getBottomStart()[0];
-            qrHeight = config.getBottomEnd()[1] + 1;
-            currentLineLen = 0;
-            int currentLineIndex = 0;
-            int baseLo = g1.getFontMetrics().getAscent();
-            for (int i = 0; i < desc.length(); i++) {
-                String c = desc.substring(i, i + 1);
+            int textLineMaxLen = config.getWidth() - (textLRMargin * 2);
+            for (int i = 0; i < text.length(); i++) {
+                String c = text.substring(i, i + 1);
                 int charWidth = g.getFontMetrics(font).stringWidth(c);
-                if (currentLineLen + charWidth > qrWidth) {
-                    currentLineIndex++;
-                    currentLineLen = 0;
-                    g1.drawString(c, currentLineLen + startX - 5,
-                            -5 + qrHeight + baseLo + fontHeight * (currentLineIndex) + wordTopMargin);
+                if (currentLineLen + charWidth > textLineMaxLen) {
+                    lineNum++;
                     currentLineLen = charWidth;
                     continue;
                 }
-                g1.drawString(c, currentLineLen + startX - 5,
-                        -5 + qrHeight + baseLo + fontHeight * (currentLineIndex) + wordTopMargin);
+                currentLineLen += charWidth;
+                if (lineNum == 1 && i == text.length() -1) {// 不存在换行时
+                    textLRMargin = (config.getWidth() - currentLineLen) / 2;
+                }
+            }
+            int totalFontHeight = fontHeight * lineNum;
+            BufferedImage bufferedImage = new BufferedImage(qrWidth, qrHeight + totalFontHeight + (textTBMargin * 2),
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics g1 = bufferedImage.getGraphics();
+            if (totalFontHeight + (textTBMargin * 2) > 0) {
+                g1.setColor(Color.WHITE);
+                g1.fillRect(0, qrHeight, qrWidth, totalFontHeight + (textTBMargin * 2));
+            }
+            g1.setColor(config.getFontColor());
+            g1.setFont(font);
+            g1.drawImage(image, 0, 0, null);
+            qrHeight = config.getHeight() + textTBMargin;
+            currentLineLen = 0;
+            int currentLineIndex = 0;
+            int baseLo = g1.getFontMetrics().getAscent();
+            for (int i = 0; i < text.length(); i++) {
+                String c = text.substring(i, i + 1);
+                int charWidth = g.getFontMetrics(font).stringWidth(c);
+                if (currentLineLen + charWidth > textLineMaxLen) {
+                    currentLineIndex++;
+                    currentLineLen = 0;
+                    g1.drawString(c, currentLineLen + textLRMargin, qrHeight + baseLo + (fontHeight * currentLineIndex));
+                    currentLineLen = charWidth;
+                    continue;
+                }
+                g1.drawString(c, currentLineLen + textLRMargin, qrHeight + baseLo + (fontHeight * currentLineIndex));
                 currentLineLen += charWidth;
             }
+            g.dispose();
+            g1.dispose();
 
-            // 处理二维码下日期
-            String date = config.getDate();
-            if (StringUtils.isNotBlank(date)) {
-                g1.drawString(date, 5, 6 + qrHeight + baseLo + fontHeight * (currentLineIndex) + wordTopMargin);
-                g1.dispose();
-            }
             image = bufferedImage;
         }
 

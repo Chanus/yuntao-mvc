@@ -25,8 +25,8 @@ import java.util.HashMap;
  * @since 0.1.8
  */
 public class QRCodeConfig {
-    public static final int BLACK = 0xFF000000;
-    public static final int WHITE = 0xFFFFFFFF;
+    private static final int BLACK = 0xFF000000;
+    private static final int WHITE = 0xFFFFFFFF;
     /**
      * 编码格式
      */
@@ -69,10 +69,6 @@ public class QRCodeConfig {
      */
     private String imageType = ImageUtils.IMAGE_TYPE_PNG;
     /**
-     * 字体大小
-     */
-    private int fontSize = 12;
-    /**
      * 二维码logo
      */
     private Image logoImage;
@@ -81,21 +77,29 @@ public class QRCodeConfig {
      */
     private float logoRatio = 0.20f;
     /**
+     * 二维码logo圆角程度（0-1,0表示不圆角，1表示圆）
+     */
+    private double logoRadius = 0.0D;
+    /**
      * 二维码下文字
      */
-    private String desc;
+    private String text;
     /**
-     * 二维码下方日期
+     * 字体大小
      */
-    private String date;
+    private int fontSize = 12;
     /**
-     * 二维码最下边的开始坐标
+     * 字体颜色，默认黑色
      */
-    private int[] bottomStart;
+    private Color fontColor = Color.BLACK;
     /**
-     * 二维码最下边的结束坐标
+     * 二维码下文字的左右间距，当文字存在换行时生效，否则文字居中显示
      */
-    private int[] bottomEnd;
+    private int textLRMargin;
+    /**
+     * 二维码下文字的上下间距
+     */
+    private int textTBMargin = 10;
 
     /**
      * 创建QrConfig
@@ -229,15 +233,6 @@ public class QRCodeConfig {
         return this;
     }
 
-    public int getFontSize() {
-        return fontSize;
-    }
-
-    public QRCodeConfig setFontSize(int fontSize) {
-        this.fontSize = fontSize;
-        return this;
-    }
-
     public Image getLogoImage() {
         return logoImage;
     }
@@ -264,39 +259,57 @@ public class QRCodeConfig {
         return this;
     }
 
-    public String getDesc() {
-        return desc;
+    public double getLogoRadius() {
+        return logoRadius;
     }
 
-    public QRCodeConfig setDesc(String desc) {
-        this.desc = desc;
+    public QRCodeConfig setLogoRadius(double logoRadius) {
+        this.logoRadius = logoRadius;
         return this;
     }
 
-    public String getDate() {
-        return date;
+    public String getText() {
+        return text;
     }
 
-    public QRCodeConfig setDate(String date) {
-        this.date = date;
+    public QRCodeConfig setText(String text) {
+        this.text = text;
         return this;
     }
 
-    public int[] getBottomStart() {
-        return bottomStart;
+    public int getFontSize() {
+        return fontSize;
     }
 
-    public QRCodeConfig setBottomStart(int[] bottomStart) {
-        this.bottomStart = bottomStart;
+    public QRCodeConfig setFontSize(int fontSize) {
+        this.fontSize = fontSize;
         return this;
     }
 
-    public int[] getBottomEnd() {
-        return bottomEnd;
+    public Color getFontColor() {
+        return fontColor;
     }
 
-    public QRCodeConfig setBottomEnd(int[] bottomEnd) {
-        this.bottomEnd = bottomEnd;
+    public QRCodeConfig setFontColor(Color fontColor) {
+        this.fontColor = fontColor;
+        return this;
+    }
+
+    public int getTextLRMargin() {
+        return textLRMargin;
+    }
+
+    public QRCodeConfig setTextLRMargin(int textLRMargin) {
+        this.textLRMargin = textLRMargin;
+        return this;
+    }
+
+    public int getTextTBMargin() {
+        return textTBMargin;
+    }
+
+    public QRCodeConfig setTextTBMargin(int textTBMargin) {
+        this.textTBMargin = textTBMargin;
         return this;
     }
 
@@ -330,10 +343,12 @@ public class QRCodeConfig {
                 ", backColor=" + backColor +
                 ", margin=" + margin +
                 ", charset=" + charset +
-                ", fontSize=" + fontSize +
                 ", logoRatio=" + logoRatio +
-                ", desc=" + desc +
-                ", date=" + date +
+                ", text=" + text +
+                ", fontSize=" + fontSize +
+                ", fontColor=" + fontColor +
+                ", textLRMargin=" + textLRMargin +
+                ", textTBMargin=" + textTBMargin +
                 "]";
     }
 }

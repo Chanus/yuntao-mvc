@@ -11,7 +11,6 @@ package pers.chanus.yuntao.util.test;
 
 import com.google.zxing.BarcodeFormat;
 import org.junit.Test;
-import pers.chanus.yuntao.util.DateUtils;
 import pers.chanus.yuntao.util.image.ImageUtils;
 import pers.chanus.yuntao.util.qrcode.QRCodeConfig;
 import pers.chanus.yuntao.util.qrcode.QRCodeUtils;
@@ -28,8 +27,8 @@ import java.io.File;
  * @since 0.1.8
  */
 public class QRCodeUtilsTest {
-    // private String path = "F:/";// windows
-    private String path = "/Users/Chanus/Documents/";// mac
+    private String path = "F:/";// windows
+    // private String path = "/Users/Chanus/Documents/";// mac
 
     @Test
     public void generateTest1() {
@@ -43,10 +42,11 @@ public class QRCodeUtilsTest {
         String imageName = System.currentTimeMillis() + ".png";
         String qrCodePath = path + imageName;
         QRCodeConfig config = QRCodeConfig.create().setContent("1234567890")
-                .setWidth(400).setHeight(400).setForeColor(Color.GREEN).setBackColor(Color.WHITE)
-                .setMargin(1).setFontSize(18).setLogoImage(path + "头像.jpg")
-                .setLogoRatio(0.2f).setDesc("测试二维码").setDate(DateUtils.getDateToday())
-                .setBottomStart(new int[]{0, 350}).setBottomEnd(new int[]{350,350});
+                .setWidth(400).setHeight(400).setForeColor(Color.BLACK).setBackColor(Color.WHITE)
+                .setMargin(2).setFontSize(18).setLogoImage(path + "0.jpg")
+                .setLogoRatio(0.2f).setLogoRadius(1)
+                .setText("不管您加或者不加 您都可以享受到开源的代码 感谢您的支持 群里的任何问题我都会一一解答 感谢您的信任 群内提供 vue-admin-beautiful-template 基础版本 群内提供很详细的基础文档 适合框架快速入门")
+                .setFontColor(Color.RED).setTextLRMargin(5).setTextTBMargin(10);
         QRCodeUtils.generate(config, new File(qrCodePath));
     }
 
@@ -63,8 +63,11 @@ public class QRCodeUtilsTest {
         String imageName = System.currentTimeMillis() + ".png";
         String qrCodePath = path + imageName;
         QRCodeConfig config = QRCodeConfig.create().setContent("1234567890")
-                .setWidth(400).setHeight(400).setForeColor(Color.GREEN).setBackColor(Color.LIGHT_GRAY)
-                .setMargin(1).setFontSize(18);
+                .setWidth(400).setHeight(400).setForeColor(Color.BLACK).setBackColor(Color.WHITE)
+                .setMargin(2).setFontSize(18).setLogoImage(path + "0.jpg")
+                .setLogoRatio(0.2f).setLogoRadius(1)
+                .setText("不管您加或者不加 您都可以享受到开源的代码 感谢您的支持 群里的任何问题我都会一一解答 感谢您的信任 群内提供 vue-admin-beautiful-template 基础版本 群内提供很详细的基础文档 适合框架快速入门")
+                .setFontColor(Color.RED).setTextLRMargin(5).setTextTBMargin(10);
         QRCodeUtils.generate(config, qrCodePath);
     }
 
@@ -76,7 +79,7 @@ public class QRCodeUtilsTest {
 
     @Test
     public void decode2() {
-        String string = QRCodeUtils.decode(path + "1588938932468.png");
+        String string = QRCodeUtils.decode(path + "1589007592142.png");
         System.out.println(string);
     }
 }
