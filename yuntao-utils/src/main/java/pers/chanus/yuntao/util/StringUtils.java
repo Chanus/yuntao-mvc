@@ -22,12 +22,49 @@ import java.util.zip.GZIPOutputStream;
  * @since 0.0.1
  */
 public class StringUtils {
-    /**
-     * 空字符串
-     *
-     * @since 0.0.5
-     */
+    public static final char C_SPACE = CharUtils.SPACE;
+    public static final char C_TAB = CharUtils.TAB;
+    public static final char C_DOT = CharUtils.DOT;
+    public static final char C_SLASH = CharUtils.SLASH;
+    public static final char C_BACKSLASH = CharUtils.BACKSLASH;
+    public static final char C_CR = CharUtils.CR;
+    public static final char C_LF = CharUtils.LF;
+    public static final char C_UNDERLINE = CharUtils.UNDERLINE;
+    public static final char C_COMMA = CharUtils.COMMA;
+    public static final char C_DELIM_START = CharUtils.DELIM_START;
+    public static final char C_DELIM_END = CharUtils.DELIM_END;
+    public static final char C_BRACKET_START = CharUtils.BRACKET_START;
+    public static final char C_BRACKET_END = CharUtils.BRACKET_END;
+    public static final char C_COLON = CharUtils.COLON;
+
+    public static final String SPACE = " ";
+    public static final String TAB = "	";
+    public static final String DOT = ".";
+    public static final String DOUBLE_DOT = "..";
+    public static final String SLASH = "/";
+    public static final String BACKSLASH = "\\";
     public static final String EMPTY = "";
+    public static final String NULL = "null";
+    public static final String CR = "\r";
+    public static final String LF = "\n";
+    public static final String CRLF = "\r\n";
+    public static final String UNDERLINE = "_";
+    public static final String DASHED = "-";
+    public static final String COMMA = ",";
+    public static final String DELIM_START = "{";
+    public static final String DELIM_END = "}";
+    public static final String BRACKET_START = "[";
+    public static final String BRACKET_END = "]";
+    public static final String COLON = ":";
+
+    public static final String HTML_NBSP = "&nbsp;";
+    public static final String HTML_AMP = "&amp;";
+    public static final String HTML_QUOTE = "&quot;";
+    public static final String HTML_APOS = "&apos;";
+    public static final String HTML_LT = "&lt;";
+    public static final String HTML_GT = "&gt;";
+
+    public static final String EMPTY_JSON = "{}";
 
     /**
      * 字符串编码格式
@@ -37,7 +74,12 @@ public class StringUtils {
     public static final String CHARSET = "UTF-8";
 
     /**
-     * 判断字符串是否为空或空格
+     * 判断字符串是否为空或空白，空白的定义如下：<br>
+     * <pre>
+     *     1、为null
+     *     2、为不可见字符（如空格）
+     *     3、""
+     * </pre>
      *
      * @param s 源字符串
      * @return {@code true} 字符串为空；{@code false} 字符串不为空
@@ -48,7 +90,41 @@ public class StringUtils {
     }
 
     /**
-     * 判断字符串是否为非空或非空格
+     * 判断字符串是否为空或空白，空白的定义如下：<br>
+     * <pre>
+     *     1、为null
+     *     2、为不可见字符（如空格）
+     *     3、""
+     * </pre>
+     *
+     * @param s 源字符串
+     * @return {@code true} 字符串为空；{@code false} 字符串不为空
+     * @since 0.1.8
+     */
+    public static boolean isBlank(CharSequence s) {
+        int length;
+
+        if ((s == null) || ((length = s.length()) == 0)) {
+            return true;
+        }
+
+        for (int i = 0; i < length; i++) {
+            // 只要有一个非空字符即为非空字符串
+            if (!CharUtils.isBlankChar(s.charAt(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 判断字符串是否为非空或非空白，空白的定义如下：<br>
+     * <pre>
+     *     1、为null
+     *     2、为不可见字符（如空格）
+     *     3、""
+     * </pre>
      *
      * @param s 源字符串
      * @return {@code true} 字符串不为空；{@code false} 字符串为空
@@ -56,6 +132,52 @@ public class StringUtils {
      */
     public static boolean isNotBlank(final String s) {
         return !isBlank(s);
+    }
+
+    /**
+     * 判断字符串是否为非空或非空白，空白的定义如下：<br>
+     * <pre>
+     *     1、为null
+     *     2、为不可见字符（如空格）
+     *     3、""
+     * </pre>
+     *
+     * @param s 源字符串
+     * @return {@code true} 字符串不为空；{@code false} 字符串为空
+     * @since 0.0.1
+     */
+    public static boolean isNotBlank(CharSequence s) {
+        return !isBlank(s);
+    }
+
+    /**
+     * 字符串是否为空，空的定义如下:
+     * <pre>
+     *     1、为null
+     *     2、为""
+     * </pre>
+     *
+     * @param s 源字符串
+     * @return {@code true} 字符串为空；{@code false} 字符串不为空
+     * @since 0.1.8
+     */
+    public static boolean isEmpty(CharSequence s) {
+        return s == null || s.length() == 0;
+    }
+
+    /**
+     * 字符串是否不为空，空的定义如下:
+     * <pre>
+     *     1、为null
+     *     2、为""
+     * </pre>
+     *
+     * @param s 源字符串
+     * @return {@code true} 字符串不为空；{@code false} 字符串为空
+     * @since 0.1.8
+     */
+    public static boolean isNotEmpty(CharSequence s) {
+        return !isEmpty(s);
     }
 
     /**

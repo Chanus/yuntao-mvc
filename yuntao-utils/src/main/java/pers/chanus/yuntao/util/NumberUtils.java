@@ -731,8 +731,7 @@ public class NumberUtils {
      * @since 0.1.8
      */
     public static double div(Double v1, Double v2, int scale, RoundingMode roundingMode) {
-        //noinspection RedundantCast
-        return div((Number) v1, (Number) v2, scale, roundingMode).doubleValue();
+        return div((Number) v1, v2, scale, roundingMode).doubleValue();
     }
 
     /**
