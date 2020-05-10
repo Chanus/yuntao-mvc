@@ -12,7 +12,6 @@ package pers.chanus.yuntao.manager.test;
 import org.junit.Test;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.springmvc.LicenseUtils;
-import pers.chanus.yuntao.util.SystemUtils;
 
 /**
  * 生成证书
@@ -32,13 +31,15 @@ public class LicenseUtilsTest {
     public void licenseTest() {
         String name = "yundao";
         String version = "0.1.8";
-        String macAddress = SystemUtils.HOST_MAC + ",48-8A-D2-7B-8F-4F";
+        // String macAddress = SystemUtils.HOST_MAC;
+        String macAddress = null;
         String limit = "0";
+        boolean enable = false;
 
-        String ciphertext = LicenseUtils.createLicense(name, version, macAddress, limit, privateKey);
+        String ciphertext = LicenseUtils.createLicense(name, version, macAddress, limit, enable, privateKey);
         System.out.println(ciphertext);
 
-        LicenseUtils.createLicense(name, version, macAddress, limit, privateKey, path);
+        LicenseUtils.createLicense(name, version, macAddress, limit, enable, privateKey, path);
 
         Message message = LicenseUtils.verify(ciphertext, publicKey);
         System.out.println(message.toString());

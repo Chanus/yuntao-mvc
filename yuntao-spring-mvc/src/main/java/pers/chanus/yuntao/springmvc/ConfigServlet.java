@@ -6,7 +6,6 @@ package pers.chanus.yuntao.springmvc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.util.StringUtils;
 
 import javax.servlet.ServletContext;
@@ -45,8 +44,9 @@ public class ConfigServlet extends HttpServlet {
             File rsaFile = new ClassPathResource("lic/rsa_pub.txt").getFile();
             String license = new String(Files.readAllBytes(licenseFile.toPath()));
             String rsaPublicKey = new String(Files.readAllBytes(rsaFile.toPath()));
-            Message message = LicenseUtils.verify(license, rsaPublicKey);
-            servletContext.setAttribute("licenseMessage", message);
+            servletContext.setAttribute("license", license);
+            servletContext.setAttribute("rsaPublicKey", rsaPublicKey);
+            servletContext.setAttribute("licenseMessage", LicenseUtils.verify(license, rsaPublicKey));
         } catch (Exception e) {
             LOGGER.error("系统初始化参数配置有误", e);
         }

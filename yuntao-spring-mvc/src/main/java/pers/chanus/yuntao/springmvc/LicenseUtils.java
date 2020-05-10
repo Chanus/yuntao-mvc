@@ -31,13 +31,14 @@ public class LicenseUtils {
      * @param name       产品名称
      * @param version    产品版本号
      * @param macAddress 设备MAC地址，多个用","分隔
-     * @param limit      证书时效
+     * @param limit      证书时效，为yyyy-MM-dd格式日期字符串，若为0则表示永久有效
+     * @param enable     是否启用证书授权，{@code true}启用，{@code false}禁用
      * @param privateKey RSA私钥
      * @return 证书内容
      * @since 0.1.8
      */
-    public static String createLicense(String name, String version, String macAddress, String limit, String privateKey) {
-        String text = "name=" + name + "&version=" + version + "&macAddress=" + macAddress + "&limit=" + limit;
+    public static String createLicense(String name, String version, String macAddress, String limit, boolean enable, String privateKey) {
+        String text = "name=" + name + "&version=" + version + "&macAddress=" + macAddress + "&limit=" + limit + "&enable=" + enable;
         String sign = SHAUtils.sha256(text);
         text = text + "&sign=" + sign;
 
@@ -50,13 +51,14 @@ public class LicenseUtils {
      * @param name       产品名称
      * @param version    产品版本号
      * @param macAddress 设备MAC地址，多个用","分隔
-     * @param limit      证书时效
+     * @param limit      证书时效，为yyyy-MM-dd格式日期字符串，若为0则表示永久有效
+     * @param enable     是否启用证书授权，{@code true}启用，{@code false}禁用
      * @param privateKey RSA私钥
      * @param path       文件路径
      * @since 0.1.8
      */
-    public static void createLicense(String name, String version, String macAddress, String limit, String privateKey, String path) {
-        String ciphertext = createLicense(name, version, macAddress, limit, privateKey);
+    public static void createLicense(String name, String version, String macAddress, String limit, boolean enable, String privateKey, String path) {
+        String ciphertext = createLicense(name, version, macAddress, limit, enable, privateKey);
         FileUtils.write(path, ciphertext, false);
     }
 
@@ -84,11 +86,15 @@ public class LicenseUtils {
         String version = map.get("version");
         String macAddress = map.get("macAddress");
         String limit = map.get("limit");
+        String enable = map.get("enable");
         String sign = map.get("sign");
-        String signText = "name=" + name + "&version=" + version + "&macAddress=" + macAddress + "&limit=" + limit;
+        String signText = "name=" + name + "&version=" + version + "&macAddress=" + macAddress + "&limit=" + limit + "&enable=" + enable;
 
         if (!SHAUtils.verifySHA256(signText, sign))
             return Message.fail("证书异常，签名不一致");
+
+        if ("false".equals(enable))
+            return Message.success("校验成功");
 
         if (!StringUtils.contains(macAddress, SystemUtils.HOST_MAC))
             return Message.fail("机器码不一致");
