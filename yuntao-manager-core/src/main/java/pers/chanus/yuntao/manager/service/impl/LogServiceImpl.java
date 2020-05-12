@@ -36,15 +36,10 @@ public class LogServiceImpl implements LogService {
         LoginUser loginUser = LoginUser.getLoginUser();
         String operateNo = loginUser == null ? "system" : loginUser.getLoginNo(),
                 operateRoleId = loginUser == null ? "0" : loginUser.getRoleId();
-        sysLog.setOperateNo(operateNo);
-        sysLog.setOperateRoleId(operateRoleId);
-        sysLog.setOperateIp(IpUtils.getIpAddress(request));
-        sysLog.setOperateModuleCode(moduleCode);
-        sysLog.setOperateUrl(String.valueOf(request.getRequestURL()));// 请求URL
-        sysLog.setOperateContent(content);// 操作内容
-        sysLog.setOperateType(logType.name());
-        sysLog.setOperateTypeDesc(operateTypeDesc);
-        sysLog.setOperateTime(new Date());
+        sysLog.setOperateNo(operateNo).setOperateRoleId(operateRoleId).setOperateIp(IpUtils.getIpAddress(request))
+                .setOperateModuleCode(moduleCode).setOperateUrl(String.valueOf(request.getRequestURL()))
+                .setOperateContent(content).setOperateType(logType.name())
+                .setOperateTypeDesc(operateTypeDesc).setOperateTime(new Date());
 
         logMapper.insertSelective(sysLog);
     }
@@ -52,15 +47,9 @@ public class LogServiceImpl implements LogService {
     @Override
     public void insert(String operateNo, String operateRoleId, String moduleCode, String operateMethod, String content, LogTypeEnum logType, String operateTypeDesc, Integer operateConsumeTime) {
         Log log = new Log();
-        log.setOperateNo(operateNo);
-        log.setOperateRoleId(operateRoleId);
-        log.setOperateModuleCode(moduleCode);
-        log.setOperateMethod(operateMethod);
-        log.setOperateContent(content);
-        log.setOperateType(logType.name());
-        log.setOperateTypeDesc(operateTypeDesc);
-        log.setOperateConsumeTime(operateConsumeTime);
-        log.setOperateTime(new Date());
+        log.setOperateNo(operateNo).setOperateRoleId(operateRoleId).setOperateModuleCode(moduleCode).setOperateMethod(operateMethod)
+                .setOperateContent(content).setOperateType(logType.name()).setOperateTypeDesc(operateTypeDesc)
+                .setOperateConsumeTime(operateConsumeTime).setOperateTime(new Date());
 
         logMapper.insertSelective(log);
     }

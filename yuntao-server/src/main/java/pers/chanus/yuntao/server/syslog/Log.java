@@ -72,96 +72,108 @@ public class Log implements Serializable {
         return operateNo;
     }
 
-    public void setOperateNo(String operateNo) {
+    public Log setOperateNo(String operateNo) {
         this.operateNo = operateNo == null ? null : operateNo.trim();
+        return this;
     }
 
     public String getOperateRoleId() {
         return operateRoleId;
     }
 
-    public void setOperateRoleId(String operateRoleId) {
+    public Log setOperateRoleId(String operateRoleId) {
         this.operateRoleId = operateRoleId == null ? null : operateRoleId.trim();
+        return this;
     }
 
     public String getOperateIp() {
         return operateIp;
     }
 
-    public void setOperateIp(String operateIp) {
+    public Log setOperateIp(String operateIp) {
         this.operateIp = operateIp;
+        return this;
     }
 
     public String getOperateModuleCode() {
         return operateModuleCode;
     }
 
-    public void setOperateModuleCode(String operateModuleCode) {
+    public Log setOperateModuleCode(String operateModuleCode) {
         this.operateModuleCode = operateModuleCode == null ? null : operateModuleCode.trim();
+        return this;
     }
 
     public String getOperateUrl() {
         return operateUrl;
     }
 
-    public void setOperateUrl(String operateUrl) {
+    public Log setOperateUrl(String operateUrl) {
         this.operateUrl = operateUrl == null ? null : operateUrl.trim();
+        return this;
     }
 
     public String getOperateMethod() {
         return operateMethod;
     }
 
-    public void setOperateMethod(String operateMethod) {
+    public Log setOperateMethod(String operateMethod) {
         this.operateMethod = operateMethod == null ? null : operateMethod.trim();
+        return this;
     }
 
     public String getOperateException() {
         return operateException;
     }
 
-    public void setOperateException(String operateException) {
+    public Log setOperateException(String operateException) {
         this.operateException = operateException == null ? null : operateException.trim();
+        return this;
     }
 
     public String getOperateContent() {
         return operateContent;
     }
 
-    public void setOperateContent(String operateContent) {
+    public Log setOperateContent(String operateContent) {
         this.operateContent = operateContent;
+        return this;
     }
 
     public String getOperateType() {
         return operateType;
     }
 
-    public void setOperateType(String operateType) {
+    public Log setOperateType(String operateType) {
         this.operateType = operateType == null ? null : operateType.trim();
+        return this;
     }
 
     public String getOperateTypeDesc() {
         return StringUtils.isBlank(operateTypeDesc) ? LOGTYPE_MAP.get(this.operateType) : operateTypeDesc;
     }
 
-    public void setOperateTypeDesc(String operateTypeDesc) {
+    public Log setOperateTypeDesc(String operateTypeDesc) {
         this.operateTypeDesc = operateTypeDesc == null ? null : operateTypeDesc.trim();
+        return this;
     }
 
     public Integer getOperateConsumeTime() {
         return operateConsumeTime;
     }
 
-    public void setOperateConsumeTime(Integer operateConsumeTime) {
+    public Log setOperateConsumeTime(Integer operateConsumeTime) {
         this.operateConsumeTime = operateConsumeTime;
+        return this;
     }
 
     public Date getOperateTime() {
         return operateTime;
     }
 
-    public void setOperateTime(Date operateTime) {
+    public Log setOperateTime(Date operateTime) {
         this.operateTime = operateTime;
+        return this;
     }
 
     public Date getGmtCreate() {
