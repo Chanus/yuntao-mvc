@@ -136,23 +136,21 @@ public class HttpUtils {
     /**
      * 向指定URL发送POST方法的请求
      *
-     * @param url 发送请求的URL，包含请求参数
+     * @param url   发送请求的URL，可以包含请求参数
+     * @param param 请求参数
      * @return 远程资源的响应结果
-     * @since 0.0.1
+     * @since 0.1.9
      */
-    public static String post(final String url) {
+    public static String post(final String url, final String param) {
         StringBuilder result = new StringBuilder();// 返回的结果
         BufferedReader bufferedReader = null;// 读取响应输入流
         BufferedWriter bufferedWriter = null;// 写入参数输出流
         try {
-            // 分割url
-            String[] urlArr = url.split("\\?");
             // 创建URL对象
-            URL connURL = new URL(urlArr[0]);
+            URL connURL = new URL(url);
             // 打开URL连接
             HttpURLConnection connection = (HttpURLConnection) connURL.openConnection();
             // 设置通用属性
-
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
@@ -167,9 +165,9 @@ public class HttpUtils {
             connection.connect();
 
             // POST请求参数
-            if (urlArr.length == 2) {// 存在参数
+            if (StringUtils.isNotBlank(param)) {
                 bufferedWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), StandardCharsets.UTF_8));
-                bufferedWriter.write(urlArr[1]);
+                bufferedWriter.write(param);
                 bufferedWriter.flush();
             }
 
@@ -193,6 +191,17 @@ public class HttpUtils {
     /**
      * 向指定URL发送POST方法的请求
      *
+     * @param url 发送请求的URL，可以包含请求参数
+     * @return 远程资源的响应结果
+     * @since 0.0.1
+     */
+    public static String post(final String url) {
+        return post(url, (String) null);
+    }
+
+    /**
+     * 向指定URL发送POST方法的请求
+     *
      * @param url        发送请求的URL
      * @param parameters 请求参数
      * @return 远程资源的响应结果
@@ -200,7 +209,28 @@ public class HttpUtils {
      */
     public static String post(final String url, final Map<String, Object> parameters) {
         String uri = UrlUtils.getParamsUri(parameters);
-        return post(StringUtils.isBlank(uri) ? url : (url + "?" + uri));
+        return post(url, uri);
+    }
+
+    /**
+     * 向指定URL发送异步POST方法的请求
+     *
+     * @param url      发送请求的URL，包含请求参数
+     * @param param    请求参数
+     * @param callBack 回调方法
+     * @since 0.1.9
+     */
+    public static void postAsyn(final String url, final String param, final CallBack callBack) {
+        new Thread(() -> {
+            try {
+                String result = post(url, param);
+                if (callBack != null) {
+                    callBack.onRequestComplete(result);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("Asynchronous request exception", e);
+            }
+        }).start();
     }
 
     /**
