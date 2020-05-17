@@ -25,14 +25,14 @@ import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
  */
 public class AccessTokenApi {
     /**
+     * 获取 access_token url，请求方式为 GET
+     */
+    private static final String TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
+
+    /**
      * 公众号开发信息
      */
     public static ApiConfig apiConfig = null;
-
-    /**
-     * 获取 access_token url，请求方式为 GET
-     */
-    private static final String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 
     /**
      * 用于手动设置的 accessToken
@@ -58,9 +58,9 @@ public class AccessTokenApi {
         if (accessToken != null && accessToken.isAvailable())
             return accessToken;
 
-        String requestUrl = url.replace("APPID", apiConfig.getAppId()).replace("APPSECRET", apiConfig.getAppSecret());
+        String url = TOKEN_URL.replace("APPID", apiConfig.getAppId()).replace("APPSECRET", apiConfig.getAppSecret());
         // 发起GET请求获取凭证
-        String result = HttpUtils.get(requestUrl);
+        String result = HttpUtils.get(url);
         AccessToken token = null;
         if (StringUtils.isNotBlank(result)) {
             token = new AccessToken(result);
@@ -88,10 +88,10 @@ public class AccessTokenApi {
      * @since 0.1.9
      */
     public static AccessToken refreshAccessToken() {
-        String requestUrl = url.replace("APPID", apiConfig.getAppId()).replace("APPSECRET", apiConfig.getAppSecret());
+        String url = TOKEN_URL.replace("APPID", apiConfig.getAppId()).replace("APPSECRET", apiConfig.getAppSecret());
         // 最多三次请求
         return RetryUtils.retryOnException(3, () -> {
-            String json = HttpUtils.get(requestUrl);
+            String json = HttpUtils.get(url);
             return new AccessToken(json);
         });
     }

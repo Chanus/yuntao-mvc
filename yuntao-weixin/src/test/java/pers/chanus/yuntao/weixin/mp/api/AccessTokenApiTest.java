@@ -3,7 +3,7 @@
  * FileName: AccessTokenApiTest
  * Author:   Chanus
  * Date:     2020-05-17 17:30:37
- * Description: AccessTokenApi测试
+ * Description: AccessTokenApi 测试
  * History:
  * <author>          <time>          <version>          <desc>
  */
@@ -14,7 +14,7 @@ import pers.chanus.yuntao.weixin.mp.api.bean.AccessToken;
 import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
 
 /**
- * AccessTokenApi
+ * AccessTokenApi 测试
  *
  * @author Chanus
  * @date 2020-05-17 17:30:37
