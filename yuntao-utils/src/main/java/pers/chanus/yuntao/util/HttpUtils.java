@@ -87,9 +87,9 @@ public class HttpUtils {
      * @return 远程资源的响应结果
      * @since 0.0.1
      */
-    public static String get(final String url, final Map<String, Object> parameters) {
-        String uri = UrlUtils.getParamsUri(parameters);
-        return get(StringUtils.isBlank(uri) ? url : (url + "?" + uri));
+    public static String get(String url, final Map<String, Object> parameters) {
+        url = UrlUtils.setParam(url, parameters);
+        return get(url);
     }
 
     /**

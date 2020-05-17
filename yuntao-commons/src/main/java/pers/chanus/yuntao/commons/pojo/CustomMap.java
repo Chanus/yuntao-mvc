@@ -26,6 +26,18 @@ public class CustomMap extends HashMap<String, Object> {
     }
 
     /**
+     * 获取CustomMap实例
+     *
+     * @param key   键
+     * @param value 值
+     * @return {@code CustomMap}实例
+     * @since 0.1.9
+     */
+    public static CustomMap get(String key, Object value) {
+        return get().putNext(key, value);
+    }
+
+    /**
      * 存储数据并返回当前Map对象
      *
      * @param key   键

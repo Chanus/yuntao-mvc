@@ -107,22 +107,50 @@ public class UrlUtils {
      */
     public static String setParam(String url, String paramName, String paramValue) {
         int temp_index = url.indexOf("?");
-        if (temp_index != -1) {
+        if (temp_index != -1) {// url 中已带有参数
             int param_index = url.indexOf(paramName + "=", temp_index + 1);
-            if (param_index != -1) {
+            if (param_index != -1) {// url 中已存在要追加的参数
                 temp_index = url.indexOf("&", param_index + paramName.length() + 1);
                 if (temp_index != -1) {
                     return url.substring(0, param_index) + paramName + "=" + paramValue + url.substring(temp_index);
                 }
                 return url.substring(0, param_index) + paramName + "=" + paramValue;
-            } else {
+            } else {// url 中不存在要追加的参数
+                // url 以 & 结尾
                 if (url.lastIndexOf("&") == url.length() - 1) {
                     return url + paramName + "=" + paramValue;
                 }
+                // url 不以 & 结尾
                 return url + "&" + paramName + "=" + paramValue;
             }
-        } else {
+        } else {// url 中不带参数
             return url + "?" + paramName + "=" + paramValue;
+        }
+    }
+
+    /**
+     * 向http请求URL中追加参数
+     *
+     * @param url    http请求URL
+     * @param params 参数名和参数值Map
+     * @return 返回追加参数后的URL
+     * @since 0.1.9
+     */
+    public static String setParam(String url, Map<String, Object> params) {
+        String uri = getParamsUri(params);
+        if (null == uri)
+            return url;
+
+        int temp_index = url.indexOf("?");
+        if (temp_index != -1) {// url 中已带有参数
+            // url 以 & 结尾
+            if (url.lastIndexOf("&") == url.length() - 1) {
+                return url + uri;
+            }
+            // url 不以 & 结尾
+            return url + "&" + uri;
+        } else {// url 中不带参数
+            return url + "?" + uri;
         }
     }
 
