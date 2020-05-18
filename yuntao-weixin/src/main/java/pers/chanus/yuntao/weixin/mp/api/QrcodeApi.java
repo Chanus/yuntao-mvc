@@ -20,7 +20,11 @@ import java.util.Map;
 
 /**
  * 生成带参数的二维码 API<br>
- * 详情请见: https://developers.weixin.qq.com/doc/offiaccount/Account_Management/Generating_a_Parametric_QR_Code.html
+ * 详情请见:
+ * <pre>
+ *     https://developers.weixin.qq.com/doc/offiaccount/Account_Management/Generating_a_Parametric_QR_Code.html
+ *     https://developers.weixin.qq.com/doc/offiaccount/Account_Management/URL_Shortener.html
+ * </pre>
  *
  * @author Chanus
  * @date 2020-05-18 00:07:34
@@ -35,6 +39,10 @@ public class QrcodeApi {
      * 通过 ticket 换取二维码 url，请求方式为 GET，TICKET 需要进行 UrlEncode
      */
     private static final String SHOW_QRCODE_URL = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET";
+    /**
+     * 长链接转短链接接口 url，请求方式为 POST
+     */
+    private static final String SHORTURL_URL = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN";
 
     /**
      * 创建二维码 ticket
@@ -151,6 +159,44 @@ public class QrcodeApi {
             return SHOW_QRCODE_URL.replace("TICKET", URLEncoder.encode(ticket, "utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 长链接转短链接接口
+     *
+     * @param longUrl 需要转换的长链接，支持http://、https://、weixin://wxpay 格式的url
+     * @return 短连接信息
+     * @since 0.1.9
+     */
+    public static JSONObject getShortUrl(String longUrl) {
+        String accessToken = AccessTokenApi.getAccessTokenStr();
+        String url = SHORTURL_URL.replace("ACCESS_TOKEN", accessToken);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("action", "long2short");
+        jsonObject.put("long_url", longUrl);
+
+        String result = HttpUtils.post(url, jsonObject.toJSONString());
+
+        return JSON.parseObject(result);
+    }
+
+    /**
+     * 长链接转短链接接口
+     *
+     * @param longUrl 需要转换的长链接，支持http://、https://、weixin://wxpay 格式的url
+     * @return 请求成功返回短连接 url，否则返回空
+     * @since 0.1.9
+     */
+    public static String getShortUrlStr(String longUrl) {
+        try {
+            JSONObject jsonObject = getShortUrl(longUrl);
+            if (jsonObject.getIntValue("errcode") == 0)
+                return jsonObject.getString("short_url");
+        } catch (Exception e) {
+            throw new RuntimeException("长链接转短链接接口请求异常", e);
         }
         return null;
     }

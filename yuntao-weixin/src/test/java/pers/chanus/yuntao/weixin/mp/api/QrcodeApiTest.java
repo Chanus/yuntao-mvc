@@ -53,4 +53,14 @@ public class QrcodeApiTest {
 
         System.out.println(qrcodeUrl);
     }
+
+    @Test
+    public void getShortUrlTest() {
+        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
+        String longUrl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQEo8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyNjBfaXQwV3djYUQxMDAwMHcwN3UAAgSFccFeAwQAAAAA";
+        JSONObject jsonObject = QrcodeApi.getShortUrl(longUrl);
+        System.out.println(jsonObject.toJSONString());
+
+        System.out.println(QrcodeApi.getShortUrlStr(longUrl));
+    }
 }
