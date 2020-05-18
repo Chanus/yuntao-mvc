@@ -23,7 +23,10 @@ import java.util.HashMap;
  */
 public class TemplateData implements Serializable {
     private static final long serialVersionUID = -468042346786904801L;
-
+    /**
+     * 默认模板内容字体颜色
+     */
+    private static final String DEFAULT_COLOR = "#173177";
     /**
      * 接收者openid
      */
@@ -39,7 +42,7 @@ public class TemplateData implements Serializable {
     /**
      * 模板数据
      */
-    private TemplateDataItem data;
+    private final TemplateDataItem data;
     /**
      * 跳小程序所需数据，不需跳小程序可不用传该数据
      */
@@ -108,14 +111,14 @@ public class TemplateData implements Serializable {
      *
      * @return json 字符串
      */
-    public String build() {
+    public String toJSONString() {
         return JSON.toJSONString(this);
     }
 
     /**
      * 模板数据
      */
-    public class TemplateDataItem extends HashMap<String, DataItem> {
+    public static class TemplateDataItem extends HashMap<String, DataItem> {
         private static final long serialVersionUID = 2256855913305513400L;
 
         public TemplateDataItem() {
@@ -129,12 +132,12 @@ public class TemplateData implements Serializable {
     /**
      * 模板数据内容
      */
-    public class DataItem {
+    public static class DataItem {
         private Object value;
         private String color;
 
         public DataItem(Object value) {
-            this(value, "#999");
+            this(value, DEFAULT_COLOR);
         }
 
         public DataItem(Object value, String color) {
@@ -162,7 +165,7 @@ public class TemplateData implements Serializable {
     /**
      * 跳小程序所需数据，不需跳小程序可不用传该数据
      */
-    public class MiniProgramData {
+    public static class MiniProgramData {
         /**
          * 所需跳转到的小程序appid（该小程序appid必须与发模板消息的公众号是绑定关联关系，暂不支持小游戏）
          */
