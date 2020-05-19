@@ -17,10 +17,7 @@ import pers.chanus.yuntao.util.HttpUtils;
 import pers.chanus.yuntao.util.StringUtils;
 import pers.chanus.yuntao.util.UrlUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 用户管理 API<br>

@@ -10,7 +10,6 @@
 package pers.chanus.yuntao.weixin.mp.api.bean;
 
 import com.alibaba.fastjson.JSON;
-import javafx.scene.control.MenuButton;
 
 import java.io.Serializable;
 import java.util.ArrayList;
