@@ -27,6 +27,10 @@ public class DateUtils {
      */
     private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     /**
+     * 时间格式
+     */
+    private static final String TIME_FORMAT = "HH:mm:ss";
+    /**
      * java.util.Date原始格式
      */
     private static final String ORIGINAL_DATETIME_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
@@ -87,6 +91,18 @@ public class DateUtils {
     }
 
     /**
+     * 将时间转换成HH:mm:ss格式的字符串
+     *
+     * @param time 时间
+     * @return HH:mm:ss格式的字符串，若{@code time}为空，则返回null
+     * @see DateUtils#formatDate(Date, String)
+     * @since 0.1.9
+     */
+    public static String formatTime(Date time) {
+        return formatDate(time, TIME_FORMAT);
+    }
+
+    /**
      * 时间字符串转换成时间对象
      *
      * @param date   时间字符串
@@ -128,6 +144,18 @@ public class DateUtils {
      */
     public static Date parseDateTime(String datetime) {
         return parseDate(datetime, DATETIME_FORMAT);
+    }
+
+    /**
+     * 将HH:mm:ss格式的时间字符串转换成时间
+     *
+     * @param time 时间字符串
+     * @return 时间对象，若{@code time}为空，则返回null
+     * @see DateUtils#parseDate(String, String)
+     * @since 0.1.9
+     */
+    public static Date parseTime(String time) {
+        return parseDate(time, TIME_FORMAT);
     }
 
     /**

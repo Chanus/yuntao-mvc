@@ -37,6 +37,8 @@ public class DateUtilsTest {
         System.out.println(DateUtils.formatDate(date));
 
         System.out.println(DateUtils.formatDateTime(date));
+
+        System.out.println(DateUtils.formatTime(date));
     }
 
     @Test
@@ -50,6 +52,8 @@ public class DateUtilsTest {
         System.out.println(DateUtils.parseDate("2019-06-13"));
 
         System.out.println(DateUtils.parseDateTime("2019-06-13 22:47:33"));
+
+        System.out.println(DateUtils.parseTime("23:07:35"));
     }
 
     @Test
