@@ -1,10 +1,10 @@
 /**
  * 自定义弹出层组件，用于弹出窗口
- * @description    基于layer封装的模块
+ * @description 基于layer封装的模块
  * @name        popup.js
- * @author    Chanus
+ * @author      Chanus
  * @date        20171128
- * @version    0.2.0
+ * @version     0.3.0
  */
 ;
 layui.define(['layer'], function (exports) {
@@ -13,15 +13,15 @@ layui.define(['layer'], function (exports) {
     var popup = {
         /**
          * 打开iframe层
-         * @param width    弹出框宽度，必需
+         * @param width     弹出框宽度，必需
          * @param height    弹出框高度，必需
-         * @param title    弹出框标题，必需
-         * @param url    弹出框URL，必需
-         * @param full    最大化标识（true|false），不必需
+         * @param title     弹出框标题，必需
+         * @param url       弹出框URL，必需
+         * @param full      最大化标识（true|false），不必需
          */
         open: function (width, height, title, url, full) {
-            width = full ? $(window).width() : (width || ($(window).width() * 0.9));
-            height = full ? $(window).height() : (height || ($(window).height() - 50));
+            width = (width && width < $(window).width()) ? width : $(window).width();
+            height = (height && height < $(window).height()) ? height : $(window).height();
             title = title || false;
             url = url || "404.html";
 
@@ -46,16 +46,26 @@ layui.define(['layer'], function (exports) {
         },
 
         /**
+         * 打开iframe层，默认宽高为当前可视窗口的宽高
+         * @param title     弹出框标题，必需
+         * @param url       弹出框URL，必需
+         * @param full      最大化标识（true|false），不必需
+         */
+        openLarge: function (title, url, full) {
+            this.open(null, null, title, url, full);
+        },
+
+        /**
          * 打开页面层
-         * @param width    弹出框宽度，必需
+         * @param width     弹出框宽度，必需
          * @param height    弹出框高度，必需
-         * @param title    弹出框标题，必需
-         * @param content    弹出框内容，必需
-         * @param full    最大化标识（true|false），不必需
+         * @param title     弹出框标题，必需
+         * @param content   弹出框内容，必需
+         * @param full      最大化标识（true|false），不必需
          */
         openPage: function (width, height, title, content, full) {
-            width = width || ($(window).width() * 0.9);
-            height = height || ($(window).height() - 50);
+            width = (width && width < $(window).width()) ? width : $(window).width();
+            height = (height && height < $(window).height()) ? height : $(window).height();
             title = title || false;
             content = content || "";
 
@@ -77,6 +87,16 @@ layui.define(['layer'], function (exports) {
                 layer.full(layerIndex);
 
             return layerIndex;
+        },
+
+        /**
+         * 打开页面层，默认宽高为当前可视窗口的宽高
+         * @param title     弹出框标题，必需
+         * @param content   弹出框内容，必需
+         * @param full      最大化标识（true|false），不必需
+         */
+        openPageLarge: function (title, content, full) {
+            this.openPage(null, null, title, content, full);
         },
 
         /**
