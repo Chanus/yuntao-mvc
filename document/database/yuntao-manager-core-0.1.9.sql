@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 07/06/2019 16:07:22
+ Date: 21/05/2020 00:27:05
 */
 
 SET NAMES utf8mb4;
@@ -26,8 +26,8 @@ CREATE TABLE `sys_china_area` (
   `area_parent_id` int(10) unsigned NOT NULL COMMENT '上级行政区划代码',
   `area_name` varchar(20) NOT NULL COMMENT '行政区名称',
   `area_level` char(1) NOT NULL COMMENT '行政区级别：1-省、直辖市、自治区，2-市，3-区、县',
-  PRIMARY KEY (`area_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='中国行政区划表';
+  PRIMARY KEY (`area_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='中国行政区划表';
 
 -- ----------------------------
 -- Records of sys_china_area
@@ -48,8 +48,8 @@ INSERT INTO `sys_china_area` VALUES (110114, 110000, '昌平区', '3');
 INSERT INTO `sys_china_area` VALUES (110115, 110000, '大兴区', '3');
 INSERT INTO `sys_china_area` VALUES (110116, 110000, '怀柔区', '3');
 INSERT INTO `sys_china_area` VALUES (110117, 110000, '平谷区', '3');
-INSERT INTO `sys_china_area` VALUES (110118, 110000, '密云县', '3');
-INSERT INTO `sys_china_area` VALUES (110119, 110000, '延庆县', '3');
+INSERT INTO `sys_china_area` VALUES (110118, 110000, '密云区', '3');
+INSERT INTO `sys_china_area` VALUES (110119, 110000, '延庆区', '3');
 INSERT INTO `sys_china_area` VALUES (120000, 0, '天津市', '1');
 INSERT INTO `sys_china_area` VALUES (120101, 120000, '和平区', '3');
 INSERT INTO `sys_china_area` VALUES (120102, 120000, '河东区', '3');
@@ -63,13 +63,13 @@ INSERT INTO `sys_china_area` VALUES (120112, 120000, '津南区', '3');
 INSERT INTO `sys_china_area` VALUES (120113, 120000, '北辰区', '3');
 INSERT INTO `sys_china_area` VALUES (120114, 120000, '武清区', '3');
 INSERT INTO `sys_china_area` VALUES (120115, 120000, '宝坻区', '3');
+INSERT INTO `sys_china_area` VALUES (120116, 120000, '滨海新区', '3');
 INSERT INTO `sys_china_area` VALUES (120117, 120000, '宁河区', '3');
 INSERT INTO `sys_china_area` VALUES (120118, 120000, '静海区', '3');
 INSERT INTO `sys_china_area` VALUES (120119, 120000, '蓟州区', '3');
 INSERT INTO `sys_china_area` VALUES (130000, 0, '河北省', '1');
 INSERT INTO `sys_china_area` VALUES (130100, 130000, '石家庄市', '2');
 INSERT INTO `sys_china_area` VALUES (130102, 130100, '长安区', '3');
-INSERT INTO `sys_china_area` VALUES (130103, 130100, '桥东区', '3');
 INSERT INTO `sys_china_area` VALUES (130104, 130100, '桥西区', '3');
 INSERT INTO `sys_china_area` VALUES (130105, 130100, '新华区', '3');
 INSERT INTO `sys_china_area` VALUES (130107, 130100, '井陉矿区', '3');
@@ -88,8 +88,6 @@ INSERT INTO `sys_china_area` VALUES (130130, 130100, '无极县', '3');
 INSERT INTO `sys_china_area` VALUES (130131, 130100, '平山县', '3');
 INSERT INTO `sys_china_area` VALUES (130132, 130100, '元氏县', '3');
 INSERT INTO `sys_china_area` VALUES (130133, 130100, '赵县', '3');
-INSERT INTO `sys_china_area` VALUES (130171, 130100, '石家庄高新技术产业开发区', '3');
-INSERT INTO `sys_china_area` VALUES (130172, 130100, '石家庄循环化工园区', '3');
 INSERT INTO `sys_china_area` VALUES (130181, 130100, '辛集市', '3');
 INSERT INTO `sys_china_area` VALUES (130183, 130100, '晋州市', '3');
 INSERT INTO `sys_china_area` VALUES (130184, 130100, '新乐市', '3');
@@ -100,13 +98,14 @@ INSERT INTO `sys_china_area` VALUES (130204, 130200, '古冶区', '3');
 INSERT INTO `sys_china_area` VALUES (130205, 130200, '开平区', '3');
 INSERT INTO `sys_china_area` VALUES (130207, 130200, '丰南区', '3');
 INSERT INTO `sys_china_area` VALUES (130208, 130200, '丰润区', '3');
-INSERT INTO `sys_china_area` VALUES (130223, 130200, '滦县', '3');
+INSERT INTO `sys_china_area` VALUES (130209, 130200, '曹妃甸区', '3');
 INSERT INTO `sys_china_area` VALUES (130224, 130200, '滦南县', '3');
 INSERT INTO `sys_china_area` VALUES (130225, 130200, '乐亭县', '3');
 INSERT INTO `sys_china_area` VALUES (130227, 130200, '迁西县', '3');
 INSERT INTO `sys_china_area` VALUES (130229, 130200, '玉田县', '3');
 INSERT INTO `sys_china_area` VALUES (130281, 130200, '遵化市', '3');
 INSERT INTO `sys_china_area` VALUES (130283, 130200, '迁安市', '3');
+INSERT INTO `sys_china_area` VALUES (130284, 130200, '滦州市', '3');
 INSERT INTO `sys_china_area` VALUES (130300, 130000, '秦皇岛市', '2');
 INSERT INTO `sys_china_area` VALUES (130302, 130300, '海港区', '3');
 INSERT INTO `sys_china_area` VALUES (130303, 130300, '山海关区', '3');
@@ -133,8 +132,6 @@ INSERT INTO `sys_china_area` VALUES (130432, 130400, '广平县', '3');
 INSERT INTO `sys_china_area` VALUES (130433, 130400, '馆陶县', '3');
 INSERT INTO `sys_china_area` VALUES (130434, 130400, '魏县', '3');
 INSERT INTO `sys_china_area` VALUES (130435, 130400, '曲周县', '3');
-INSERT INTO `sys_china_area` VALUES (130471, 130400, '邯郸经济技术开发区', '3');
-INSERT INTO `sys_china_area` VALUES (130473, 130400, '邯郸冀南新区', '3');
 INSERT INTO `sys_china_area` VALUES (130481, 130400, '武安市', '3');
 INSERT INTO `sys_china_area` VALUES (130500, 130000, '邢台市', '2');
 INSERT INTO `sys_china_area` VALUES (130502, 130500, '桥东区', '3');
@@ -229,6 +226,7 @@ INSERT INTO `sys_china_area` VALUES (130983, 130900, '黄骅市', '3');
 INSERT INTO `sys_china_area` VALUES (130984, 130900, '河间市', '3');
 INSERT INTO `sys_china_area` VALUES (131000, 130000, '廊坊市', '2');
 INSERT INTO `sys_china_area` VALUES (131002, 131000, '安次区', '3');
+INSERT INTO `sys_china_area` VALUES (131003, 131000, '广阳区', '3');
 INSERT INTO `sys_china_area` VALUES (131022, 131000, '固安县', '3');
 INSERT INTO `sys_china_area` VALUES (131023, 131000, '永清县', '3');
 INSERT INTO `sys_china_area` VALUES (131024, 131000, '香河县', '3');
@@ -262,17 +260,16 @@ INSERT INTO `sys_china_area` VALUES (140122, 140100, '阳曲县', '3');
 INSERT INTO `sys_china_area` VALUES (140123, 140100, '娄烦县', '3');
 INSERT INTO `sys_china_area` VALUES (140181, 140100, '古交市', '3');
 INSERT INTO `sys_china_area` VALUES (140200, 140000, '大同市', '2');
-INSERT INTO `sys_china_area` VALUES (140202, 140200, '城区', '3');
-INSERT INTO `sys_china_area` VALUES (140203, 140200, '矿区', '3');
-INSERT INTO `sys_china_area` VALUES (140211, 140200, '南郊区', '3');
 INSERT INTO `sys_china_area` VALUES (140212, 140200, '新荣区', '3');
+INSERT INTO `sys_china_area` VALUES (140213, 140200, '平城区', '3');
+INSERT INTO `sys_china_area` VALUES (140214, 140200, '云冈区', '3');
+INSERT INTO `sys_china_area` VALUES (140215, 140200, '云州区', '3');
 INSERT INTO `sys_china_area` VALUES (140221, 140200, '阳高县', '3');
 INSERT INTO `sys_china_area` VALUES (140222, 140200, '天镇县', '3');
 INSERT INTO `sys_china_area` VALUES (140223, 140200, '广灵县', '3');
 INSERT INTO `sys_china_area` VALUES (140224, 140200, '灵丘县', '3');
 INSERT INTO `sys_china_area` VALUES (140225, 140200, '浑源县', '3');
 INSERT INTO `sys_china_area` VALUES (140226, 140200, '左云县', '3');
-INSERT INTO `sys_china_area` VALUES (140227, 140200, '大同县', '3');
 INSERT INTO `sys_china_area` VALUES (140300, 140000, '阳泉市', '2');
 INSERT INTO `sys_china_area` VALUES (140302, 140300, '城区', '3');
 INSERT INTO `sys_china_area` VALUES (140303, 140300, '矿区', '3');
@@ -280,11 +277,11 @@ INSERT INTO `sys_china_area` VALUES (140311, 140300, '郊区', '3');
 INSERT INTO `sys_china_area` VALUES (140321, 140300, '平定县', '3');
 INSERT INTO `sys_china_area` VALUES (140322, 140300, '盂县', '3');
 INSERT INTO `sys_china_area` VALUES (140400, 140000, '长治市', '2');
-INSERT INTO `sys_china_area` VALUES (140402, 140400, '城区', '3');
-INSERT INTO `sys_china_area` VALUES (140411, 140400, '郊区', '3');
-INSERT INTO `sys_china_area` VALUES (140421, 140400, '长治县', '3');
+INSERT INTO `sys_china_area` VALUES (140403, 140400, '潞州区', '3');
+INSERT INTO `sys_china_area` VALUES (140404, 140400, '上党区', '3');
+INSERT INTO `sys_china_area` VALUES (140405, 140400, '屯留区', '3');
+INSERT INTO `sys_china_area` VALUES (140406, 140400, '潞城区', '3');
 INSERT INTO `sys_china_area` VALUES (140423, 140400, '襄垣县', '3');
-INSERT INTO `sys_china_area` VALUES (140424, 140400, '屯留县', '3');
 INSERT INTO `sys_china_area` VALUES (140425, 140400, '平顺县', '3');
 INSERT INTO `sys_china_area` VALUES (140426, 140400, '黎城县', '3');
 INSERT INTO `sys_china_area` VALUES (140427, 140400, '壶关县', '3');
@@ -292,7 +289,6 @@ INSERT INTO `sys_china_area` VALUES (140428, 140400, '长子县', '3');
 INSERT INTO `sys_china_area` VALUES (140429, 140400, '武乡县', '3');
 INSERT INTO `sys_china_area` VALUES (140430, 140400, '沁县', '3');
 INSERT INTO `sys_china_area` VALUES (140431, 140400, '沁源县', '3');
-INSERT INTO `sys_china_area` VALUES (140481, 140400, '潞城市', '3');
 INSERT INTO `sys_china_area` VALUES (140500, 140000, '晋城市', '2');
 INSERT INTO `sys_china_area` VALUES (140502, 140500, '城区', '3');
 INSERT INTO `sys_china_area` VALUES (140521, 140500, '沁水县', '3');
@@ -306,20 +302,21 @@ INSERT INTO `sys_china_area` VALUES (140603, 140600, '平鲁区', '3');
 INSERT INTO `sys_china_area` VALUES (140621, 140600, '山阴县', '3');
 INSERT INTO `sys_china_area` VALUES (140622, 140600, '应县', '3');
 INSERT INTO `sys_china_area` VALUES (140623, 140600, '右玉县', '3');
-INSERT INTO `sys_china_area` VALUES (140624, 140600, '怀仁县', '3');
+INSERT INTO `sys_china_area` VALUES (140681, 140600, '怀仁市', '3');
 INSERT INTO `sys_china_area` VALUES (140700, 140000, '晋中市', '2');
 INSERT INTO `sys_china_area` VALUES (140702, 140700, '榆次区', '3');
+INSERT INTO `sys_china_area` VALUES (140703, 140700, '太谷区', '3');
 INSERT INTO `sys_china_area` VALUES (140721, 140700, '榆社县', '3');
 INSERT INTO `sys_china_area` VALUES (140722, 140700, '左权县', '3');
 INSERT INTO `sys_china_area` VALUES (140723, 140700, '和顺县', '3');
 INSERT INTO `sys_china_area` VALUES (140724, 140700, '昔阳县', '3');
 INSERT INTO `sys_china_area` VALUES (140725, 140700, '寿阳县', '3');
-INSERT INTO `sys_china_area` VALUES (140726, 140700, '太谷县', '3');
 INSERT INTO `sys_china_area` VALUES (140727, 140700, '祁县', '3');
 INSERT INTO `sys_china_area` VALUES (140728, 140700, '平遥县', '3');
 INSERT INTO `sys_china_area` VALUES (140729, 140700, '灵石县', '3');
 INSERT INTO `sys_china_area` VALUES (140781, 140700, '介休市', '3');
 INSERT INTO `sys_china_area` VALUES (140800, 140000, '运城市', '2');
+INSERT INTO `sys_china_area` VALUES (140802, 140800, '盐湖区', '3');
 INSERT INTO `sys_china_area` VALUES (140821, 140800, '临猗县', '3');
 INSERT INTO `sys_china_area` VALUES (140822, 140800, '万荣县', '3');
 INSERT INTO `sys_china_area` VALUES (140823, 140800, '闻喜县', '3');
@@ -348,6 +345,7 @@ INSERT INTO `sys_china_area` VALUES (140931, 140900, '保德县', '3');
 INSERT INTO `sys_china_area` VALUES (140932, 140900, '偏关县', '3');
 INSERT INTO `sys_china_area` VALUES (140981, 140900, '原平市', '3');
 INSERT INTO `sys_china_area` VALUES (141000, 140000, '临汾市', '2');
+INSERT INTO `sys_china_area` VALUES (141002, 141000, '尧都区', '3');
 INSERT INTO `sys_china_area` VALUES (141021, 141000, '曲沃县', '3');
 INSERT INTO `sys_china_area` VALUES (141022, 141000, '翼城县', '3');
 INSERT INTO `sys_china_area` VALUES (141023, 141000, '襄汾县', '3');
@@ -427,6 +425,7 @@ INSERT INTO `sys_china_area` VALUES (150526, 150500, '扎鲁特旗', '3');
 INSERT INTO `sys_china_area` VALUES (150581, 150500, '霍林郭勒市', '3');
 INSERT INTO `sys_china_area` VALUES (150600, 150000, '鄂尔多斯市', '2');
 INSERT INTO `sys_china_area` VALUES (150602, 150600, '东胜区', '3');
+INSERT INTO `sys_china_area` VALUES (150603, 150600, '康巴什区', '3');
 INSERT INTO `sys_china_area` VALUES (150621, 150600, '达拉特旗', '3');
 INSERT INTO `sys_china_area` VALUES (150622, 150600, '准格尔旗', '3');
 INSERT INTO `sys_china_area` VALUES (150623, 150600, '鄂托克前旗', '3');
@@ -436,6 +435,7 @@ INSERT INTO `sys_china_area` VALUES (150626, 150600, '乌审旗', '3');
 INSERT INTO `sys_china_area` VALUES (150627, 150600, '伊金霍洛旗', '3');
 INSERT INTO `sys_china_area` VALUES (150700, 150000, '呼伦贝尔市', '2');
 INSERT INTO `sys_china_area` VALUES (150702, 150700, '海拉尔区', '3');
+INSERT INTO `sys_china_area` VALUES (150703, 150700, '扎赉诺尔区', '3');
 INSERT INTO `sys_china_area` VALUES (150721, 150700, '阿荣旗', '3');
 INSERT INTO `sys_china_area` VALUES (150722, 150700, '莫力达瓦达斡尔族自治旗', '3');
 INSERT INTO `sys_china_area` VALUES (150723, 150700, '鄂伦春自治旗', '3');
@@ -753,22 +753,15 @@ INSERT INTO `sys_china_area` VALUES (230622, 230600, '肇源县', '3');
 INSERT INTO `sys_china_area` VALUES (230623, 230600, '林甸县', '3');
 INSERT INTO `sys_china_area` VALUES (230624, 230600, '杜尔伯特蒙古族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (230700, 230000, '伊春市', '2');
-INSERT INTO `sys_china_area` VALUES (230702, 230700, '伊春区', '3');
-INSERT INTO `sys_china_area` VALUES (230703, 230700, '南岔区', '3');
-INSERT INTO `sys_china_area` VALUES (230704, 230700, '友好区', '3');
-INSERT INTO `sys_china_area` VALUES (230705, 230700, '西林区', '3');
-INSERT INTO `sys_china_area` VALUES (230706, 230700, '翠峦区', '3');
-INSERT INTO `sys_china_area` VALUES (230707, 230700, '新青区', '3');
-INSERT INTO `sys_china_area` VALUES (230708, 230700, '美溪区', '3');
-INSERT INTO `sys_china_area` VALUES (230709, 230700, '金山屯区', '3');
-INSERT INTO `sys_china_area` VALUES (230710, 230700, '五营区', '3');
-INSERT INTO `sys_china_area` VALUES (230711, 230700, '乌马河区', '3');
-INSERT INTO `sys_china_area` VALUES (230712, 230700, '汤旺河区', '3');
-INSERT INTO `sys_china_area` VALUES (230713, 230700, '带岭区', '3');
-INSERT INTO `sys_china_area` VALUES (230714, 230700, '乌伊岭区', '3');
-INSERT INTO `sys_china_area` VALUES (230715, 230700, '红星区', '3');
-INSERT INTO `sys_china_area` VALUES (230716, 230700, '上甘岭区', '3');
+INSERT INTO `sys_china_area` VALUES (230717, 230700, '伊美区', '3');
+INSERT INTO `sys_china_area` VALUES (230718, 230700, '乌翠区', '3');
+INSERT INTO `sys_china_area` VALUES (230719, 230700, '友好区', '3');
 INSERT INTO `sys_china_area` VALUES (230722, 230700, '嘉荫县', '3');
+INSERT INTO `sys_china_area` VALUES (230723, 230700, '汤旺县', '3');
+INSERT INTO `sys_china_area` VALUES (230724, 230700, '丰林县', '3');
+INSERT INTO `sys_china_area` VALUES (230725, 230700, '大箐山县', '3');
+INSERT INTO `sys_china_area` VALUES (230726, 230700, '南岔县', '3');
+INSERT INTO `sys_china_area` VALUES (230751, 230700, '金林区', '3');
 INSERT INTO `sys_china_area` VALUES (230781, 230700, '铁力市', '3');
 INSERT INTO `sys_china_area` VALUES (230800, 230000, '佳木斯市', '2');
 INSERT INTO `sys_china_area` VALUES (230803, 230800, '向阳区', '3');
@@ -799,12 +792,13 @@ INSERT INTO `sys_china_area` VALUES (231085, 231000, '穆棱市', '3');
 INSERT INTO `sys_china_area` VALUES (231086, 231000, '东宁市', '3');
 INSERT INTO `sys_china_area` VALUES (231100, 230000, '黑河市', '2');
 INSERT INTO `sys_china_area` VALUES (231102, 231100, '爱辉区', '3');
-INSERT INTO `sys_china_area` VALUES (231121, 231100, '嫩江县', '3');
 INSERT INTO `sys_china_area` VALUES (231123, 231100, '逊克县', '3');
 INSERT INTO `sys_china_area` VALUES (231124, 231100, '孙吴县', '3');
 INSERT INTO `sys_china_area` VALUES (231181, 231100, '北安市', '3');
 INSERT INTO `sys_china_area` VALUES (231182, 231100, '五大连池市', '3');
+INSERT INTO `sys_china_area` VALUES (231183, 231100, '嫩江市', '3');
 INSERT INTO `sys_china_area` VALUES (231200, 230000, '绥化市', '2');
+INSERT INTO `sys_china_area` VALUES (231202, 231200, '北林区', '3');
 INSERT INTO `sys_china_area` VALUES (231221, 231200, '望奎县', '3');
 INSERT INTO `sys_china_area` VALUES (231222, 231200, '兰西县', '3');
 INSERT INTO `sys_china_area` VALUES (231223, 231200, '青冈县', '3');
@@ -815,9 +809,9 @@ INSERT INTO `sys_china_area` VALUES (231281, 231200, '安达市', '3');
 INSERT INTO `sys_china_area` VALUES (231282, 231200, '肇东市', '3');
 INSERT INTO `sys_china_area` VALUES (231283, 231200, '海伦市', '3');
 INSERT INTO `sys_china_area` VALUES (232700, 230000, '大兴安岭地区', '2');
+INSERT INTO `sys_china_area` VALUES (232701, 232700, '漠河市', '3');
 INSERT INTO `sys_china_area` VALUES (232721, 232700, '呼玛县', '3');
 INSERT INTO `sys_china_area` VALUES (232722, 232700, '塔河县', '3');
-INSERT INTO `sys_china_area` VALUES (232723, 232700, '漠河县', '3');
 INSERT INTO `sys_china_area` VALUES (310000, 0, '上海市', '1');
 INSERT INTO `sys_china_area` VALUES (310101, 310000, '黄浦区', '3');
 INSERT INTO `sys_china_area` VALUES (310104, 310000, '徐汇区', '3');
@@ -846,8 +840,8 @@ INSERT INTO `sys_china_area` VALUES (320113, 320100, '栖霞区', '3');
 INSERT INTO `sys_china_area` VALUES (320114, 320100, '雨花台区', '3');
 INSERT INTO `sys_china_area` VALUES (320115, 320100, '江宁区', '3');
 INSERT INTO `sys_china_area` VALUES (320116, 320100, '六合区', '3');
-INSERT INTO `sys_china_area` VALUES (320117, 320100, '溧水县', '3');
-INSERT INTO `sys_china_area` VALUES (320118, 320100, '高淳县', '3');
+INSERT INTO `sys_china_area` VALUES (320117, 320100, '溧水区', '3');
+INSERT INTO `sys_china_area` VALUES (320118, 320100, '高淳区', '3');
 INSERT INTO `sys_china_area` VALUES (320200, 320000, '无锡市', '2');
 INSERT INTO `sys_china_area` VALUES (320205, 320200, '锡山区', '3');
 INSERT INTO `sys_china_area` VALUES (320206, 320200, '惠山区', '3');
@@ -888,11 +882,11 @@ INSERT INTO `sys_china_area` VALUES (320600, 320000, '南通市', '2');
 INSERT INTO `sys_china_area` VALUES (320602, 320600, '崇川区', '3');
 INSERT INTO `sys_china_area` VALUES (320611, 320600, '港闸区', '3');
 INSERT INTO `sys_china_area` VALUES (320612, 320600, '通州区', '3');
-INSERT INTO `sys_china_area` VALUES (320621, 320600, '海安县', '3');
 INSERT INTO `sys_china_area` VALUES (320623, 320600, '如东县', '3');
 INSERT INTO `sys_china_area` VALUES (320681, 320600, '启东市', '3');
 INSERT INTO `sys_china_area` VALUES (320682, 320600, '如皋市', '3');
 INSERT INTO `sys_china_area` VALUES (320684, 320600, '海门市', '3');
+INSERT INTO `sys_china_area` VALUES (320685, 320600, '海安市', '3');
 INSERT INTO `sys_china_area` VALUES (320700, 320000, '连云港市', '2');
 INSERT INTO `sys_china_area` VALUES (320703, 320700, '连云区', '3');
 INSERT INTO `sys_china_area` VALUES (320706, 320700, '海州区', '3');
@@ -983,6 +977,7 @@ INSERT INTO `sys_china_area` VALUES (330328, 330300, '文成县', '3');
 INSERT INTO `sys_china_area` VALUES (330329, 330300, '泰顺县', '3');
 INSERT INTO `sys_china_area` VALUES (330381, 330300, '瑞安市', '3');
 INSERT INTO `sys_china_area` VALUES (330382, 330300, '乐清市', '3');
+INSERT INTO `sys_china_area` VALUES (330383, 330300, '龙港市', '3');
 INSERT INTO `sys_china_area` VALUES (330400, 330000, '嘉兴市', '2');
 INSERT INTO `sys_china_area` VALUES (330402, 330400, '南湖区', '3');
 INSERT INTO `sys_china_area` VALUES (330411, 330400, '秀洲区', '3');
@@ -1037,6 +1032,7 @@ INSERT INTO `sys_china_area` VALUES (331081, 331000, '温岭市', '3');
 INSERT INTO `sys_china_area` VALUES (331082, 331000, '临海市', '3');
 INSERT INTO `sys_china_area` VALUES (331083, 331000, '玉环市', '3');
 INSERT INTO `sys_china_area` VALUES (331100, 330000, '丽水市', '2');
+INSERT INTO `sys_china_area` VALUES (331102, 331100, '莲都区', '3');
 INSERT INTO `sys_china_area` VALUES (331121, 331100, '青田县', '3');
 INSERT INTO `sys_china_area` VALUES (331122, 331100, '缙云县', '3');
 INSERT INTO `sys_china_area` VALUES (331123, 331100, '遂昌县', '3');
@@ -1058,13 +1054,13 @@ INSERT INTO `sys_china_area` VALUES (340124, 340100, '庐江县', '3');
 INSERT INTO `sys_china_area` VALUES (340181, 340100, '巢湖市', '3');
 INSERT INTO `sys_china_area` VALUES (340200, 340000, '芜湖市', '2');
 INSERT INTO `sys_china_area` VALUES (340202, 340200, '镜湖区', '3');
-INSERT INTO `sys_china_area` VALUES (340203, 340200, '戈江市', '3');
+INSERT INTO `sys_china_area` VALUES (340203, 340200, '弋江区', '3');
 INSERT INTO `sys_china_area` VALUES (340207, 340200, '鸠江区', '3');
 INSERT INTO `sys_china_area` VALUES (340208, 340200, '三山区', '3');
 INSERT INTO `sys_china_area` VALUES (340221, 340200, '芜湖县', '3');
 INSERT INTO `sys_china_area` VALUES (340222, 340200, '繁昌县', '3');
 INSERT INTO `sys_china_area` VALUES (340223, 340200, '南陵县', '3');
-INSERT INTO `sys_china_area` VALUES (340225, 340200, '无为县', '3');
+INSERT INTO `sys_china_area` VALUES (340281, 340200, '无为市', '3');
 INSERT INTO `sys_china_area` VALUES (340300, 340000, '蚌埠市', '2');
 INSERT INTO `sys_china_area` VALUES (340302, 340300, '龙子湖区', '3');
 INSERT INTO `sys_china_area` VALUES (340303, 340300, '蚌山区', '3');
@@ -1080,7 +1076,7 @@ INSERT INTO `sys_china_area` VALUES (340404, 340400, '谢家集区', '3');
 INSERT INTO `sys_china_area` VALUES (340405, 340400, '八公山区', '3');
 INSERT INTO `sys_china_area` VALUES (340406, 340400, '潘集区', '3');
 INSERT INTO `sys_china_area` VALUES (340421, 340400, '凤台县', '3');
-INSERT INTO `sys_china_area` VALUES (340422, 341500, '寿县', '3');
+INSERT INTO `sys_china_area` VALUES (340422, 340400, '寿县', '3');
 INSERT INTO `sys_china_area` VALUES (340500, 340000, '马鞍山市', '2');
 INSERT INTO `sys_china_area` VALUES (340503, 340500, '花山区', '3');
 INSERT INTO `sys_china_area` VALUES (340504, 340500, '雨山区', '3');
@@ -1103,12 +1099,12 @@ INSERT INTO `sys_china_area` VALUES (340802, 340800, '迎江区', '3');
 INSERT INTO `sys_china_area` VALUES (340803, 340800, '大观区', '3');
 INSERT INTO `sys_china_area` VALUES (340811, 340800, '宜秀区', '3');
 INSERT INTO `sys_china_area` VALUES (340822, 340800, '怀宁县', '3');
-INSERT INTO `sys_china_area` VALUES (340824, 340800, '潜山县', '3');
 INSERT INTO `sys_china_area` VALUES (340825, 340800, '太湖县', '3');
 INSERT INTO `sys_china_area` VALUES (340826, 340800, '宿松县', '3');
 INSERT INTO `sys_china_area` VALUES (340827, 340800, '望江县', '3');
 INSERT INTO `sys_china_area` VALUES (340828, 340800, '岳西县', '3');
 INSERT INTO `sys_china_area` VALUES (340881, 340800, '桐城市', '3');
+INSERT INTO `sys_china_area` VALUES (340882, 340800, '潜山市', '3');
 INSERT INTO `sys_china_area` VALUES (341000, 340000, '黄山市', '2');
 INSERT INTO `sys_china_area` VALUES (341002, 341000, '屯溪区', '3');
 INSERT INTO `sys_china_area` VALUES (341003, 341000, '黄山区', '3');
@@ -1144,10 +1140,16 @@ INSERT INTO `sys_china_area` VALUES (341324, 341300, '泗县', '3');
 INSERT INTO `sys_china_area` VALUES (341500, 340000, '六安市', '2');
 INSERT INTO `sys_china_area` VALUES (341502, 341500, '金安区', '3');
 INSERT INTO `sys_china_area` VALUES (341503, 341500, '裕安区', '3');
+INSERT INTO `sys_china_area` VALUES (341504, 341500, '叶集区', '3');
 INSERT INTO `sys_china_area` VALUES (341522, 341500, '霍邱县', '3');
 INSERT INTO `sys_china_area` VALUES (341523, 341500, '舒城县', '3');
 INSERT INTO `sys_china_area` VALUES (341524, 341500, '金寨县', '3');
 INSERT INTO `sys_china_area` VALUES (341525, 341500, '霍山县', '3');
+INSERT INTO `sys_china_area` VALUES (341600, 340000, '亳州市', '2');
+INSERT INTO `sys_china_area` VALUES (341602, 341600, '谯城区', '3');
+INSERT INTO `sys_china_area` VALUES (341621, 341600, '涡阳县', '3');
+INSERT INTO `sys_china_area` VALUES (341622, 341600, '蒙城县', '3');
+INSERT INTO `sys_china_area` VALUES (341623, 341600, '利辛县', '3');
 INSERT INTO `sys_china_area` VALUES (341700, 340000, '池州市', '2');
 INSERT INTO `sys_china_area` VALUES (341702, 341700, '贵池区', '3');
 INSERT INTO `sys_china_area` VALUES (341721, 341700, '东至县', '3');
@@ -1156,11 +1158,11 @@ INSERT INTO `sys_china_area` VALUES (341723, 341700, '青阳县', '3');
 INSERT INTO `sys_china_area` VALUES (341800, 340000, '宣城市', '2');
 INSERT INTO `sys_china_area` VALUES (341802, 341800, '宣州区', '3');
 INSERT INTO `sys_china_area` VALUES (341821, 341800, '郎溪县', '3');
-INSERT INTO `sys_china_area` VALUES (341822, 341800, '广德县', '3');
 INSERT INTO `sys_china_area` VALUES (341823, 341800, '泾县', '3');
 INSERT INTO `sys_china_area` VALUES (341824, 341800, '绩溪县', '3');
 INSERT INTO `sys_china_area` VALUES (341825, 341800, '旌德县', '3');
 INSERT INTO `sys_china_area` VALUES (341881, 341800, '宁国市', '3');
+INSERT INTO `sys_china_area` VALUES (341882, 341800, '广德市', '3');
 INSERT INTO `sys_china_area` VALUES (350000, 0, '福建省', '1');
 INSERT INTO `sys_china_area` VALUES (350100, 350000, '福州市', '2');
 INSERT INTO `sys_china_area` VALUES (350102, 350100, '鼓楼区', '3');
@@ -1261,9 +1263,9 @@ INSERT INTO `sys_china_area` VALUES (360100, 360000, '南昌市', '2');
 INSERT INTO `sys_china_area` VALUES (360102, 360100, '东湖区', '3');
 INSERT INTO `sys_china_area` VALUES (360103, 360100, '西湖区', '3');
 INSERT INTO `sys_china_area` VALUES (360104, 360100, '青云谱区', '3');
-INSERT INTO `sys_china_area` VALUES (360105, 360100, '湾里区', '3');
 INSERT INTO `sys_china_area` VALUES (360111, 360100, '青山湖区', '3');
 INSERT INTO `sys_china_area` VALUES (360112, 360100, '新建区', '3');
+INSERT INTO `sys_china_area` VALUES (360113, 360100, '红谷滩区', '3');
 INSERT INTO `sys_china_area` VALUES (360121, 360100, '南昌县', '3');
 INSERT INTO `sys_china_area` VALUES (360123, 360100, '安义县', '3');
 INSERT INTO `sys_china_area` VALUES (360124, 360100, '进贤县', '3');
@@ -1290,13 +1292,14 @@ INSERT INTO `sys_china_area` VALUES (360428, 360400, '都昌县', '3');
 INSERT INTO `sys_china_area` VALUES (360429, 360400, '湖口县', '3');
 INSERT INTO `sys_china_area` VALUES (360430, 360400, '彭泽县', '3');
 INSERT INTO `sys_china_area` VALUES (360481, 360400, '瑞昌市', '3');
+INSERT INTO `sys_china_area` VALUES (360482, 360400, '共青城市', '3');
 INSERT INTO `sys_china_area` VALUES (360483, 360400, '庐山市', '3');
 INSERT INTO `sys_china_area` VALUES (360500, 360000, '新余市', '2');
 INSERT INTO `sys_china_area` VALUES (360502, 360500, '渝水区', '3');
 INSERT INTO `sys_china_area` VALUES (360521, 360500, '分宜县', '3');
 INSERT INTO `sys_china_area` VALUES (360600, 360000, '鹰潭市', '2');
 INSERT INTO `sys_china_area` VALUES (360602, 360600, '月湖区', '3');
-INSERT INTO `sys_china_area` VALUES (360622, 360600, '余江县', '3');
+INSERT INTO `sys_china_area` VALUES (360603, 360600, '余江区', '3');
 INSERT INTO `sys_china_area` VALUES (360681, 360600, '贵溪市', '3');
 INSERT INTO `sys_china_area` VALUES (360700, 360000, '赣州市', '2');
 INSERT INTO `sys_china_area` VALUES (360702, 360700, '章贡区', '3');
@@ -1332,6 +1335,7 @@ INSERT INTO `sys_china_area` VALUES (360829, 360800, '安福县', '3');
 INSERT INTO `sys_china_area` VALUES (360830, 360800, '永新县', '3');
 INSERT INTO `sys_china_area` VALUES (360881, 360800, '井冈山市', '3');
 INSERT INTO `sys_china_area` VALUES (360900, 360000, '宜春市', '2');
+INSERT INTO `sys_china_area` VALUES (360902, 360900, '袁州区', '3');
 INSERT INTO `sys_china_area` VALUES (360921, 360900, '奉新县', '3');
 INSERT INTO `sys_china_area` VALUES (360922, 360900, '万载县', '3');
 INSERT INTO `sys_china_area` VALUES (360923, 360900, '上高县', '3');
@@ -1354,8 +1358,9 @@ INSERT INTO `sys_china_area` VALUES (361027, 361000, '金溪县', '3');
 INSERT INTO `sys_china_area` VALUES (361028, 361000, '资溪县', '3');
 INSERT INTO `sys_china_area` VALUES (361030, 361000, '广昌县', '3');
 INSERT INTO `sys_china_area` VALUES (361100, 360000, '上饶市', '2');
+INSERT INTO `sys_china_area` VALUES (361102, 361100, '信州区', '3');
 INSERT INTO `sys_china_area` VALUES (361103, 361100, '广丰区', '3');
-INSERT INTO `sys_china_area` VALUES (361121, 361100, '上饶县', '3');
+INSERT INTO `sys_china_area` VALUES (361104, 361100, '广信区', '3');
 INSERT INTO `sys_china_area` VALUES (361123, 361100, '玉山县', '3');
 INSERT INTO `sys_china_area` VALUES (361124, 361100, '铅山县', '3');
 INSERT INTO `sys_china_area` VALUES (361125, 361100, '横峰县', '3');
@@ -1374,8 +1379,10 @@ INSERT INTO `sys_china_area` VALUES (370105, 370100, '天桥区', '3');
 INSERT INTO `sys_china_area` VALUES (370112, 370100, '历城区', '3');
 INSERT INTO `sys_china_area` VALUES (370113, 370100, '长清区', '3');
 INSERT INTO `sys_china_area` VALUES (370114, 370100, '章丘区', '3');
+INSERT INTO `sys_china_area` VALUES (370115, 370100, '济阳区', '3');
+INSERT INTO `sys_china_area` VALUES (370116, 370100, '莱芜区', '3');
+INSERT INTO `sys_china_area` VALUES (370117, 370100, '钢城区', '3');
 INSERT INTO `sys_china_area` VALUES (370124, 370100, '平阴县', '3');
-INSERT INTO `sys_china_area` VALUES (370125, 370100, '济阳县', '3');
 INSERT INTO `sys_china_area` VALUES (370126, 370100, '商河县', '3');
 INSERT INTO `sys_china_area` VALUES (370200, 370000, '青岛市', '2');
 INSERT INTO `sys_china_area` VALUES (370202, 370200, '市南区', '3');
@@ -1465,9 +1472,6 @@ INSERT INTO `sys_china_area` VALUES (371102, 371100, '东港区', '3');
 INSERT INTO `sys_china_area` VALUES (371103, 371100, '岚山区', '3');
 INSERT INTO `sys_china_area` VALUES (371121, 371100, '五莲县', '3');
 INSERT INTO `sys_china_area` VALUES (371122, 371100, '莒县', '3');
-INSERT INTO `sys_china_area` VALUES (371200, 370000, '莱芜市', '2');
-INSERT INTO `sys_china_area` VALUES (371202, 371200, '莱城区', '3');
-INSERT INTO `sys_china_area` VALUES (371203, 371200, '钢城区', '3');
 INSERT INTO `sys_china_area` VALUES (371300, 370000, '临沂市', '2');
 INSERT INTO `sys_china_area` VALUES (371302, 371300, '兰山区', '3');
 INSERT INTO `sys_china_area` VALUES (371311, 371300, '罗庄区', '3');
@@ -1495,21 +1499,23 @@ INSERT INTO `sys_china_area` VALUES (371481, 371400, '乐陵市', '3');
 INSERT INTO `sys_china_area` VALUES (371482, 371400, '禹城市', '3');
 INSERT INTO `sys_china_area` VALUES (371500, 370000, '聊城市', '2');
 INSERT INTO `sys_china_area` VALUES (371502, 371500, '东昌府区', '3');
+INSERT INTO `sys_china_area` VALUES (371503, 371500, '茌平区', '3');
 INSERT INTO `sys_china_area` VALUES (371521, 371500, '阳谷县', '3');
 INSERT INTO `sys_china_area` VALUES (371522, 371500, '莘县', '3');
-INSERT INTO `sys_china_area` VALUES (371523, 371500, '茌平县', '3');
 INSERT INTO `sys_china_area` VALUES (371524, 371500, '东阿县', '3');
 INSERT INTO `sys_china_area` VALUES (371525, 371500, '冠县', '3');
 INSERT INTO `sys_china_area` VALUES (371526, 371500, '高唐县', '3');
 INSERT INTO `sys_china_area` VALUES (371581, 371500, '临清市', '3');
 INSERT INTO `sys_china_area` VALUES (371600, 370000, '滨州市', '2');
+INSERT INTO `sys_china_area` VALUES (371602, 371600, '滨城区', '3');
 INSERT INTO `sys_china_area` VALUES (371603, 371600, '沾化区', '3');
 INSERT INTO `sys_china_area` VALUES (371621, 371600, '惠民县', '3');
 INSERT INTO `sys_china_area` VALUES (371622, 371600, '阳信县', '3');
 INSERT INTO `sys_china_area` VALUES (371623, 371600, '无棣县', '3');
 INSERT INTO `sys_china_area` VALUES (371625, 371600, '博兴县', '3');
-INSERT INTO `sys_china_area` VALUES (371626, 371600, '邹平县', '3');
+INSERT INTO `sys_china_area` VALUES (371681, 371600, '邹平市', '3');
 INSERT INTO `sys_china_area` VALUES (371700, 370000, '菏泽市', '2');
+INSERT INTO `sys_china_area` VALUES (371702, 371700, '牡丹区', '3');
 INSERT INTO `sys_china_area` VALUES (371703, 371700, '定陶区', '3');
 INSERT INTO `sys_china_area` VALUES (371721, 371700, '曹县', '3');
 INSERT INTO `sys_china_area` VALUES (371722, 371700, '单县', '3');
@@ -1537,6 +1543,7 @@ INSERT INTO `sys_china_area` VALUES (410202, 410200, '龙亭区', '3');
 INSERT INTO `sys_china_area` VALUES (410203, 410200, '顺河回族区', '3');
 INSERT INTO `sys_china_area` VALUES (410204, 410200, '鼓楼区', '3');
 INSERT INTO `sys_china_area` VALUES (410205, 410200, '禹王台区', '3');
+INSERT INTO `sys_china_area` VALUES (410212, 410200, '祥符区', '3');
 INSERT INTO `sys_china_area` VALUES (410221, 410200, '杞县', '3');
 INSERT INTO `sys_china_area` VALUES (410222, 410200, '通许县', '3');
 INSERT INTO `sys_china_area` VALUES (410223, 410200, '尉氏县', '3');
@@ -1544,7 +1551,7 @@ INSERT INTO `sys_china_area` VALUES (410225, 410200, '兰考县', '3');
 INSERT INTO `sys_china_area` VALUES (410300, 410000, '洛阳市', '2');
 INSERT INTO `sys_china_area` VALUES (410302, 410300, '老城区', '3');
 INSERT INTO `sys_china_area` VALUES (410303, 410300, '西工区', '3');
-INSERT INTO `sys_china_area` VALUES (410304, 410300, '廛河回族区', '3');
+INSERT INTO `sys_china_area` VALUES (410304, 410300, '瀍河回族区', '3');
 INSERT INTO `sys_china_area` VALUES (410305, 410300, '涧西区', '3');
 INSERT INTO `sys_china_area` VALUES (410306, 410300, '吉利区', '3');
 INSERT INTO `sys_china_area` VALUES (410311, 410300, '洛龙区', '3');
@@ -1571,6 +1578,8 @@ INSERT INTO `sys_china_area` VALUES (410482, 410400, '汝州市', '3');
 INSERT INTO `sys_china_area` VALUES (410500, 410000, '安阳市', '2');
 INSERT INTO `sys_china_area` VALUES (410502, 410500, '文峰区', '3');
 INSERT INTO `sys_china_area` VALUES (410503, 410500, '北关区', '3');
+INSERT INTO `sys_china_area` VALUES (410505, 410500, '殷都区', '3');
+INSERT INTO `sys_china_area` VALUES (410506, 410500, '龙安区', '3');
 INSERT INTO `sys_china_area` VALUES (410522, 410500, '安阳县', '3');
 INSERT INTO `sys_china_area` VALUES (410523, 410500, '汤阴县', '3');
 INSERT INTO `sys_china_area` VALUES (410526, 410500, '滑县', '3');
@@ -1579,6 +1588,7 @@ INSERT INTO `sys_china_area` VALUES (410581, 410500, '林州市', '3');
 INSERT INTO `sys_china_area` VALUES (410600, 410000, '鹤壁市', '2');
 INSERT INTO `sys_china_area` VALUES (410602, 410600, '鹤山区', '3');
 INSERT INTO `sys_china_area` VALUES (410603, 410600, '山城区', '3');
+INSERT INTO `sys_china_area` VALUES (410611, 410600, '淇滨区', '3');
 INSERT INTO `sys_china_area` VALUES (410621, 410600, '浚县', '3');
 INSERT INTO `sys_china_area` VALUES (410622, 410600, '淇县', '3');
 INSERT INTO `sys_china_area` VALUES (410700, 410000, '新乡市', '2');
@@ -1591,9 +1601,9 @@ INSERT INTO `sys_china_area` VALUES (410724, 410700, '获嘉县', '3');
 INSERT INTO `sys_china_area` VALUES (410725, 410700, '原阳县', '3');
 INSERT INTO `sys_china_area` VALUES (410726, 410700, '延津县', '3');
 INSERT INTO `sys_china_area` VALUES (410727, 410700, '封丘县', '3');
-INSERT INTO `sys_china_area` VALUES (410728, 410700, '长垣县', '3');
 INSERT INTO `sys_china_area` VALUES (410781, 410700, '卫辉市', '3');
 INSERT INTO `sys_china_area` VALUES (410782, 410700, '辉县市', '3');
+INSERT INTO `sys_china_area` VALUES (410783, 410700, '长垣市', '3');
 INSERT INTO `sys_china_area` VALUES (410800, 410000, '焦作市', '2');
 INSERT INTO `sys_china_area` VALUES (410802, 410800, '解放区', '3');
 INSERT INTO `sys_china_area` VALUES (410803, 410800, '中站区', '3');
@@ -1614,6 +1624,7 @@ INSERT INTO `sys_china_area` VALUES (410927, 410900, '台前县', '3');
 INSERT INTO `sys_china_area` VALUES (410928, 410900, '濮阳县', '3');
 INSERT INTO `sys_china_area` VALUES (411000, 410000, '许昌市', '2');
 INSERT INTO `sys_china_area` VALUES (411002, 411000, '魏都区', '3');
+INSERT INTO `sys_china_area` VALUES (411003, 411000, '建安区', '3');
 INSERT INTO `sys_china_area` VALUES (411024, 411000, '鄢陵县', '3');
 INSERT INTO `sys_china_area` VALUES (411025, 411000, '襄城县', '3');
 INSERT INTO `sys_china_area` VALUES (411081, 411000, '禹州市', '3');
@@ -1667,16 +1678,18 @@ INSERT INTO `sys_china_area` VALUES (411526, 411500, '潢川县', '3');
 INSERT INTO `sys_china_area` VALUES (411527, 411500, '淮滨县', '3');
 INSERT INTO `sys_china_area` VALUES (411528, 411500, '息县', '3');
 INSERT INTO `sys_china_area` VALUES (411600, 410000, '周口市', '2');
+INSERT INTO `sys_china_area` VALUES (411602, 411600, '川汇区', '3');
+INSERT INTO `sys_china_area` VALUES (411603, 411600, '淮阳区', '3');
 INSERT INTO `sys_china_area` VALUES (411621, 411600, '扶沟县', '3');
 INSERT INTO `sys_china_area` VALUES (411622, 411600, '西华县', '3');
 INSERT INTO `sys_china_area` VALUES (411623, 411600, '商水县', '3');
 INSERT INTO `sys_china_area` VALUES (411624, 411600, '沈丘县', '3');
 INSERT INTO `sys_china_area` VALUES (411625, 411600, '郸城县', '3');
-INSERT INTO `sys_china_area` VALUES (411626, 411600, '淮阳县', '3');
 INSERT INTO `sys_china_area` VALUES (411627, 411600, '太康县', '3');
 INSERT INTO `sys_china_area` VALUES (411628, 411600, '鹿邑县', '3');
 INSERT INTO `sys_china_area` VALUES (411681, 411600, '项城市', '3');
 INSERT INTO `sys_china_area` VALUES (411700, 410000, '驻马店市', '2');
+INSERT INTO `sys_china_area` VALUES (411702, 411700, '驿城区', '3');
 INSERT INTO `sys_china_area` VALUES (411721, 411700, '西平县', '3');
 INSERT INTO `sys_china_area` VALUES (411722, 411700, '上蔡县', '3');
 INSERT INTO `sys_china_area` VALUES (411723, 411700, '平舆县', '3');
@@ -1735,6 +1748,7 @@ INSERT INTO `sys_china_area` VALUES (420583, 420500, '枝江市', '3');
 INSERT INTO `sys_china_area` VALUES (420600, 420000, '襄阳市', '2');
 INSERT INTO `sys_china_area` VALUES (420602, 420600, '襄城区', '3');
 INSERT INTO `sys_china_area` VALUES (420606, 420600, '樊城区', '3');
+INSERT INTO `sys_china_area` VALUES (420607, 420600, '襄州区', '3');
 INSERT INTO `sys_china_area` VALUES (420624, 420600, '南漳县', '3');
 INSERT INTO `sys_china_area` VALUES (420625, 420600, '谷城县', '3');
 INSERT INTO `sys_china_area` VALUES (420626, 420600, '保康县', '3');
@@ -1748,9 +1762,9 @@ INSERT INTO `sys_china_area` VALUES (420704, 420700, '鄂城区', '3');
 INSERT INTO `sys_china_area` VALUES (420800, 420000, '荆门市', '2');
 INSERT INTO `sys_china_area` VALUES (420802, 420800, '东宝区', '3');
 INSERT INTO `sys_china_area` VALUES (420804, 420800, '掇刀区', '3');
-INSERT INTO `sys_china_area` VALUES (420821, 420800, '京山县', '3');
 INSERT INTO `sys_china_area` VALUES (420822, 420800, '沙洋县', '3');
 INSERT INTO `sys_china_area` VALUES (420881, 420800, '钟祥市', '3');
+INSERT INTO `sys_china_area` VALUES (420882, 420800, '京山市', '3');
 INSERT INTO `sys_china_area` VALUES (420900, 420000, '孝感市', '2');
 INSERT INTO `sys_china_area` VALUES (420902, 420900, '孝南区', '3');
 INSERT INTO `sys_china_area` VALUES (420921, 420900, '孝昌县', '3');
@@ -1786,6 +1800,10 @@ INSERT INTO `sys_china_area` VALUES (421222, 421200, '通城县', '3');
 INSERT INTO `sys_china_area` VALUES (421223, 421200, '崇阳县', '3');
 INSERT INTO `sys_china_area` VALUES (421224, 421200, '通山县', '3');
 INSERT INTO `sys_china_area` VALUES (421281, 421200, '赤壁市', '3');
+INSERT INTO `sys_china_area` VALUES (421300, 420000, '随州市', '2');
+INSERT INTO `sys_china_area` VALUES (421303, 421300, '曾都区', '3');
+INSERT INTO `sys_china_area` VALUES (421321, 421300, '随县', '3');
+INSERT INTO `sys_china_area` VALUES (421381, 421300, '广水市', '3');
 INSERT INTO `sys_china_area` VALUES (422800, 420000, '恩施土家族苗族自治州', '2');
 INSERT INTO `sys_china_area` VALUES (422801, 422800, '恩施市', '3');
 INSERT INTO `sys_china_area` VALUES (422802, 422800, '利川市', '3');
@@ -1815,7 +1833,7 @@ INSERT INTO `sys_china_area` VALUES (430202, 430200, '荷塘区', '3');
 INSERT INTO `sys_china_area` VALUES (430203, 430200, '芦淞区', '3');
 INSERT INTO `sys_china_area` VALUES (430204, 430200, '石峰区', '3');
 INSERT INTO `sys_china_area` VALUES (430211, 430200, '天元区', '3');
-INSERT INTO `sys_china_area` VALUES (430221, 430200, '株洲县', '3');
+INSERT INTO `sys_china_area` VALUES (430212, 430200, '渌口区', '3');
 INSERT INTO `sys_china_area` VALUES (430223, 430200, '攸县', '3');
 INSERT INTO `sys_china_area` VALUES (430224, 430200, '茶陵县', '3');
 INSERT INTO `sys_china_area` VALUES (430225, 430200, '炎陵县', '3');
@@ -1843,7 +1861,6 @@ INSERT INTO `sys_china_area` VALUES (430500, 430000, '邵阳市', '2');
 INSERT INTO `sys_china_area` VALUES (430502, 430500, '双清区', '3');
 INSERT INTO `sys_china_area` VALUES (430503, 430500, '大祥区', '3');
 INSERT INTO `sys_china_area` VALUES (430511, 430500, '北塔区', '3');
-INSERT INTO `sys_china_area` VALUES (430521, 430500, '邵东县', '3');
 INSERT INTO `sys_china_area` VALUES (430522, 430500, '新邵县', '3');
 INSERT INTO `sys_china_area` VALUES (430523, 430500, '邵阳县', '3');
 INSERT INTO `sys_china_area` VALUES (430524, 430500, '隆回县', '3');
@@ -1852,6 +1869,7 @@ INSERT INTO `sys_china_area` VALUES (430527, 430500, '绥宁县', '3');
 INSERT INTO `sys_china_area` VALUES (430528, 430500, '新宁县', '3');
 INSERT INTO `sys_china_area` VALUES (430529, 430500, '城步苗族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (430581, 430500, '武冈市', '3');
+INSERT INTO `sys_china_area` VALUES (430582, 430500, '邵东市', '3');
 INSERT INTO `sys_china_area` VALUES (430600, 430000, '岳阳市', '2');
 INSERT INTO `sys_china_area` VALUES (430602, 430600, '岳阳楼区', '3');
 INSERT INTO `sys_china_area` VALUES (430603, 430600, '云溪区', '3');
@@ -1922,6 +1940,7 @@ INSERT INTO `sys_china_area` VALUES (431229, 431200, '靖州苗族侗族自治�
 INSERT INTO `sys_china_area` VALUES (431230, 431200, '通道侗族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (431281, 431200, '洪江市', '3');
 INSERT INTO `sys_china_area` VALUES (431300, 430000, '娄底市', '2');
+INSERT INTO `sys_china_area` VALUES (431302, 431300, '娄星区', '3');
 INSERT INTO `sys_china_area` VALUES (431321, 431300, '双峰县', '3');
 INSERT INTO `sys_china_area` VALUES (431322, 431300, '新化县', '3');
 INSERT INTO `sys_china_area` VALUES (431381, 431300, '冷水江市', '3');
@@ -1945,6 +1964,7 @@ INSERT INTO `sys_china_area` VALUES (440111, 440100, '白云区', '3');
 INSERT INTO `sys_china_area` VALUES (440112, 440100, '黄埔区', '3');
 INSERT INTO `sys_china_area` VALUES (440113, 440100, '番禺区', '3');
 INSERT INTO `sys_china_area` VALUES (440114, 440100, '花都区', '3');
+INSERT INTO `sys_china_area` VALUES (440115, 440100, '南沙区', '3');
 INSERT INTO `sys_china_area` VALUES (440117, 440100, '从化区', '3');
 INSERT INTO `sys_china_area` VALUES (440118, 440100, '增城区', '3');
 INSERT INTO `sys_china_area` VALUES (440200, 440000, '韶关市', '2');
@@ -1965,7 +1985,9 @@ INSERT INTO `sys_china_area` VALUES (440305, 440300, '南山区', '3');
 INSERT INTO `sys_china_area` VALUES (440306, 440300, '宝安区', '3');
 INSERT INTO `sys_china_area` VALUES (440307, 440300, '龙岗区', '3');
 INSERT INTO `sys_china_area` VALUES (440308, 440300, '盐田区', '3');
-INSERT INTO `sys_china_area` VALUES (440309, 460100, '龙华区', '3');
+INSERT INTO `sys_china_area` VALUES (440309, 440300, '龙华区', '3');
+INSERT INTO `sys_china_area` VALUES (440310, 440300, '坪山区', '3');
+INSERT INTO `sys_china_area` VALUES (440311, 440300, '光明区', '3');
 INSERT INTO `sys_china_area` VALUES (440400, 440000, '珠海市', '2');
 INSERT INTO `sys_china_area` VALUES (440402, 440400, '香洲区', '3');
 INSERT INTO `sys_china_area` VALUES (440403, 440400, '斗门区', '3');
@@ -2117,8 +2139,8 @@ INSERT INTO `sys_china_area` VALUES (450327, 450300, '灌阳县', '3');
 INSERT INTO `sys_china_area` VALUES (450328, 450300, '龙胜各族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (450329, 450300, '资源县', '3');
 INSERT INTO `sys_china_area` VALUES (450330, 450300, '平乐县', '3');
-INSERT INTO `sys_china_area` VALUES (450331, 450300, '荔蒲县', '3');
 INSERT INTO `sys_china_area` VALUES (450332, 450300, '恭城瑶族自治县', '3');
+INSERT INTO `sys_china_area` VALUES (450381, 450300, '荔浦市', '3');
 INSERT INTO `sys_china_area` VALUES (450400, 450000, '梧州市', '2');
 INSERT INTO `sys_china_area` VALUES (450403, 450400, '万秀区', '3');
 INSERT INTO `sys_china_area` VALUES (450405, 450400, '长洲区', '3');
@@ -2150,6 +2172,7 @@ INSERT INTO `sys_china_area` VALUES (450821, 450800, '平南县', '3');
 INSERT INTO `sys_china_area` VALUES (450881, 450800, '桂平市', '3');
 INSERT INTO `sys_china_area` VALUES (450900, 450000, '玉林市', '2');
 INSERT INTO `sys_china_area` VALUES (450902, 450900, '玉州区', '3');
+INSERT INTO `sys_china_area` VALUES (450903, 450900, '福绵区', '3');
 INSERT INTO `sys_china_area` VALUES (450921, 450900, '容县', '3');
 INSERT INTO `sys_china_area` VALUES (450922, 450900, '陆川县', '3');
 INSERT INTO `sys_china_area` VALUES (450923, 450900, '博白县', '3');
@@ -2157,9 +2180,8 @@ INSERT INTO `sys_china_area` VALUES (450924, 450900, '兴业县', '3');
 INSERT INTO `sys_china_area` VALUES (450981, 450900, '北流市', '3');
 INSERT INTO `sys_china_area` VALUES (451000, 450000, '百色市', '2');
 INSERT INTO `sys_china_area` VALUES (451002, 451000, '右江区', '3');
-INSERT INTO `sys_china_area` VALUES (451021, 451000, '田阳县', '3');
+INSERT INTO `sys_china_area` VALUES (451003, 451000, '田阳区', '3');
 INSERT INTO `sys_china_area` VALUES (451022, 451000, '田东县', '3');
-INSERT INTO `sys_china_area` VALUES (451023, 451000, '平果县', '3');
 INSERT INTO `sys_china_area` VALUES (451024, 451000, '德保县', '3');
 INSERT INTO `sys_china_area` VALUES (451026, 451000, '那坡县', '3');
 INSERT INTO `sys_china_area` VALUES (451027, 451000, '凌云县', '3');
@@ -2168,8 +2190,10 @@ INSERT INTO `sys_china_area` VALUES (451029, 451000, '田林县', '3');
 INSERT INTO `sys_china_area` VALUES (451030, 451000, '西林县', '3');
 INSERT INTO `sys_china_area` VALUES (451031, 451000, '隆林各族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (451081, 451000, '靖西市', '3');
+INSERT INTO `sys_china_area` VALUES (451082, 451000, '平果市', '3');
 INSERT INTO `sys_china_area` VALUES (451100, 450000, '贺州市', '2');
 INSERT INTO `sys_china_area` VALUES (451102, 451100, '八步区', '3');
+INSERT INTO `sys_china_area` VALUES (451103, 451100, '平桂区', '3');
 INSERT INTO `sys_china_area` VALUES (451121, 451100, '昭平县', '3');
 INSERT INTO `sys_china_area` VALUES (451122, 451100, '钟山县', '3');
 INSERT INTO `sys_china_area` VALUES (451123, 451100, '富川瑶族自治县', '3');
@@ -2203,6 +2227,7 @@ INSERT INTO `sys_china_area` VALUES (451481, 451400, '凭祥市', '3');
 INSERT INTO `sys_china_area` VALUES (460000, 0, '海南省', '1');
 INSERT INTO `sys_china_area` VALUES (460100, 460000, '海口市', '2');
 INSERT INTO `sys_china_area` VALUES (460105, 460100, '秀英区', '3');
+INSERT INTO `sys_china_area` VALUES (460106, 460100, '龙华区', '3');
 INSERT INTO `sys_china_area` VALUES (460107, 460100, '琼山区', '3');
 INSERT INTO `sys_china_area` VALUES (460108, 460100, '美兰区', '3');
 INSERT INTO `sys_china_area` VALUES (460200, 460000, '三亚市', '2');
@@ -2287,7 +2312,7 @@ INSERT INTO `sys_china_area` VALUES (510181, 510100, '都江堰市', '3');
 INSERT INTO `sys_china_area` VALUES (510182, 510100, '彭州市', '3');
 INSERT INTO `sys_china_area` VALUES (510183, 510100, '邛崃市', '3');
 INSERT INTO `sys_china_area` VALUES (510184, 510100, '崇州市', '3');
-INSERT INTO `sys_china_area` VALUES (510185, 512000, '简阳市', '3');
+INSERT INTO `sys_china_area` VALUES (510185, 510100, '简阳市', '3');
 INSERT INTO `sys_china_area` VALUES (510300, 510000, '自贡市', '2');
 INSERT INTO `sys_china_area` VALUES (510302, 510300, '自流井区', '3');
 INSERT INTO `sys_china_area` VALUES (510303, 510300, '贡井区', '3');
@@ -2338,8 +2363,8 @@ INSERT INTO `sys_china_area` VALUES (510900, 510000, '遂宁市', '2');
 INSERT INTO `sys_china_area` VALUES (510903, 510900, '船山区', '3');
 INSERT INTO `sys_china_area` VALUES (510904, 510900, '安居区', '3');
 INSERT INTO `sys_china_area` VALUES (510921, 510900, '蓬溪县', '3');
-INSERT INTO `sys_china_area` VALUES (510922, 510900, '射洪县', '3');
 INSERT INTO `sys_china_area` VALUES (510923, 510900, '大英县', '3');
+INSERT INTO `sys_china_area` VALUES (510981, 510900, '射洪市', '3');
 INSERT INTO `sys_china_area` VALUES (511000, 510000, '内江市', '2');
 INSERT INTO `sys_china_area` VALUES (511002, 511000, '市中区', '3');
 INSERT INTO `sys_china_area` VALUES (511011, 511000, '东兴区', '3');
@@ -2378,7 +2403,7 @@ INSERT INTO `sys_china_area` VALUES (511425, 511400, '青神县', '3');
 INSERT INTO `sys_china_area` VALUES (511500, 510000, '宜宾市', '2');
 INSERT INTO `sys_china_area` VALUES (511502, 511500, '翠屏区', '3');
 INSERT INTO `sys_china_area` VALUES (511503, 511500, '南溪区', '3');
-INSERT INTO `sys_china_area` VALUES (511521, 511500, '宜宾县', '3');
+INSERT INTO `sys_china_area` VALUES (511504, 511500, '叙州区', '3');
 INSERT INTO `sys_china_area` VALUES (511523, 511500, '江安县', '3');
 INSERT INTO `sys_china_area` VALUES (511524, 511500, '长宁县', '3');
 INSERT INTO `sys_china_area` VALUES (511525, 511500, '高县', '3');
@@ -2388,6 +2413,7 @@ INSERT INTO `sys_china_area` VALUES (511528, 511500, '兴文县', '3');
 INSERT INTO `sys_china_area` VALUES (511529, 511500, '屏山县', '3');
 INSERT INTO `sys_china_area` VALUES (511600, 510000, '广安市', '2');
 INSERT INTO `sys_china_area` VALUES (511602, 511600, '广安区', '3');
+INSERT INTO `sys_china_area` VALUES (511603, 511600, '前锋区', '3');
 INSERT INTO `sys_china_area` VALUES (511621, 511600, '岳池县', '3');
 INSERT INTO `sys_china_area` VALUES (511622, 511600, '武胜县', '3');
 INSERT INTO `sys_china_area` VALUES (511623, 511600, '邻水县', '3');
@@ -2401,6 +2427,7 @@ INSERT INTO `sys_china_area` VALUES (511724, 511700, '大竹县', '3');
 INSERT INTO `sys_china_area` VALUES (511725, 511700, '渠县', '3');
 INSERT INTO `sys_china_area` VALUES (511781, 511700, '万源市', '3');
 INSERT INTO `sys_china_area` VALUES (511800, 510000, '雅安市', '2');
+INSERT INTO `sys_china_area` VALUES (511802, 511800, '雨城区', '3');
 INSERT INTO `sys_china_area` VALUES (511803, 511800, '名山区', '3');
 INSERT INTO `sys_china_area` VALUES (511822, 511800, '荥经县', '3');
 INSERT INTO `sys_china_area` VALUES (511823, 511800, '汉源县', '3');
@@ -2409,10 +2436,13 @@ INSERT INTO `sys_china_area` VALUES (511825, 511800, '天全县', '3');
 INSERT INTO `sys_china_area` VALUES (511826, 511800, '芦山县', '3');
 INSERT INTO `sys_china_area` VALUES (511827, 511800, '宝兴县', '3');
 INSERT INTO `sys_china_area` VALUES (511900, 510000, '巴中市', '2');
+INSERT INTO `sys_china_area` VALUES (511902, 511900, '巴州区', '3');
+INSERT INTO `sys_china_area` VALUES (511903, 511900, '恩阳区', '3');
 INSERT INTO `sys_china_area` VALUES (511921, 511900, '通江县', '3');
 INSERT INTO `sys_china_area` VALUES (511922, 511900, '南江县', '3');
 INSERT INTO `sys_china_area` VALUES (511923, 511900, '平昌县', '3');
 INSERT INTO `sys_china_area` VALUES (512000, 510000, '资阳市', '2');
+INSERT INTO `sys_china_area` VALUES (512002, 512000, '雁江区', '3');
 INSERT INTO `sys_china_area` VALUES (512021, 512000, '安岳县', '3');
 INSERT INTO `sys_china_area` VALUES (512022, 512000, '乐至县', '3');
 INSERT INTO `sys_china_area` VALUES (513200, 510000, '阿坝藏族羌族自治州', '2');
@@ -2499,12 +2529,14 @@ INSERT INTO `sys_china_area` VALUES (520330, 520300, '习水县', '3');
 INSERT INTO `sys_china_area` VALUES (520381, 520300, '赤水市', '3');
 INSERT INTO `sys_china_area` VALUES (520382, 520300, '仁怀市', '3');
 INSERT INTO `sys_china_area` VALUES (520400, 520000, '安顺市', '2');
+INSERT INTO `sys_china_area` VALUES (520402, 520400, '西秀区', '3');
 INSERT INTO `sys_china_area` VALUES (520403, 520400, '平坝区', '3');
 INSERT INTO `sys_china_area` VALUES (520422, 520400, '普定县', '3');
 INSERT INTO `sys_china_area` VALUES (520423, 520400, '镇宁布依族苗族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (520424, 520400, '关岭布依族苗族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (520425, 520400, '紫云苗族布依族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (520500, 520000, '毕节市', '2');
+INSERT INTO `sys_china_area` VALUES (520502, 520500, '七星关区', '3');
 INSERT INTO `sys_china_area` VALUES (520521, 520500, '大方县', '3');
 INSERT INTO `sys_china_area` VALUES (520522, 520500, '黔西县', '3');
 INSERT INTO `sys_china_area` VALUES (520523, 520500, '金沙县', '3');
@@ -2513,6 +2545,7 @@ INSERT INTO `sys_china_area` VALUES (520525, 520500, '纳雍县', '3');
 INSERT INTO `sys_china_area` VALUES (520526, 520500, '威宁彝族回族苗族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (520527, 520500, '赫章县', '3');
 INSERT INTO `sys_china_area` VALUES (520600, 520000, '铜仁市', '2');
+INSERT INTO `sys_china_area` VALUES (520602, 520600, '碧江区', '3');
 INSERT INTO `sys_china_area` VALUES (520603, 520600, '万山区', '3');
 INSERT INTO `sys_china_area` VALUES (520621, 520600, '江口县', '3');
 INSERT INTO `sys_china_area` VALUES (520622, 520600, '玉屏侗族自治县', '3');
@@ -2524,7 +2557,7 @@ INSERT INTO `sys_china_area` VALUES (520627, 520600, '沿河土家族自治县',
 INSERT INTO `sys_china_area` VALUES (520628, 520600, '松桃苗族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (522300, 520000, '黔西南布依族苗族自治州', '2');
 INSERT INTO `sys_china_area` VALUES (522301, 522300, '兴义市', '3');
-INSERT INTO `sys_china_area` VALUES (522322, 522300, '兴仁县', '3');
+INSERT INTO `sys_china_area` VALUES (522302, 522300, '兴仁市', '3');
 INSERT INTO `sys_china_area` VALUES (522323, 522300, '普安县', '3');
 INSERT INTO `sys_china_area` VALUES (522324, 522300, '晴隆县', '3');
 INSERT INTO `sys_china_area` VALUES (522325, 522300, '贞丰县', '3');
@@ -2580,7 +2613,7 @@ INSERT INTO `sys_china_area` VALUES (530181, 530100, '安宁市', '3');
 INSERT INTO `sys_china_area` VALUES (530300, 530000, '曲靖市', '2');
 INSERT INTO `sys_china_area` VALUES (530302, 530300, '麒麟区', '3');
 INSERT INTO `sys_china_area` VALUES (530303, 530300, '沾益区', '3');
-INSERT INTO `sys_china_area` VALUES (530321, 530300, '马龙县', '3');
+INSERT INTO `sys_china_area` VALUES (530304, 530300, '马龙区', '3');
 INSERT INTO `sys_china_area` VALUES (530322, 530300, '陆良县', '3');
 INSERT INTO `sys_china_area` VALUES (530323, 530300, '师宗县', '3');
 INSERT INTO `sys_china_area` VALUES (530324, 530300, '罗平县', '3');
@@ -2590,19 +2623,21 @@ INSERT INTO `sys_china_area` VALUES (530381, 530300, '宣威市', '3');
 INSERT INTO `sys_china_area` VALUES (530400, 530000, '玉溪市', '2');
 INSERT INTO `sys_china_area` VALUES (530402, 530400, '红塔区', '3');
 INSERT INTO `sys_china_area` VALUES (530403, 530400, '江川区', '3');
-INSERT INTO `sys_china_area` VALUES (530422, 530400, '澄江县', '3');
 INSERT INTO `sys_china_area` VALUES (530423, 530400, '通海县', '3');
 INSERT INTO `sys_china_area` VALUES (530424, 530400, '华宁县', '3');
 INSERT INTO `sys_china_area` VALUES (530425, 530400, '易门县', '3');
 INSERT INTO `sys_china_area` VALUES (530426, 530400, '峨山彝族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (530427, 530400, '新平彝族傣族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (530428, 530400, '元江哈尼族彝族傣族自治县', '3');
+INSERT INTO `sys_china_area` VALUES (530481, 530400, '澄江市', '3');
 INSERT INTO `sys_china_area` VALUES (530500, 530000, '保山市', '2');
+INSERT INTO `sys_china_area` VALUES (530502, 530500, '隆阳区', '3');
 INSERT INTO `sys_china_area` VALUES (530521, 530500, '施甸县', '3');
 INSERT INTO `sys_china_area` VALUES (530523, 530500, '龙陵县', '3');
 INSERT INTO `sys_china_area` VALUES (530524, 530500, '昌宁县', '3');
 INSERT INTO `sys_china_area` VALUES (530581, 530500, '腾冲市', '3');
 INSERT INTO `sys_china_area` VALUES (530600, 530000, '昭通市', '2');
+INSERT INTO `sys_china_area` VALUES (530602, 530600, '昭阳区', '3');
 INSERT INTO `sys_china_area` VALUES (530621, 530600, '鲁甸县', '3');
 INSERT INTO `sys_china_area` VALUES (530622, 530600, '巧家县', '3');
 INSERT INTO `sys_china_area` VALUES (530623, 530600, '盐津县', '3');
@@ -2612,8 +2647,9 @@ INSERT INTO `sys_china_area` VALUES (530626, 530600, '绥江县', '3');
 INSERT INTO `sys_china_area` VALUES (530627, 530600, '镇雄县', '3');
 INSERT INTO `sys_china_area` VALUES (530628, 530600, '彝良县', '3');
 INSERT INTO `sys_china_area` VALUES (530629, 530600, '威信县', '3');
-INSERT INTO `sys_china_area` VALUES (530630, 530600, '水富县', '3');
+INSERT INTO `sys_china_area` VALUES (530681, 530600, '水富市', '3');
 INSERT INTO `sys_china_area` VALUES (530700, 530000, '丽江市', '2');
+INSERT INTO `sys_china_area` VALUES (530702, 530700, '古城区', '3');
 INSERT INTO `sys_china_area` VALUES (530721, 530700, '玉龙纳西族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (530722, 530700, '永胜县', '3');
 INSERT INTO `sys_china_area` VALUES (530723, 530700, '华坪县', '3');
@@ -2715,6 +2751,7 @@ INSERT INTO `sys_china_area` VALUES (540123, 540100, '尼木县', '3');
 INSERT INTO `sys_china_area` VALUES (540124, 540100, '曲水县', '3');
 INSERT INTO `sys_china_area` VALUES (540127, 540100, '墨竹工卡县', '3');
 INSERT INTO `sys_china_area` VALUES (540200, 540000, '日喀则市', '2');
+INSERT INTO `sys_china_area` VALUES (540202, 540200, '桑珠孜区', '3');
 INSERT INTO `sys_china_area` VALUES (540221, 540200, '南木林县', '3');
 INSERT INTO `sys_china_area` VALUES (540222, 540200, '江孜县', '3');
 INSERT INTO `sys_china_area` VALUES (540223, 540200, '定日县', '3');
@@ -2745,6 +2782,7 @@ INSERT INTO `sys_china_area` VALUES (540328, 540300, '芒康县', '3');
 INSERT INTO `sys_china_area` VALUES (540329, 540300, '洛隆县', '3');
 INSERT INTO `sys_china_area` VALUES (540330, 540300, '边坝县', '3');
 INSERT INTO `sys_china_area` VALUES (540400, 540000, '林芝市', '2');
+INSERT INTO `sys_china_area` VALUES (540402, 540400, '巴宜区', '3');
 INSERT INTO `sys_china_area` VALUES (540421, 540400, '工布江达县', '3');
 INSERT INTO `sys_china_area` VALUES (540422, 540400, '米林县', '3');
 INSERT INTO `sys_china_area` VALUES (540423, 540400, '墨脱县', '3');
@@ -2765,6 +2803,7 @@ INSERT INTO `sys_china_area` VALUES (540529, 540500, '隆子县', '3');
 INSERT INTO `sys_china_area` VALUES (540530, 540500, '错那县', '3');
 INSERT INTO `sys_china_area` VALUES (540531, 540500, '浪卡子县', '3');
 INSERT INTO `sys_china_area` VALUES (540600, 540000, '那曲市', '2');
+INSERT INTO `sys_china_area` VALUES (540602, 540600, '色尼区', '3');
 INSERT INTO `sys_china_area` VALUES (540621, 540600, '嘉黎县', '3');
 INSERT INTO `sys_china_area` VALUES (540622, 540600, '比如县', '3');
 INSERT INTO `sys_china_area` VALUES (540623, 540600, '聂荣县', '3');
@@ -2774,6 +2813,7 @@ INSERT INTO `sys_china_area` VALUES (540626, 540600, '索县', '3');
 INSERT INTO `sys_china_area` VALUES (540627, 540600, '班戈县', '3');
 INSERT INTO `sys_china_area` VALUES (540628, 540600, '巴青县', '3');
 INSERT INTO `sys_china_area` VALUES (540629, 540600, '尼玛县', '3');
+INSERT INTO `sys_china_area` VALUES (540630, 540600, '双湖县', '3');
 INSERT INTO `sys_china_area` VALUES (542500, 540000, '阿里地区', '2');
 INSERT INTO `sys_china_area` VALUES (542521, 542500, '普兰县', '3');
 INSERT INTO `sys_china_area` VALUES (542522, 542500, '札达县', '3');
@@ -2824,12 +2864,12 @@ INSERT INTO `sys_china_area` VALUES (610423, 610400, '泾阳县', '3');
 INSERT INTO `sys_china_area` VALUES (610424, 610400, '乾县', '3');
 INSERT INTO `sys_china_area` VALUES (610425, 610400, '礼泉县', '3');
 INSERT INTO `sys_china_area` VALUES (610426, 610400, '永寿县', '3');
-INSERT INTO `sys_china_area` VALUES (610427, 610400, '彬县', '3');
 INSERT INTO `sys_china_area` VALUES (610428, 610400, '长武县', '3');
 INSERT INTO `sys_china_area` VALUES (610429, 610400, '旬邑县', '3');
 INSERT INTO `sys_china_area` VALUES (610430, 610400, '淳化县', '3');
 INSERT INTO `sys_china_area` VALUES (610431, 610400, '武功县', '3');
 INSERT INTO `sys_china_area` VALUES (610481, 610400, '兴平市', '3');
+INSERT INTO `sys_china_area` VALUES (610482, 610400, '彬州市', '3');
 INSERT INTO `sys_china_area` VALUES (610500, 610000, '渭南市', '2');
 INSERT INTO `sys_china_area` VALUES (610502, 610500, '临渭区', '3');
 INSERT INTO `sys_china_area` VALUES (610503, 610500, '华州区', '3');
@@ -2847,7 +2887,6 @@ INSERT INTO `sys_china_area` VALUES (610602, 610600, '宝塔区', '3');
 INSERT INTO `sys_china_area` VALUES (610603, 610600, '安塞区', '3');
 INSERT INTO `sys_china_area` VALUES (610621, 610600, '延长县', '3');
 INSERT INTO `sys_china_area` VALUES (610622, 610600, '延川县', '3');
-INSERT INTO `sys_china_area` VALUES (610623, 610600, '子长县', '3');
 INSERT INTO `sys_china_area` VALUES (610625, 610600, '志丹县', '3');
 INSERT INTO `sys_china_area` VALUES (610626, 610600, '吴起县', '3');
 INSERT INTO `sys_china_area` VALUES (610627, 610600, '甘泉县', '3');
@@ -2856,6 +2895,7 @@ INSERT INTO `sys_china_area` VALUES (610629, 610600, '洛川县', '3');
 INSERT INTO `sys_china_area` VALUES (610630, 610600, '宜川县', '3');
 INSERT INTO `sys_china_area` VALUES (610631, 610600, '黄龙县', '3');
 INSERT INTO `sys_china_area` VALUES (610632, 610600, '黄陵县', '3');
+INSERT INTO `sys_china_area` VALUES (610681, 610600, '子长市', '3');
 INSERT INTO `sys_china_area` VALUES (610700, 610000, '汉中市', '2');
 INSERT INTO `sys_china_area` VALUES (610702, 610700, '汉台区', '3');
 INSERT INTO `sys_china_area` VALUES (610703, 610700, '南郑区', '3');
@@ -2869,6 +2909,7 @@ INSERT INTO `sys_china_area` VALUES (610728, 610700, '镇巴县', '3');
 INSERT INTO `sys_china_area` VALUES (610729, 610700, '留坝县', '3');
 INSERT INTO `sys_china_area` VALUES (610730, 610700, '佛坪县', '3');
 INSERT INTO `sys_china_area` VALUES (610800, 610000, '榆林市', '2');
+INSERT INTO `sys_china_area` VALUES (610802, 610800, '榆阳区', '3');
 INSERT INTO `sys_china_area` VALUES (610803, 610800, '横山区', '3');
 INSERT INTO `sys_china_area` VALUES (610822, 610800, '府谷县', '3');
 INSERT INTO `sys_china_area` VALUES (610824, 610800, '靖边县', '3');
@@ -2881,6 +2922,7 @@ INSERT INTO `sys_china_area` VALUES (610830, 610800, '清涧县', '3');
 INSERT INTO `sys_china_area` VALUES (610831, 610800, '子洲县', '3');
 INSERT INTO `sys_china_area` VALUES (610881, 610800, '神木市', '3');
 INSERT INTO `sys_china_area` VALUES (610900, 610000, '安康市', '2');
+INSERT INTO `sys_china_area` VALUES (610902, 610900, '汉滨区', '3');
 INSERT INTO `sys_china_area` VALUES (610921, 610900, '汉阴县', '3');
 INSERT INTO `sys_china_area` VALUES (610922, 610900, '石泉县', '3');
 INSERT INTO `sys_china_area` VALUES (610923, 610900, '宁陕县', '3');
@@ -2909,7 +2951,6 @@ INSERT INTO `sys_china_area` VALUES (620121, 620100, '永登县', '3');
 INSERT INTO `sys_china_area` VALUES (620122, 620100, '皋兰县', '3');
 INSERT INTO `sys_china_area` VALUES (620123, 620100, '榆中县', '3');
 INSERT INTO `sys_china_area` VALUES (620200, 620000, '嘉峪关市', '2');
-INSERT INTO `sys_china_area` VALUES (620201, 620200, '市辖区', '3');
 INSERT INTO `sys_china_area` VALUES (620300, 620000, '金昌市', '2');
 INSERT INTO `sys_china_area` VALUES (620302, 620300, '金川区', '3');
 INSERT INTO `sys_china_area` VALUES (620321, 620300, '永昌县', '3');
@@ -2928,30 +2969,36 @@ INSERT INTO `sys_china_area` VALUES (620523, 620500, '甘谷县', '3');
 INSERT INTO `sys_china_area` VALUES (620524, 620500, '武山县', '3');
 INSERT INTO `sys_china_area` VALUES (620525, 620500, '张家川回族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (620600, 620000, '武威市', '2');
+INSERT INTO `sys_china_area` VALUES (620602, 620600, '凉州区', '3');
 INSERT INTO `sys_china_area` VALUES (620621, 620600, '民勤县', '3');
 INSERT INTO `sys_china_area` VALUES (620622, 620600, '古浪县', '3');
 INSERT INTO `sys_china_area` VALUES (620623, 620600, '天祝藏族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (620700, 620000, '张掖市', '2');
+INSERT INTO `sys_china_area` VALUES (620702, 620700, '甘州区', '3');
 INSERT INTO `sys_china_area` VALUES (620721, 620700, '肃南裕固族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (620722, 620700, '民乐县', '3');
 INSERT INTO `sys_china_area` VALUES (620723, 620700, '临泽县', '3');
 INSERT INTO `sys_china_area` VALUES (620724, 620700, '高台县', '3');
 INSERT INTO `sys_china_area` VALUES (620725, 620700, '山丹县', '3');
 INSERT INTO `sys_china_area` VALUES (620800, 620000, '平凉市', '2');
+INSERT INTO `sys_china_area` VALUES (620802, 620800, '崆峒区', '3');
 INSERT INTO `sys_china_area` VALUES (620821, 620800, '泾川县', '3');
 INSERT INTO `sys_china_area` VALUES (620822, 620800, '灵台县', '3');
 INSERT INTO `sys_china_area` VALUES (620823, 620800, '崇信县', '3');
-INSERT INTO `sys_china_area` VALUES (620824, 620800, '华亭县', '3');
 INSERT INTO `sys_china_area` VALUES (620825, 620800, '庄浪县', '3');
 INSERT INTO `sys_china_area` VALUES (620826, 620800, '静宁县', '3');
+INSERT INTO `sys_china_area` VALUES (620881, 620800, '华亭市', '3');
 INSERT INTO `sys_china_area` VALUES (620900, 620000, '酒泉市', '2');
+INSERT INTO `sys_china_area` VALUES (620902, 620900, '肃州区', '3');
 INSERT INTO `sys_china_area` VALUES (620921, 620900, '金塔县', '3');
+INSERT INTO `sys_china_area` VALUES (620922, 620900, '瓜州县', '3');
 INSERT INTO `sys_china_area` VALUES (620923, 620900, '肃北蒙古族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (620924, 620900, '阿克塞哈萨克族自治县', '3');
 INSERT INTO `sys_china_area` VALUES (620981, 620900, '玉门市', '3');
 INSERT INTO `sys_china_area` VALUES (620982, 620900, '敦煌市', '3');
 INSERT INTO `sys_china_area` VALUES (621000, 620000, '庆阳市', '2');
 INSERT INTO `sys_china_area` VALUES (621002, 621000, '西峰区', '3');
+INSERT INTO `sys_china_area` VALUES (621021, 621000, '庆城县', '3');
 INSERT INTO `sys_china_area` VALUES (621022, 621000, '环县', '3');
 INSERT INTO `sys_china_area` VALUES (621023, 621000, '华池县', '3');
 INSERT INTO `sys_china_area` VALUES (621024, 621000, '合水县', '3');
@@ -2959,6 +3006,7 @@ INSERT INTO `sys_china_area` VALUES (621025, 621000, '正宁县', '3');
 INSERT INTO `sys_china_area` VALUES (621026, 621000, '宁县', '3');
 INSERT INTO `sys_china_area` VALUES (621027, 621000, '镇原县', '3');
 INSERT INTO `sys_china_area` VALUES (621100, 620000, '定西市', '2');
+INSERT INTO `sys_china_area` VALUES (621102, 621100, '安定区', '3');
 INSERT INTO `sys_china_area` VALUES (621121, 621100, '通渭县', '3');
 INSERT INTO `sys_china_area` VALUES (621122, 621100, '陇西县', '3');
 INSERT INTO `sys_china_area` VALUES (621123, 621100, '渭源县', '3');
@@ -2999,9 +3047,9 @@ INSERT INTO `sys_china_area` VALUES (630102, 630100, '城东区', '3');
 INSERT INTO `sys_china_area` VALUES (630103, 630100, '城中区', '3');
 INSERT INTO `sys_china_area` VALUES (630104, 630100, '城西区', '3');
 INSERT INTO `sys_china_area` VALUES (630105, 630100, '城北区', '3');
+INSERT INTO `sys_china_area` VALUES (630106, 630100, '湟中区', '3');
 INSERT INTO `sys_china_area` VALUES (630121, 630100, '大通回族土族自治县', '3');
-INSERT INTO `sys_china_area` VALUES (630122, 630200, '湟中县', '3');
-INSERT INTO `sys_china_area` VALUES (630123, 630200, '湟源县', '3');
+INSERT INTO `sys_china_area` VALUES (630123, 630100, '湟源县', '3');
 INSERT INTO `sys_china_area` VALUES (630200, 630000, '海东市', '2');
 INSERT INTO `sys_china_area` VALUES (630202, 630200, '乐都区', '3');
 INSERT INTO `sys_china_area` VALUES (630203, 630200, '平安区', '3');
@@ -3042,6 +3090,7 @@ INSERT INTO `sys_china_area` VALUES (632726, 632700, '曲麻莱县', '3');
 INSERT INTO `sys_china_area` VALUES (632800, 630000, '海西蒙古族藏族自治州', '2');
 INSERT INTO `sys_china_area` VALUES (632801, 632800, '格尔木市', '3');
 INSERT INTO `sys_china_area` VALUES (632802, 632800, '德令哈市', '3');
+INSERT INTO `sys_china_area` VALUES (632803, 632800, '茫崖市', '3');
 INSERT INTO `sys_china_area` VALUES (632821, 632800, '乌兰县', '3');
 INSERT INTO `sys_china_area` VALUES (632822, 632800, '都兰县', '3');
 INSERT INTO `sys_china_area` VALUES (632823, 632800, '天峻县', '3');
@@ -3089,9 +3138,11 @@ INSERT INTO `sys_china_area` VALUES (650203, 650200, '克拉玛依区', '3');
 INSERT INTO `sys_china_area` VALUES (650204, 650200, '白碱滩区', '3');
 INSERT INTO `sys_china_area` VALUES (650205, 650200, '乌尔禾区', '3');
 INSERT INTO `sys_china_area` VALUES (650400, 650000, '吐鲁番市', '2');
+INSERT INTO `sys_china_area` VALUES (650402, 650400, '高昌区', '3');
 INSERT INTO `sys_china_area` VALUES (650421, 650400, '鄯善县', '3');
 INSERT INTO `sys_china_area` VALUES (650422, 650400, '托克逊县', '3');
 INSERT INTO `sys_china_area` VALUES (650500, 650000, '哈密市', '2');
+INSERT INTO `sys_china_area` VALUES (650502, 650500, '伊州区', '3');
 INSERT INTO `sys_china_area` VALUES (650521, 650500, '巴里坤哈萨克自治县', '3');
 INSERT INTO `sys_china_area` VALUES (650522, 650500, '伊吾县', '3');
 INSERT INTO `sys_china_area` VALUES (652300, 650000, '昌吉回族自治州', '2');
@@ -3104,6 +3155,7 @@ INSERT INTO `sys_china_area` VALUES (652327, 652300, '吉木萨尔县', '3');
 INSERT INTO `sys_china_area` VALUES (652328, 652300, '木垒哈萨克自治县', '3');
 INSERT INTO `sys_china_area` VALUES (652700, 650000, '博尔塔拉蒙古自治州', '2');
 INSERT INTO `sys_china_area` VALUES (652701, 652700, '博乐市', '3');
+INSERT INTO `sys_china_area` VALUES (652702, 652700, '阿拉山口市', '3');
 INSERT INTO `sys_china_area` VALUES (652722, 652700, '精河县', '3');
 INSERT INTO `sys_china_area` VALUES (652723, 652700, '温泉县', '3');
 INSERT INTO `sys_china_area` VALUES (652800, 650000, '巴音郭楞蒙古自治州', '2');
@@ -3118,8 +3170,8 @@ INSERT INTO `sys_china_area` VALUES (652828, 652800, '和硕县', '3');
 INSERT INTO `sys_china_area` VALUES (652829, 652800, '博湖县', '3');
 INSERT INTO `sys_china_area` VALUES (652900, 650000, '阿克苏地区', '2');
 INSERT INTO `sys_china_area` VALUES (652901, 652900, '阿克苏市', '3');
+INSERT INTO `sys_china_area` VALUES (652902, 652900, '库车市', '3');
 INSERT INTO `sys_china_area` VALUES (652922, 652900, '温宿县', '3');
-INSERT INTO `sys_china_area` VALUES (652923, 652900, '库车县', '3');
 INSERT INTO `sys_china_area` VALUES (652924, 652900, '沙雅县', '3');
 INSERT INTO `sys_china_area` VALUES (652925, 652900, '新和县', '3');
 INSERT INTO `sys_china_area` VALUES (652926, 652900, '拜城县', '3');
@@ -3185,6 +3237,15 @@ INSERT INTO `sys_china_area` VALUES (659001, 650000, '石河子市', '2');
 INSERT INTO `sys_china_area` VALUES (659002, 650000, '阿拉尔市', '2');
 INSERT INTO `sys_china_area` VALUES (659003, 650000, '图木舒克市', '2');
 INSERT INTO `sys_china_area` VALUES (659004, 650000, '五家渠市', '2');
+INSERT INTO `sys_china_area` VALUES (659005, 650000, '北屯市', '2');
+INSERT INTO `sys_china_area` VALUES (659006, 650000, '铁门关市', '2');
+INSERT INTO `sys_china_area` VALUES (659007, 650000, '双河市', '2');
+INSERT INTO `sys_china_area` VALUES (659008, 650000, '可克达拉市', '2');
+INSERT INTO `sys_china_area` VALUES (659009, 650000, '昆玉市', '2');
+INSERT INTO `sys_china_area` VALUES (659010, 650000, '胡杨河市', '2');
+INSERT INTO `sys_china_area` VALUES (710000, 0, '台湾省', '1');
+INSERT INTO `sys_china_area` VALUES (810000, 0, '香港特别行政区', '1');
+INSERT INTO `sys_china_area` VALUES (820000, 0, '澳门特别行政区', '1');
 COMMIT;
 
 -- ----------------------------
@@ -3193,7 +3254,7 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_dict`;
 CREATE TABLE `sys_dict` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `dict_code` varchar(20) NOT NULL COMMENT '字典集代码',
+  `dict_code` varchar(50) NOT NULL COMMENT '字典集代码',
   `dict_name` varchar(50) NOT NULL COMMENT '字典集名称',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
   `valid_status` char(1) NOT NULL DEFAULT '1' COMMENT '状态：0-停用，1-启用',
@@ -3204,15 +3265,21 @@ CREATE TABLE `sys_dict` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统字典集表';
 
 -- ----------------------------
+-- Records of sys_dict
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for sys_dict_item
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_item`;
 CREATE TABLE `sys_dict_item` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `dict_code` varchar(30) NOT NULL COMMENT '字典集代码',
-  `item_code` varchar(30) NOT NULL COMMENT '字典项代码',
+  `dict_code` varchar(50) NOT NULL COMMENT '字典集代码',
+  `item_code` varchar(50) NOT NULL COMMENT '字典项代码',
   `item_name` varchar(50) NOT NULL COMMENT '字典项名称',
-  `item_data` varchar(100) NOT NULL COMMENT '字典项值',
+  `item_data` varchar(100) DEFAULT NULL COMMENT '字典项值',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
   `valid_status` char(1) NOT NULL DEFAULT '1' COMMENT '状态：0-停用，1-启用',
   `priority` int(10) unsigned NOT NULL COMMENT '优先级',
@@ -3223,6 +3290,12 @@ CREATE TABLE `sys_dict_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统字典项表';
 
 -- ----------------------------
+-- Records of sys_dict_item
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for sys_log
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_log`;
@@ -3231,7 +3304,7 @@ CREATE TABLE `sys_log` (
   `operate_no` varchar(30) NOT NULL DEFAULT '' COMMENT '操作账号',
   `operate_role_id` varchar(50) DEFAULT '' COMMENT '操作账号角色',
   `operate_ip` int(10) unsigned DEFAULT NULL COMMENT '操作IP',
-  `operate_module_id` int(10) unsigned DEFAULT NULL COMMENT '操作模块',
+  `operate_module_code` varchar(50) DEFAULT '' COMMENT '模块代码',
   `operate_url` varchar(200) DEFAULT '' COMMENT '请求地址',
   `operate_method` varchar(200) DEFAULT '' COMMENT '方法描述',
   `operate_exception` varchar(200) DEFAULT '' COMMENT '操作异常描述',
@@ -3247,12 +3320,19 @@ CREATE TABLE `sys_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统操作日志表';
 
 -- ----------------------------
+-- Records of sys_log
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for sys_module
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_module`;
 CREATE TABLE `sys_module` (
   `module_id` int(10) unsigned NOT NULL COMMENT '模块ID',
   `module_parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级模块ID，一级模块默认为0',
+  `module_code` varchar(50) DEFAULT NULL COMMENT '模块代码',
   `module_name` varchar(30) NOT NULL DEFAULT '' COMMENT '模块名称',
   `module_url` varchar(50) DEFAULT '' COMMENT '模块URL',
   `module_level` char(4) NOT NULL COMMENT '模块层级，一级模块从10开始，二级模块与上级模块层级拼接，从01开始，如1001',
@@ -3261,11 +3341,13 @@ CREATE TABLE `sys_module` (
   `module_for_admin` char(1) NOT NULL DEFAULT '0' COMMENT '是否是超级管理员私有菜单，0-不是，1-是，默认0',
   `module_belong` char(1) NOT NULL DEFAULT '0' COMMENT '菜单分组，0-共有，1-操作员，2-非操作员，默认0',
   `module_icon` varchar(50) DEFAULT '' COMMENT '模块图标',
+  `module_target` char(1) DEFAULT '' COMMENT '模块页面打开位置：0-页签打开，1-新页面打开',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
   `valid_status` char(1) NOT NULL DEFAULT '1' COMMENT '状态：0-停用，1-启用',
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`module_id`) USING BTREE,
+  UNIQUE KEY `module_code` (`module_code`),
   KEY `module_parent_id` (`module_parent_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统模块表';
 
@@ -3273,22 +3355,23 @@ CREATE TABLE `sys_module` (
 -- Records of sys_module
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_module` VALUES (10, 0, '系统管理', '', '10', '1', '1', '0', '0', 'layui-icon layui-icon-set', '', '1', '2018-09-02 20:40:37', '2019-06-03 21:49:48');
-INSERT INTO `sys_module` VALUES (99, 0, '非菜单URL管理', '', '99', '0', '0', '0', '0', '', '系统中非菜单的请求URL', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:18');
-INSERT INTO `sys_module` VALUES (1001, 10, '权限项管理', 'system/power/main.do', '1001', '1', '1', '1', '0', 'layui-icon layui-icon-form', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:20');
-INSERT INTO `sys_module` VALUES (1002, 10, '模块管理', 'system/module/main.do', '1002', '1', '1', '1', '0', 'layui-icon layui-icon-form', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:21');
-INSERT INTO `sys_module` VALUES (1003, 10, '模块权限配置', 'system/modulepower/main.do', '1003', '1', '1', '1', '0', 'layui-icon layui-icon-form', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:23');
-INSERT INTO `sys_module` VALUES (1004, 10, '角色管理', 'system/role/main.do', '1004', '1', '1', '0', '0', 'layui-icon layui-icon-form', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:27');
-INSERT INTO `sys_module` VALUES (1005, 10, '操作员管理', 'system/operator/main.do', '1006', '1', '1', '0', '0', 'layui-icon layui-icon-form', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:28');
-INSERT INTO `sys_module` VALUES (1006, 10, '子账号管理', 'system/sub/main.do', '1007', '1', '1', '0', '0', 'layui-icon layui-icon-form', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:29');
-INSERT INTO `sys_module` VALUES (1007, 10, '系统参数配置', 'system/param/main.do', '1008', '1', '1', '0', '0', 'layui-icon layui-icon-form', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:30');
-INSERT INTO `sys_module` VALUES (1008, 10, 'IP白名单管理', 'system/whiteip/main.do', '1010', '1', '1', '0', '0', 'layui-icon layui-icon-form', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:32');
-INSERT INTO `sys_module` VALUES (1009, 10, '操作日志', 'system/log/main.do', '1011', '1', '1', '0', '0', 'layui-icon layui-icon-form', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:34');
-INSERT INTO `sys_module` VALUES (1010, 10, '代码生成工具', 'system/code/main.do', '1012', '1', '1', '1', '1', 'layui-icon layui-icon-form', '', '1', '2018-10-30 20:46:00', '2018-10-30 21:37:24');
-INSERT INTO `sys_module` VALUES (1011, 10, '组织机构管理', 'system/organization/main.do', '1005', '1', '1', '0', '0', 'layui-icon layui-icon-form', '', '1', '2019-05-06 21:08:53', '2019-05-06 21:09:07');
-INSERT INTO `sys_module` VALUES (1012, 10, '数据字典管理', 'system/dict/main.do', '1009', '1', '1', '0', '0', 'layui-icon layui-icon-form', '', '1', '2019-06-07 12:37:41', '2019-06-07 12:37:41');
-INSERT INTO `sys_module` VALUES (9901, 99, '登录退出', '', '9901', '0', '0', '0', '0', '', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:35');
-INSERT INTO `sys_module` VALUES (9902, 99, '首页', '', '9902', '0', '0', '0', '0', '', '', '1', '2018-09-02 20:40:37', '2018-09-28 11:42:37');
+INSERT INTO `sys_module` VALUES (10, 0, NULL, '系统管理', '', '10', '1', '1', '0', '0', 'layui-icon layui-icon-set', '', '', '1', '2018-09-02 20:40:37', '2020-03-19 13:50:09');
+INSERT INTO `sys_module` VALUES (99, 0, NULL, '非菜单URL管理', '', '99', '0', '0', '0', '0', '', '', '系统中非菜单的请求URL', '1', '2018-09-02 20:40:37', '2020-03-16 23:52:43');
+INSERT INTO `sys_module` VALUES (1001, 10, 'POWER', '权限项管理', 'system/power/main.do', '1001', '1', '1', '1', '0', 'layui-icon layui-icon-form', '0', '', '1', '2018-09-02 20:40:37', '2020-05-04 11:46:36');
+INSERT INTO `sys_module` VALUES (1002, 10, 'MODULE', '模块管理', 'system/module/main.do', '1002', '1', '1', '1', '0', 'layui-icon layui-icon-form', '0', '', '1', '2018-09-02 20:40:37', '2020-05-04 11:10:47');
+INSERT INTO `sys_module` VALUES (1003, 10, 'MODULE_POWER', '模块权限配置', 'system/modulepower/main.do', '1003', '1', '1', '1', '0', 'layui-icon layui-icon-form', '0', '', '1', '2018-09-02 20:40:37', '2020-05-03 22:54:37');
+INSERT INTO `sys_module` VALUES (1004, 10, 'ROLE', '角色管理', 'system/role/main.do', '1004', '1', '1', '0', '0', 'layui-icon layui-icon-form', '0', '', '1', '2018-09-02 20:40:37', '2020-05-03 22:55:05');
+INSERT INTO `sys_module` VALUES (1005, 10, 'OPERATOR', '操作员管理', 'system/operator/main.do', '1006', '1', '1', '0', '0', 'layui-icon layui-icon-form', '0', '', '1', '2018-09-02 20:40:37', '2020-05-03 22:55:18');
+INSERT INTO `sys_module` VALUES (1006, 10, 'SUB', '子账号管理', 'system/sub/main.do', '1007', '1', '1', '0', '0', 'layui-icon layui-icon-form', '0', '', '1', '2018-09-02 20:40:37', '2020-05-03 22:55:30');
+INSERT INTO `sys_module` VALUES (1007, 10, 'PARAM', '系统参数配置', 'system/param/main.do', '1008', '1', '1', '0', '0', 'layui-icon layui-icon-form', '0', '', '1', '2018-09-02 20:40:37', '2020-05-03 22:55:39');
+INSERT INTO `sys_module` VALUES (1008, 10, 'WHITE_IP', 'IP白名单管理', 'system/whiteip/main.do', '1010', '1', '1', '0', '0', 'layui-icon layui-icon-form', '0', '', '1', '2018-09-02 20:40:37', '2020-05-03 22:56:01');
+INSERT INTO `sys_module` VALUES (1009, 10, 'LOG', '操作日志', 'system/log/main.do', '1012', '1', '1', '0', '0', 'layui-icon layui-icon-form', '0', '', '1', '2018-09-02 20:40:37', '2020-05-03 22:56:13');
+INSERT INTO `sys_module` VALUES (1010, 10, 'CODE_GENERATION', '代码生成工具', 'system/code/main.do', '1013', '1', '1', '1', '1', 'layui-icon layui-icon-form', '0', '', '1', '2018-10-30 20:46:00', '2020-05-04 11:22:01');
+INSERT INTO `sys_module` VALUES (1011, 10, 'ORGANIZATION', '组织机构管理', 'system/organization/main.do', '1005', '1', '1', '0', '0', 'layui-icon layui-icon-form', '0', '', '1', '2019-05-06 21:08:53', '2020-05-03 22:57:30');
+INSERT INTO `sys_module` VALUES (1012, 10, 'DICT', '数据字典管理', 'system/dict/main.do', '1009', '1', '1', '0', '0', 'layui-icon layui-icon-form', '0', '', '1', '2019-06-07 12:37:41', '2020-05-03 22:57:52');
+INSERT INTO `sys_module` VALUES (1013, 10, 'JOB', '定时任务管理', 'system/job/main.do', '1011', '1', '1', '0', '0', 'layui-icon layui-icon-form', '0', '', '1', '2020-04-12 19:24:21', '2020-05-03 22:57:59');
+INSERT INTO `sys_module` VALUES (9901, 99, 'LOGIN', '登录退出', '', '9901', '0', '0', '0', '0', '', '', '', '1', '2018-09-02 20:40:37', '2020-05-04 11:12:18');
+INSERT INTO `sys_module` VALUES (9902, 99, 'INDEX', '首页', '', '9902', '0', '0', '0', '0', '', '', '', '1', '2018-09-02 20:40:37', '2020-05-04 11:12:01');
 COMMIT;
 
 -- ----------------------------
@@ -3297,74 +3380,79 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_module_power`;
 CREATE TABLE `sys_module_power` (
   `mp_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `module_id` int(10) unsigned NOT NULL COMMENT '模块ID',
+  `module_code` varchar(50) NOT NULL COMMENT '模块代码',
   `power_item` varchar(20) NOT NULL COMMENT '权限项',
   `alias_name` varchar(20) NOT NULL DEFAULT '' COMMENT '权限项别名',
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`mp_id`) USING BTREE,
   KEY `power_item` (`power_item`) USING BTREE,
-  KEY `module_id` (`module_id`) USING BTREE,
-  CONSTRAINT `sys_module_power_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `sys_module` (`module_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项关系表';
+  KEY `module_code` (`module_code`),
+  CONSTRAINT `sys_module_power_ibfk_1` FOREIGN KEY (`module_code`) REFERENCES `sys_module` (`module_code`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项关系表';
 
 -- ----------------------------
 -- Records of sys_module_power
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_module_power` VALUES (1, 9901, 'VIEW', '浏览', '2018-09-04 15:44:39', '2018-09-08 12:00:22');
-INSERT INTO `sys_module_power` VALUES (2, 9902, 'VIEW', '浏览', '2018-09-04 15:44:39', '2018-09-08 12:00:23');
-INSERT INTO `sys_module_power` VALUES (3, 1001, 'VIEW', '浏览', '2018-09-08 14:47:49', '2018-09-08 14:47:49');
-INSERT INTO `sys_module_power` VALUES (4, 1001, 'ADD', '添加', '2018-09-08 14:47:49', '2018-09-08 14:50:00');
-INSERT INTO `sys_module_power` VALUES (5, 1001, 'DELETE', '删除', '2018-09-08 14:47:49', '2018-09-08 14:50:08');
-INSERT INTO `sys_module_power` VALUES (6, 1001, 'UPDATE', '修改', '2018-09-08 14:47:49', '2018-09-08 14:50:09');
-INSERT INTO `sys_module_power` VALUES (7, 1001, 'PRIORITY', '调整优先级', '2018-09-08 14:54:48', '2018-09-08 14:54:48');
-INSERT INTO `sys_module_power` VALUES (8, 1002, 'VIEW', '浏览', '2018-09-08 16:45:38', '2018-09-08 16:45:38');
-INSERT INTO `sys_module_power` VALUES (9, 1002, 'ADD', '添加', '2018-09-08 16:45:38', '2018-09-08 16:45:38');
-INSERT INTO `sys_module_power` VALUES (10, 1002, 'DELETE', '删除', '2018-09-08 16:45:38', '2018-09-08 16:45:38');
-INSERT INTO `sys_module_power` VALUES (11, 1002, 'UPDATE', '修改', '2018-09-08 16:45:38', '2018-09-08 16:45:38');
-INSERT INTO `sys_module_power` VALUES (12, 1002, 'PRIORITY', '调整优先级', '2018-09-08 16:45:38', '2018-09-08 19:23:21');
-INSERT INTO `sys_module_power` VALUES (13, 1003, 'VIEW', '浏览', '2018-09-08 20:58:34', '2018-09-08 20:58:52');
-INSERT INTO `sys_module_power` VALUES (14, 1003, 'ADD', '添加', '2018-09-08 20:58:34', '2018-09-08 20:58:54');
-INSERT INTO `sys_module_power` VALUES (15, 1003, 'DELETE', '删除', '2018-09-08 20:58:34', '2018-09-08 20:58:56');
-INSERT INTO `sys_module_power` VALUES (16, 1003, 'UPDATE', '修改', '2018-09-08 20:58:34', '2018-09-08 20:58:58');
-INSERT INTO `sys_module_power` VALUES (17, 1003, 'CONFIG', '配置URL', '2018-09-08 20:58:34', '2018-09-08 21:24:49');
-INSERT INTO `sys_module_power` VALUES (18, 1004, 'VIEW', '浏览', '2018-09-08 22:47:02', '2018-09-08 22:47:02');
-INSERT INTO `sys_module_power` VALUES (19, 1004, 'ADD', '添加', '2018-09-08 22:47:08', '2018-09-08 22:47:08');
-INSERT INTO `sys_module_power` VALUES (20, 1004, 'DELETE', '删除', '2018-09-08 22:47:12', '2018-09-08 22:47:12');
-INSERT INTO `sys_module_power` VALUES (21, 1004, 'UPDATE', '编辑', '2018-09-08 22:47:16', '2018-09-08 22:47:16');
-INSERT INTO `sys_module_power` VALUES (22, 1004, 'CONFIG', '配置权限', '2018-09-08 22:47:19', '2018-09-08 22:47:29');
-INSERT INTO `sys_module_power` VALUES (23, 1005, 'VIEW', '浏览', '2018-09-09 12:00:52', '2018-09-09 12:00:52');
-INSERT INTO `sys_module_power` VALUES (24, 1005, 'ADD', '添加', '2018-09-09 12:00:55', '2018-09-09 12:00:55');
-INSERT INTO `sys_module_power` VALUES (25, 1005, 'DELETE', '删除', '2018-09-09 12:00:59', '2018-09-09 12:00:59');
-INSERT INTO `sys_module_power` VALUES (26, 1005, 'UPDATE', '编辑', '2018-09-09 12:01:08', '2018-09-09 12:01:08');
-INSERT INTO `sys_module_power` VALUES (27, 1005, 'PASSWORD', '修改密码', '2018-09-09 12:01:12', '2018-09-09 12:01:12');
-INSERT INTO `sys_module_power` VALUES (28, 1006, 'VIEW', '浏览', '2018-09-09 15:01:45', '2018-09-09 15:01:45');
-INSERT INTO `sys_module_power` VALUES (29, 1006, 'ADD', '添加', '2018-09-09 15:01:49', '2018-09-09 15:01:49');
-INSERT INTO `sys_module_power` VALUES (30, 1006, 'DELETE', '删除', '2018-09-09 15:01:54', '2018-09-09 15:01:54');
-INSERT INTO `sys_module_power` VALUES (31, 1006, 'UPDATE', '编辑', '2018-09-09 15:01:58', '2018-09-09 15:01:58');
-INSERT INTO `sys_module_power` VALUES (32, 1006, 'CONFIG', '配置权限', '2018-09-09 15:02:03', '2018-09-09 15:02:31');
-INSERT INTO `sys_module_power` VALUES (33, 1006, 'PASSWORD', '修改密码', '2018-09-09 15:02:08', '2018-09-09 15:02:08');
-INSERT INTO `sys_module_power` VALUES (34, 1007, 'VIEW', '浏览', '2018-09-09 17:00:13', '2018-09-09 17:00:13');
-INSERT INTO `sys_module_power` VALUES (35, 1007, 'ADD', '添加', '2018-09-09 17:00:16', '2018-09-09 17:00:16');
-INSERT INTO `sys_module_power` VALUES (36, 1007, 'DELETE', '删除', '2018-09-09 17:00:20', '2018-09-09 17:00:20');
-INSERT INTO `sys_module_power` VALUES (37, 1007, 'UPDATE', '编辑', '2018-09-09 17:00:24', '2018-09-09 17:00:24');
-INSERT INTO `sys_module_power` VALUES (38, 1007, 'PRIORITY', '调整优先级', '2018-09-09 17:00:28', '2018-09-09 17:00:28');
-INSERT INTO `sys_module_power` VALUES (39, 1008, 'VIEW', '浏览', '2018-09-09 17:00:36', '2018-09-09 17:00:36');
-INSERT INTO `sys_module_power` VALUES (40, 1008, 'ADD', '添加', '2018-09-09 17:00:39', '2018-09-09 17:00:39');
-INSERT INTO `sys_module_power` VALUES (41, 1008, 'DELETE', '删除', '2018-09-09 17:00:43', '2018-09-09 17:00:43');
-INSERT INTO `sys_module_power` VALUES (42, 1008, 'UPDATE', '编辑', '2018-09-09 17:00:47', '2018-09-09 17:00:47');
-INSERT INTO `sys_module_power` VALUES (43, 1009, 'VIEW', '浏览', '2018-09-09 17:04:33', '2018-09-09 17:04:33');
-INSERT INTO `sys_module_power` VALUES (44, 1010, 'VIEW', '浏览', '2018-10-30 20:48:00', '2018-10-30 20:48:00');
-INSERT INTO `sys_module_power` VALUES (45, 1010, 'DOWNLOAD', '代码生成', '2018-10-30 20:48:21', '2018-10-30 20:48:41');
-INSERT INTO `sys_module_power` VALUES (46, 1011, 'VIEW', '浏览', '2019-05-07 12:56:26', '2019-05-07 12:56:26');
-INSERT INTO `sys_module_power` VALUES (47, 1011, 'ADD', '添加', '2019-05-07 13:49:34', '2019-05-07 13:49:34');
-INSERT INTO `sys_module_power` VALUES (48, 1011, 'DELETE', '删除', '2019-05-07 13:49:44', '2019-05-07 13:49:44');
-INSERT INTO `sys_module_power` VALUES (49, 1011, 'UPDATE', '编辑', '2019-05-07 13:49:54', '2019-05-07 13:49:54');
-INSERT INTO `sys_module_power` VALUES (50, 1012, 'VIEW', '浏览', '2019-06-07 13:00:14', '2019-06-07 13:00:14');
-INSERT INTO `sys_module_power` VALUES (51, 1012, 'ADD', '添加', '2019-06-07 13:00:14', '2019-06-07 13:00:14');
-INSERT INTO `sys_module_power` VALUES (52, 1012, 'DELETE', '删除', '2019-06-07 13:00:14', '2019-06-07 13:00:14');
-INSERT INTO `sys_module_power` VALUES (53, 1012, 'UPDATE', '编辑', '2019-06-07 13:02:35', '2019-06-07 13:02:35');
+INSERT INTO `sys_module_power` VALUES (1, 'LOGIN', 'VIEW', '浏览', '2018-09-04 15:44:39', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (2, 'INDEX', 'VIEW', '浏览', '2018-09-04 15:44:39', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (3, 'POWER', 'VIEW', '浏览', '2018-09-08 14:47:49', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (4, 'POWER', 'ADD', '添加', '2018-09-08 14:47:49', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (5, 'POWER', 'DELETE', '删除', '2018-09-08 14:47:49', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (6, 'POWER', 'UPDATE', '修改', '2018-09-08 14:47:49', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (7, 'POWER', 'PRIORITY', '调整优先级', '2018-09-08 14:54:48', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (8, 'MODULE', 'VIEW', '浏览', '2018-09-08 16:45:38', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (9, 'MODULE', 'ADD', '添加', '2018-09-08 16:45:38', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (10, 'MODULE', 'DELETE', '删除', '2018-09-08 16:45:38', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (11, 'MODULE', 'UPDATE', '修改', '2018-09-08 16:45:38', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (12, 'MODULE', 'PRIORITY', '调整优先级', '2018-09-08 16:45:38', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (13, 'MODULE_POWER', 'VIEW', '浏览', '2018-09-08 20:58:34', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (14, 'MODULE_POWER', 'ADD', '添加', '2018-09-08 20:58:34', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (15, 'MODULE_POWER', 'DELETE', '删除', '2018-09-08 20:58:34', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (16, 'MODULE_POWER', 'UPDATE', '修改', '2018-09-08 20:58:34', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (17, 'MODULE_POWER', 'CONFIG', '配置URL', '2018-09-08 20:58:34', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (18, 'ROLE', 'VIEW', '浏览', '2018-09-08 22:47:02', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (19, 'ROLE', 'ADD', '添加', '2018-09-08 22:47:08', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (20, 'ROLE', 'DELETE', '删除', '2018-09-08 22:47:12', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (21, 'ROLE', 'UPDATE', '编辑', '2018-09-08 22:47:16', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (22, 'ROLE', 'CONFIG', '配置权限', '2018-09-08 22:47:19', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (23, 'OPERATOR', 'VIEW', '浏览', '2018-09-09 12:00:52', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (24, 'OPERATOR', 'ADD', '添加', '2018-09-09 12:00:55', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (25, 'OPERATOR', 'DELETE', '删除', '2018-09-09 12:00:59', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (26, 'OPERATOR', 'UPDATE', '编辑', '2018-09-09 12:01:08', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (27, 'OPERATOR', 'PASSWORD', '修改密码', '2018-09-09 12:01:12', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (28, 'SUB', 'VIEW', '浏览', '2018-09-09 15:01:45', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (29, 'SUB', 'ADD', '添加', '2018-09-09 15:01:49', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (30, 'SUB', 'DELETE', '删除', '2018-09-09 15:01:54', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (31, 'SUB', 'UPDATE', '编辑', '2018-09-09 15:01:58', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (32, 'SUB', 'CONFIG', '配置权限', '2018-09-09 15:02:03', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (33, 'SUB', 'PASSWORD', '修改密码', '2018-09-09 15:02:08', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (34, 'PARAM', 'VIEW', '浏览', '2018-09-09 17:00:13', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (35, 'PARAM', 'ADD', '添加', '2018-09-09 17:00:16', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (36, 'PARAM', 'DELETE', '删除', '2018-09-09 17:00:20', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (37, 'PARAM', 'UPDATE', '编辑', '2018-09-09 17:00:24', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (38, 'PARAM', 'PRIORITY', '调整优先级', '2018-09-09 17:00:28', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (39, 'WHITE_IP', 'VIEW', '浏览', '2018-09-09 17:00:36', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (40, 'WHITE_IP', 'ADD', '添加', '2018-09-09 17:00:39', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (41, 'WHITE_IP', 'DELETE', '删除', '2018-09-09 17:00:43', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (42, 'WHITE_IP', 'UPDATE', '编辑', '2018-09-09 17:00:47', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (43, 'LOG', 'VIEW', '浏览', '2018-09-09 17:04:33', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (44, 'CODE_GENERATION', 'VIEW', '浏览', '2018-10-30 20:48:00', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (45, 'CODE_GENERATION', 'DOWNLOAD', '代码生成', '2018-10-30 20:48:21', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (46, 'ORGANIZATION', 'VIEW', '浏览', '2019-05-07 12:56:26', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (47, 'ORGANIZATION', 'ADD', '添加', '2019-05-07 13:49:34', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (48, 'ORGANIZATION', 'DELETE', '删除', '2019-05-07 13:49:44', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (49, 'ORGANIZATION', 'UPDATE', '编辑', '2019-05-07 13:49:54', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (50, 'DICT', 'VIEW', '浏览', '2019-06-07 13:00:14', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (51, 'DICT', 'ADD', '添加', '2019-06-07 13:00:14', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (52, 'DICT', 'DELETE', '删除', '2019-06-07 13:00:14', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (53, 'DICT', 'UPDATE', '编辑', '2019-06-07 13:02:35', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (54, 'JOB', 'VIEW', '浏览', '2020-04-12 19:28:22', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (55, 'JOB', 'ADD', '添加', '2020-04-12 19:28:22', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (56, 'JOB', 'DELETE', '删除', '2020-04-12 19:28:22', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (57, 'JOB', 'UPDATE', '编辑', '2020-04-12 19:28:22', '2020-05-04 11:43:31');
+INSERT INTO `sys_module_power` VALUES (58, 'LOG', 'DELETE', '删除', '2020-05-05 09:28:01', '2020-05-05 09:28:01');
 COMMIT;
 
 -- ----------------------------
@@ -3379,9 +3467,9 @@ CREATE TABLE `sys_module_power_method` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`mpm_id`) USING BTREE,
-  KEY `sys_module_power_method_ibfk_1` (`mp_id`),
+  KEY `mp_id` (`mp_id`),
   CONSTRAINT `sys_module_power_method_ibfk_1` FOREIGN KEY (`mp_id`) REFERENCES `sys_module_power` (`mp_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项方法配置表';
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项方法配置表';
 
 -- ----------------------------
 -- Records of sys_module_power_method
@@ -3482,6 +3570,25 @@ INSERT INTO `sys_module_power_method` VALUES (92, 50, 'pers.chanus.yuntao.manage
 INSERT INTO `sys_module_power_method` VALUES (93, 51, 'pers.chanus.yuntao.manager.controller.DictItemController', '/system/dict/item/add.do', '2019-06-07 14:39:19', '2019-06-07 14:39:19');
 INSERT INTO `sys_module_power_method` VALUES (94, 52, 'pers.chanus.yuntao.manager.controller.DictItemController', '/system/dict/item/delete.do', '2019-06-07 14:39:36', '2019-06-07 14:39:36');
 INSERT INTO `sys_module_power_method` VALUES (95, 53, 'pers.chanus.yuntao.manager.controller.DictItemController', '/system/dict/item/update.do', '2019-06-07 14:39:48', '2019-06-07 14:39:48');
+INSERT INTO `sys_module_power_method` VALUES (96, 50, 'pers.chanus.yuntao.manager.controller.DictController', '/system/dict/reload-dict.do', '2019-06-09 20:54:52', '2019-06-09 20:54:52');
+INSERT INTO `sys_module_power_method` VALUES (97, 54, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/main.do', '2020-04-12 19:28:22', '2020-04-12 19:28:22');
+INSERT INTO `sys_module_power_method` VALUES (98, 54, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/list.do', '2020-04-12 19:28:22', '2020-04-12 19:28:22');
+INSERT INTO `sys_module_power_method` VALUES (99, 55, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/add.do', '2020-04-12 19:28:22', '2020-04-12 19:28:22');
+INSERT INTO `sys_module_power_method` VALUES (100, 56, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/delete.do', '2020-04-12 19:28:22', '2020-04-12 19:28:22');
+INSERT INTO `sys_module_power_method` VALUES (101, 57, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/update.do', '2020-04-12 19:28:22', '2020-04-12 19:28:22');
+INSERT INTO `sys_module_power_method` VALUES (102, 54, 'pers.chanus.yuntao.manager.controller.ScheduleTriggerController', '/system/job/trigger/main.do', '2020-04-14 10:16:21', '2020-04-14 10:16:21');
+INSERT INTO `sys_module_power_method` VALUES (103, 54, 'pers.chanus.yuntao.manager.controller.ScheduleTriggerController', '/system/job/trigger/list.do', '2020-04-14 10:16:32', '2020-04-14 10:16:32');
+INSERT INTO `sys_module_power_method` VALUES (104, 55, 'pers.chanus.yuntao.manager.controller.ScheduleTriggerController', '/system/job/trigger/add.do', '2020-04-14 10:29:34', '2020-04-14 10:29:34');
+INSERT INTO `sys_module_power_method` VALUES (105, 56, 'pers.chanus.yuntao.manager.controller.ScheduleTriggerController', '/system/job/trigger/delete.do', '2020-04-14 10:29:55', '2020-04-14 10:29:55');
+INSERT INTO `sys_module_power_method` VALUES (106, 57, 'pers.chanus.yuntao.manager.controller.ScheduleTriggerController', '/system/job/trigger/update.do', '2020-04-14 10:30:16', '2020-04-14 10:30:16');
+INSERT INTO `sys_module_power_method` VALUES (107, 57, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/start.do', '2020-04-14 22:51:47', '2020-04-14 22:51:47');
+INSERT INTO `sys_module_power_method` VALUES (108, 57, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/pause.do', '2020-04-15 12:42:03', '2020-04-15 13:19:01');
+INSERT INTO `sys_module_power_method` VALUES (109, 57, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/resume.do', '2020-04-15 13:19:15', '2020-04-15 13:19:15');
+INSERT INTO `sys_module_power_method` VALUES (110, 57, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/stop.do', '2020-04-15 13:19:28', '2020-04-15 13:19:28');
+INSERT INTO `sys_module_power_method` VALUES (111, 57, 'pers.chanus.yuntao.manager.controller.ScheduleJobController', '/system/job/trigger.do', '2020-04-15 17:16:33', '2020-04-15 17:16:33');
+INSERT INTO `sys_module_power_method` VALUES (112, 58, 'pers.chanus.yuntao.manager.controller.LogController', '/system/log/delete.do', '2020-05-05 09:32:15', '2020-05-05 09:32:15');
+INSERT INTO `sys_module_power_method` VALUES (113, 58, 'pers.chanus.yuntao.manager.controller.LogController', '/system/log/clear.do', '2020-05-05 09:33:29', '2020-05-05 09:33:29');
+INSERT INTO `sys_module_power_method` VALUES (114, 11, 'pers.chanus.yuntao.manager.controller.ModuleController', '/system/module/transfer.do', '2020-05-05 10:41:48', '2020-05-05 10:41:48');
 COMMIT;
 
 -- ----------------------------
@@ -3492,11 +3599,10 @@ CREATE TABLE `sys_operator` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `operator_no` varchar(30) NOT NULL DEFAULT '' COMMENT '操作员账号',
   `operator_name` varchar(30) NOT NULL DEFAULT '' COMMENT '操作员名称',
-  `operator_password` char(32) NOT NULL COMMENT '操作员密码',
+  `operator_password` char(64) NOT NULL COMMENT '操作员密码',
   `operator_role_id` varchar(50) NOT NULL COMMENT '操作员角色',
   `master_no` varchar(30) DEFAULT '' COMMENT '主账号',
   `master_role_id` varchar(30) DEFAULT '' COMMENT '主账号角色',
-  `authority` varchar(255) DEFAULT '' COMMENT '权限控制',
   `email` varchar(100) DEFAULT '' COMMENT '邮箱账号',
   `tel` varchar(50) DEFAULT '' COMMENT '电话号码',
   `head_image` varchar(50) DEFAULT '' COMMENT '头像图片路径',
@@ -3506,15 +3612,16 @@ CREATE TABLE `sys_operator` (
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `operator_no` (`operator_no`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='操作员表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='操作员表';
 
 -- ----------------------------
 -- Records of sys_operator
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_operator` VALUES (1, 'Administrator', 'Administrator', '3b90a0e38e797dd1a7c108e9151814ab', '0', '', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '超级管理员', '1', '2018-09-04 14:16:55', '2019-01-05 17:50:40');
-INSERT INTO `sys_operator` VALUES (2, 'admin', 'admin', 'efd9d1b8bfb00e8e3647990f7d74d1d8', '10', '', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '2018-09-09 12:11:47', '2019-02-18 21:29:02');
-INSERT INTO `sys_operator` VALUES (3, 'system', 'system', '7794d9e38e986f74751ed6fa6f6075a4', '10', '', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '2019-01-05 17:51:31', '2019-01-05 17:52:36');
+INSERT INTO `sys_operator` VALUES (1, 'root', 'root', '97da10d6a688e01e08944d2339eefb163fb5a9e066641c70f2f377f2173b36b8', '0', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '超级管理员', '1', '2018-09-04 14:16:55', '2020-03-26 18:55:49');
+INSERT INTO `sys_operator` VALUES (2, 'admin', 'admin', '2daceebc4e31654d326ae7889b397ed50ff7e5afff374d1f89525865fd87efe0', '10', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '2018-09-09 12:11:47', '2019-06-23 22:49:38');
+INSERT INTO `sys_operator` VALUES (3, 'system', 'system', 'a491ce8907a6e5ec70f24450793f886f3e20afd4cf70e9f6daa02e666d720fc5', '10', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '2019-01-05 17:51:31', '2019-06-23 22:49:48');
+INSERT INTO `sys_operator` VALUES (4, 'Administrator', 'Administrator', 'f1c4598719723cb341ab439c74baf60141f7151e20b16d91f345f7646421de9d', '0', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '', '1', '2020-04-20 14:11:40', '2020-04-20 14:11:40');
 COMMIT;
 
 -- ----------------------------
@@ -3539,12 +3646,18 @@ CREATE TABLE `sys_organization` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='组织结构表';
 
 -- ----------------------------
+-- Records of sys_organization
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for sys_param
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_param`;
 CREATE TABLE `sys_param` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `param_code` varchar(30) NOT NULL COMMENT '参数代码',
+  `param_code` varchar(50) NOT NULL COMMENT '参数代码',
   `param_data` varchar(100) NOT NULL COMMENT '参数值',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
   `valid_status` char(1) NOT NULL DEFAULT '1' COMMENT '状态：0-停用，1-启用',
@@ -3554,16 +3667,17 @@ CREATE TABLE `sys_param` (
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `param_code` (`param_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='系统基础参数表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='系统基础参数表';
 
 -- ----------------------------
 -- Records of sys_param
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_param` VALUES (1, 'sys_check_verify_code', '1', '登录时是否验证验证码：0-不验证，1-验证', '1', '0', 1, '2018-09-04 17:46:30', '2019-05-19 17:55:21');
-INSERT INTO `sys_param` VALUES (2, 'sys_check_google_authenticator', '0', '登录时是否验证谷歌验证器：0-不验证，1-验证', '1', '0', 2, '2019-03-06 16:26:43', '2019-05-19 17:55:28');
-INSERT INTO `sys_param` VALUES (3, 'sys_check_white_ip', '0', '登录时是否验证IP白名单：0-不验证，1-验证', '1', '0', 3, '2018-09-04 17:55:15', '2019-05-19 17:55:34');
-INSERT INTO `sys_param` VALUES (4, 'sys_single_location_login', '0', '登录时是否验证单一位置登录：0-不验证，即同一账号可以同时在多处登录，1-验证，即同一账号只能同时在一处登录', '1', '0', 4, '2019-05-06 18:12:17', '2019-05-19 17:55:10');
+INSERT INTO `sys_param` VALUES (1, 'sys_check_verify_code', '1', '登录时是否验证验证码：0-不验证，1-验证', '1', '0', 1, '2018-09-04 17:46:30', '2020-04-23 23:43:24');
+INSERT INTO `sys_param` VALUES (2, 'sys_check_google_authenticator', '0', '登录时是否验证谷歌验证器：0-不验证，1-验证', '1', '0', 2, '2019-03-06 16:26:43', '2020-04-23 23:44:18');
+INSERT INTO `sys_param` VALUES (3, 'sys_google_authenticator_secret', 'BUX5OUIKAG2UZWED', '登录时谷歌验证器密钥', '1', '0', 3, '2019-06-24 13:38:30', '2019-06-24 13:39:22');
+INSERT INTO `sys_param` VALUES (4, 'sys_check_white_ip', '0', '登录时是否验证IP白名单：0-不验证，1-验证', '1', '0', 4, '2018-09-04 17:55:15', '2019-06-24 13:38:46');
+INSERT INTO `sys_param` VALUES (5, 'sys_single_location_login', '0', '登录时是否验证单一位置登录：0-不验证，即同一账号可以同时在多处登录，1-验证，即同一账号只能同时在一处登录', '1', '0', 5, '2019-05-06 18:12:17', '2019-06-24 13:38:48');
 COMMIT;
 
 -- ----------------------------
@@ -3581,7 +3695,7 @@ CREATE TABLE `sys_power` (
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `power_item` (`power_item`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COMMENT='系统权限项表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COMMENT='系统权限项表';
 
 -- ----------------------------
 -- Records of sys_power
@@ -3591,12 +3705,14 @@ INSERT INTO `sys_power` VALUES (1, 'ADD', '添加', '模块添加权限', 2, '1'
 INSERT INTO `sys_power` VALUES (2, 'APPROVE', '审批', '审核批准权限', 8, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
 INSERT INTO `sys_power` VALUES (3, 'CONFIG', '配置', '模块配置功能权限', 5, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
 INSERT INTO `sys_power` VALUES (4, 'DELETE', '删除', '模块删除权限', 3, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
-INSERT INTO `sys_power` VALUES (5, 'DOWNLOAD', '下载', '下载资源权限', 10, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
+INSERT INTO `sys_power` VALUES (5, 'DOWNLOAD', '下载', '下载资源权限', 10, '1', '2018-09-04 15:18:18', '2020-02-19 13:32:34');
 INSERT INTO `sys_power` VALUES (6, 'PASSWORD', '修改密码', '模块修改密码权限', 6, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
 INSERT INTO `sys_power` VALUES (7, 'PRIORITY', '调整优先级', '调整优先级权限', 7, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
 INSERT INTO `sys_power` VALUES (8, 'UPDATE', '编辑', '模块编辑权限', 4, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
 INSERT INTO `sys_power` VALUES (9, 'UPLOAD', '上传', '上传资源权限', 9, '1', '2018-09-04 15:18:18', '2018-09-04 15:18:18');
-INSERT INTO `sys_power` VALUES (10, 'VIEW', '浏览', '模块浏览权限', 1, '1', '2018-09-04 15:18:18', '2019-06-06 13:41:52');
+INSERT INTO `sys_power` VALUES (10, 'VIEW', '浏览', '模块浏览权限', 1, '1', '2018-09-04 15:18:18', '2020-05-05 13:56:10');
+INSERT INTO `sys_power` VALUES (11, 'DEPOSIT', '充值', '充值权限', 11, '1', '2020-05-04 15:15:00', '2020-05-04 15:16:34');
+INSERT INTO `sys_power` VALUES (12, 'WITHDRAW', '提现', '提现权限', 12, '1', '2020-05-04 15:15:16', '2020-05-04 15:16:44');
 COMMIT;
 
 -- ----------------------------
@@ -3618,7 +3734,7 @@ CREATE TABLE `sys_role` (
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `role_id` (`role_id`),
-  UNIQUE KEY `role_code` (`role_id`,`role_code`) USING BTREE
+  UNIQUE KEY `role_code` (`role_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='系统角色表';
 
 -- ----------------------------
@@ -3637,27 +3753,75 @@ DROP TABLE IF EXISTS `sys_role_module_power`;
 CREATE TABLE `sys_role_module_power` (
   `rmp_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `role_id` varchar(50) NOT NULL COMMENT '角色ID',
-  `module_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '模块ID',
+  `module_code` varchar(50) NOT NULL COMMENT '模块代码',
   `power_item` varchar(20) NOT NULL DEFAULT '' COMMENT '权限项',
   `sub_no` varchar(30) DEFAULT '' COMMENT '子账号',
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`rmp_id`) USING BTREE,
-  KEY `module_id` (`module_id`) USING BTREE,
+  KEY `module_code` (`module_code`) USING BTREE,
   KEY `power_item` (`power_item`) USING BTREE,
   KEY `role_id` (`role_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COMMENT='系统角色权限表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统角色权限表';
 
 -- ----------------------------
 -- Records of sys_role_module_power
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_role_module_power` VALUES (8, '10', 1004, 'VIEW', '', '2019-02-18 21:30:53', '2019-02-18 21:30:53');
-INSERT INTO `sys_role_module_power` VALUES (9, '10', 1004, 'ADD', '', '2019-02-18 21:30:53', '2019-02-18 21:30:53');
-INSERT INTO `sys_role_module_power` VALUES (10, '10', 1004, 'DELETE', '', '2019-02-18 21:30:53', '2019-02-18 21:30:53');
-INSERT INTO `sys_role_module_power` VALUES (11, '10', 1004, 'UPDATE', '', '2019-02-18 21:30:53', '2019-02-18 21:30:53');
-INSERT INTO `sys_role_module_power` VALUES (12, '10', 1004, 'CONFIG', '', '2019-02-18 21:30:53', '2019-02-18 21:30:53');
-INSERT INTO `sys_role_module_power` VALUES (13, '10', 1009, 'VIEW', '', '2019-02-18 21:30:53', '2019-02-18 21:30:53');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_schedule_job
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_schedule_job`;
+CREATE TABLE `sys_schedule_job` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `job_name` varchar(120) NOT NULL COMMENT '任务名称',
+  `job_group` varchar(180) NOT NULL COMMENT '任务组',
+  `job_class_name` varchar(250) NOT NULL COMMENT '执行类',
+  `job_data` varchar(500) DEFAULT NULL COMMENT '属性配置，json格式',
+  `remark` varchar(200) DEFAULT '' COMMENT '备注',
+  `valid_status` char(1) NOT NULL DEFAULT '0' COMMENT '状态：0-停止，1-启动，2-暂停',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `job_name` (`job_name`,`job_group`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务定义表';
+
+-- ----------------------------
+-- Records of sys_schedule_job
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_schedule_job` VALUES (1, 'TEST_JOB', 'TEST', 'pers.chanus.yuntao.manager.job.TestJob', '{\"a\":\"aaa\",\"b\":\"bbb\"}', '测试定时任务', '0', '2020-04-15 15:15:06', '2020-04-16 13:28:11');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_schedule_trigger
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_schedule_trigger`;
+CREATE TABLE `sys_schedule_trigger` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `job_id` int(10) unsigned NOT NULL COMMENT '定时任务ID',
+  `trigger_name` varchar(120) NOT NULL COMMENT '触发器名称',
+  `trigger_group` varchar(180) NOT NULL COMMENT '触发器组',
+  `trigger_cron` varchar(100) NOT NULL COMMENT 'Cron表达式',
+  `trigger_start_time` datetime DEFAULT NULL COMMENT '开始时间',
+  `trigger_end_time` datetime DEFAULT NULL COMMENT '结束时间',
+  `trigger_data` varchar(500) DEFAULT NULL COMMENT '属性配置，json格式',
+  `priority` int(11) DEFAULT NULL COMMENT '优先级',
+  `remark` varchar(200) DEFAULT '' COMMENT '备注',
+  `valid_status` char(1) NOT NULL DEFAULT '0' COMMENT '状态：0-停用，1-启用',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `trigger_name` (`trigger_name`,`trigger_group`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务触发器表表';
+
+-- ----------------------------
+-- Records of sys_schedule_trigger
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_schedule_trigger` VALUES (1, 1, 'TEST_JOB_TRIGGER', 'TEST', '0/30 * * * * ?', '2020-04-15 00:00:00', '2020-04-30 00:00:00', '{\"key\":\"test_trigger\"}', 5, '测试触发器', '1', '2020-04-15 15:18:36', '2020-04-16 13:28:18');
 COMMIT;
 
 -- ----------------------------
@@ -3677,10 +3841,16 @@ CREATE TABLE `sys_white_ip` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统IP白名单';
 
 -- ----------------------------
+-- Records of sys_white_ip
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- View structure for view_login_user
 -- ----------------------------
 DROP VIEW IF EXISTS `view_login_user`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_login_user` AS select `sys_operator`.`operator_no` AS `login_no`,`sys_operator`.`operator_name` AS `login_name`,`sys_operator`.`operator_password` AS `password`,`sys_operator`.`operator_role_id` AS `role_id`,`sys_operator`.`master_no` AS `master_no`,`sys_operator`.`master_role_id` AS `master_role_id`,`sys_operator`.`valid_status` AS `valid_status`,`sys_operator`.`authority` AS `authority`,if((`sys_operator`.`operator_role_id` = '1'),'1','0') AS `user_type`,`sys_operator`.`head_image` AS `head_image` from `sys_operator` where (isnull(`sys_operator`.`master_no`) or (`sys_operator`.`master_no` = '')) union all select `sys_operator`.`operator_no` AS `login_no`,`sys_operator`.`operator_name` AS `login_name`,`sys_operator`.`operator_password` AS `password`,`sys_operator`.`operator_role_id` AS `role_id`,`sys_operator`.`master_no` AS `master_no`,`sys_operator`.`master_role_id` AS `master_role_id`,`sys_operator`.`valid_status` AS `valid_status`,(select `so`.`authority` from `sys_operator` `so` where (`so`.`operator_no` = `sys_operator`.`master_no`)) AS `authority`,if((`sys_operator`.`operator_role_id` = '1'),'1','0') AS `user_type`,`sys_operator`.`head_image` AS `head_image` from `sys_operator` where ((`sys_operator`.`master_no` is not null) and (`sys_operator`.`master_no` <> ''));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_login_user` AS select `sys_operator`.`operator_no` AS `login_no`,`sys_operator`.`operator_name` AS `login_name`,`sys_operator`.`operator_password` AS `password`,`sys_operator`.`operator_role_id` AS `role_id`,`sys_operator`.`master_no` AS `master_no`,`sys_operator`.`master_role_id` AS `master_role_id`,`sys_operator`.`valid_status` AS `valid_status`,if((`sys_operator`.`operator_role_id` = '1'),'1','0') AS `user_type`,`sys_operator`.`head_image` AS `head_image` from `sys_operator`;
 
 -- ----------------------------
 -- View structure for view_user
@@ -3693,7 +3863,7 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_user` AS select `sy
 -- ----------------------------
 DROP FUNCTION IF EXISTS `get_parent_roles`;
 delimiter ;;
-CREATE FUNCTION `yuntao-manager-core`.`get_parent_roles`(roleId varchar(50))
+CREATE FUNCTION `get_parent_roles`(roleId varchar(50))
  RETURNS varchar(1000) CHARSET utf8mb4
 BEGIN
   DECLARE parentRoleId varchar(50) DEFAULT '';
@@ -3718,7 +3888,7 @@ delimiter ;
 -- ----------------------------
 DROP FUNCTION IF EXISTS `get_parent_roles_with_self`;
 delimiter ;;
-CREATE FUNCTION `yuntao-manager-core`.`get_parent_roles_with_self`(roleId varchar(50))
+CREATE FUNCTION `get_parent_roles_with_self`(roleId varchar(50))
  RETURNS varchar(1000) CHARSET utf8mb4
 BEGIN
   DECLARE parentRoleId varchar(50) DEFAULT '';
@@ -3743,7 +3913,7 @@ delimiter ;
 -- ----------------------------
 DROP FUNCTION IF EXISTS `has_child_role`;
 delimiter ;;
-CREATE FUNCTION `yuntao-manager-core`.`has_child_role`(pRoleId varchar(50))
+CREATE FUNCTION `has_child_role`(pRoleId varchar(50))
  RETURNS char(1) CHARSET utf8mb4
 BEGIN
   DECLARE childCount int(10) DEFAULT 0;

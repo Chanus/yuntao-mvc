@@ -9,7 +9,6 @@
     <result column="operator_role_id" jdbcType="VARCHAR" property="operatorRoleId" />
     <result column="master_no" jdbcType="VARCHAR" property="masterNo" />
     <result column="master_role_id" jdbcType="VARCHAR" property="masterRoleId" />
-    <result column="authority" jdbcType="VARCHAR" property="authority" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="head_image" jdbcType="VARCHAR" property="headImage" />
@@ -22,8 +21,8 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, operator_no, operator_name, operator_password, operator_role_id, master_no, master_role_id, authority, 
-    email, tel, head_image, remark, valid_status, gmt_create, gmt_modified
+    id, operator_no, operator_name, operator_password, operator_role_id, master_no, master_role_id, email,
+    tel, head_image, remark, valid_status, gmt_create, gmt_modified
   </sql>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -74,9 +73,6 @@
       <if test="masterRoleId != null">
         master_role_id,
       </if>
-      <if test="authority != null">
-        authority,
-      </if>
       <if test="email != null">
         email,
       </if>
@@ -120,9 +116,6 @@
       </if>
       <if test="masterRoleId != null">
         #{masterRoleId,jdbcType=VARCHAR},
-      </if>
-      <if test="authority != null">
-        #{authority,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         HEX(AES_ENCRYPT(#{email,jdbcType=VARCHAR},#{aesEmailKey,jdbcType=VARCHAR})),
@@ -169,9 +162,6 @@
       <if test="masterRoleId != null">
         master_role_id = #{masterRoleId,jdbcType=VARCHAR},
       </if>
-      <if test="authority != null">
-        authority = #{authority,jdbcType=VARCHAR},
-      </if>
       <if test="email != null">
         email = HEX(AES_ENCRYPT(#{email,jdbcType=VARCHAR},#{aesEmailKey,jdbcType=VARCHAR})),
       </if>
@@ -199,7 +189,7 @@
   
   <select id="getById" resultMap="BaseResultMap">
     select 
-    id, operator_no, operator_name, operator_role_id, master_no, master_role_id, authority, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email, 
+    id, operator_no, operator_name, operator_role_id, master_no, master_role_id, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, remark, valid_status
     from sys_operator
     where id = #{id,jdbcType=INTEGER}
@@ -207,7 +197,7 @@
   
   <select id="getByOperatorNo" resultMap="BaseResultMap">
     select 
-    sys_operator.id, operator_no, operator_name, operator_role_id, master_no, master_role_id, authority, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email, 
+    sys_operator.id, operator_no, operator_name, operator_role_id, master_no, master_role_id, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, sys_operator.remark, sys_operator.valid_status, sys_operator.gmt_create, role_name
     from sys_operator, sys_role
     where operator_role_id = role_id and operator_no = #{operatorNo,jdbcType=VARCHAR}
@@ -234,7 +224,7 @@
   
   <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
-    sys_operator.id, operator_no, operator_name, operator_role_id, authority, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email, 
+    sys_operator.id, operator_no, operator_name, operator_role_id, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, sys_operator.remark, sys_operator.valid_status, role_name
     from sys_operator, sys_role
     <where>
@@ -282,7 +272,7 @@
   
   <select id="listSub" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
-    sys_operator.id, operator_no, operator_name, master_no, master_role_id, authority, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email, 
+    sys_operator.id, operator_no, operator_name, master_no, master_role_id, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, sys_operator.remark, sys_operator.valid_status, role_name
     from sys_operator, sys_role
     <where>

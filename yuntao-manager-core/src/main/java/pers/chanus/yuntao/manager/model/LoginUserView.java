@@ -19,8 +19,6 @@ public class LoginUserView implements Serializable {
 
     private String validStatus;
 
-    private String authority;
-
     private String userType;
 
     private String headImage;
@@ -81,14 +79,6 @@ public class LoginUserView implements Serializable {
         this.validStatus = validStatus == null ? null : validStatus.trim();
     }
 
-    public String getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(String authority) {
-        this.authority = authority == null ? null : authority.trim();
-    }
-
     public String getUserType() {
         return userType;
     }
@@ -107,6 +97,16 @@ public class LoginUserView implements Serializable {
 
     @Override
     public String toString() {
-        return "LoginUserView [loginNo=" + loginNo + ", loginName=" + loginName + ", password=" + password + ", roleId=" + roleId + ", masterNo=" + masterNo + ", masterRoleId=" + masterRoleId + ", validStatus=" + validStatus + ", authority=" + authority + ", userType=" + userType + ", headImage=" + headImage + "]";
+        return "LoginUserView [" +
+                "loginNo=" + loginNo +
+                ", loginName=" + loginName +
+                ", password=" + password +
+                ", roleId=" + roleId +
+                ", masterNo=" + masterNo +
+                ", masterRoleId=" + masterRoleId +
+                ", validStatus=" + validStatus +
+                ", userType=" + userType +
+                ", headImage=" + headImage +
+                "]";
     }
 }
