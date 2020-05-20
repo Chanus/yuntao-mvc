@@ -22,6 +22,11 @@
       <artifactId>yuntao-commons</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <!-- 读写XML -->
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
