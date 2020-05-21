@@ -30,9 +30,9 @@ public class MenuApiTest {
         AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         // String json = "{\"button\":[{\"type\":\"click\",\"name\":\"今日歌曲\",\"key\":\"V1001_TODAY_MUSIC\"},{\"name\":\"菜单\",\"sub_button\":[{\"type\":\"view\",\"name\":\"搜索\",\"url\":\"http://www.soso.com/\"},{\"type\":\"click\",\"name\":\"赞一下我们\",\"key\":\"V1001_GOOD\"}]}]}";
         // JSONObject jsonObject = MenuApi.createMenu(json);
-        String json = Menu.create().setButton("click", "今日歌曲", "V1001_TODAY_MUSIC", (String) null)
-                .setButton("菜单", Menu.MenuButton.create().setSub_button("view", "搜索", "http://www.soso.com")
-                        .setSub_button("click", "赞一下我们", "V1001_GOOD", (String) null).getSub_button()).toJSONString();
+        String json = Menu.create().setClickButton("今日歌曲", "V1001_TODAY_MUSIC")
+                .setButton("菜单", Menu.MenuButton.create().setViewSubButton("搜索", "http://www.soso.com")
+                        .setClickSubButton("赞一下我们", "V1001_GOOD").getSub_button()).toJSONString();
         System.out.println(json);
 
         JSONObject jsonObject = MenuApi.createMenu(json);
@@ -63,9 +63,9 @@ public class MenuApiTest {
     @Test
     public void addConditionalTest() {
         AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        String json = Menu.create().setButton("click", "今日歌曲", "V1001_TODAY_MUSIC", (String) null)
-                .setButton("菜单", Menu.MenuButton.create().setSub_button("view", "搜索", "http://www.soso.com")
-                        .setSub_button("click", "赞一下我们", "V1001_GOOD", (String) null).getSub_button())
+        String json = Menu.create().setClickButton("今日歌曲", "V1001_TODAY_MUSIC")
+                .setButton("菜单", Menu.MenuButton.create().setViewSubButton("搜索", "http://www.soso.com")
+                        .setClickSubButton("赞一下我们", "V1001_GOOD").getSub_button())
                 .setMatchrule(Menu.MatchRule.create().setTag_id("2").setSex("1").setCountry("中国").setProvince("安徽")
                         .setCity("亳州").setClient_platform_type("2").setLanguage("zh_HK"))
                 .toJSONString();

@@ -50,8 +50,8 @@ public class Menu implements Serializable {
         this.button = button;
     }
 
-    public Menu setButton(String type, String name, String url) {
-        this.button.add(new MenuButton(type, name, null, url));
+    public Menu setButton(String type, String name, String key) {
+        this.button.add(new MenuButton(type, name, key));
         return this;
     }
 
@@ -60,13 +60,18 @@ public class Menu implements Serializable {
         return this;
     }
 
-    public Menu setButton(String type, String name, String key, String url) {
-        this.button.add(new MenuButton(type, name, key, url));
+    public Menu setButton(String type, String name, String key, List<MenuButton> sub_button) {
+        this.button.add(new MenuButton(type, name, key, sub_button));
         return this;
     }
 
-    public Menu setButton(String type, String name, String key, List<MenuButton> sub_button) {
-        this.button.add(new MenuButton(type, name, key, sub_button));
+    public Menu setClickButton(String name, String key) {
+        this.button.add(new MenuButton("click", name, key, (String) null));
+        return this;
+    }
+
+    public Menu setViewButton(String name, String url) {
+        this.button.add(new MenuButton("view", name, null, url));
         return this;
     }
 
@@ -226,23 +231,28 @@ public class Menu implements Serializable {
             this.sub_button = sub_button;
         }
 
-        public MenuButton setSub_button(String type, String name, String url) {
-            this.sub_button.add(new MenuButton(type, name, null, url));
+        public MenuButton setSubButton(String type, String name, String key) {
+            this.sub_button.add(new MenuButton(type, name, key));
             return this;
         }
 
-        public MenuButton setSub_button(String name, List<MenuButton> sub_button) {
+        public MenuButton setSubButton(String name, List<MenuButton> sub_button) {
             this.sub_button.add(new MenuButton(name, sub_button));
             return this;
         }
 
-        public MenuButton setSub_button(String type, String name, String key, String url) {
-            this.sub_button.add(new MenuButton(type, name, key, url));
+        public MenuButton setSubButton(String type, String name, String key, List<MenuButton> sub_button) {
+            this.sub_button.add(new MenuButton(type, name, key, sub_button));
             return this;
         }
 
-        public MenuButton setSub_button(String type, String name, String key, List<MenuButton> sub_button) {
-            this.sub_button.add(new MenuButton(type, name, key, sub_button));
+        public MenuButton setClickSubButton(String name, String key) {
+            this.sub_button.add(new MenuButton("click", name, key));
+            return this;
+        }
+
+        public MenuButton setViewSubButton(String name, String url) {
+            this.sub_button.add(new MenuButton("view", name, url));
             return this;
         }
     }
