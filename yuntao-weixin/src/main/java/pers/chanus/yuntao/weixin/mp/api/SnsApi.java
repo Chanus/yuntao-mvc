@@ -55,7 +55,6 @@ public class SnsApi {
     /**
      * 生成网页授权的 url 链接
      *
-     * @param appId       公众号的唯一标识
      * @param redirectUri 授权后重定向的回调链接地址
      * @param snsapiBase  应用授权作用域，{@code true}表示静默授权并自动跳转到回调页，{@code false}表示需要用户手动同意<br>
      *                    snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息 ）
@@ -63,9 +62,9 @@ public class SnsApi {
      * @return 网页授权的 url 链接
      * @since 0.1.9
      */
-    public static String getAuthorizeURL(String appId, String redirectUri, boolean snsapiBase, String state) {
+    public static String getAuthorizeURL(String redirectUri, boolean snsapiBase, String state) {
         Map<String, Object> params = new TreeMap<>();
-        params.put("appid", appId);
+        params.put("appid", AccessTokenApi.apiConfig.getAppId());
         try {
             params.put("redirect_uri", URLEncoder.encode(redirectUri, "utf-8"));
         } catch (UnsupportedEncodingException e) {
@@ -85,29 +84,27 @@ public class SnsApi {
     /**
      * 生成网页授权的 url 链接
      *
-     * @param appId       公众号的唯一标识
      * @param redirectUri 授权后重定向的回调链接地址
      * @param snsapiBase  应用授权作用域，{@code true}表示静默授权并自动跳转到回调页，{@code false}表示需要用户手动同意<br>
      *                    snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息 ）最多128字节
      * @return 网页授权的 url 链接
      * @since 0.1.9
      */
-    public static String getAuthorizeURL(String appId, String redirectUri, boolean snsapiBase) {
-        return getAuthorizeURL(appId, redirectUri, snsapiBase, null);
+    public static String getAuthorizeURL(String redirectUri, boolean snsapiBase) {
+        return getAuthorizeURL(redirectUri, snsapiBase, null);
     }
 
     /**
      * 生成网页二维码授权链接
      *
-     * @param appId       公众号的唯一标识
      * @param redirectUri 授权后重定向的回调链接地址
      * @param state       重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节
      * @return 网页二维码授权链接
      * @since 0.1.9
      */
-    public static String getQrConnectURL(String appId, String redirectUri, String state) {
+    public static String getQrConnectURL(String redirectUri, String state) {
         Map<String, Object> params = new TreeMap<>();
-        params.put("appid", appId);
+        params.put("appid", AccessTokenApi.apiConfig.getAppId());
         try {
             params.put("redirect_uri", URLEncoder.encode(redirectUri, "utf-8"));
         } catch (UnsupportedEncodingException e) {
@@ -125,26 +122,24 @@ public class SnsApi {
     /**
      * 生成网页二维码授权链接
      *
-     * @param appId       公众号的唯一标识
      * @param redirectUri 授权后重定向的回调链接地址
      * @return 网页二维码授权链接
      * @since 0.1.9
      */
-    public static String getQrConnectURL(String appId, String redirectUri) {
-        return getQrConnectURL(appId, redirectUri, null);
+    public static String getQrConnectURL(String redirectUri) {
+        return getQrConnectURL(redirectUri, null);
     }
 
     /**
      * 通过 code 换取网页授权 access_token
      *
-     * @param appId  公众号的唯一标识
-     * @param secret 公众号的 appsecret
-     * @param code   填写第一步获取的 code 参数
+     * @param code 填写第一步获取的 code 参数
      * @return {@code SnsAccessToken}
      * @since 0.1.9
      */
-    public static SnsAccessToken getSnsAccessToken(String appId, String secret, String code) {
-        String url = GET_SNS_ACCESS_TOKEN_URL.replace("APPID", appId).replace("SECRET", secret).replace("CODE", code);
+    public static SnsAccessToken getSnsAccessToken(String code) {
+        String url = GET_SNS_ACCESS_TOKEN_URL.replace("APPID", AccessTokenApi.apiConfig.getAppId())
+                .replace("SECRET", AccessTokenApi.apiConfig.getAppSecret()).replace("CODE", code);
 
         return RetryUtils.retryOnException(3, () -> {
             String json = HttpUtils.get(url);
@@ -153,15 +148,28 @@ public class SnsApi {
     }
 
     /**
+     * 通过 code 换取网页授权 access_token，获取用户 openid
+     *
+     * @param code 填写第一步获取的 code 参数
+     * @return 用户 openid
+     * @since 0.1.9
+     */
+    public static String getUserOpenId(String code) {
+        SnsAccessToken snsAccessToken = getSnsAccessToken(code);
+
+        return snsAccessToken.getOpenid();
+    }
+
+    /**
      * 刷新 access_token（如果需要）
      *
-     * @param appId        公众号的唯一标识
      * @param refreshToken 填写通过 access_token 获取到的 refresh_token 参数
      * @return {@code SnsAccessToken}
      * @since 0.1.9
      */
-    public static SnsAccessToken refreshSnsAccessToken(String appId, String refreshToken) {
-        String url = REFRESH_SNS_ACCESS_TOKEN_URL.replace("APPID", appId).replace("REFRESH_TOKEN", refreshToken);
+    public static SnsAccessToken refreshSnsAccessToken(String refreshToken) {
+        String url = REFRESH_SNS_ACCESS_TOKEN_URL.replace("APPID", AccessTokenApi.apiConfig.getAppId())
+                .replace("REFRESH_TOKEN", refreshToken);
 
         return RetryUtils.retryOnException(3, () -> {
             String json = HttpUtils.get(url);

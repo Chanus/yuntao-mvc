@@ -11,6 +11,7 @@ package pers.chanus.yuntao.weixin.mp.api;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
+import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
 import pers.chanus.yuntao.weixin.mp.api.bean.SnsAccessToken;
 
 /**
@@ -26,35 +27,47 @@ public class SnsApiTest {
 
     @Test
     public void getAuthorizeURLTest() {
+        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         String redirectUri = "http://t.liulianhuan.com/register/oauth2";
-        String url = SnsApi.getAuthorizeURL(appId, redirectUri, true);
+        String url = SnsApi.getAuthorizeURL(redirectUri, true);
         System.out.println(url);
         String state = "test";
-        url = SnsApi.getAuthorizeURL(appId, redirectUri, false, state);
+        url = SnsApi.getAuthorizeURL(redirectUri, false, state);
         System.out.println(url);
     }
 
     @Test
     public void getQrConnectURLTest() {
+        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         String redirectUri = "http://t.liulianhuan.com/register/oauth2";
-        String url = SnsApi.getQrConnectURL(appId, redirectUri);
+        String url = SnsApi.getQrConnectURL(redirectUri);
         System.out.println(url);
         String state = "test";
-        url = SnsApi.getQrConnectURL(appId, redirectUri, state);
+        url = SnsApi.getQrConnectURL(redirectUri, state);
         System.out.println(url);
     }
 
     @Test
     public void getSnsAccessTokenTest() {
+        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         String code = "001CH9Bz1TEcJc0tiDAz1RX8Bz1CH9BG";
-        SnsAccessToken snsAccessToken = SnsApi.getSnsAccessToken(appId, appSecret, code);
+        SnsAccessToken snsAccessToken = SnsApi.getSnsAccessToken(code);
         System.out.println(snsAccessToken.toString());
     }
 
     @Test
+    public void getUserOpenIdTest() {
+        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
+        String code = "001CH9Bz1TEcJc0tiDAz1RX8Bz1CH9BG";
+        String openId = SnsApi.getUserOpenId(code);
+        System.out.println(openId);
+    }
+
+    @Test
     public void refreshSnsAccessTokenTest() {
+        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         String refreshToken = "33_9CQql90EruOkAoMeFZmh7jz7EJsQV0u6LSd75jeU1XL4ik7uP-RZkKHObZC1u8z4ysKUx2TBoWGxsQwa-LXFOhrVhGuLZPTicDicbJJWyT8";
-        SnsAccessToken snsAccessToken = SnsApi.refreshSnsAccessToken(appId, refreshToken);
+        SnsAccessToken snsAccessToken = SnsApi.refreshSnsAccessToken(refreshToken);
         System.out.println(snsAccessToken.toString());
     }
 

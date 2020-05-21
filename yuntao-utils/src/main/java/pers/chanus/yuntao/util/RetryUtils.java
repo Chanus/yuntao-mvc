@@ -42,11 +42,10 @@ public class RetryUtils {
     public static <V extends ResultCheck> V retryOnException(int retryLimit, Callable<V> retryCallable) {
         V v = null;
         for (int i = 0; i < retryLimit; i++) {
-            System.out.println("retry " + i);
             try {
                 v = retryCallable.call();
-            } catch (Exception ignored) {
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             if (null != v && v.matching()) break;
         }
@@ -69,8 +68,8 @@ public class RetryUtils {
         for (int i = 0; i < retryLimit; i++) {
             try {
                 v = retryCallable.call();
-            } catch (Exception ignored) {
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             if (null != v && v.matching()) break;
             Thread.sleep(sleepMillis);
