@@ -154,33 +154,6 @@
     <error-code>404</error-code>
     <location>/404.jsp</location>
   </error-page>
-
-  <jsp-config>
-    <taglib id="c">
-      <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
-      <taglib-location>jstl/c.tld</taglib-location>
-    </taglib>
-    <taglib id="fmt">
-      <taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
-      <taglib-location>jstl/fmt.tld</taglib-location>
-    </taglib>
-    <taglib id="fn">
-      <taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>
-      <taglib-location>jstl/fn.tld</taglib-location>
-    </taglib>
-    <taglib id="x">
-      <taglib-uri>http://java.sun.com/jsp/jstl/xml</taglib-uri>
-      <taglib-location>jstl/x.tld</taglib-location>
-    </taglib>
-    <taglib id="sql">
-      <taglib-uri>http://java.sun.com/jsp/jstl/sql</taglib-uri>
-      <taglib-location>jstl/sql.tld</taglib-location>
-    </taglib>
-    <taglib id="spring">
-      <taglib-uri>http://www.springframework.org/tags</taglib-uri>
-      <taglib-location>jstl/spring.tld</taglib-location>
-    </taglib>
-  </jsp-config>
   
   <!-- session超时时间 -->
   <session-config>
