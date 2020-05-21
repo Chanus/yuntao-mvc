@@ -26,6 +26,7 @@ import java.util.List;
  *     设置用户备注名：https://developers.weixin.qq.com/doc/offiaccount/User_Management/Configuring_user_notes.html
  *     获取用户基本信息(UnionID机制)：https://developers.weixin.qq.com/doc/offiaccount/User_Management/Get_users_basic_information_UnionID.html#UinonId
  *     获取用户列表：https://developers.weixin.qq.com/doc/offiaccount/User_Management/Getting_a_User_List.html
+ *     批量获取用户基本信息：http://caibaojian.com/wxwiki/3c3151152c9e627a42e5728e219da4763d0b2d32.html
  * </pre>
  *
  * @author Chanus

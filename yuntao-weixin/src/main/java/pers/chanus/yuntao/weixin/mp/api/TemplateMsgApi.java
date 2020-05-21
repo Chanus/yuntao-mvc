@@ -42,7 +42,6 @@ public class TemplateMsgApi {
      * 删除模板 url，请求方式为 POST
      */
     private static final String DEL_PRIVATE_TEMPLATE_URL = "https://api.weixin.qq.com/cgi-bin/template/del_private_template?access_token=ACCESS_TOKEN";
-
     /**
      * 发送模板消息 url，请求方式为 POST
      */

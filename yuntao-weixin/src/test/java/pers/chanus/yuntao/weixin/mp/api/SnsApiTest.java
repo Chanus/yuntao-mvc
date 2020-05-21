@@ -78,4 +78,12 @@ public class SnsApiTest {
         JSONObject jsonObject = SnsApi.getUserInfo(accessToken, openId);
         System.out.println(jsonObject.toJSONString());
     }
+
+    @Test
+    public void authSnsAccessTokenTest() {
+        String accessToken = "33_Cog0JM9pFMfzIetwrQJlDkJcKnXPQlDfk2eoMxZDoze5FREB45EGp8THp_sFj3l-a9dEfXbhU1FA5jgySCcKPNmno4crqSmCLZlEDTj7SVM";
+        String openId = "o-mAK55lxMjG-3Kd5wRtFtS__4rA";
+        JSONObject jsonObject = SnsApi.authSnsAccessToken(accessToken, openId);
+        System.out.println(jsonObject.toJSONString());
+    }
 }

@@ -19,6 +19,7 @@ import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.service.LoginUserService;
 import pers.chanus.yuntao.util.CollectionUtils;
+import pers.chanus.yuntao.util.ObjectUtils;
 import pers.chanus.yuntao.util.StringUtils;
 import pers.chanus.yuntao.util.encrypt.SHAUtils;
 
@@ -85,17 +86,13 @@ public class LoginUserServiceImpl implements LoginUserService {
         if (CollectionUtils.isEmpty(menus))
             return Message.fail("当前用户没有系统权限");
 
-        LoginUser loginUser = new LoginUser();
-        loginUser.setLoginNo(loginUserView.getLoginNo());
-        loginUser.setLoginName(loginUserView.getLoginName());
-        loginUser.setRoleId(loginUserView.getRoleId());
-        loginUser.setMasterNo(StringUtils.isBlank(loginUserView.getMasterNo()) ? loginUserView.getLoginNo() : loginUserView.getMasterNo());
-        loginUser.setMasterRoleId(StringUtils.isBlank(loginUserView.getMasterRoleId()) ? loginUserView.getRoleId() : loginUserView.getMasterRoleId());
-        loginUser.setUserType(loginUserView.getUserType());
-        loginUser.setLoginIp(loginIp);
-        loginUser.setHeadImage(loginUserView.getHeadImage());
-        loginUser.setMenus(menus);
-        loginUser.setUrls(moduleMapper.listUrl(loginUserView.getRoleId(), loginUserView.getLoginNo()));
+        LoginUser loginUser = new LoginUser().setLoginNo(loginUserView.getLoginNo())
+                .setLoginName(loginUserView.getLoginName()).setRoleId(loginUserView.getRoleId())
+                .setMasterNo(ObjectUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
+                .setMasterRoleId(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleId(), loginUserView.getRoleId()))
+                .setUserType(loginUserView.getUserType()).setLoginIp(loginIp)
+                .setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
+                .setUrls(moduleMapper.listUrl(loginUserView.getRoleId(), loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
 
         return Message.success("登录成功").initMsg(loginUser);
@@ -149,17 +146,13 @@ public class LoginUserServiceImpl implements LoginUserService {
         if (CollectionUtils.isEmpty(menus))
             return Message.fail("当前用户没有系统权限");
 
-        LoginUser loginUser = new LoginUser();
-        loginUser.setLoginNo(loginUserView.getLoginNo());
-        loginUser.setLoginName(loginUserView.getLoginName());
-        loginUser.setRoleId(roleId);
-        loginUser.setMasterNo(StringUtils.isBlank(loginUserView.getMasterNo()) ? loginUserView.getLoginNo() : loginUserView.getMasterNo());
-        loginUser.setMasterRoleId(StringUtils.isBlank(loginUserView.getMasterRoleId()) ? roleId : loginUserView.getMasterRoleId());
-        loginUser.setUserType(loginUserView.getUserType());
-        loginUser.setLoginIp(loginIp);
-        loginUser.setHeadImage(loginUserView.getHeadImage());
-        loginUser.setMenus(menus);
-        loginUser.setUrls(moduleMapper.listUrl(roleId, loginUserView.getLoginNo()));
+        LoginUser loginUser = new LoginUser().setLoginNo(loginUserView.getLoginNo())
+                .setLoginName(loginUserView.getLoginName()).setRoleId(roleId)
+                .setMasterNo(ObjectUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
+                .setMasterRoleId(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleId(), roleId))
+                .setUserType(loginUserView.getUserType()).setLoginIp(loginIp)
+                .setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
+                .setUrls(moduleMapper.listUrl(roleId, loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
 
         return Message.success("登录成功").initMsg(loginUser);

@@ -106,8 +106,8 @@ public class PageBean {
     /**
      * 构造方法，初始化{@code code}、{@code count}、{@code data}和{@code totalRow}
      *
-     * @param count  记录条数
-     * @param data   记录列表
+     * @param count    记录条数
+     * @param data     记录列表
      * @param totalRow 记录统计行
      * @since 0.1.5
      */
@@ -152,8 +152,8 @@ public class PageBean {
     /**
      * 设置{@code count}、{@code data}和{@code totalRow}
      *
-     * @param count  记录条数
-     * @param data   记录列表
+     * @param count    记录条数
+     * @param data     记录列表
      * @param totalRow 记录统计行
      * @return 当前{@code PageBean}实例
      * @since 0.1.5
@@ -193,8 +193,8 @@ public class PageBean {
     /**
      * 分页，带统计行
      *
-     * @param count  记录条数
-     * @param data   记录列表
+     * @param count    记录条数
+     * @param data     记录列表
      * @param totalRow 记录统计行
      * @return {@code PageBean}实例
      * @since 0.1.5
@@ -207,52 +207,65 @@ public class PageBean {
         return code;
     }
 
-    public void setCode(int code) {
+    public PageBean setCode(int code) {
         this.code = code;
+        return this;
     }
 
     public String getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public PageBean setMsg(String msg) {
         this.msg = msg;
+        return this;
     }
 
     public int getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public PageBean setCount(int count) {
         this.count = count;
+        return this;
     }
 
     public Object getObject() {
         return object;
     }
 
-    public void setObject(Object object) {
+    public PageBean setObject(Object object) {
         this.object = object;
+        return this;
     }
 
     public List<?> getData() {
         return data;
     }
 
-    public void setData(List<?> data) {
+    public PageBean setData(List<?> data) {
         this.data = data;
+        return this;
     }
 
     public Object getTotalRow() {
         return totalRow;
     }
 
-    public void setTotalRow(Object totalRow) {
+    public PageBean setTotalRow(Object totalRow) {
         this.totalRow = totalRow;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "PageBean [code=" + code + ", msg=" + msg + ", count=" + count + ", object=" + object + ", data=" + data + ", totalRow=" + totalRow + "]";
+        return "PageBean [" +
+                "code=" + code +
+                ", msg=" + msg +
+                ", count=" + count +
+                ", object=" + object +
+                ", data=" + data +
+                ", totalRow=" + totalRow +
+                "]";
     }
 }

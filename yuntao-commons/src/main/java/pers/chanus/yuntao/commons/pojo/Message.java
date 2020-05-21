@@ -69,18 +69,6 @@ public class Message {
      *
      * @param code 信息代码
      * @param msg  信息内容
-     * @since 0.0.1
-     */
-    public void init(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-
-    /**
-     * 设置{@code code}和{@code msg}
-     *
-     * @param code 信息代码
-     * @param msg  信息内容
      * @return {@code Message}实例
      * @since 0.0.1
      */
@@ -242,44 +230,55 @@ public class Message {
         return code;
     }
 
-    public void setCode(int code) {
+    public Message setCode(int code) {
         this.code = code;
+        return this;
     }
 
     public String getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public Message setMsg(String msg) {
         this.msg = msg;
+        return this;
     }
 
     public Object getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public Message setData(Object data) {
         this.data = data;
+        return this;
     }
 
     public List<?> getDatas() {
         return datas;
     }
 
-    public void setDatas(List<?> datas) {
+    public Message setDatas(List<?> datas) {
         this.datas = datas;
+        return this;
     }
 
     public Map<String, Object> getMap() {
         return map;
     }
 
-    public void setMap(Map<String, Object> map) {
+    public Message setMap(Map<String, Object> map) {
         this.map = map;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "Message [code=" + code + ", msg=" + msg + ", data=" + data + ", datas=" + datas + ", map=" + map + "]";
+        return "Message [" +
+                "code=" + code +
+                ", msg=" + msg +
+                ", data=" + data +
+                ", datas=" + datas +
+                ", map=" + map +
+                "]";
     }
 }

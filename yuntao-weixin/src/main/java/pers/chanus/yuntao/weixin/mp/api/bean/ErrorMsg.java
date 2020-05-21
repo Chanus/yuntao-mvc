@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 微信接口全局返回码
+ * 微信接口全局返回码<br>
+ * 详情请见：https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Global_Return_Code.html
  *
  * @author Chanus
  * @date 2020-05-17 13:08:33

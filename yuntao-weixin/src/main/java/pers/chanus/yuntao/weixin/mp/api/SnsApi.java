@@ -51,6 +51,10 @@ public class SnsApi {
      * 拉取用户信息(需scope为 snsapi_userinfo) url，请求方式为 GET
      */
     private static final String SNS_USER_INFO_URL = "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
+    /**
+     * 检验授权凭证（access_token）是否有效 url，请求方式为 GET
+     */
+    private static final String SNS_AUTH_URL = "https://api.weixin.qq.com/sns/auth?access_token=ACCESS_TOKEN&openid=OPENID";
 
     /**
      * 生成网页授权的 url 链接
@@ -187,6 +191,22 @@ public class SnsApi {
      */
     public static JSONObject getUserInfo(String accessToken, String openId) {
         String url = SNS_USER_INFO_URL.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
+
+        String result = HttpUtils.get(url);
+
+        return JSON.parseObject(result);
+    }
+
+    /**
+     * 检验授权凭证（access_token）是否有效
+     *
+     * @param accessToken 网页授权接口调用凭证，注意：此 access_token 与基础支持的 access_token 不同
+     * @param openId      用户的唯一标识
+     * @return 请求结果的 json 对象
+     * @since 0.1.9
+     */
+    public static JSONObject authSnsAccessToken(String accessToken, String openId) {
+        String url = SNS_AUTH_URL.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
 
         String result = HttpUtils.get(url);
 

@@ -109,88 +109,99 @@ public class LoginUser implements Serializable {
         return loginNo;
     }
 
-    public void setLoginNo(String loginNo) {
+    public LoginUser setLoginNo(String loginNo) {
         this.loginNo = loginNo;
+        return this;
     }
 
     public String getLoginName() {
         return loginName;
     }
 
-    public void setLoginName(String loginName) {
+    public LoginUser setLoginName(String loginName) {
         this.loginName = loginName;
+        return this;
     }
 
     public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public LoginUser setRoleId(String roleId) {
         this.roleId = roleId;
+        return this;
     }
 
     public String getMasterNo() {
         return masterNo;
     }
 
-    public void setMasterNo(String masterNo) {
+    public LoginUser setMasterNo(String masterNo) {
         this.masterNo = masterNo;
+        return this;
     }
 
     public String getMasterRoleId() {
         return masterRoleId;
     }
 
-    public void setMasterRoleId(String masterRoleId) {
+    public LoginUser setMasterRoleId(String masterRoleId) {
         this.masterRoleId = masterRoleId;
+        return this;
     }
 
     public String getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public LoginUser setUserType(String userType) {
         this.userType = userType == null ? null : userType.trim();
+        return this;
     }
 
     public String getLoginIp() {
         return loginIp;
     }
 
-    public void setLoginIp(String loginIp) {
+    public LoginUser setLoginIp(String loginIp) {
         this.loginIp = loginIp;
+        return this;
     }
 
     public String getHeadImage() {
         return headImage;
     }
 
-    public void setHeadImage(String headImage) {
+    public LoginUser setHeadImage(String headImage) {
         this.headImage = headImage;
+        return this;
     }
 
     public Object getObject() {
         return object;
     }
 
-    public void setObject(Object object) {
+    public LoginUser setObject(Object object) {
         this.object = object;
+        return this;
     }
 
     public List<?> getMenus() {
         return menus;
     }
 
-    public void setMenus(List<?> menus) {
+    public LoginUser setMenus(List<?> menus) {
         this.menus = menus;
+        return this;
     }
 
     public List<String> getUrls() {
         return urls;
     }
 
-    public void setUrls(List<String> urls) {
+    public LoginUser setUrls(List<String> urls) {
         this.urls = urls;
+        return this;
     }
 
     @Override
