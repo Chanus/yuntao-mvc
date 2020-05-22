@@ -38,10 +38,6 @@ public class Menu implements Serializable {
         this.button = new ArrayList<>();
     }
 
-    public static Menu create() {
-        return new Menu();
-    }
-
     public List<MenuButton> getButton() {
         return button;
     }
@@ -85,9 +81,20 @@ public class Menu implements Serializable {
     }
 
     /**
+     * 创建一个自定义菜单数据对象实例
+     *
+     * @return 自定义菜单数据对象实例
+     * @since 0.1.9
+     */
+    public static Menu create() {
+        return new Menu();
+    }
+
+    /**
      * 将当前对象转化成 json 字符串
      *
      * @return json 字符串
+     * @since 0.1.9
      */
     public String toJSONString() {
         return JSON.toJSONString(this);

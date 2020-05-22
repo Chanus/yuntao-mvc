@@ -70,7 +70,7 @@ public class UserTagApiTest {
         openIdList.add("o-mAK5_H-VujM2sT7SYs1pyJEEio");
         openIdList.add("o-mAK56WJbFNVxrptEbo80apufVc");
         openIdList.add("o-mAK55qfZGGZLh-BV4AG78sXgtQ");
-        JSONObject jsonObject = UserTagApi.batchTagging(100, openIdList);
+        JSONObject jsonObject = UserTagApi.batchTagging(104, openIdList);
         System.out.println(jsonObject.toJSONString());
     }
 
