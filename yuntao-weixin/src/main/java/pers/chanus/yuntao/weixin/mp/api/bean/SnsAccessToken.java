@@ -64,6 +64,9 @@ public class SnsAccessToken implements RetryUtils.ResultCheck, Serializable {
 
     private String json;
 
+    public SnsAccessToken() {
+    }
+
     /**
      * 构造方法
      *

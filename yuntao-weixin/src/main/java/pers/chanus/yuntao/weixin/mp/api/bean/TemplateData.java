@@ -136,6 +136,9 @@ public class TemplateData implements Serializable {
         private Object value;
         private String color;
 
+        public DataItem() {
+        }
+
         public DataItem(Object value) {
             this(value, DEFAULT_COLOR);
         }
@@ -174,6 +177,9 @@ public class TemplateData implements Serializable {
          * 所需跳转到小程序的具体页面路径，支持带参数,（示例index?foo=bar），要求该小程序已发布，暂不支持小游戏
          */
         private String pagepath;
+
+        public MiniProgramData() {
+        }
 
         public MiniProgramData(String appid, String pagepath) {
             this.appid = appid;

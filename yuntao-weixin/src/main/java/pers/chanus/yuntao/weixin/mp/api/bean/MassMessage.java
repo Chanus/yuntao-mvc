@@ -3,31 +3,36 @@
  * FileName: MassTagMessage
  * Author:   Chanus
  * Date:     2020-05-22 21:11:29
- * Description: 按标签群发的消息
+ * Description: 群发消息数据
  * History:
  * <author>          <time>          <version>          <desc>
  */
-package pers.chanus.yuntao.weixin.mp.api.bean.mass;
+package pers.chanus.yuntao.weixin.mp.api.bean;
 
 import com.alibaba.fastjson.JSON;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * 按标签群发的消息
+ * 群发消息数据
  *
  * @author Chanus
  * @date 2020-05-22 21:11:29
  * @since 0.1.9
  */
-public class MassTagMessage implements Serializable {
+public class MassMessage implements Serializable {
     private static final long serialVersionUID = -3586688431164347067L;
 
     /**
      * 用于设定图文消息的接收者
      */
     private Filter filter;
+    /**
+     * 填写图文消息的接收者，一串 OpenID 列表，OpenID 最少2个，最多10000个
+     */
+    private List<String> touser;
     /**
      * 用于设定即将发送的图文消息
      */
@@ -60,40 +65,56 @@ public class MassTagMessage implements Serializable {
      * 图文消息被判定为转载时，是否继续群发。 1为继续群发（转载），0为停止群发。 该参数默认为0
      */
     private Integer send_ignore_reprint;
+    /**
+     * 开发者侧群发msgid，长度限制64字节，如不填，则后台默认以群发范围和群发内容的摘要值做为clientmsgid
+     */
+    private String clientmsgid;
 
-    public MassTagMessage() {
+    public MassMessage() {
     }
 
-    public MassTagMessage(String msgtype) {
-        this.msgtype = msgtype;
+    public MassMessage(boolean is_to_all) {
+        this.filter = new Filter(is_to_all);
     }
 
-    public MassTagMessage(boolean is_to_all, Integer tag_id, String msgtype) {
-        this.filter = new Filter(is_to_all, tag_id);
-        this.msgtype = msgtype;
-    }
-
-    public MassTagMessage(Integer tag_id, String msgtype) {
+    public MassMessage(Integer tag_id) {
         this.filter = new Filter(tag_id);
-        this.msgtype = msgtype;
+    }
+
+    public MassMessage(List<String> touser) {
+        this.touser = touser;
     }
 
     public Filter getFilter() {
         return filter;
     }
 
-    public MassTagMessage setFilter(Filter filter) {
+    public MassMessage setFilter(Filter filter) {
         this.filter = filter;
         return this;
     }
 
-    public MassTagMessage setFilter(Integer tag_id) {
+    public MassMessage setFilter(Integer tag_id) {
         this.filter = new Filter(tag_id);
         return this;
     }
 
-    public MassTagMessage setFilter(boolean is_to_all, Integer tag_id) {
-        this.filter = new Filter(is_to_all, tag_id);
+    public MassMessage setFilter(boolean is_to_all) {
+        this.filter = new Filter(is_to_all);
+        return this;
+    }
+
+    public List<String> getTouser() {
+        return touser;
+    }
+
+    public MassMessage setTouser(List<String> touser) {
+        this.touser = touser;
+        return this;
+    }
+
+    public MassMessage setTouser(String... touser) {
+        this.touser = Arrays.asList(touser);
         return this;
     }
 
@@ -101,13 +122,15 @@ public class MassTagMessage implements Serializable {
         return mpnews;
     }
 
-    public MassTagMessage setMpnews(MpNews mpnews) {
+    public MassMessage setMpnews(MpNews mpnews) {
         this.mpnews = mpnews;
+        this.msgtype = "mpnews";
         return this;
     }
 
-    public MassTagMessage setMpnews(String media_id) {
+    public MassMessage setMpnews(String media_id) {
         this.mpnews = new MpNews(media_id);
+        this.msgtype = "mpnews";
         return this;
     }
 
@@ -115,13 +138,15 @@ public class MassTagMessage implements Serializable {
         return text;
     }
 
-    public MassTagMessage setText(Text text) {
+    public MassMessage setText(Text text) {
         this.text = text;
+        this.msgtype = "text";
         return this;
     }
 
-    public MassTagMessage setText(String content) {
+    public MassMessage setText(String content) {
         this.text = new Text(content);
+        this.msgtype = "text";
         return this;
     }
 
@@ -129,13 +154,15 @@ public class MassTagMessage implements Serializable {
         return voice;
     }
 
-    public MassTagMessage setVoice(Voice voice) {
+    public MassMessage setVoice(Voice voice) {
         this.voice = voice;
+        this.msgtype = "voice";
         return this;
     }
 
-    public MassTagMessage setVoice(String media_id) {
+    public MassMessage setVoice(String media_id) {
         this.voice = new Voice(media_id);
+        this.msgtype = "voice";
         return this;
     }
 
@@ -143,23 +170,27 @@ public class MassTagMessage implements Serializable {
         return images;
     }
 
-    public MassTagMessage setImages(Images images) {
+    public MassMessage setImages(Images images) {
         this.images = images;
+        this.msgtype = "image";
         return this;
     }
 
-    public MassTagMessage setImages(List<String> media_ids) {
+    public MassMessage setImages(List<String> media_ids) {
         this.images = new Images(media_ids);
+        this.msgtype = "image";
         return this;
     }
 
-    public MassTagMessage setImages(List<String> media_ids, String recommend) {
+    public MassMessage setImages(List<String> media_ids, String recommend) {
         this.images = new Images(media_ids, recommend);
+        this.msgtype = "image";
         return this;
     }
 
-    public MassTagMessage setImages(List<String> media_ids, String recommend, Integer need_open_comment, Integer only_fans_can_comment) {
+    public MassMessage setImages(List<String> media_ids, String recommend, Integer need_open_comment, Integer only_fans_can_comment) {
         this.images = new Images(media_ids, recommend, need_open_comment, only_fans_can_comment);
+        this.msgtype = "image";
         return this;
     }
 
@@ -167,13 +198,15 @@ public class MassTagMessage implements Serializable {
         return mpvideo;
     }
 
-    public MassTagMessage setMpvideo(MpVideo mpvideo) {
+    public MassMessage setMpvideo(MpVideo mpvideo) {
         this.mpvideo = mpvideo;
+        this.msgtype = "mpvideo";
         return this;
     }
 
-    public MassTagMessage setMpvideo(String media_id) {
+    public MassMessage setMpvideo(String media_id) {
         this.mpvideo = new MpVideo(media_id);
+        this.msgtype = "mpvideo";
         return this;
     }
 
@@ -181,13 +214,15 @@ public class MassTagMessage implements Serializable {
         return wxcard;
     }
 
-    public MassTagMessage setWxcard(WxCard wxcard) {
+    public MassMessage setWxcard(WxCard wxcard) {
         this.wxcard = wxcard;
+        this.msgtype = "wxcard";
         return this;
     }
 
-    public MassTagMessage setWxcard(String card_id) {
+    public MassMessage setWxcard(String card_id) {
         this.wxcard = new WxCard(card_id);
+        this.msgtype = "wxcard";
         return this;
     }
 
@@ -195,7 +230,7 @@ public class MassTagMessage implements Serializable {
         return msgtype;
     }
 
-    public MassTagMessage setMsgtype(String msgtype) {
+    public MassMessage setMsgtype(String msgtype) {
         this.msgtype = msgtype;
         return this;
     }
@@ -204,8 +239,17 @@ public class MassTagMessage implements Serializable {
         return send_ignore_reprint;
     }
 
-    public MassTagMessage setSend_ignore_reprint(Integer send_ignore_reprint) {
+    public MassMessage setSend_ignore_reprint(Integer send_ignore_reprint) {
         this.send_ignore_reprint = send_ignore_reprint;
+        return this;
+    }
+
+    public String getClientmsgid() {
+        return clientmsgid;
+    }
+
+    public MassMessage setClientmsgid(String clientmsgid) {
+        this.clientmsgid = clientmsgid;
         return this;
     }
 
@@ -215,44 +259,41 @@ public class MassTagMessage implements Serializable {
      * @return 群发消息的对象实例
      * @since 0.1.9
      */
-    public static MassTagMessage create() {
-        return new MassTagMessage();
-    }
-
-    /**
-     * 创建一个群发消息的对象实例
-     *
-     * @param msgtype 群发的消息类型
-     * @return 群发消息的对象实例
-     * @since 0.1.9
-     */
-    public static MassTagMessage create(String msgtype) {
-        return new MassTagMessage(msgtype);
+    public static MassMessage create() {
+        return new MassMessage();
     }
 
     /**
      * 创建一个群发消息的对象实例
      *
      * @param is_to_all 用于设定是否向全部用户发送，值为true或false，选择true该消息群发给所有用户，选择false可根据tag_id发送给指定群组的用户
-     * @param tag_id    群发到的标签的tag_id，若is_to_all值为true，可不填写tag_id
-     * @param msgtype   群发消息的对象实例
      * @return 群发消息的对象实例
      * @since 0.1.9
      */
-    public static MassTagMessage create(boolean is_to_all, Integer tag_id, String msgtype) {
-        return new MassTagMessage(is_to_all, tag_id, msgtype);
+    public static MassMessage create(boolean is_to_all) {
+        return new MassMessage(is_to_all);
     }
 
     /**
      * 创建一个群发消息的对象实例，is_to_all 默认为false
      *
-     * @param tag_id  群发到的标签的tag_id
-     * @param msgtype 群发消息的对象实例
+     * @param tag_id 群发到的标签的tag_id
      * @return 群发消息的对象实例
      * @since 0.1.9
      */
-    public static MassTagMessage create(Integer tag_id, String msgtype) {
-        return new MassTagMessage(tag_id, msgtype);
+    public static MassMessage create(Integer tag_id) {
+        return new MassMessage(tag_id);
+    }
+
+    /**
+     * 创建一个群发消息的对象实例
+     *
+     * @param touser 图文消息的接收者，一串OpenID列表，OpenID最少2个，最多10000个
+     * @return 群发消息的对象实例
+     * @since 0.1.9
+     */
+    public static MassMessage create(List<String> touser) {
+        return new MassMessage(touser);
     }
 
     /**
@@ -286,9 +327,8 @@ public class MassTagMessage implements Serializable {
             this.tag_id = tag_id;
         }
 
-        public Filter(boolean is_to_all, Integer tag_id) {
+        public Filter(boolean is_to_all) {
             this.is_to_all = is_to_all;
-            this.tag_id = tag_id;
         }
 
         public boolean isIs_to_all() {
@@ -319,6 +359,9 @@ public class MassTagMessage implements Serializable {
          */
         private String media_id;
 
+        public MpNews() {
+        }
+
         public MpNews(String media_id) {
             this.media_id = media_id;
         }
@@ -342,6 +385,9 @@ public class MassTagMessage implements Serializable {
          */
         private String content;
 
+        public Text() {
+        }
+
         public Text(String content) {
             this.content = content;
         }
@@ -364,6 +410,9 @@ public class MassTagMessage implements Serializable {
          * 语音/音频素材ID
          */
         private String media_id;
+
+        public Voice() {
+        }
 
         public Voice(String media_id) {
             this.media_id = media_id;
@@ -399,6 +448,9 @@ public class MassTagMessage implements Serializable {
          * Uint32 是否粉丝才可评论，0所有人可评论，1粉丝才可评论
          */
         private Integer only_fans_can_comment;
+
+        public Images() {
+        }
 
         public Images(List<String> media_ids) {
             this.media_ids = media_ids;
@@ -464,6 +516,9 @@ public class MassTagMessage implements Serializable {
          */
         private String media_id;
 
+        public MpVideo() {
+        }
+
         public MpVideo(String media_id) {
             this.media_id = media_id;
         }
@@ -486,6 +541,9 @@ public class MassTagMessage implements Serializable {
          * 卡券ID
          */
         private String card_id;
+
+        public WxCard() {
+        }
 
         public WxCard(String card_id) {
             this.card_id = card_id;
