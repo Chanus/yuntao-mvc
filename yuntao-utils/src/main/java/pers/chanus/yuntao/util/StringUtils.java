@@ -7,7 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -247,78 +246,6 @@ public class StringUtils {
      */
     public static boolean isNumber(String s) {
         return isNotBlank(s) && Pattern.compile("^([+|-]?0\\.\\d+)|^([+|-]?[1-9]\\d*(\\.\\d+)?)$").matcher(s).matches();
-    }
-
-    /**
-     * 将Map转换成指定字符连接和分割的字符串
-     *
-     * @param map       Map集合数据
-     * @param link      key和value之间的连接符，如"="
-     * @param separator 每组key和value之间的分割符，如"&"
-     * @return {@code link}与{@code separator}连接和分割的字符串
-     * @see CollectionUtils#join(Map, String, String)
-     * @since 0.0.1
-     */
-    @Deprecated
-    public static String map2String(Map<String, ?> map, String link, String separator) {
-        if (CollectionUtils.isEmpty(map))
-            return null;
-
-        StringBuilder string = new StringBuilder();
-        for (String key : map.keySet()) {
-            string.append(key).append(link).append(map.get(key).toString()).append(separator);
-        }
-
-        return string.substring(0, string.length() - separator.length());
-    }
-
-    /**
-     * 将Map转换成字符串
-     *
-     * @param map Map集合数据
-     * @return key1=value1&key2=value2...格式字符串
-     * @see CollectionUtils#join(Map)
-     * @since 0.0.1
-     */
-    @Deprecated
-    public static String map2String(Map<String, ?> map) {
-        return map2String(map, "=", "&");
-    }
-
-    /**
-     * 将数组转换成以{@code separator}分割的字符串
-     *
-     * @param array     数据数组
-     * @param separator 分割符
-     * @return 以{@code separator}分割的字符串
-     * @see CollectionUtils#join(Object[], String)
-     * @since 0.0.1
-     */
-    @Deprecated
-    public static String array2String(Object[] array, String separator) {
-        if (CollectionUtils.isEmpty(array) || isBlank(separator))
-            return null;
-
-        StringBuilder string = new StringBuilder();
-        for (Object object : array) {
-            if (object != null)
-                string.append(object.toString()).append(separator);
-        }
-
-        return string.substring(0, string.length() - separator.length());
-    }
-
-    /**
-     * 将数组转换成以逗号分割的字符串
-     *
-     * @param array 数据数组
-     * @return value1, value2...格式字符串
-     * @see CollectionUtils#join(Object[])
-     * @since 0.0.1
-     */
-    @Deprecated
-    public static String array2String(Object[] array) {
-        return array2String(array, ",");
     }
 
     /**
