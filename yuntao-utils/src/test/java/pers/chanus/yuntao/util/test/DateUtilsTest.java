@@ -200,4 +200,37 @@ public class DateUtilsTest {
         String originalDateTime = "Fri Apr 24 22:50:23 CST 2020";
         System.out.println(DateUtils.parseOriginalDateTime(originalDateTime));
     }
+
+    @Test
+    public void dayOfWeekTest() {
+        System.out.println(DateUtils.dayOfWeek("2020-05-25"));// 周一
+        System.out.println(DateUtils.dayOfWeek("2020-05-26"));// 周二
+        System.out.println(DateUtils.dayOfWeek("2020-05-27"));// 周三
+        System.out.println(DateUtils.dayOfWeek("2020-05-28"));// 周四
+        System.out.println(DateUtils.dayOfWeek("2020-05-29"));// 周五
+        System.out.println(DateUtils.dayOfWeek("2020-05-30"));// 周六
+        System.out.println(DateUtils.dayOfWeek("2020-05-31 15:47::30"));// 周日
+
+        System.out.println(DateUtils.dayOfWeek());
+    }
+
+    @Test
+    public void dayOfCycleTest() {
+        System.out.println(DateUtils.dayOfCycle("2020-05-17", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-05-25", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-05-26", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-05-27", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-05-28", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-05-29", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-05-30", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-05-31", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-06-01", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-06-30", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2020-07-31", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2021-02-28", 7, "2020-05-25"));
+        System.out.println(DateUtils.dayOfCycle("2021-05-31", 7, "2020-05-25"));
+
+        System.out.println(DateUtils.dayOfCycle(7, DateUtils.parseDate("2020-05-25")));
+        System.out.println(DateUtils.dayOfCycle(7, "2020-05-25"));
+    }
 }

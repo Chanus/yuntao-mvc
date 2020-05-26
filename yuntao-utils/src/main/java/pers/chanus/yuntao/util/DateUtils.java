@@ -540,4 +540,92 @@ public class DateUtils {
 
         return new Date(sourceDate.getTime() - sourceTimeZone.getRawOffset() + targetTimeZone.getRawOffset());
     }
+
+    /**
+     * 获取指定日期是星期几，1表示周一，2表示周二，3表示周三，4表示周四，5表示周五，6表示周六，7表示周日
+     *
+     * @param date 日期时间
+     * @return {@code date}是星期几
+     * @since 0.1.9
+     */
+    public static int dayOfWeek(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+
+        return dayOfWeek == 0 ? 7 : dayOfWeek;
+    }
+
+    /**
+     * 获取指定日期是星期几，1表示周一，2表示周二，3表示周三，4表示周四，5表示周五，6表示周六，7表示周日
+     *
+     * @param dateStr 日期时间字符串
+     * @return {@code dateStr}是星期几
+     * @since 0.1.9
+     */
+    public static int dayOfWeek(String dateStr) {
+        return dayOfWeek(parseDate(dateStr));
+    }
+
+    /**
+     * 获取今天是星期几，1表示周一，2表示周二，3表示周三，4表示周四，5表示周五，6表示周六，7表示周日
+     *
+     * @return 今天是星期几
+     * @since 0.1.9
+     */
+    public static int dayOfWeek() {
+        return dayOfWeek(new Date());
+    }
+
+    /**
+     * 获取指定日期是指定时间周期内的第几天，1表示第一天，0表示指定时间小于周期开始时间
+     *
+     * @param date      日期时间
+     * @param cycle     时间周期的天数
+     * @param beginDate 时间周期的开始时间
+     * @return 指定日期是指定时间周期内的第几天，如果指定时间小于周期开始时间，则返回0
+     * @since 0.1.9
+     */
+    public static int dayOfCycle(Date date, int cycle, Date beginDate) {
+        if (DateUtils.compare(date, beginDate) == -1)
+            return 0;
+        return getDiffTimeInDays(beginDate, date) % cycle + 1;
+    }
+
+    /**
+     * 获取指定日期是指定时间周期内的第几天，1表示第一天，0表示指定时间小于周期开始时间
+     *
+     * @param dateStr      日期时间字符串
+     * @param cycle        时间周期的天数
+     * @param beginDateStr 时间周期的开始时间字符串
+     * @return 指定日期是指定时间周期内的第几天，如果指定时间小于周期开始时间，则返回0
+     * @since 0.1.9
+     */
+    public static int dayOfCycle(String dateStr, int cycle, String beginDateStr) {
+        return dayOfCycle(DateUtils.parseDate(dateStr), cycle, DateUtils.parseDate(beginDateStr));
+    }
+
+    /**
+     * 获取今天是指定时间周期内的第几天，1表示第一天，0表示今天小于周期开始时间
+     *
+     * @param cycle     时间周期的天数
+     * @param beginDate 时间周期的开始时间
+     * @return 今天是指定时间周期内的第几天，如果今天小于周期开始时间，则返回0
+     * @since 0.1.9
+     */
+    public static int dayOfCycle(int cycle, Date beginDate) {
+        return dayOfCycle(new Date(), cycle, beginDate);
+    }
+
+    /**
+     * 获取今天是指定时间周期内的第几天，1表示第一天，0表示今天小于周期开始时间
+     *
+     * @param cycle        时间周期的天数
+     * @param beginDateStr 时间周期的开始时间字符串
+     * @return 今天是指定时间周期内的第几天，如果今天小于周期开始时间，则返回0
+     * @since 0.1.9
+     */
+    public static int dayOfCycle(int cycle, String beginDateStr) {
+        return dayOfCycle(new Date(), cycle, DateUtils.parseDate(beginDateStr));
+    }
 }
