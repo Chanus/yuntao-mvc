@@ -513,6 +513,20 @@ public class DateUtils {
     }
 
     /**
+     * 比较指定时间与当前时间的大小<br>
+     * 若sourceDate > 当前时间，则返回 1<br>
+     * 若sourceDate = 当前时间，则返回 0<br>
+     * 若sourceDate < 当前时间，则返回 -1
+     *
+     * @param sourceDate 需要比较的时间
+     * @return 比较结果
+     * @since 0.1.9
+     */
+    public static int compareNow(Date sourceDate) {
+        return compare(sourceDate, new Date());
+    }
+
+    /**
      * 判断某个时间是否在某一时间段内
      *
      * @param date  时间

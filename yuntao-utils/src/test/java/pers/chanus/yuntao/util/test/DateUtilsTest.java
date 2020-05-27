@@ -177,6 +177,10 @@ public class DateUtilsTest {
         System.out.println(DateUtils.compare("2019-06-13 12:47:33", "2019-06-13 22:47:33", "yyyy-MM-dd"));
         System.out.println(DateUtils.compare("2019-06-13 23:47:33", "2019-06-13 22:47:33", "yyyy-MM-dd"));
         System.out.println(DateUtils.compare("2019-06-13 22:47:33", "2019-06-13 22:47:33", "yyyy-MM-dd"));
+
+        System.out.println(DateUtils.compareNow(DateUtils.parseDateTime("2020-05-27 12:47:33")));
+        System.out.println(DateUtils.compareNow(new Date()));
+        System.out.println(DateUtils.compareNow(DateUtils.parseDateTime("2020-05-27 22:47:33")));
     }
 
     @Test
