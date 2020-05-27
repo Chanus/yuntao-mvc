@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import pers.chanus.yuntao.util.DateUtils;
 import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
-import pers.chanus.yuntao.weixin.mp.api.bean.TemplateData;
+import pers.chanus.yuntao.weixin.mp.api.bean.TemplateMessage;
 
 /**
  * TemplateMsgApi 测试
@@ -64,7 +64,7 @@ public class TemplateMsgApiTest {
     @Test
     public void sendTest() {
         AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        String json = TemplateData.create().setTouser("o-mAK55lxMjG-3Kd5wRtFtS__4rA")
+        String json = TemplateMessage.create().setTouser("o-mAK55lxMjG-3Kd5wRtFtS__4rA")
                 .setTemplate_id("6SihCiqY8XBgK-OUto2MHnA4c8ump7kT55rd-PHyEzo")
                 .setUrl("http://t.liulianhuan.com/teacher/register?schoolCode=350524001")
                 .setData("first", "老师注册")

@@ -1,6 +1,6 @@
 /*
  * Copyright (c), 2020-persent, Chanus and/or its affiliates. All rights reserved.
- * FileName: TemplateData
+ * FileName: TemplateMessage
  * Author:   Chanus
  * Date:     2020-05-18 13:14:22
  * Description: 模板消息数据对象
@@ -21,7 +21,7 @@ import java.util.HashMap;
  * @date 2020-05-18 13:14:22
  * @since 0.1.9
  */
-public class TemplateData implements Serializable {
+public class TemplateMessage implements Serializable {
     private static final long serialVersionUID = -468042346786904801L;
     /**
      * 默认模板内容字体颜色
@@ -40,6 +40,14 @@ public class TemplateData implements Serializable {
      */
     private String url;
     /**
+     * 订阅场景值，重定向后会带上scene参数，开发者可以填0-10000的整形值，用来标识订阅场景值（推送一次性订阅消息时使用）
+     */
+    private String scene;
+    /**
+     * 消息标题，15字以内（推送一次性订阅消息时使用）
+     */
+    private String title;
+    /**
      * 模板数据
      */
     private final TemplateDataItem data;
@@ -48,11 +56,11 @@ public class TemplateData implements Serializable {
      */
     private MiniProgramData miniprogram;
 
-    public static TemplateData create() {
-        return new TemplateData();
+    public static TemplateMessage create() {
+        return new TemplateMessage();
     }
 
-    private TemplateData() {
+    private TemplateMessage() {
         this.data = new TemplateDataItem();
     }
 
@@ -60,7 +68,7 @@ public class TemplateData implements Serializable {
         return touser;
     }
 
-    public TemplateData setTouser(String touser) {
+    public TemplateMessage setTouser(String touser) {
         this.touser = touser;
         return this;
     }
@@ -69,7 +77,7 @@ public class TemplateData implements Serializable {
         return template_id;
     }
 
-    public TemplateData setTemplate_id(String template_id) {
+    public TemplateMessage setTemplate_id(String template_id) {
         this.template_id = template_id;
         return this;
     }
@@ -78,8 +86,26 @@ public class TemplateData implements Serializable {
         return url;
     }
 
-    public TemplateData setUrl(String url) {
+    public TemplateMessage setUrl(String url) {
         this.url = url;
+        return this;
+    }
+
+    public String getScene() {
+        return scene;
+    }
+
+    public TemplateMessage setScene(String scene) {
+        this.scene = scene;
+        return this;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public TemplateMessage setTitle(String title) {
+        this.title = title;
         return this;
     }
 
@@ -87,13 +113,23 @@ public class TemplateData implements Serializable {
         return data;
     }
 
-    public TemplateData setData(String key, String value, String color) {
+    public TemplateMessage setData(String key, String value, String color) {
         data.put(key, new DataItem(value, color));
         return this;
     }
 
-    public TemplateData setData(String key, String value) {
+    public TemplateMessage setData(String key, String value) {
         data.put(key, new DataItem(value));
+        return this;
+    }
+
+    public TemplateMessage setSubscribeData(String value, String color) {
+        data.put("content", new DataItem(value, color));
+        return this;
+    }
+
+    public TemplateMessage setSubscribeData(String value) {
+        data.put("content", new DataItem(value));
         return this;
     }
 
@@ -101,7 +137,7 @@ public class TemplateData implements Serializable {
         return miniprogram;
     }
 
-    public TemplateData setMiniprogram(String appid, String pagepath) {
+    public TemplateMessage setMiniprogram(String appid, String pagepath) {
         this.miniprogram = new MiniProgramData(appid, pagepath);
         return this;
     }
@@ -133,7 +169,13 @@ public class TemplateData implements Serializable {
      * 模板数据内容
      */
     public static class DataItem {
+        /**
+         * value为消息内容文本
+         */
         private Object value;
+        /**
+         * 消息内容的字体颜色
+         */
         private String color;
 
         public DataItem() {
