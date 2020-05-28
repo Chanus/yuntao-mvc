@@ -683,6 +683,19 @@ public class LocalDateTimeUtils {
     }
 
     /**
+     * 根据{@code field}获取两个时间相间隔的数值，如相间隔的小时数，分钟数，秒数，毫秒数等，{@code start}和{@code end}不区分先后顺序
+     *
+     * @param start 开始时间
+     * @param end   结束时间
+     * @param field 操作区域，时、分、秒、毫秒等
+     * @return {@code start}与{@code end}根据{@code field}相间的数值
+     * @since 0.1.9
+     */
+    public static long interval(LocalTime start, LocalTime end, ChronoUnit field) {
+        return Math.abs(field.between(start, end));
+    }
+
+    /**
      * 比较两个日期时间的大小
      *
      * @param source 源日期时间

@@ -271,6 +271,13 @@ public class LocalDateTimeUtilsTest {
         System.out.println("相差月数：" + LocalDateTimeUtils.interval(start2, end2, ChronoUnit.MONTHS));
         System.out.println("相差天数：" + LocalDateTimeUtils.interval(start2, end2, ChronoUnit.DAYS));
         System.out.println("相差星期数：" + LocalDateTimeUtils.interval(start2, end2, ChronoUnit.WEEKS));
+
+        LocalTime start3 = LocalDateTimeUtils.parseTimeMillis("20:11:33.123");
+        LocalTime end3 = LocalDateTimeUtils.parseTimeMillis("22:12:33.123");
+        System.out.println("相差小时数：" + LocalDateTimeUtils.interval(start3, end3, ChronoUnit.HOURS));
+        System.out.println("相差分钟数：" + LocalDateTimeUtils.interval(start3, end3, ChronoUnit.MINUTES));
+        System.out.println("相差秒钟数：" + LocalDateTimeUtils.interval(start3, end3, ChronoUnit.SECONDS));
+        System.out.println("相差毫秒数：" + LocalDateTimeUtils.interval(start3, end3, ChronoUnit.MILLIS));
     }
 
     @Test
