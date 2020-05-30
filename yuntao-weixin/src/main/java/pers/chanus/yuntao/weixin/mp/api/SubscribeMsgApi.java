@@ -18,7 +18,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * 一次性订阅消息 API
+ * 一次性订阅消息 API<br>
+ * 详情请见：https://developers.weixin.qq.com/doc/offiaccount/Message_Management/One-time_subscription_info.html
  *
  * @author Chanus
  * @date 2020-05-27 12:56:18
