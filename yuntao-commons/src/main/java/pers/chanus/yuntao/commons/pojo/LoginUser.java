@@ -47,11 +47,6 @@ public class LoginUser implements Serializable {
     private String masterRoleId;
 
     /**
-     * 用户类型
-     */
-    private String userType;
-
-    /**
      * 用户登录IP
      */
     private String loginIp;
@@ -150,15 +145,6 @@ public class LoginUser implements Serializable {
         return this;
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public LoginUser setUserType(String userType) {
-        this.userType = userType == null ? null : userType.trim();
-        return this;
-    }
-
     public String getLoginIp() {
         return loginIp;
     }
@@ -212,7 +198,6 @@ public class LoginUser implements Serializable {
                 ", roleId=" + roleId +
                 ", masterNo=" + masterNo +
                 ", masterRoleId=" + masterRoleId +
-                ", userType=" + userType +
                 ", loginIp=" + loginIp +
                 ", headImage=" + headImage +
                 ", object=" + object +

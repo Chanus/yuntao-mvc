@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 21/05/2020 00:27:05
+ Date: 01/06/2020 00:21:25
 */
 
 SET NAMES utf8mb4;
@@ -3850,7 +3850,7 @@ COMMIT;
 -- View structure for view_login_user
 -- ----------------------------
 DROP VIEW IF EXISTS `view_login_user`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_login_user` AS select `sys_operator`.`operator_no` AS `login_no`,`sys_operator`.`operator_name` AS `login_name`,`sys_operator`.`operator_password` AS `password`,`sys_operator`.`operator_role_id` AS `role_id`,`sys_operator`.`master_no` AS `master_no`,`sys_operator`.`master_role_id` AS `master_role_id`,`sys_operator`.`valid_status` AS `valid_status`,if((`sys_operator`.`operator_role_id` = '1'),'1','0') AS `user_type`,`sys_operator`.`head_image` AS `head_image` from `sys_operator`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_login_user` AS select `sys_operator`.`operator_no` AS `login_no`,`sys_operator`.`operator_name` AS `login_name`,`sys_operator`.`operator_password` AS `password`,`sys_operator`.`operator_role_id` AS `role_id`,`sys_operator`.`master_no` AS `master_no`,`sys_operator`.`master_role_id` AS `master_role_id`,`sys_operator`.`valid_status` AS `valid_status`,`sys_operator`.`head_image` AS `head_image` from `sys_operator`;
 
 -- ----------------------------
 -- View structure for view_user

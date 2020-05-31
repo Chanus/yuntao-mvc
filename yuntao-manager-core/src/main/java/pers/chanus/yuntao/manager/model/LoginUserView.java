@@ -19,8 +19,6 @@ public class LoginUserView implements Serializable {
 
     private String validStatus;
 
-    private String userType;
-
     private String headImage;
 
     public String getLoginNo() {
@@ -79,14 +77,6 @@ public class LoginUserView implements Serializable {
         this.validStatus = validStatus == null ? null : validStatus.trim();
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType == null ? null : userType.trim();
-    }
-
     public String getHeadImage() {
         return headImage;
     }
@@ -105,7 +95,6 @@ public class LoginUserView implements Serializable {
                 ", masterNo=" + masterNo +
                 ", masterRoleId=" + masterRoleId +
                 ", validStatus=" + validStatus +
-                ", userType=" + userType +
                 ", headImage=" + headImage +
                 "]";
     }

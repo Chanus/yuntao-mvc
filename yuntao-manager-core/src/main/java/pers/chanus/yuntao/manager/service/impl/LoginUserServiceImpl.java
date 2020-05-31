@@ -90,8 +90,7 @@ public class LoginUserServiceImpl implements LoginUserService {
                 .setLoginName(loginUserView.getLoginName()).setRoleId(loginUserView.getRoleId())
                 .setMasterNo(ObjectUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
                 .setMasterRoleId(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleId(), loginUserView.getRoleId()))
-                .setUserType(loginUserView.getUserType()).setLoginIp(loginIp)
-                .setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
+                .setLoginIp(loginIp).setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
                 .setUrls(moduleMapper.listUrl(loginUserView.getRoleId(), loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
 
@@ -150,8 +149,7 @@ public class LoginUserServiceImpl implements LoginUserService {
                 .setLoginName(loginUserView.getLoginName()).setRoleId(roleId)
                 .setMasterNo(ObjectUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
                 .setMasterRoleId(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleId(), roleId))
-                .setUserType(loginUserView.getUserType()).setLoginIp(loginIp)
-                .setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
+                .setLoginIp(loginIp).setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
                 .setUrls(moduleMapper.listUrl(roleId, loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
 

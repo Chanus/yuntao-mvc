@@ -9,16 +9,15 @@
     <result column="master_no" jdbcType="VARCHAR" property="masterNo" />
     <result column="master_role_id" jdbcType="VARCHAR" property="masterRoleId" />
     <result column="valid_status" jdbcType="CHAR" property="validStatus" />
-    <result column="user_type" jdbcType="VARCHAR" property="userType" />
     <result column="head_image" jdbcType="VARCHAR" property="headImage" />
   </resultMap>
   
   <select id="getUser" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select login_no, login_name, role_id, master_no, master_role_id, valid_status, user_type, head_image from view_login_user where login_no = #{loginNo,jdbcType=VARCHAR}
+    select login_no, login_name, role_id, master_no, master_role_id, valid_status, head_image from view_login_user where login_no = #{loginNo,jdbcType=VARCHAR}
   </select>
   
   <select id="login" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select login_no, login_name, password, role_id, master_no, master_role_id, valid_status, user_type, head_image from view_login_user where binary login_no = #{loginNo,jdbcType=VARCHAR}
+    select login_no, login_name, password, role_id, master_no, master_role_id, valid_status, head_image from view_login_user where binary login_no = #{loginNo,jdbcType=VARCHAR}
   </select>
   
   <select id="getUserName" parameterType="java.lang.String" resultType="java.lang.String">
