@@ -36,7 +36,7 @@
         <div class="layui-form-item">
           <label class="layui-form-label">可浏览角色</label>
           <div class="layui-input-block">
-            <input type="text" name="modifiedRoleId" value="${parameter.modifiedRoleId }" placeholder="请输入可浏览该参数的角色，多个以“,”分隔" class="layui-input" autocomplete="off">
+            <input type="text" name="modifiedRoleCode" value="${parameter.modifiedRoleCode }" placeholder="请输入可浏览该参数的角色，多个以“,”分隔" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item" pane>

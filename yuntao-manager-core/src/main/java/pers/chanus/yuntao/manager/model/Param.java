@@ -16,7 +16,7 @@ public class Param implements Serializable {
 
     private String validStatus;
 
-    private String modifiedRoleId;
+    private String modifiedRoleCode;
 
     private Integer priority;
 
@@ -64,12 +64,12 @@ public class Param implements Serializable {
         this.validStatus = validStatus == null ? null : validStatus.trim();
     }
 
-    public String getModifiedRoleId() {
-        return modifiedRoleId;
+    public String getModifiedRoleCode() {
+        return modifiedRoleCode;
     }
 
-    public void setModifiedRoleId(String modifiedRoleId) {
-        this.modifiedRoleId = modifiedRoleId == null ? null : modifiedRoleId.trim();
+    public void setModifiedRoleCode(String modifiedRoleCode) {
+        this.modifiedRoleCode = modifiedRoleCode == null ? null : modifiedRoleCode.trim();
     }
 
     public Integer getPriority() {
@@ -98,6 +98,6 @@ public class Param implements Serializable {
 
     @Override
     public String toString() {
-        return "Param [id=" + id + ", paramCode=" + paramCode + ", paramData=" + paramData + ", remark=" + remark + ", validStatus=" + validStatus + ", modifiedRoleId=" + modifiedRoleId + ", priority=" + priority + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "Param [id=" + id + ", paramCode=" + paramCode + ", paramData=" + paramData + ", remark=" + remark + ", validStatus=" + validStatus + ", modifiedRoleCode=" + modifiedRoleCode + ", priority=" + priority + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
     }
 }
