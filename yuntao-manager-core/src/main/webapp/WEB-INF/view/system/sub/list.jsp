@@ -10,7 +10,7 @@
       <!-- 搜索条件 -->
       <div class="layui-form layui-form-pane">
         <div class="layui-form-item">
-          <c:if test="${sessionScope.loginUser.roleId eq '0' }">
+          <c:if test="${sessionScope.loginUser.roleCode eq '0' }">
             <div class="layui-inline">
               <label class="layui-form-label">主账号</label>
               <div class="layui-input-inline">
@@ -53,7 +53,7 @@
         <a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
       {{# } }}
       {{# if(${powers.containsKey('CONFIG') }){ }}
-        <a href="configure.do?subNo={{ d.operatorNo }}&masterRoleId={{ d.masterRoleId }}" class="layui-btn layui-btn-xs layui-bg-blue" lay-event="configure">配置权限</a>
+        <a href="configure.do?subNo={{ d.operatorNo }}&masterRoleCode={{ d.masterRoleCode }}" class="layui-btn layui-btn-xs layui-bg-blue" lay-event="configure">配置权限</a>
       {{# } }}
       {{# if(${powers.containsKey('PASSWORD') }){ }}
         <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="password">修改密码</a>

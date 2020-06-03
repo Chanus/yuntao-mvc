@@ -63,7 +63,7 @@ public class SubController extends BaseController {
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
     public PageBean list() {
-        return operatorService.listSubPagination(getParams().putNext("loginNo", LoginUser.getLoginUser().getLoginNo()).putNext("loginRoleId", LoginUser.getLoginUser().getRoleId()));
+        return operatorService.listSubPagination(getParams().putNext("loginNo", LoginUser.getLoginUser().getLoginNo()).putNext("loginRoleCode", LoginUser.getLoginUser().getRoleCode()));
     }
 
     /**
@@ -89,8 +89,8 @@ public class SubController extends BaseController {
     @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(Operator operator) {
-        operator.setOperatorRoleId(ConfigConsts.ROLE_SUB_1);
-        if (!ConfigConsts.ROLE_ADMIN_0.equals(LoginUser.getLoginUser().getRoleId()))
+        operator.setOperatorRoleCode(ConfigConsts.ROLE_SUB_1);
+        if (!ConfigConsts.ROLE_ADMIN_0.equals(LoginUser.getLoginUser().getRoleCode()))
             operator.setMasterNo(LoginUser.getLoginUser().getLoginNo());
 
         return operatorService.insert(operator);
@@ -166,15 +166,15 @@ public class SubController extends BaseController {
     /**
      * 跳转到配置子账号权限页面
      *
-     * @param subNo        子账号
-     * @param masterRoleId 主账号角色
+     * @param subNo          子账号
+     * @param masterRoleCode 主账号角色
      * @param model
      * @return
      */
     @GetMapping(value = "configure.do")
-    public String configure(String subNo, String masterRoleId, Model model) {
+    public String configure(String subNo, String masterRoleCode, Model model) {
         // 获取主账号的权限菜单
-        List<Module> menus = moduleService.listSubModulePower(subNo, masterRoleId);
+        List<Module> menus = moduleService.listSubModulePower(subNo, masterRoleCode);
         model.addAttribute("menus", menus);
         model.addAttribute("subNo", subNo);
         return "system/sub/configure";

@@ -28,7 +28,7 @@
             <input type="text" name="operatorName" required lay-verify="required" value="${operator.operatorName }" placeholder="请输入子账号名称" class="layui-input" autocomplete="off">
           </div>
         </div>
-        <c:if test="${cmd eq 'add' and sessionScope.loginUser.roleId eq '0' }">
+        <c:if test="${cmd eq 'add' and sessionScope.loginUser.roleCode eq '0' }">
           <div class="layui-form-item">
             <label class="layui-form-label">主账号<span class="red">*</span></label>
             <div class="layui-input-block">
