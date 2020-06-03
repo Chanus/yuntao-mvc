@@ -15,7 +15,7 @@
             <c:choose>
               <c:when test="${cmd eq 'add' }">
                 <input type="text" name="operatorNo" required lay-verify="letternumline" lay-data-length="3-16" lay-null-msg="请输入操作员账号" lay-error-msg="操作员账号由3-16位字母数字下划线组成" placeholder="请输入操作员账号" class="layui-input" autocomplete="off">
-                <input type="hidden" name="operatorRoleId" value="${operatorRoleId }" class="layui-input" autocomplete="off">
+                <input type="hidden" name="operatorRoleCode" value="${operatorRoleCode }" class="layui-input" autocomplete="off">
               </c:when>
               <c:otherwise>
                 <input type="text" name="operatorNo" required readonly lay-verify="required" value="${operator.operatorNo }" placeholder="请输入操作员账号" class="layui-input" autocomplete="off">
@@ -86,6 +86,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/operator.js?v=0.0.1.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/operator.js?v=0.1.9.1"></script>
   </body>
 </html>

@@ -13,9 +13,11 @@ import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.AESKeyConsts;
 import pers.chanus.yuntao.manager.mapper.LoginUserViewMapper;
 import pers.chanus.yuntao.manager.mapper.OperatorMapper;
+import pers.chanus.yuntao.manager.mapper.RoleMapper;
 import pers.chanus.yuntao.manager.mapper.RoleModulePowerMapper;
 import pers.chanus.yuntao.manager.model.LoginUserView;
 import pers.chanus.yuntao.manager.model.Operator;
+import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.model.RoleModulePower;
 import pers.chanus.yuntao.manager.service.OperatorService;
 import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
@@ -38,6 +40,8 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
     @Autowired
     private LoginUserViewMapper loginUserViewMapper;
     @Autowired
+    private RoleMapper roleMapper;
+    @Autowired
     private RoleModulePowerMapper roleModulePowerMapper;
 
     @Autowired
@@ -53,21 +57,26 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
         if (StringUtils.isNotBlank(t.getOperatorPassword()))
             t.setOperatorPassword(SHAUtils.sha256(t.getOperatorPassword() + t.getOperatorNo()));
 
-        // 添加子账号时
-        if (ConfigConsts.ROLE_SUB_1.equals(t.getOperatorRoleId())) {
+        Role role;
+        if (ConfigConsts.ROLE_SUB_1.equals(t.getOperatorRoleCode())) {// 添加子账号时
             if (StringUtils.isBlank(t.getMasterNo()))
                 return Message.fail("主账号不能为空");
 
             LoginUserView user = loginUserViewMapper.getUser(t.getMasterNo());
             if (user == null)
                 return Message.fail("主账号不存在");
-            if (ConfigConsts.ROLE_SUB_1.equals(user.getRoleId()))
+            if (ConfigConsts.ROLE_SUB_1.equals(user.getRoleCode()))
                 return Message.fail("子账号不能创建子账号");
 
             t.setMasterNo(user.getLoginNo());
-            t.setMasterRoleId(user.getRoleId());
+            t.setMasterRoleCode(user.getRoleCode());
+
+            role = roleMapper.getByRoleCode(user.getRoleCode());
+        } else {
+            role = roleMapper.getByRoleCode(t.getOperatorRoleCode());
         }
 
+        t.setSuperior(role.getSuperior());
         t.setAesEmailKey(AESKeyConsts.KEY_EMAIL);
         t.setAesPhoneKey(AESKeyConsts.KEY_PHONE);
 

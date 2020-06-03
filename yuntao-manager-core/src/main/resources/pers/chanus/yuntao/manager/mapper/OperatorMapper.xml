@@ -6,14 +6,15 @@
     <result column="operator_no" jdbcType="VARCHAR" property="operatorNo" />
     <result column="operator_name" jdbcType="VARCHAR" property="operatorName" />
     <result column="operator_password" jdbcType="CHAR" property="operatorPassword" />
-    <result column="operator_role_id" jdbcType="VARCHAR" property="operatorRoleId" />
+    <result column="operator_role_code" jdbcType="VARCHAR" property="operatorRoleCode" />
     <result column="master_no" jdbcType="VARCHAR" property="masterNo" />
-    <result column="master_role_id" jdbcType="VARCHAR" property="masterRoleId" />
+    <result column="master_role_code" jdbcType="VARCHAR" property="masterRoleCode" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="head_image" jdbcType="VARCHAR" property="headImage" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="valid_status" jdbcType="CHAR" property="validStatus" />
+    <result column="superior" jdbcType="VARCHAR" property="superior" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     
@@ -21,8 +22,8 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, operator_no, operator_name, operator_password, operator_role_id, master_no, master_role_id, email,
-    tel, head_image, remark, valid_status, gmt_create, gmt_modified
+    id, operator_no, operator_name, operator_password, operator_role_code, master_no, master_role_code, email,
+    tel, head_image, remark, valid_status, superior, gmt_create, gmt_modified
   </sql>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -64,14 +65,14 @@
       <if test="operatorPassword != null">
         operator_password,
       </if>
-      <if test="operatorRoleId != null">
-        operator_role_id,
+      <if test="operatorRoleCode != null">
+        operator_role_code,
       </if>
       <if test="masterNo != null">
         master_no,
       </if>
-      <if test="masterRoleId != null">
-        master_role_id,
+      <if test="masterRoleCode != null">
+        master_role_code,
       </if>
       <if test="email != null">
         email,
@@ -87,6 +88,9 @@
       </if>
       <if test="validStatus != null">
         valid_status,
+      </if>
+      <if test="superior != null">
+        superior,
       </if>
       <if test="gmtCreate != null">
         gmt_create,
@@ -108,14 +112,14 @@
       <if test="operatorPassword != null">
         #{operatorPassword,jdbcType=CHAR},
       </if>
-      <if test="operatorRoleId != null">
-        #{operatorRoleId,jdbcType=VARCHAR},
+      <if test="operatorRoleCode != null">
+        #{operatorRoleCode,jdbcType=VARCHAR},
       </if>
       <if test="masterNo != null">
         #{masterNo,jdbcType=VARCHAR},
       </if>
-      <if test="masterRoleId != null">
-        #{masterRoleId,jdbcType=VARCHAR},
+      <if test="masterRoleCode != null">
+        #{masterRoleCode,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         HEX(AES_ENCRYPT(#{email,jdbcType=VARCHAR},#{aesEmailKey,jdbcType=VARCHAR})),
@@ -131,6 +135,9 @@
       </if>
       <if test="validStatus != null">
         #{validStatus,jdbcType=CHAR},
+      </if>
+      <if test="superior != null">
+        #{superior,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -153,14 +160,14 @@
       <if test="operatorPassword != null">
         operator_password = #{operatorPassword,jdbcType=CHAR},
       </if>
-      <if test="operatorRoleId != null">
-        operator_role_id = #{operatorRoleId,jdbcType=VARCHAR},
+      <if test="operatorRoleCode != null">
+        operator_role_code = #{operatorRoleCode,jdbcType=VARCHAR},
       </if>
       <if test="masterNo != null">
         master_no = #{masterNo,jdbcType=VARCHAR},
       </if>
-      <if test="masterRoleId != null">
-        master_role_id = #{masterRoleId,jdbcType=VARCHAR},
+      <if test="masterRoleCode != null">
+        master_role_code = #{masterRoleCode,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         email = HEX(AES_ENCRYPT(#{email,jdbcType=VARCHAR},#{aesEmailKey,jdbcType=VARCHAR})),
@@ -177,6 +184,9 @@
       <if test="validStatus != null">
         valid_status = #{validStatus,jdbcType=CHAR},
       </if>
+      <if test="superior != null">
+        superior = #{superior,jdbcType=VARCHAR},
+      </if>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
@@ -189,7 +199,7 @@
   
   <select id="getById" resultMap="BaseResultMap">
     select 
-    id, operator_no, operator_name, operator_role_id, master_no, master_role_id, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
+    id, operator_no, operator_name, operator_role_code, master_no, master_role_code, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, remark, valid_status
     from sys_operator
     where id = #{id,jdbcType=INTEGER}
@@ -197,52 +207,52 @@
   
   <select id="getByOperatorNo" resultMap="BaseResultMap">
     select 
-    sys_operator.id, operator_no, operator_name, operator_role_id, master_no, master_role_id, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
+    sys_operator.id, operator_no, operator_name, operator_role_code, master_no, master_role_code, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, sys_operator.remark, sys_operator.valid_status, sys_operator.gmt_create, role_name
     from sys_operator, sys_role
-    where operator_role_id = role_id and operator_no = #{operatorNo,jdbcType=VARCHAR}
+    where operator_role_code = role_code and operator_no = #{operatorNo,jdbcType=VARCHAR}
   </select>
   
   <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from sys_operator
     <where>
-      and operator_role_id &lt;&gt; '1'
+      and operator_role_code &lt;&gt; '1'
       <if test="operatorNo != null">
         and operator_no = #{operatorNo,jdbcType=VARCHAR}
       </if>
-      <if test="operatorRoleId != null">
-        and operator_role_id = #{operatorRoleId,jdbcType=VARCHAR}
+      <if test="operatorRoleCode != null">
+        and operator_role_code = #{operatorRoleCode,jdbcType=VARCHAR}
       </if>
       <if test="validStatus != null">
         and valid_status = #{validStatus,jdbcType=CHAR}
       </if>
-      <if test="loginRoleId != null">
-        and operator_role_id like concat(#{loginRoleId,jdbcType=VARCHAR}, '%')
+      <if test="loginRoleCode != null">
+        and FIND_IN_SET(#{loginRoleCode,jdbcType=VARCHAR}, superior)
       </if>
     </where>
   </select>
   
   <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
-    sys_operator.id, operator_no, operator_name, operator_role_id, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
+    sys_operator.id, operator_no, operator_name, operator_role_code, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, sys_operator.remark, sys_operator.valid_status, role_name
     from sys_operator, sys_role
     <where>
-      operator_role_id = role_id and operator_role_id &lt;&gt; '1'
+      operator_role_code = role_code and operator_role_code &lt;&gt; '1'
       <if test="operatorNo != null">
         and operator_no = #{operatorNo,jdbcType=VARCHAR}
       </if>
-      <if test="operatorRoleId != null">
-        and operator_role_id = #{operatorRoleId,jdbcType=VARCHAR}
+      <if test="operatorRoleCode != null">
+        and operator_role_code = #{operatorRoleCode,jdbcType=VARCHAR}
       </if>
       <if test="validStatus != null">
         and sys_operator.valid_status = #{validStatus,jdbcType=CHAR}
       </if>
-      <if test="loginRoleId != null">
-        and operator_role_id like concat(#{loginRoleId,jdbcType=VARCHAR}, '%')
+      <if test="loginRoleCode != null">
+        and FIND_IN_SET(#{loginRoleCode,jdbcType=VARCHAR}, superior)
       </if>
     </where>
-    order by operator_role_id asc
+    order by operator_role_code asc
     <if test="pagination == true">
       limit #{start,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
     </if>
@@ -251,8 +261,8 @@
   <select id="countSub" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from sys_operator
     <where>
-      and operator_role_id = '1'
-      <if test='loginRoleId != "0"'>
+      and operator_role_code = '1'
+      <if test='loginRoleCode != "0"'>
         and master_no = #{loginNo,jdbcType=VARCHAR}
       </if>
       <if test="subNo != null">
@@ -261,8 +271,8 @@
       <if test="masterNo != null">
         and master_no = #{masterNo,jdbcType=VARCHAR}
       </if>
-      <if test="masterRoleId != null">
-        and master_role_id = #{masterRoleId,jdbcType=VARCHAR}
+      <if test="masterRoleCode != null">
+        and master_role_code = #{masterRoleCode,jdbcType=VARCHAR}
       </if>
       <if test="validStatus != null">
         and valid_status = #{validStatus,jdbcType=CHAR}
@@ -272,12 +282,12 @@
   
   <select id="listSub" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
-    sys_operator.id, operator_no, operator_name, master_no, master_role_id, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
+    sys_operator.id, operator_no, operator_name, master_no, master_role_code, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, sys_operator.remark, sys_operator.valid_status, role_name
     from sys_operator, sys_role
     <where>
-      master_role_id = role_id and operator_role_id = '1'
-      <if test='loginRoleId != "0"'>
+      master_role_code = role_code and operator_role_code = '1'
+      <if test='loginRoleCode != "0"'>
         and master_no = #{loginNo,jdbcType=VARCHAR}
       </if>
       <if test="subNo != null">
@@ -286,8 +296,8 @@
       <if test="masterNo != null">
         and master_no = #{masterNo,jdbcType=VARCHAR}
       </if>
-      <if test="masterRoleId != null">
-        and master_role_id = #{masterRoleId,jdbcType=VARCHAR}
+      <if test="masterRoleCode != null">
+        and master_role_code = #{masterRoleCode,jdbcType=VARCHAR}
       </if>
       <if test="validStatus != null">
         and sys_operator.valid_status = #{validStatus,jdbcType=CHAR}

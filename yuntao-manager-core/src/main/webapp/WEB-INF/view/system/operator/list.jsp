@@ -48,7 +48,7 @@
       {{# }else{ }}{{ d.validStatus }}{{# } }}
     </script>
     <script type="text/html" id="toolbar">
-      {{# if(${sessionScope.loginUser.masterRoleId } != d.operatorRoleId){ }}
+      {{# if(${sessionScope.loginUser.masterRoleCode } != d.operatorRoleCode){ }}
         {{# if(${powers.containsKey('UPDATE') }){ }}
           <a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
         {{# } }}
@@ -64,6 +64,6 @@
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${ctx }/lib/zTree/jquery.ztree.core.min.js"></script>
-    <script type="text/javascript" src="${ctx }/js/system/operator.js?v=0.0.1.2"></script>
+    <script type="text/javascript" src="${ctx }/js/system/operator.js?v=0.1.9.1"></script>
   </body>
 </html>

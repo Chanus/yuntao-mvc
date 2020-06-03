@@ -50,11 +50,11 @@ public interface OperatorService extends BaseService<Operator, Integer> {
     /**
      * 分页查询子账号
      *
-     * @param params loginRoleId    登录角色编码，必需
+     * @param params loginRoleCode    登录角色编码，必需
      *               loginNo    登录账号，必需
      *               subNo  子账号
      *               masterNo   主账号
-     *               masterRoleId   主账号角色编码
+     *               masterRoleCode   主账号角色编码
      *               validStatus    状态
      * @return
      * @since 0.0.1

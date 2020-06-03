@@ -14,11 +14,11 @@ public class Operator implements Serializable {
 
     private String operatorPassword;
 
-    private String operatorRoleId;
+    private String operatorRoleCode;
 
     private String masterNo;
 
-    private String masterRoleId;
+    private String masterRoleCode;
 
     private String email;
 
@@ -29,6 +29,8 @@ public class Operator implements Serializable {
     private String remark;
 
     private String validStatus;
+
+    private String superior;
 
     private Date gmtCreate;
 
@@ -72,12 +74,12 @@ public class Operator implements Serializable {
         this.operatorPassword = operatorPassword == null ? null : operatorPassword.trim();
     }
 
-    public String getOperatorRoleId() {
-        return operatorRoleId;
+    public String getOperatorRoleCode() {
+        return operatorRoleCode;
     }
 
-    public void setOperatorRoleId(String operatorRoleId) {
-        this.operatorRoleId = operatorRoleId == null ? null : operatorRoleId.trim();
+    public void setOperatorRoleCode(String operatorRoleCode) {
+        this.operatorRoleCode = operatorRoleCode == null ? null : operatorRoleCode.trim();
     }
 
     public String getMasterNo() {
@@ -88,12 +90,12 @@ public class Operator implements Serializable {
         this.masterNo = masterNo == null ? null : masterNo.trim();
     }
 
-    public String getMasterRoleId() {
-        return masterRoleId;
+    public String getMasterRoleCode() {
+        return masterRoleCode;
     }
 
-    public void setMasterRoleId(String masterRoleId) {
-        this.masterRoleId = masterRoleId == null ? null : masterRoleId.trim();
+    public void setMasterRoleCode(String masterRoleCode) {
+        this.masterRoleCode = masterRoleCode == null ? null : masterRoleCode.trim();
     }
 
     public String getEmail() {
@@ -134,6 +136,14 @@ public class Operator implements Serializable {
 
     public void setValidStatus(String validStatus) {
         this.validStatus = validStatus == null ? null : validStatus.trim();
+    }
+
+    public String getSuperior() {
+        return superior;
+    }
+
+    public void setSuperior(String superior) {
+        this.superior = superior == null ? null : superior.trim();
     }
 
     public Date getGmtCreate() {
@@ -183,9 +193,9 @@ public class Operator implements Serializable {
                 ", operatorNo=" + operatorNo +
                 ", operatorName=" + operatorName +
                 ", operatorPassword=" + operatorPassword +
-                ", operatorRoleId=" + operatorRoleId +
+                ", operatorRoleCode=" + operatorRoleCode +
                 ", masterNo=" + masterNo +
-                ", masterRoleId=" + masterRoleId +
+                ", masterRoleCode=" + masterRoleCode +
                 ", email=" + email +
                 ", tel=" + tel +
                 ", headImage=" + headImage +

@@ -28,13 +28,13 @@ layui.config({
     });
 
     // 重新加载
-    reload = function (roleId) {
+    reload = function (roleCode) {
         table.reload('d', {
             page: {
                 curr: 1 //重新从第 1 页开始
             },
             where: {
-                operatorRoleId: roleId === -1 ? null : roleId,
+                operatorRoleCode: roleCode === '-1' ? null : roleCode,
                 operatorNo: $("#operatorNo").val(),
                 v: new Date().getTime()
             }
@@ -43,13 +43,13 @@ layui.config({
 
     // 搜索
     $("#search").on('click', function () {
-        reload(treeObj.getSelectedNodes()[0].id);
+        reload(treeObj.getSelectedNodes()[0].roleCode);
     });
 
     // 添加
     $("#add").on('click', function () {
         var nodes = treeObj.getSelectedNodes();
-        popup.open(600, 680, '<i class="layui-icon layui-icon-add-circle"></i>添加操作员', action_path + 'add.do?operatorRoleId=' + nodes[0].id);
+        popup.open(600, 680, '<i class="layui-icon layui-icon-add-circle"></i>添加操作员', action_path + 'add.do?operatorRoleCode=' + nodes[0].roleCode);
     });
 
     // 监听工具条
@@ -97,7 +97,7 @@ var setting = {
                 $("#add").css('display', '');
             }
             // 点击节点重新加载操作员列表
-            reload(treeNode.level === 0 ? -1 : treeNode.id);
+            reload(treeNode.level === 0 ? '-1' : treeNode.roleCode);
         }
     },
     data: {

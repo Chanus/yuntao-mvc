@@ -31,6 +31,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/operator.js?v=0.0.1.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/operator.js?v=0.1.9.1"></script>
   </body>
 </html>

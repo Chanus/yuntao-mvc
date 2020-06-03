@@ -37,7 +37,7 @@
               <input type="text" value="${operator.roleName }" readonly="readonly" disabled="disabled" class="layui-input layui-disabled" autocomplete="off">
             </div>
           </div>
-          <c:if test="${operator.operatorRoleId eq '1' }">
+          <c:if test="${operator.operatorRoleCode eq '1' }">
             <div class="layui-form-item">
               <label class="layui-form-label">主账号</label>
               <div class="layui-input-block">

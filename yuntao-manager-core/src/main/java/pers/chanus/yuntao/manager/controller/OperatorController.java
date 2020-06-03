@@ -64,9 +64,9 @@ public class OperatorController extends BaseController {
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
     public PageBean list() {
         CustomMap params = getParams();
-        String loginRoleId = LoginUser.getLoginUser().getMasterRoleId();
-        if (!ConfigConsts.ROLE_ADMIN_0.equals(loginRoleId))
-            params.put("loginRoleId", loginRoleId);
+        String loginRoleCode = LoginUser.getLoginUser().getMasterRoleCode();
+        if (!ConfigConsts.ROLE_ADMIN_0.equals(loginRoleCode))
+            params.put("loginRoleCode", loginRoleCode);
 
         return operatorService.listPagination(params);
     }
@@ -79,20 +79,20 @@ public class OperatorController extends BaseController {
     @ResponseBody
     @PostMapping(value = "tree.do", produces = "application/json; charset=utf-8")
     public Object tree() {
-        return JSON.parse(roleService.createTree(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleId()).putNext("hasOperator", ConfigConsts.STATUS_YES)));
+        return JSON.parse(roleService.createTree(getParams().putNext("roleCode", LoginUser.getLoginUser().getMasterRoleCode()).putNext("hasOperator", ConfigConsts.STATUS_YES)));
     }
 
     /**
      * 跳转到添加页面
      *
-     * @param operatorRoleId 操作员角色代码
+     * @param operatorRoleCode 操作员角色代码
      * @param model
      * @return
      */
     @GetMapping(value = "add.do")
-    public String add(Integer operatorRoleId, Model model) {
+    public String add(Integer operatorRoleCode, Model model) {
         model.addAttribute("operator", new Operator());
-        model.addAttribute("operatorRoleId", operatorRoleId);
+        model.addAttribute("operatorRoleCode", operatorRoleCode);
         model.addAttribute("cmd", "add");
         return "system/operator/add-update";
     }
