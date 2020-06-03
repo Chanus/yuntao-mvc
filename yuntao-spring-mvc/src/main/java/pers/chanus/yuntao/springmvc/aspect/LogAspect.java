@@ -80,7 +80,7 @@ public class LogAspect {
         Log log = new Log();
         if (loginUser != null) {
             log.setOperateNo(loginUser.getLoginNo());
-            log.setOperateRoleId(loginUser.getRoleId());
+            log.setOperateRoleCode(loginUser.getRoleCode());
         }
         log.setOperateIp(IpUtils.getIpAddress(request));
         log.setOperateModuleCode(systemLog.module());
@@ -100,7 +100,7 @@ public class LogAspect {
                     loginUser = LoginUser.getLoginUser();// 登录用户信息
                     if (loginUser != null) {
                         log.setOperateNo(loginUser.getLoginNo());
-                        log.setOperateRoleId(loginUser.getRoleId());
+                        log.setOperateRoleCode(loginUser.getRoleCode());
                     }
                 }
                 if (object instanceof Message && ((Message) object).getCode() == MsgCode.SUCCESS) {// 操作成功

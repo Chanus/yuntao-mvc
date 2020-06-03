@@ -16,7 +16,7 @@ public class Log implements Serializable {
 
     private String operateNo;
 
-    private String operateRoleId;
+    private String operateRoleCode;
 
     private String operateIp;
 
@@ -77,12 +77,12 @@ public class Log implements Serializable {
         return this;
     }
 
-    public String getOperateRoleId() {
-        return operateRoleId;
+    public String getOperateRoleCode() {
+        return operateRoleCode;
     }
 
-    public Log setOperateRoleId(String operateRoleId) {
-        this.operateRoleId = operateRoleId == null ? null : operateRoleId.trim();
+    public Log setOperateRoleCode(String operateRoleCode) {
+        this.operateRoleCode = operateRoleCode == null ? null : operateRoleCode.trim();
         return this;
     }
 
@@ -213,7 +213,7 @@ public class Log implements Serializable {
         return "Log [" +
                 "id=" + id +
                 ", operateNo=" + operateNo +
-                ", operateRoleId=" + operateRoleId +
+                ", operateRoleCode=" + operateRoleCode +
                 ", operateIp=" + operateIp +
                 ", operateModuleCode=" + operateModuleCode +
                 ", operateUrl=" + operateUrl +

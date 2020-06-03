@@ -67,7 +67,7 @@ public class LogController extends BaseController {
         } catch (UnsupportedEncodingException e) {
             LOGGER.error("查询系统日志转码异常", e);
         }
-        return logService.listPagination(params.putNext("operateRoleId", LoginUser.getLoginUser().getMasterRoleId()));
+        return logService.listPagination(params.putNext("operateRoleCode", LoginUser.getLoginUser().getMasterRoleCode()));
     }
 
     /**

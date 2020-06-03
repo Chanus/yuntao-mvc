@@ -35,8 +35,8 @@ public class LogServiceImpl implements LogService {
         Log sysLog = new Log();
         LoginUser loginUser = LoginUser.getLoginUser();
         String operateNo = loginUser == null ? "system" : loginUser.getLoginNo(),
-                operateRoleId = loginUser == null ? "0" : loginUser.getRoleId();
-        sysLog.setOperateNo(operateNo).setOperateRoleId(operateRoleId).setOperateIp(IpUtils.getIpAddress(request))
+                operateRoleCode = loginUser == null ? "0" : loginUser.getRoleCode();
+        sysLog.setOperateNo(operateNo).setOperateRoleCode(operateRoleCode).setOperateIp(IpUtils.getIpAddress(request))
                 .setOperateModuleCode(moduleCode).setOperateUrl(String.valueOf(request.getRequestURL()))
                 .setOperateContent(content).setOperateType(logType.name())
                 .setOperateTypeDesc(operateTypeDesc).setOperateTime(new Date());
@@ -45,9 +45,9 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public void insert(String operateNo, String operateRoleId, String moduleCode, String operateMethod, String content, LogTypeEnum logType, String operateTypeDesc, Integer operateConsumeTime) {
+    public void insert(String operateNo, String operateRoleCode, String moduleCode, String operateMethod, String content, LogTypeEnum logType, String operateTypeDesc, Integer operateConsumeTime) {
         Log log = new Log();
-        log.setOperateNo(operateNo).setOperateRoleId(operateRoleId).setOperateModuleCode(moduleCode).setOperateMethod(operateMethod)
+        log.setOperateNo(operateNo).setOperateRoleCode(operateRoleCode).setOperateModuleCode(moduleCode).setOperateMethod(operateMethod)
                 .setOperateContent(content).setOperateType(logType.name()).setOperateTypeDesc(operateTypeDesc)
                 .setOperateConsumeTime(operateConsumeTime).setOperateTime(new Date());
 

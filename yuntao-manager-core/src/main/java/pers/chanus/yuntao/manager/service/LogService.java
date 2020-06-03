@@ -32,10 +32,21 @@ public interface LogService {
     void insert(HttpServletRequest request, String moduleCode, String content, LogTypeEnum logType, String operateTypeDesc);
 
     /**
+     * 添加退出系统的系统日志
+     *
+     * @param request         必需
+     * @param operateTypeDesc 操作类型描述，可选
+     * @since 0.0.1
+     */
+    default void logout(HttpServletRequest request, String operateTypeDesc) {
+        insert(request, null, null, LogTypeEnum.LOGOUT, operateTypeDesc);
+    }
+
+    /**
      * 添加系统日志
      *
      * @param operateNo          操作账号
-     * @param operateRoleId      操作账号角色
+     * @param operateRoleCode    操作账号角色
      * @param moduleCode         模块代码，可选
      * @param operateMethod      方法描述
      * @param content            日志内容，可选
@@ -44,7 +55,7 @@ public interface LogService {
      * @param operateConsumeTime 操作耗时
      * @since 0.1.7
      */
-    void insert(String operateNo, String operateRoleId, String moduleCode, String operateMethod, String content, LogTypeEnum logType, String operateTypeDesc, Integer operateConsumeTime);
+    void insert(String operateNo, String operateRoleCode, String moduleCode, String operateMethod, String content, LogTypeEnum logType, String operateTypeDesc, Integer operateConsumeTime);
 
     /**
      * 获取系统日志内容
@@ -76,7 +87,7 @@ public interface LogService {
     /**
      * 删除日期记录
      *
-     * @param id    日志ID
+     * @param id 日志ID
      * @return
      * @since 0.1.8
      */
