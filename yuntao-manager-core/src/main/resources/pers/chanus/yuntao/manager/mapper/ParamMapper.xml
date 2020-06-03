@@ -143,8 +143,8 @@
       <if test="validStatus != null">
         and valid_status = #{validStatus,jdbcType=CHAR}
       </if>
-      <if test='loginRoleId != null and loginRoleId != "0"'>
-        and FIND_IN_SET(#{loginRoleId,jdbcType=VARCHAR},if(modified_role_code is not null and modified_role_code &lt;&gt; '', modified_role_code, #{loginRoleId,jdbcType=VARCHAR}))
+      <if test='loginRoleCode != null and loginRoleCode != "0"'>
+        and FIND_IN_SET(#{loginRoleCode,jdbcType=VARCHAR},if(modified_role_code is not null and modified_role_code &lt;&gt; '', modified_role_code, #{loginRoleCode,jdbcType=VARCHAR}))
       </if>
     </where>
   </select>
@@ -160,8 +160,8 @@
       <if test="validStatus != null">
         and valid_status = #{validStatus,jdbcType=CHAR}
       </if>
-      <if test='loginRoleId != null and loginRoleId != "0"'>
-        and FIND_IN_SET(#{loginRoleId,jdbcType=VARCHAR},if(modified_role_code is not null and modified_role_code &lt;&gt; '', modified_role_code, #{loginRoleId,jdbcType=VARCHAR}))
+      <if test='loginRoleCode != null and loginRoleCode != "0"'>
+        and FIND_IN_SET(#{loginRoleCode,jdbcType=VARCHAR},if(modified_role_code is not null and modified_role_code &lt;&gt; '', modified_role_code, #{loginRoleCode,jdbcType=VARCHAR}))
       </if>
     </where>
     order by priority asc
