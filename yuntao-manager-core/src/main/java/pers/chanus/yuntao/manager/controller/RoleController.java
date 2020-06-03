@@ -63,7 +63,7 @@ public class RoleController extends BaseController {
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
     public PageBean list() {
-        return roleService.listPagination(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleId()));
+        return roleService.listPagination(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleCode()));
     }
 
     /**
@@ -74,7 +74,7 @@ public class RoleController extends BaseController {
     @ResponseBody
     @PostMapping(value = "tree.do", produces = "application/json; charset=utf-8")
     public Object tree() {
-        return JSON.parse(roleService.createTree(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleId())));
+        return JSON.parse(roleService.createTree(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleCode())));
     }
 
     /**
@@ -86,7 +86,7 @@ public class RoleController extends BaseController {
     @GetMapping(value = "add.do")
     public String add(Model model) {
         model.addAttribute("role", new Role());
-        model.addAttribute("parentRoles", roleService.list(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleId())));
+        model.addAttribute("parentRoles", roleService.list(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleCode())));
         model.addAttribute("cmd", "add");
         return "system/role/add-update";
     }

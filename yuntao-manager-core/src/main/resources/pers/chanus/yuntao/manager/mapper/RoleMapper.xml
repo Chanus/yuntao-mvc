@@ -12,13 +12,14 @@
     <result column="valid_status" jdbcType="CHAR" property="validStatus" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="superior" jdbcType="VARCHAR" property="superior" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
   </resultMap>
   
   <sql id="Base_Column_List">
     id, role_id, role_code, role_name, parent_role_id, login_flag, has_operator, valid_status, 
-    remark, priority, gmt_create, gmt_modified
+    remark, priority, superior, gmt_create, gmt_modified
   </sql>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -78,6 +79,9 @@
       <if test="priority != null">
         priority,
       </if>
+      <if test="superior != null">
+        superior,
+      </if>
       <if test="gmtCreate != null">
         gmt_create,
       </if>
@@ -115,6 +119,9 @@
       </if>
       <if test="priority != null">
         #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="superior != null">
+        #{superior,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -154,6 +161,9 @@
       </if>
       <if test="priority != null">
         priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="superior != null">
+        superior = #{superior,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},

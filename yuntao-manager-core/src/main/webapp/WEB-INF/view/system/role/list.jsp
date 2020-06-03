@@ -96,7 +96,7 @@
         </tr>
         {{# } }}
       {{# } }}
-      {{# if(d.currentRoleId != '0' && ${sessionScope.loginUser.roleId } != d.currentRoleId && ${powers.containsKey('CONFIG') }){ }}
+      {{# if(d.currentRoleId != '0' && ${sessionScope.loginUser.roleCode } != d.currentRoleId && ${powers.containsKey('CONFIG') }){ }}
       <tr>
         <td colspan="4" align="center">
           <button id="grant" class="layui-btn layui-btn-normal">授权</button>

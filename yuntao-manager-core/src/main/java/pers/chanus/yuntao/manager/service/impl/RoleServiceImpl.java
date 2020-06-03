@@ -43,12 +43,22 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
 
     @Override
     public Message insert(Role t) {
+        // 获取最大角色，用来生成新的角色ID
         String roleId = mapper.getMaxRoleId(t.getParentRoleId());
         t.setRoleId(StringUtils.isBlank(roleId) ? (t.getParentRoleId() + "10") : String.valueOf(Integer.parseInt(roleId) + 1));
+        // 如果没有填写角色代码，则默认为角色ID
         if (StringUtils.isBlank(t.getRoleCode()))
             t.setRoleCode(t.getRoleId());
+        // 获取最大排序值，用来设置角色的排序
         Integer priority = mapper.getMaxPriority(t.getParentRoleId());
         t.setPriority(priority == null ? 1 : (priority + 1));
+        // 获取上级角色信息，设置上级角色代码
+        Role parent = mapper.get(t.getParentRoleId());
+        if (parent == null)
+            t.setSuperior(t.getRoleCode());
+        else
+            t.setSuperior(parent.getSuperior() + "," + t.getRoleCode());
+        
         return super.insert(t);
     }
 

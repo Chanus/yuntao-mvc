@@ -26,6 +26,8 @@ public class Role implements Serializable {
 
     private Integer priority;
 
+    private String superior;
+
     private Date gmtCreate;
 
     private Date gmtModified;
@@ -110,6 +112,14 @@ public class Role implements Serializable {
         this.priority = priority;
     }
 
+    public String getSuperior() {
+        return superior;
+    }
+
+    public void setSuperior(String superior) {
+        this.superior = superior == null ? null : superior.trim();
+    }
+
     public Date getGmtCreate() {
         return gmtCreate;
     }
@@ -128,6 +138,20 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "Role [id=" + id + ", roleId=" + roleId + ", roleCode=" + roleCode + ", roleName=" + roleName + ", parentRoleId=" + parentRoleId + ", loginFlag=" + loginFlag + ", hasOperator=" + hasOperator + ", validStatus=" + validStatus + ", remark=" + remark + ", priority=" + priority + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "Role [" +
+                "id=" + id +
+                ", roleId=" + roleId +
+                ", roleCode=" + roleCode +
+                ", roleName=" + roleName +
+                ", parentRoleId=" + parentRoleId +
+                ", loginFlag=" + loginFlag +
+                ", hasOperator=" + hasOperator +
+                ", validStatus=" + validStatus +
+                ", remark=" + remark +
+                ", priority=" + priority +
+                ", superior=" + superior +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                "]";
     }
 }

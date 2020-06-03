@@ -35,7 +35,7 @@
         <div class="layui-form-item">
           <label class="layui-form-label">角色代码</label>
           <div class="layui-input-block">
-            <input type="text" name="roleCode" value="${role.roleCode }" placeholder="请输入角色代码" class="layui-input" autocomplete="off">
+            <input type="text" name="roleCode" value="${role.roleCode }" placeholder="请输入角色代码，不填则默认为角色ID" class="layui-input" autocomplete="off">
           </div>
         </div>
         <div class="layui-form-item">
