@@ -79,7 +79,7 @@ public class OperatorController extends BaseController {
     @ResponseBody
     @PostMapping(value = "tree.do", produces = "application/json; charset=utf-8")
     public Object tree() {
-        return JSON.parse(roleService.createTree(getParams().putNext("roleCode", LoginUser.getLoginUser().getMasterRoleCode()).putNext("hasOperator", ConfigConsts.STATUS_YES)));
+        return JSON.parse(roleService.createTree(LoginUser.getLoginUser().getMasterRoleCode(), ConfigConsts.STATUS_YES));
     }
 
     /**

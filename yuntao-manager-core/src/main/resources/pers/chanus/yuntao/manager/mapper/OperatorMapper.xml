@@ -249,7 +249,7 @@
         and sys_operator.valid_status = #{validStatus,jdbcType=CHAR}
       </if>
       <if test="loginRoleCode != null">
-        and FIND_IN_SET(#{loginRoleCode,jdbcType=VARCHAR}, superior)
+        and FIND_IN_SET(#{loginRoleCode,jdbcType=VARCHAR}, sys_operator.superior)
       </if>
     </where>
     order by operator_role_code asc

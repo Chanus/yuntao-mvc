@@ -3,7 +3,7 @@
 <mapper namespace="pers.chanus.yuntao.manager.mapper.RoleModulePowerMapper">
   <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.RoleModulePower">
     <id column="rmp_id" jdbcType="INTEGER" property="rmpId" />
-    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
     <result column="module_code" jdbcType="VARCHAR" property="moduleCode" />
     <result column="power_item" jdbcType="VARCHAR" property="powerItem" />
     <result column="sub_no" jdbcType="VARCHAR" property="subNo" />
@@ -11,8 +11,8 @@
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
   </resultMap>
   
-  <delete id="deleteByRoleId" parameterType="java.lang.String">
-    delete from sys_role_module_power where role_id = #{roleId,jdbcType=VARCHAR}
+  <delete id="deleteByRoleCode" parameterType="java.lang.String">
+    delete from sys_role_module_power where role_code = #{roleCode,jdbcType=VARCHAR}
   </delete>
   
   <delete id="deleteBySubNo" parameterType="java.lang.String">
@@ -20,10 +20,10 @@
   </delete>
   
   <insert id="insertBatch" parameterType="java.util.List">
-    insert into sys_role_module_power (role_id, module_code, power_item, sub_no)
+    insert into sys_role_module_power (role_code, module_code, power_item, sub_no)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.roleId,jdbcType=VARCHAR}, #{item.moduleCode,jdbcType=VARCHAR}, #{item.powerItem,jdbcType=VARCHAR}, #{item.subNo,jdbcType=VARCHAR})
+      (#{item.roleCode,jdbcType=VARCHAR}, #{item.moduleCode,jdbcType=VARCHAR}, #{item.powerItem,jdbcType=VARCHAR}, #{item.subNo,jdbcType=VARCHAR})
     </foreach>
   </insert>
 </mapper>

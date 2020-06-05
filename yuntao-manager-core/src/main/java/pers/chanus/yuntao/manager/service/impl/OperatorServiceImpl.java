@@ -162,7 +162,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             RoleModulePower subModulePower;
             for (String s : modulePowers) {
                 subModulePower = new RoleModulePower();
-                subModulePower.setRoleId(ConfigConsts.ROLE_SUB_1);
+                subModulePower.setRoleCode(ConfigConsts.ROLE_SUB_1);
                 subModulePower.setSubNo(subNo);
                 String[] mp = s.split("\\.");
                 subModulePower.setModuleCode(mp[0]);

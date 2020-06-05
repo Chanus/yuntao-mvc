@@ -18,13 +18,13 @@ public interface ModuleMapper extends BaseMapper<Module, Integer> {
 
     List<Module> listRoleModulePowerForAdmin();
 
-    List<Module> listRoleModulePowerForNotAdmin(@Param("roleId") String roleId, @Param("parentRoleId") String parentRoleId);
+    List<Module> listRoleModulePowerForNotAdmin(@Param("roleCode") String roleCode, @Param("parentRoleCode") String parentRoleCode);
 
-    List<Module> listSubModulePower(@Param("subNo") String subNo, @Param("masterRoleId") String masterRoleId);
+    List<Module> listSubModulePower(@Param("subNo") String subNo, @Param("masterRoleCode") String masterRoleCode);
 
-    List<Module> listMenu(@Param("roleId") String roleId, @Param("subNo") String subNo);
+    List<Module> listMenu(@Param("roleCode") String roleCode, @Param("subNo") String subNo);
 
-    List<String> listUrl(@Param("roleId") String roleId, @Param("subNo") String subNo);
+    List<String> listUrl(@Param("roleCode") String roleCode, @Param("subNo") String subNo);
 
     @Select("select count(*) from sys_module where module_code = #{moduleCode,jdbcType=VARCHAR}")
     int checkModuleCode(String moduleCode);

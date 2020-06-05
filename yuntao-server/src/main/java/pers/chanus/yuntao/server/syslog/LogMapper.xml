@@ -37,7 +37,7 @@
         operate_no,
       </if>
       <if test="operateRoleCode != null">
-        operate_role_code, superior,
+        operate_role_code,
       </if>
       <if test="operateIp != null">
         operate_ip,
@@ -66,6 +66,9 @@
       <if test="operateTime != null">
         operate_time,
       </if>
+      <if test="operateMasterRoleCode != null">
+        superior,
+      </if>
       <if test="gmtCreate != null">
         gmt_create,
       </if>
@@ -85,7 +88,6 @@
       </if>
       <if test="operateRoleCode != null">
         #{operateRoleCode,jdbcType=VARCHAR},
-        (select superior from sys_role where role_code = #{operateRoleCode,jdbcType=VARCHAR}),
       </if>
       <if test="operateIp != null">
         inet_aton(#{operateIp,jdbcType=INTEGER}),
@@ -113,6 +115,9 @@
       </if>
       <if test="operateTime != null">
         #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateMasterRoleCode != null">
+        (select superior from sys_role where role_code = #{operateMasterRoleCode,jdbcType=VARCHAR}),
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -178,7 +183,7 @@
         and operate_no = #{operateNo,jdbcType=VARCHAR}
       </if>
       <if test='operateRoleCode != null and operateRoleCode != "0"'>
-        and FIND_IN_SET(#{operateRoleCode,jdbcType=VARCHAR},superior)
+        and FIND_IN_SET(#{operateRoleCode,jdbcType=VARCHAR},sys_log.superior)
       </if>
       <if test="operateType != null">
         <choose>

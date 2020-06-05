@@ -7,8 +7,6 @@ import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.server.service.BaseService;
 
-import java.util.Map;
-
 /**
  * 系统角色管理接口
  *
@@ -20,19 +18,32 @@ public interface RoleService extends BaseService<Role, Integer> {
     /**
      * 创建角色树
      *
+     * @param roleCode    角色代码
+     * @param hasOperator 是否可以创建操作员：0-不能，1-能
      * @return
-     * @since 0.0.1
+     * @since 0.1.9
      */
-    String createTree(Map<String, Object> params);
+    String createTree(String roleCode, String hasOperator);
+
+    /**
+     * 创建角色树
+     *
+     * @param roleCode 角色代码
+     * @return
+     * @since 0.1.9
+     */
+    default String createTree(String roleCode) {
+        return createTree(roleCode, null);
+    }
 
     /**
      * 角色授权
      *
-     * @param roleId       角色代码
+     * @param roleCode     角色代码
      * @param modulePowers 模块-权限项数组
      * @return
      * @since 0.0.1
      */
-    Message grantRoleModulePower(String roleId, String[] modulePowers);
+    Message grantRoleModulePower(String roleCode, String[] modulePowers);
 
 }

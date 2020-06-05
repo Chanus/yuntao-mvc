@@ -81,6 +81,7 @@ public class LogAspect {
         if (loginUser != null) {
             log.setOperateNo(loginUser.getLoginNo());
             log.setOperateRoleCode(loginUser.getRoleCode());
+            log.setOperateMasterRoleCode(loginUser.getMasterRoleCode());
         }
         log.setOperateIp(IpUtils.getIpAddress(request));
         log.setOperateModuleCode(systemLog.module());
@@ -101,6 +102,7 @@ public class LogAspect {
                     if (loginUser != null) {
                         log.setOperateNo(loginUser.getLoginNo());
                         log.setOperateRoleCode(loginUser.getRoleCode());
+                        log.setOperateMasterRoleCode(loginUser.getMasterRoleCode());
                     }
                 }
                 if (object instanceof Message && ((Message) object).getCode() == MsgCode.SUCCESS) {// 操作成功

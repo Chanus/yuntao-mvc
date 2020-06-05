@@ -50,7 +50,7 @@ public class RequestInterceptor implements HandlerInterceptor {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");// 登录账号信息
 
         // 验证用户是否登录
-        if (loginUser == null || StringUtils.isBlank(loginUser.getLoginNo()) || StringUtils.isBlank(loginUser.getRoleId()) || CollectionUtils.isEmpty(loginUser.getMenus())) {
+        if (loginUser == null || StringUtils.isBlank(loginUser.getLoginNo()) || StringUtils.isBlank(loginUser.getRoleCode()) || CollectionUtils.isEmpty(loginUser.getMenus())) {
             // 判断是否为ajax请求
             if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
                 response.getWriter().print("{\"code\":2,\"msg\":\"登录超时\"}");

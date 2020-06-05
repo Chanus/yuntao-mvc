@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 01/06/2020 00:21:25
+ Date: 06/06/2020 00:54:32
 */
 
 SET NAMES utf8mb4;
@@ -3261,7 +3261,7 @@ CREATE TABLE `sys_dict` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `dict_code` (`dict_code`) USING BTREE
+  UNIQUE KEY `uk_dict_code` (`dict_code`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统字典集表';
 
 -- ----------------------------
@@ -3286,7 +3286,7 @@ CREATE TABLE `sys_dict_item` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `dict_code` (`dict_code`,`item_code`) USING BTREE
+  UNIQUE KEY `uk_dict_code` (`dict_code`,`item_code`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统字典项表';
 
 -- ----------------------------
@@ -3302,7 +3302,7 @@ DROP TABLE IF EXISTS `sys_log`;
 CREATE TABLE `sys_log` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `operate_no` varchar(30) NOT NULL DEFAULT '' COMMENT '操作账号',
-  `operate_role_id` varchar(50) DEFAULT '' COMMENT '操作账号角色',
+  `operate_role_code` varchar(50) DEFAULT '' COMMENT '操作账号角色',
   `operate_ip` int(10) unsigned DEFAULT NULL COMMENT '操作IP',
   `operate_module_code` varchar(50) DEFAULT '' COMMENT '模块代码',
   `operate_url` varchar(200) DEFAULT '' COMMENT '请求地址',
@@ -3313,10 +3313,11 @@ CREATE TABLE `sys_log` (
   `operate_type_desc` varchar(200) DEFAULT '' COMMENT '操作类型描述',
   `operate_consume_time` int(10) unsigned DEFAULT NULL COMMENT '操作耗时(毫秒)',
   `operate_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
+  `superior` varchar(255) DEFAULT NULL COMMENT '操作账号角色的所有上级角色',
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `operate_time` (`operate_time`,`operate_no`) USING BTREE
+  KEY `idx_operate_time` (`operate_time`,`operate_no`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统操作日志表';
 
 -- ----------------------------
@@ -3347,8 +3348,8 @@ CREATE TABLE `sys_module` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`module_id`) USING BTREE,
-  UNIQUE KEY `module_code` (`module_code`),
-  KEY `module_parent_id` (`module_parent_id`) USING BTREE
+  UNIQUE KEY `uk_module_code` (`module_code`),
+  KEY `idx_module_parent_id` (`module_parent_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统模块表';
 
 -- ----------------------------
@@ -3386,8 +3387,8 @@ CREATE TABLE `sys_module_power` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`mp_id`) USING BTREE,
-  KEY `power_item` (`power_item`) USING BTREE,
-  KEY `module_code` (`module_code`),
+  KEY `idx_power_item` (`power_item`) USING BTREE,
+  KEY `idx_module_code` (`module_code`),
   CONSTRAINT `sys_module_power_ibfk_1` FOREIGN KEY (`module_code`) REFERENCES `sys_module` (`module_code`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项关系表';
 
@@ -3467,7 +3468,7 @@ CREATE TABLE `sys_module_power_method` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`mpm_id`) USING BTREE,
-  KEY `mp_id` (`mp_id`),
+  KEY `idx_mp_id` (`mp_id`),
   CONSTRAINT `sys_module_power_method_ibfk_1` FOREIGN KEY (`mp_id`) REFERENCES `sys_module_power` (`mp_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COMMENT='模块权限项方法配置表';
 
@@ -3600,28 +3601,30 @@ CREATE TABLE `sys_operator` (
   `operator_no` varchar(30) NOT NULL DEFAULT '' COMMENT '操作员账号',
   `operator_name` varchar(30) NOT NULL DEFAULT '' COMMENT '操作员名称',
   `operator_password` char(64) NOT NULL COMMENT '操作员密码',
-  `operator_role_id` varchar(50) NOT NULL COMMENT '操作员角色',
+  `operator_role_code` varchar(50) NOT NULL COMMENT '操作员角色',
   `master_no` varchar(30) DEFAULT '' COMMENT '主账号',
-  `master_role_id` varchar(30) DEFAULT '' COMMENT '主账号角色',
+  `master_role_code` varchar(50) DEFAULT '' COMMENT '主账号角色',
   `email` varchar(100) DEFAULT '' COMMENT '邮箱账号',
   `tel` varchar(50) DEFAULT '' COMMENT '电话号码',
   `head_image` varchar(50) DEFAULT '' COMMENT '头像图片路径',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
   `valid_status` char(1) NOT NULL DEFAULT '1' COMMENT '状态：0-停用，1-启用',
+  `superior` varchar(255) NOT NULL COMMENT '所有上级角色代码',
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `operator_no` (`operator_no`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='操作员表';
+  UNIQUE KEY `uk_operator_no` (`operator_no`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='操作员表';
 
 -- ----------------------------
 -- Records of sys_operator
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_operator` VALUES (1, 'root', 'root', '97da10d6a688e01e08944d2339eefb163fb5a9e066641c70f2f377f2173b36b8', '0', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '超级管理员', '1', '2018-09-04 14:16:55', '2020-03-26 18:55:49');
-INSERT INTO `sys_operator` VALUES (2, 'admin', 'admin', '2daceebc4e31654d326ae7889b397ed50ff7e5afff374d1f89525865fd87efe0', '10', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '2018-09-09 12:11:47', '2019-06-23 22:49:38');
-INSERT INTO `sys_operator` VALUES (3, 'system', 'system', 'a491ce8907a6e5ec70f24450793f886f3e20afd4cf70e9f6daa02e666d720fc5', '10', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '2019-01-05 17:51:31', '2019-06-23 22:49:48');
-INSERT INTO `sys_operator` VALUES (4, 'Administrator', 'Administrator', 'f1c4598719723cb341ab439c74baf60141f7151e20b16d91f345f7646421de9d', '0', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '', '1', '2020-04-20 14:11:40', '2020-04-20 14:11:40');
+INSERT INTO `sys_operator` VALUES (1, 'yuntao', 'yuntao', '403b80d48cd2e99573da838690ff84ac498aa39822e6f0a3153a654820f04340', '0', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '', '1', '0', '2020-06-03 21:19:25', '2020-06-04 00:04:49');
+INSERT INTO `sys_operator` VALUES (2, 'root', 'root', '97da10d6a688e01e08944d2339eefb163fb5a9e066641c70f2f377f2173b36b8', '0', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '超级管理员', '1', '0', '2018-09-04 14:16:55', '2020-06-03 23:12:03');
+INSERT INTO `sys_operator` VALUES (3, 'Administrator', 'Administrator', 'f1c4598719723cb341ab439c74baf60141f7151e20b16d91f345f7646421de9d', '0', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '', '1', '0', '2020-04-20 14:11:40', '2020-06-03 23:12:06');
+INSERT INTO `sys_operator` VALUES (4, 'admin', 'admin', '2daceebc4e31654d326ae7889b397ed50ff7e5afff374d1f89525865fd87efe0', '10', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '0,10', '2018-09-09 12:11:47', '2020-06-03 23:12:17');
+INSERT INTO `sys_operator` VALUES (5, 'system', 'system', 'a491ce8907a6e5ec70f24450793f886f3e20afd4cf70e9f6daa02e666d720fc5', '10', '', '', '43DFC020D2623C98D3A4BCBABC21D227', 'B343446324CEB0B17B0365E220C85BE1', '', '系统管理员', '1', '0,10', '2019-01-05 17:51:31', '2020-06-03 23:12:20');
 COMMIT;
 
 -- ----------------------------
@@ -3642,7 +3645,7 @@ CREATE TABLE `sys_organization` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`org_id`),
-  UNIQUE KEY `org_code` (`org_code`) USING BTREE
+  UNIQUE KEY `uk_org_code` (`org_code`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='组织结构表';
 
 -- ----------------------------
@@ -3661,23 +3664,23 @@ CREATE TABLE `sys_param` (
   `param_data` varchar(100) NOT NULL COMMENT '参数值',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
   `valid_status` char(1) NOT NULL DEFAULT '1' COMMENT '状态：0-停用，1-启用',
-  `modified_role_id` varchar(100) DEFAULT '' COMMENT '可以看到该参数的角色，多个角色用‘,’隔开，为空则所有角色都可以看到',
+  `modified_role_code` varchar(100) DEFAULT '' COMMENT '可以看到该参数的角色，多个角色用‘,’隔开，为空则所有角色都可以看到',
   `priority` int(10) unsigned NOT NULL COMMENT '优先级',
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `param_code` (`param_code`)
+  UNIQUE KEY `uk_param_code` (`param_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='系统基础参数表';
 
 -- ----------------------------
 -- Records of sys_param
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_param` VALUES (1, 'sys_check_verify_code', '1', '登录时是否验证验证码：0-不验证，1-验证', '1', '0', 1, '2018-09-04 17:46:30', '2020-04-23 23:43:24');
+INSERT INTO `sys_param` VALUES (1, 'sys_check_verify_code', '1', '登录时是否验证验证码：0-不验证，1-验证', '1', '0', 1, '2018-09-04 17:46:30', '2020-06-02 22:36:21');
 INSERT INTO `sys_param` VALUES (2, 'sys_check_google_authenticator', '0', '登录时是否验证谷歌验证器：0-不验证，1-验证', '1', '0', 2, '2019-03-06 16:26:43', '2020-04-23 23:44:18');
 INSERT INTO `sys_param` VALUES (3, 'sys_google_authenticator_secret', 'BUX5OUIKAG2UZWED', '登录时谷歌验证器密钥', '1', '0', 3, '2019-06-24 13:38:30', '2019-06-24 13:39:22');
 INSERT INTO `sys_param` VALUES (4, 'sys_check_white_ip', '0', '登录时是否验证IP白名单：0-不验证，1-验证', '1', '0', 4, '2018-09-04 17:55:15', '2019-06-24 13:38:46');
-INSERT INTO `sys_param` VALUES (5, 'sys_single_location_login', '0', '登录时是否验证单一位置登录：0-不验证，即同一账号可以同时在多处登录，1-验证，即同一账号只能同时在一处登录', '1', '0', 5, '2019-05-06 18:12:17', '2019-06-24 13:38:48');
+INSERT INTO `sys_param` VALUES (5, 'sys_single_location_login', '0', '登录时是否验证单一位置登录：0-不验证，即同一账号可以同时在多处登录，1-验证，即同一账号只能同时在一处登录', '1', '0', 5, '2019-05-06 18:12:17', '2020-06-06 00:41:33');
 COMMIT;
 
 -- ----------------------------
@@ -3694,7 +3697,7 @@ CREATE TABLE `sys_power` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `power_item` (`power_item`) USING BTREE
+  UNIQUE KEY `uk_power_item` (`power_item`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COMMENT='系统权限项表';
 
 -- ----------------------------
@@ -3730,20 +3733,21 @@ CREATE TABLE `sys_role` (
   `valid_status` char(1) NOT NULL DEFAULT '1' COMMENT '状态：0-停用，1-启用',
   `remark` varchar(200) DEFAULT '' COMMENT '备注',
   `priority` int(10) unsigned NOT NULL COMMENT '优先级',
+  `superior` varchar(255) NOT NULL COMMENT '所有上级角色代码',
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `role_id` (`role_id`),
-  UNIQUE KEY `role_code` (`role_code`) USING BTREE
+  UNIQUE KEY `uk_role_id` (`role_id`),
+  UNIQUE KEY `uk_role_code` (`role_code`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='系统角色表';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_role` VALUES (1, '0', '0', '超级管理员', '-1', '1', '1', '1', '具有所有权限', 1, '2018-09-02 18:03:45', '2018-09-02 18:55:26');
-INSERT INTO `sys_role` VALUES (2, '1', '1', '子账号', '-1', '1', '1', '1', '子账号', 99, '2018-09-02 18:03:45', '2018-09-02 18:55:29');
-INSERT INTO `sys_role` VALUES (3, '10', '10', '系统操作员', '0', '1', '1', '1', '', 1, '2018-09-02 18:03:45', '2018-09-02 18:55:34');
+INSERT INTO `sys_role` VALUES (1, '0', '0', '超级管理员', '-1', '1', '1', '1', '具有所有权限', 1, '0', '2018-09-02 18:03:45', '2020-06-03 21:00:34');
+INSERT INTO `sys_role` VALUES (2, '1', '1', '子账号', '-1', '1', '1', '1', '子账号', 99, '1', '2018-09-02 18:03:45', '2020-06-03 21:00:40');
+INSERT INTO `sys_role` VALUES (3, '10', '10', '系统操作员', '0', '1', '1', '1', '', 1, '0,10', '2018-09-02 18:03:45', '2020-06-03 21:01:17');
 COMMIT;
 
 -- ----------------------------
@@ -3752,16 +3756,16 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_role_module_power`;
 CREATE TABLE `sys_role_module_power` (
   `rmp_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `role_id` varchar(50) NOT NULL COMMENT '角色ID',
+  `role_code` varchar(50) NOT NULL COMMENT '角色代码',
   `module_code` varchar(50) NOT NULL COMMENT '模块代码',
   `power_item` varchar(20) NOT NULL DEFAULT '' COMMENT '权限项',
   `sub_no` varchar(30) DEFAULT '' COMMENT '子账号',
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`rmp_id`) USING BTREE,
-  KEY `module_code` (`module_code`) USING BTREE,
-  KEY `power_item` (`power_item`) USING BTREE,
-  KEY `role_id` (`role_id`) USING BTREE
+  KEY `idx_module_code` (`module_code`) USING BTREE,
+  KEY `idx_power_item` (`power_item`) USING BTREE,
+  KEY `idx_role_code` (`role_code`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统角色权限表';
 
 -- ----------------------------
@@ -3785,7 +3789,7 @@ CREATE TABLE `sys_schedule_job` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `job_name` (`job_name`,`job_group`)
+  UNIQUE KEY `uk_job_name` (`job_name`,`job_group`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务定义表';
 
 -- ----------------------------
@@ -3814,7 +3818,7 @@ CREATE TABLE `sys_schedule_trigger` (
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `trigger_name` (`trigger_name`,`trigger_group`)
+  UNIQUE KEY `uk_trigger_name` (`trigger_name`,`trigger_group`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务触发器表表';
 
 -- ----------------------------
@@ -3850,7 +3854,7 @@ COMMIT;
 -- View structure for view_login_user
 -- ----------------------------
 DROP VIEW IF EXISTS `view_login_user`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_login_user` AS select `sys_operator`.`operator_no` AS `login_no`,`sys_operator`.`operator_name` AS `login_name`,`sys_operator`.`operator_password` AS `password`,`sys_operator`.`operator_role_id` AS `role_id`,`sys_operator`.`master_no` AS `master_no`,`sys_operator`.`master_role_id` AS `master_role_id`,`sys_operator`.`valid_status` AS `valid_status`,`sys_operator`.`head_image` AS `head_image` from `sys_operator`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_login_user` AS select `sys_operator`.`operator_no` AS `login_no`,`sys_operator`.`operator_name` AS `login_name`,`sys_operator`.`operator_password` AS `password`,`sys_operator`.`operator_role_code` AS `role_code`,`sys_operator`.`master_no` AS `master_no`,`sys_operator`.`master_role_code` AS `master_role_code`,`sys_operator`.`valid_status` AS `valid_status`,`sys_operator`.`head_image` AS `head_image` from `sys_operator`;
 
 -- ----------------------------
 -- View structure for view_user
@@ -3888,19 +3892,19 @@ delimiter ;
 -- ----------------------------
 DROP FUNCTION IF EXISTS `get_parent_roles_with_self`;
 delimiter ;;
-CREATE FUNCTION `get_parent_roles_with_self`(roleId varchar(50))
+CREATE FUNCTION `get_parent_roles_with_self`(roleCode varchar(50))
  RETURNS varchar(1000) CHARSET utf8mb4
 BEGIN
-  DECLARE parentRoleId varchar(50) DEFAULT '';
-  DECLARE parentRoles varchar(1000) DEFAULT CONCAT(',', roleId, ',');
+  DECLARE parentRoleCode varchar(50) DEFAULT '';
+  DECLARE parentRoles varchar(1000) DEFAULT CONCAT(',', roleCode, ',');
 
-  WHILE (roleId IS NOT NULL AND roleId != '') DO
-    SELECT parent_role_id INTO parentRoleId FROM sys_role WHERE role_id = roleId;
-    IF (parentRoleId IS NOT NULL AND parentRoleId != '' AND parentRoleId != '-1') THEN
-      SET parentRoles = CONCAT(parentRoles, parentRoleId, ',');
-      SET roleId = parentRoleId;
+  WHILE (roleCode IS NOT NULL AND roleCode != '') DO
+    SELECT parent_role.role_code INTO parentRoleCode FROM sys_role role, sys_role parent_role WHERE role.parent_role_id = parent_role.role_id and role.role_code = roleCode;
+    IF (parentRoleCode IS NULL OR parentRoleCode = '') THEN
+			SET roleCode = NULL;
     ELSE
-      SET roleId = NULL;
+      SET parentRoles = CONCAT(parentRoles, parentRoleCode, ',');
+      SET roleCode = parentRoleCode;
     END IF;
   END WHILE;
   RETURN parentRoles;

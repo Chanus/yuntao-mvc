@@ -34,17 +34,17 @@ public class LoginUser implements Serializable {
     /**
      * 用户角色代码
      */
-    private String roleId;
+    private String roleCode;
 
     /**
-     * 用户主账号
+     * 用户主账号，如果用户是子账号，则存放其主账号，否则为用户账号本身
      */
     private String masterNo;
 
     /**
-     * 用户主账号角色代码
+     * 用户主账号角色代码，如果用户是子账号，则存放其主账号角色代码，否则为用户账号本身角色代码
      */
-    private String masterRoleId;
+    private String masterRoleCode;
 
     /**
      * 用户登录IP
@@ -118,12 +118,12 @@ public class LoginUser implements Serializable {
         return this;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public LoginUser setRoleId(String roleId) {
-        this.roleId = roleId;
+    public LoginUser setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
         return this;
     }
 
@@ -136,12 +136,12 @@ public class LoginUser implements Serializable {
         return this;
     }
 
-    public String getMasterRoleId() {
-        return masterRoleId;
+    public String getMasterRoleCode() {
+        return masterRoleCode;
     }
 
-    public LoginUser setMasterRoleId(String masterRoleId) {
-        this.masterRoleId = masterRoleId;
+    public LoginUser setMasterRoleCode(String masterRoleCode) {
+        this.masterRoleCode = masterRoleCode;
         return this;
     }
 
@@ -195,9 +195,9 @@ public class LoginUser implements Serializable {
         return "LoginUser [" +
                 "loginNo=" + loginNo +
                 ", loginName=" + loginName +
-                ", roleId=" + roleId +
+                ", roleCode=" + roleCode +
                 ", masterNo=" + masterNo +
-                ", masterRoleId=" + masterRoleId +
+                ", masterRoleCode=" + masterRoleCode +
                 ", loginIp=" + loginIp +
                 ", headImage=" + headImage +
                 ", object=" + object +

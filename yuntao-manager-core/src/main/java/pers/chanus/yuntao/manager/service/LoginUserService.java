@@ -30,12 +30,12 @@ public interface LoginUserService {
      *
      * @param loginNo  登录账号
      * @param password 登录密码
-     * @param roleId   登录角色
+     * @param roleCode 登录角色
      * @param loginIp  登录IP
      * @return
      * @since 0.0.3
      */
-    Message login(String loginNo, String password, String roleId, String loginIp);
+    Message login(String loginNo, String password, String roleCode, String loginIp);
 
     /**
      * 根据登录账号获取用户信息，不区分账号字母大小写

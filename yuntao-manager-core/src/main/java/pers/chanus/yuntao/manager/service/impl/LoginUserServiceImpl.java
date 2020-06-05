@@ -74,7 +74,7 @@ public class LoginUserServiceImpl implements LoginUserService {
         if (!SHAUtils.verifySHA256(password + loginNo, loginUserView.getPassword()))
             return Message.fail("登录密码不正确");
 
-        Role role = roleMapper.getLoginStatus(loginUserView.getRoleId());
+        Role role = roleMapper.getLoginStatus(loginUserView.getRoleCode());
         if (role == null)
             return Message.fail("当前用户角色不存在");
         if (ConfigConsts.STATUS_NO.equals(role.getValidStatus()))
@@ -82,23 +82,23 @@ public class LoginUserServiceImpl implements LoginUserService {
         if (ConfigConsts.STATUS_NO.equals(role.getLoginFlag()))
             return Message.fail("当前用户角色不允许登录系统");
 
-        List<Module> menus = moduleMapper.listMenu(loginUserView.getRoleId(), loginUserView.getLoginNo());
+        List<Module> menus = moduleMapper.listMenu(loginUserView.getRoleCode(), loginUserView.getLoginNo());
         if (CollectionUtils.isEmpty(menus))
             return Message.fail("当前用户没有系统权限");
 
         LoginUser loginUser = new LoginUser().setLoginNo(loginUserView.getLoginNo())
-                .setLoginName(loginUserView.getLoginName()).setRoleId(loginUserView.getRoleId())
+                .setLoginName(loginUserView.getLoginName()).setRoleCode(loginUserView.getRoleCode())
                 .setMasterNo(ObjectUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
-                .setMasterRoleId(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleId(), loginUserView.getRoleId()))
+                .setMasterRoleCode(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleCode(), loginUserView.getRoleCode()))
                 .setLoginIp(loginIp).setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
-                .setUrls(moduleMapper.listUrl(loginUserView.getRoleId(), loginUserView.getLoginNo()));
+                .setUrls(moduleMapper.listUrl(loginUserView.getRoleCode(), loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
 
         return Message.success("登录成功").initMsg(loginUser);
     }
 
     @Override
-    public Message login(String loginNo, String password, String roleId, String loginIp) {
+    public Message login(String loginNo, String password, String roleCode, String loginIp) {
         if (StringUtils.isBlank(loginNo))
             return Message.fail("登录账号不能为空");
         if (StringUtils.isBlank(password))
@@ -127,13 +127,13 @@ public class LoginUserServiceImpl implements LoginUserService {
             return Message.fail("当前用户不可用");
         if (!SHAUtils.verifySHA256(password + loginNo, loginUserView.getPassword()))
             return Message.fail("登录密码不正确");
-        if (StringUtils.isBlank(loginUserView.getRoleId()))
+        if (StringUtils.isBlank(loginUserView.getRoleCode()))
             return Message.fail("当前用户角色不存在");
-        String[] userRoleIds = loginUserView.getRoleId().split(",");
-        if (!CollectionUtils.contains(userRoleIds, roleId))
+        String[] userRoleCodes = loginUserView.getRoleCode().split(",");
+        if (!CollectionUtils.contains(userRoleCodes, roleCode))
             return Message.fail("当前用户角色不存在");
 
-        Role role = roleMapper.getLoginStatus(roleId);
+        Role role = roleMapper.getLoginStatus(roleCode);
         if (role == null)
             return Message.fail("当前用户角色不存在");
         if (ConfigConsts.STATUS_NO.equals(role.getValidStatus()))
@@ -141,16 +141,16 @@ public class LoginUserServiceImpl implements LoginUserService {
         if (ConfigConsts.STATUS_NO.equals(role.getLoginFlag()))
             return Message.fail("当前用户角色不允许登录系统");
 
-        List<Module> menus = moduleMapper.listMenu(roleId, loginUserView.getLoginNo());
+        List<Module> menus = moduleMapper.listMenu(roleCode, loginUserView.getLoginNo());
         if (CollectionUtils.isEmpty(menus))
             return Message.fail("当前用户没有系统权限");
 
         LoginUser loginUser = new LoginUser().setLoginNo(loginUserView.getLoginNo())
-                .setLoginName(loginUserView.getLoginName()).setRoleId(roleId)
+                .setLoginName(loginUserView.getLoginName()).setRoleCode(roleCode)
                 .setMasterNo(ObjectUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
-                .setMasterRoleId(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleId(), roleId))
+                .setMasterRoleCode(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleCode(), roleCode))
                 .setLoginIp(loginIp).setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
-                .setUrls(moduleMapper.listUrl(roleId, loginUserView.getLoginNo()));
+                .setUrls(moduleMapper.listUrl(roleCode, loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
 
         return Message.success("登录成功").initMsg(loginUser);

@@ -8,7 +8,7 @@ public class RoleModulePower implements Serializable {
 
     private Integer rmpId;
 
-    private String roleId;
+    private String roleCode;
 
     private String moduleCode;
 
@@ -28,12 +28,12 @@ public class RoleModulePower implements Serializable {
         this.rmpId = rmpId;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode == null ? null : roleCode.trim();
     }
 
     public String getModuleCode() {
@@ -80,7 +80,7 @@ public class RoleModulePower implements Serializable {
     public String toString() {
         return "RoleModulePower [" +
                 "rmpId=" + rmpId +
-                ", roleId=" + roleId +
+                ", roleCode=" + roleCode +
                 ", moduleCode=" + moduleCode +
                 ", powerItem=" + powerItem +
                 ", subNo=" + subNo +

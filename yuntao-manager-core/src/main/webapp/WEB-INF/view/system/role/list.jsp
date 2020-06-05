@@ -96,7 +96,7 @@
         </tr>
         {{# } }}
       {{# } }}
-      {{# if(d.currentRoleId != '0' && ${sessionScope.loginUser.roleCode } != d.currentRoleId && ${powers.containsKey('CONFIG') }){ }}
+      {{# if(d.currentRoleCode != '0' && ${sessionScope.loginUser.masterRoleCode } != d.currentRoleCode && ${powers.containsKey('CONFIG') }){ }}
       <tr>
         <td colspan="4" align="center">
           <button id="grant" class="layui-btn layui-btn-normal">授权</button>
@@ -108,6 +108,6 @@
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${ctx }/lib/zTree/jquery.ztree.core.min.js"></script>
-    <script type="text/javascript" src="${ctx }/js/system/role.js?v=0.1.9.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/role.js?v=0.1.9.2"></script>
   </body>
 </html>

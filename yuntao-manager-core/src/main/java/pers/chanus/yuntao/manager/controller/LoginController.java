@@ -149,7 +149,7 @@ public class LoginController extends BaseController {
         }
 
         String loginname = (String) params.get("loginname");
-        String roleId = (String) params.get("roleId");
+        String roleCode = (String) params.get("roleCode");
         String password = (String) params.get("password");
         try {
             password = RSAUtils.decryptByPrivateKey(password, CacheData.RSA_KEYS_MAP.get(rsaPublicKey));
@@ -158,10 +158,10 @@ public class LoginController extends BaseController {
         }
 
         Message message;
-        if (StringUtils.isBlank(roleId)) {
+        if (StringUtils.isBlank(roleCode)) {
             message = loginUserService.login(loginname, password, IpUtils.getIpAddress(getRequest()));
         } else {
-            message = loginUserService.login(loginname, password, roleId, IpUtils.getIpAddress(getRequest()));
+            message = loginUserService.login(loginname, password, roleCode, IpUtils.getIpAddress(getRequest()));
         }
 
         if (message.getCode() == MsgCode.SUCCESS) {// 存储登录账号信息
@@ -198,21 +198,21 @@ public class LoginController extends BaseController {
         LoginUser loginUser = LoginUser.getLoginUser();
         if (loginUser == null) {
             getSession().invalidate();
-            logService.insert(getRequest(), null, null, LogTypeEnum.LOGOUT, "登录状态异常：loginUser为空");
+            logService.logout(getRequest(), "登录状态异常：loginUser为空");
             return Message.fail("请重新登录系统");
         }
 
         String sessionId = SessionSave.getSessionIdSave().get(loginUser.getLoginNo());
         if (StringUtils.isBlank(sessionId)) {
             getSession().invalidate();
-            logService.insert(getRequest(), null, null, LogTypeEnum.LOGOUT, "登录状态异常：sessionId为空");
+            logService.logout(getRequest(), "登录状态异常：sessionId为空");
             return Message.fail("请重新登录系统");
         }
 
         String currentSessionId = getSession().getId();
         if (!sessionId.equals(currentSessionId)) {
             getSession().invalidate();
-            logService.insert(getRequest(), null, null, LogTypeEnum.LOGOUT, "登录状态异常：异地登录");
+            logService.logout(getRequest(), "登录状态异常：异地登录");
             return Message.fail("当前账号已在其他地方登录");
         }
 

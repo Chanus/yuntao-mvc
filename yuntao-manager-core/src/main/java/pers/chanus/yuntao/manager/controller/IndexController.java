@@ -65,8 +65,8 @@ public class IndexController extends BaseController {
         try {
             HttpSession session = getSession();
             LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
-            loginUser.setMenus(moduleService.listMenu(loginUser.getRoleId(), loginUser.getLoginNo()));
-            loginUser.setUrls(moduleService.listUrl(loginUser.getRoleId(), loginUser.getLoginNo()));
+            loginUser.setMenus(moduleService.listMenu(loginUser.getRoleCode(), loginUser.getLoginNo()));
+            loginUser.setUrls(moduleService.listUrl(loginUser.getRoleCode(), loginUser.getLoginNo()));
             session.setAttribute("loginUser", loginUser);
             message = Message.success("重新加载权限成功");
         } catch (Exception e) {

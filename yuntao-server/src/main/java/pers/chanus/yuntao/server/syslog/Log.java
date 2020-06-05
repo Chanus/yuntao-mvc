@@ -47,6 +47,8 @@ public class Log implements Serializable {
 
     private String operateModuleName;
 
+    private String operateMasterRoleCode;
+
     private final static Map<String, String> LOGTYPE_MAP = new LinkedHashMap<>();
 
     static {
@@ -206,6 +208,14 @@ public class Log implements Serializable {
 
     public void setOperateModuleName(String operateModuleName) {
         this.operateModuleName = operateModuleName;
+    }
+
+    public String getOperateMasterRoleCode() {
+        return operateMasterRoleCode;
+    }
+
+    public void setOperateMasterRoleCode(String operateMasterRoleCode) {
+        this.operateMasterRoleCode = operateMasterRoleCode;
     }
 
     @Override

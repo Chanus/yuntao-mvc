@@ -18,17 +18,17 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, role_id, role_code, role_name, parent_role_id, login_flag, has_operator, valid_status, 
+    id, role_id, role_code, role_name, parent_role_id, login_flag, has_operator, valid_status,
     remark, priority, superior, gmt_create, gmt_modified
   </sql>
-  
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sys_role
     where id = #{id,jdbcType=INTEGER}
   </select>
-  
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_role
     <where>
@@ -45,7 +45,7 @@
       </choose>
     </where>
   </delete>
-  
+
   <insert id="insertSelective" parameterType="pers.chanus.yuntao.manager.model.Role">
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -131,7 +131,7 @@
       </if>
     </trim>
   </insert>
-  
+
   <update id="updateByPrimaryKeySelective" parameterType="pers.chanus.yuntao.manager.model.Role">
     update sys_role
     <set>
@@ -174,13 +174,13 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
+
   <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from sys_role
     <where>
       and role_id &lt;&gt; '1'
-      <if test='roleId != null and roleId != "0"'>
-        and role_id like concat(#{roleId,jdbcType=VARCHAR}, '%')
+      <if test='roleCode != null and roleCode != "0"'>
+        and FIND_IN_SET(#{roleCode,jdbcType=VARCHAR}, superior)
       </if>
       <if test="parentRoleId != null">
         and parent_role_id = #{parentRoleId,jdbcType=VARCHAR}
@@ -193,15 +193,15 @@
       </if>
     </where>
   </select>
-  
+
   <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sys_role
     <where>
       and role_id &lt;&gt; '1'
-      <if test='roleId != null and roleId != "0"'>
-        and role_id like concat(#{roleId,jdbcType=VARCHAR}, '%')
+      <if test='roleCode != null and roleCode != "0"'>
+        and FIND_IN_SET(#{roleCode,jdbcType=VARCHAR}, superior)
       </if>
       <if test="parentRoleId != null">
         and parent_role_id = #{parentRoleId,jdbcType=VARCHAR}
@@ -218,11 +218,27 @@
       limit #{start,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
     </if>
   </select>
-  
+
   <select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sys_role
     where role_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getByRoleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where role_code = #{roleCode,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getParentRole" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    p.id, p.role_id, p.role_code, p.role_name, p.parent_role_id, p.login_flag, p.has_operator, p.valid_status,
+    p.remark, p.priority, p.superior
+    from sys_role
+    inner join sys_role p on sys_role.parent_role_id = p.role_id
+    where sys_role.role_code = #{roleCode,jdbcType=VARCHAR}
   </select>
 </mapper>

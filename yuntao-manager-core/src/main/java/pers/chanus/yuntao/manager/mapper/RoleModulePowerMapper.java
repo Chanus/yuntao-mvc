@@ -5,7 +5,7 @@ import pers.chanus.yuntao.manager.model.RoleModulePower;
 import java.util.List;
 
 public interface RoleModulePowerMapper {
-    int deleteByRoleId(String roleId);
+    int deleteByRoleCode(String roleCode);
 
     int deleteBySubNo(String subNo);
 

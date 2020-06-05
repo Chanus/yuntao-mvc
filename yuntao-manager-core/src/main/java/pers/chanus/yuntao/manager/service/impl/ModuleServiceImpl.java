@@ -141,28 +141,29 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module, Int
     }
 
     @Override
-    public List<Module> listRoleModulePower(String roleId) {
-        if (ConfigConsts.ROLE_ADMIN_0.equals(roleId)) {// 超级管理员
+    public List<Module> listRoleModulePower(String roleCode) {
+        if (ConfigConsts.ROLE_ADMIN_0.equals(roleCode)) {// 超级管理员
             return mapper.listRoleModulePowerForAdmin();
         } else {
-            Role role = roleMapper.get(roleId);
-            return ConfigConsts.STATUS_YES.equals(role.getLoginFlag()) ? mapper.listRoleModulePowerForNotAdmin(roleId, role.getParentRoleId()) : null;
+            Role role = roleMapper.getByRoleCode(roleCode);
+            Role parentRole = roleMapper.get(role.getParentRoleId());
+            return ConfigConsts.STATUS_YES.equals(role.getLoginFlag()) ? mapper.listRoleModulePowerForNotAdmin(roleCode, parentRole.getRoleCode()) : null;
         }
     }
 
     @Override
-    public List<Module> listSubModulePower(String subNo, String masterRoleId) {
-        return mapper.listSubModulePower(subNo, masterRoleId);
+    public List<Module> listSubModulePower(String subNo, String masterRoleCode) {
+        return mapper.listSubModulePower(subNo, masterRoleCode);
     }
 
     @Override
-    public List<Module> listMenu(String roleId, String subNo) {
-        return mapper.listMenu(roleId, subNo);
+    public List<Module> listMenu(String roleCode, String subNo) {
+        return mapper.listMenu(roleCode, subNo);
     }
 
     @Override
-    public List<String> listUrl(String roleId, String subNo) {
-        return mapper.listUrl(roleId, subNo);
+    public List<String> listUrl(String roleCode, String subNo) {
+        return mapper.listUrl(roleCode, subNo);
     }
 
     @Transactional

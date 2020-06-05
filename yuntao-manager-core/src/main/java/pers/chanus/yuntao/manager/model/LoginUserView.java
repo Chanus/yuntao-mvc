@@ -11,11 +11,11 @@ public class LoginUserView implements Serializable {
 
     private String password;
 
-    private String roleId;
+    private String roleCode;
 
     private String masterNo;
 
-    private String masterRoleId;
+    private String masterRoleCode;
 
     private String validStatus;
 
@@ -45,12 +45,12 @@ public class LoginUserView implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode == null ? null : roleCode.trim();
     }
 
     public String getMasterNo() {
@@ -61,12 +61,12 @@ public class LoginUserView implements Serializable {
         this.masterNo = masterNo == null ? null : masterNo.trim();
     }
 
-    public String getMasterRoleId() {
-        return masterRoleId;
+    public String getMasterRoleCode() {
+        return masterRoleCode;
     }
 
-    public void setMasterRoleId(String masterRoleId) {
-        this.masterRoleId = masterRoleId == null ? null : masterRoleId.trim();
+    public void setMasterRoleCode(String masterRoleCode) {
+        this.masterRoleCode = masterRoleCode == null ? null : masterRoleCode.trim();
     }
 
     public String getValidStatus() {
@@ -91,9 +91,9 @@ public class LoginUserView implements Serializable {
                 "loginNo=" + loginNo +
                 ", loginName=" + loginName +
                 ", password=" + password +
-                ", roleId=" + roleId +
+                ", roleCode=" + roleCode +
                 ", masterNo=" + masterNo +
-                ", masterRoleId=" + masterRoleId +
+                ", masterRoleCode=" + masterRoleCode +
                 ", validStatus=" + validStatus +
                 ", headImage=" + headImage +
                 "]";

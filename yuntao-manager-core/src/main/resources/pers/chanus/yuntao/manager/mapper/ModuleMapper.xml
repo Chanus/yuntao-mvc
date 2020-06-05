@@ -311,7 +311,7 @@
   
   <select id="listRoleModulePowerForNotAdmin" resultMap="RoleModulePowerMap">
     <choose>
-      <when test='parentRoleId == "0"'>
+      <when test='parentRoleCode == "0"'>
         select 
         sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name,
         sm2.module_id, sm2.module_code, sm2.module_name,
@@ -320,7 +320,7 @@
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
         inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        left join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{roleId,jdbcType=VARCHAR}
+        left join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_code = #{roleCode,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
         and sm1.module_for_admin = '0'
@@ -342,8 +342,8 @@
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
         inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{parentRoleId,jdbcType=VARCHAR}
-        left join sys_role_module_power srmp2 on sm2.module_code = srmp2.module_code and smp.power_item = srmp2.power_item and srmp2.role_id = #{roleId,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_code = #{parentRoleCode,jdbcType=VARCHAR}
+        left join sys_role_module_power srmp2 on sm2.module_code = srmp2.module_code and smp.power_item = srmp2.power_item and srmp2.role_code = #{roleCode,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
         and sm1.module_for_admin = '0'
@@ -361,7 +361,7 @@
   
   <select id="listSubModulePower" resultMap="RoleModulePowerMap">
     <choose>
-      <when test="masterRoleId == 0">
+      <when test="masterRoleCode == 0">
         select 
         sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name,
         sm2.module_id, sm2.module_code, sm2.module_name,
@@ -376,7 +376,6 @@
         and sm1.valid_status = '1'
         and sm2.module_for_permission = '1'
         and sm2.valid_status = '1'
-        and sm2.module_id &lt;&gt; '1007'
         and sp.valid_status = '1'
         order by sm1.module_level asc, sm2.module_level asc, sp.priority asc
       </when>
@@ -389,7 +388,7 @@
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
         inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{masterRoleId,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_code = #{masterRoleCode,jdbcType=VARCHAR}
         left join sys_role_module_power submp on sm2.module_code = submp.module_code and smp.power_item = submp.power_item and submp.sub_no = #{subNo,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
@@ -398,7 +397,6 @@
         and sm2.module_for_permission = '1'
         and sm2.module_for_admin = '0'
         and sm2.valid_status = '1'
-        and sm2.module_id &lt;&gt; '1007'
         and sp.valid_status = '1'
         order by sm1.module_level asc, sm2.module_level asc, sp.priority asc
       </otherwise>
@@ -407,7 +405,7 @@
   
   <select id="listMenu" resultMap="RoleModulePowerMap">
     <choose>
-      <when test='roleId == "0"'>
+      <when test='roleCode == "0"'>
         select 
         sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name, sm1.module_icon p_module_icon, sm1.module_target p_module_target,
         sm1.module_is_menu p_module_is_menu, sm2.module_id, sm2.module_parent_id, sm2.module_code, sm2.module_name, sm2.module_url, sm2.module_icon,
@@ -426,7 +424,7 @@
         and sp.valid_status = '1'
         order by sm1.module_level asc, sm2.module_level asc, sp.priority asc
       </when>
-      <when test='roleId == "1"'>
+      <when test='roleCode == "1"'>
         select 
         sm1.module_id p_module_id, sm1.module_code p_module_code, sm1.module_name p_module_name, sm1.module_icon p_module_icon, sm1.module_target p_module_target,
         sm1.module_is_menu p_module_is_menu, sm2.module_id, sm2.module_parent_id, sm2.module_code, sm2.module_name, sm2.module_url, sm2.module_icon,
@@ -455,7 +453,7 @@
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
         inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{roleId,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_code = #{roleCode,jdbcType=VARCHAR}
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'
         and sm1.module_for_admin = '0'
@@ -471,10 +469,10 @@
   
   <select id="listUrl" resultType="java.lang.String">
     <choose>
-      <when test='roleId == "0"'>
+      <when test='roleCode == "0"'>
         select distinct url from sys_module_power_method
       </when>
-      <when test='roleId == "1"'>
+      <when test='roleCode == "1"'>
         select distinct url from sys_module sm1
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
         inner join sys_module_power smp on sm2.module_code = smp.module_code
@@ -507,7 +505,7 @@
         inner join sys_module sm2 on sm1.module_id = sm2.module_parent_id
         inner join sys_module_power smp on sm2.module_code = smp.module_code
         inner join sys_power sp on smp.power_item = sp.power_item
-        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_id = #{roleId,jdbcType=VARCHAR}
+        inner join sys_role_module_power srmp on sm2.module_code = srmp.module_code and smp.power_item = srmp.power_item and srmp.role_code = #{roleCode,jdbcType=VARCHAR}
         inner join sys_module_power_method smpm on smp.mp_id = smpm.mp_id
         where sm1.module_parent_id = 0
         and sm1.module_for_permission = '1'

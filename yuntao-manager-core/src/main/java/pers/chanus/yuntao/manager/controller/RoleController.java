@@ -63,7 +63,7 @@ public class RoleController extends BaseController {
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
     public PageBean list() {
-        return roleService.listPagination(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleCode()));
+        return roleService.listPagination(getParams().putNext("roleCode", LoginUser.getLoginUser().getMasterRoleCode()));
     }
 
     /**
@@ -74,7 +74,7 @@ public class RoleController extends BaseController {
     @ResponseBody
     @PostMapping(value = "tree.do", produces = "application/json; charset=utf-8")
     public Object tree() {
-        return JSON.parse(roleService.createTree(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleCode())));
+        return JSON.parse(roleService.createTree(LoginUser.getLoginUser().getMasterRoleCode()));
     }
 
     /**
@@ -86,7 +86,7 @@ public class RoleController extends BaseController {
     @GetMapping(value = "add.do")
     public String add(Model model) {
         model.addAttribute("role", new Role());
-        model.addAttribute("parentRoles", roleService.list(getParams().putNext("roleId", LoginUser.getLoginUser().getMasterRoleCode())));
+        model.addAttribute("parentRoles", roleService.list(getParams().putNext("roleCode", LoginUser.getLoginUser().getMasterRoleCode())));
         model.addAttribute("cmd", "add");
         return "system/role/add-update";
     }
@@ -147,26 +147,26 @@ public class RoleController extends BaseController {
     /**
      * 获取角色的模块权限列表
      *
-     * @param roleId 角色代码
+     * @param roleCode 角色代码
      * @return
      */
     @ResponseBody
     @PostMapping(value = "list-role-module-power.do", produces = "application/json; charset=utf-8")
-    public List<Module> listRoleModulePower(String roleId) {
-        return moduleService.listRoleModulePower(roleId);
+    public List<Module> listRoleModulePower(String roleCode) {
+        return moduleService.listRoleModulePower(roleCode);
     }
 
     /**
      * 角色授权
      *
-     * @param roleId       角色代码
+     * @param roleCode     角色代码
      * @param modulePowers 模块-权限项数组
      * @return
      */
     @ResponseBody
     @SystemLog(module = currentModuleCode, description = "角色授权", logType = LogTypeEnum.UPDATE)
     @PostMapping(value = "grant.do", produces = "application/json; charset=utf-8")
-    public Message grant(String roleId, String[] modulePowers) {
-        return roleService.grantRoleModulePower(roleId, modulePowers);
+    public Message grant(String roleCode, String[] modulePowers) {
+        return roleService.grantRoleModulePower(roleCode, modulePowers);
     }
 }

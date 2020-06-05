@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.RoleMapper;
 import pers.chanus.yuntao.manager.mapper.RoleModulePowerMapper;
@@ -20,7 +21,6 @@ import pers.chanus.yuntao.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 系统角色管理接口实现
@@ -63,14 +63,12 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
     }
 
     @Override
-    public String createTree(Map<String, Object> params) {
+    public String createTree(String roleCode, String hasOperator) {
         StringBuilder tree = new StringBuilder("[");
-        // 当前角色
-        Role r = mapper.getByRoleCode((String) params.get("roleCode"));
         // 上级角色
-        Role p = mapper.get(r.getParentRoleId());
+        Role p = mapper.getParentRole(roleCode);
         // 构建一个角色列表根节点
-        tree.append("{\"id\":\"").append(r.getParentRoleId())
+        tree.append("{\"id\":\"").append(p == null ? "-1" : p.getRoleId())
                 .append("\", \"roleCode\":\"").append(p == null ? "-1" : p.getRoleCode())// 根节点设置上级角色的角色代码
                 .append("\", \"pId\":\"-1\", \"name\":\"角色列表\", \"open\":true")
                 .append(", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"")
@@ -78,6 +76,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
                 .append(", \"iconClose\":\"../../lib/zTree/zTreeStyle/img/diy/1_close.png\"}");
         try {
             // 构建角色列表目录节点
+            CustomMap params = CustomMap.get().putNext("roleCode", roleCode).putNext("hasOperator", hasOperator);
             List<Role> roles = mapper.list(params);
             if (!CollectionUtils.isEmpty(roles)) {
                 for (Role role : roles) {
@@ -98,19 +97,19 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
 
     @Transactional
     @Override
-    public Message grantRoleModulePower(String roleId, String[] modulePowers) {
-        if (StringUtils.isBlank(roleId))
+    public Message grantRoleModulePower(String roleCode, String[] modulePowers) {
+        if (StringUtils.isBlank(roleCode))
             return Message.fail("请选择被授权的角色");
 
         // 先删除角色原有权限
-        roleModulePowerMapper.deleteByRoleId(roleId);
+        roleModulePowerMapper.deleteByRoleCode(roleCode);
         // 再写入新的角色权限
         if (!CollectionUtils.isEmpty(modulePowers)) {
             List<RoleModulePower> roleModulePowers = new ArrayList<>();
             RoleModulePower roleModulePower;
             for (String s : modulePowers) {
                 roleModulePower = new RoleModulePower();
-                roleModulePower.setRoleId(roleId);
+                roleModulePower.setRoleCode(roleCode);
                 String[] mp = s.split("\\.");
                 roleModulePower.setModuleCode(mp[0]);
                 roleModulePower.setPowerItem(mp[1]);
