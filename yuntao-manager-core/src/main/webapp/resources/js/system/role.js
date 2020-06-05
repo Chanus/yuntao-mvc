@@ -94,12 +94,12 @@ layui.config({
     };
 
     // 渲染角色菜单权限列表
-    renderRoleModulePower = function (roleId) {
+    renderRoleModulePower = function (roleId, roleCode) {
         var loading = layer.load(0, {shade: [0.2, '#000']});//0.2透明度的白色背景
         $.post(action_path + 'list-role-module-power.do', {roleId: roleId}, function (data) {
             var view = $('#roleModulePowerContent');
             if (data && data.length > 0) {
-                data.currentRoleId = roleId;
+                data.currentRoleId = roleCode;
                 var gettpl = $("#roleModulePowerTpl").html();
                 laytpl(gettpl).render(data, function (html) {
                     view.html(html);
@@ -151,6 +151,7 @@ layui.config({
             }
         });
         var roleId = treeObj.getSelectedNodes()[0].id;
+        var roleCode = treeObj.getSelectedNodes()[0].roleCode;
         $.ajax({
             type: 'post',
             url: action_path + 'grant.do?roleId=' + roleId + '&modulePowers=' + modulePowers,
@@ -160,13 +161,13 @@ layui.config({
                 if (data.code === 0) {
                     layer.msg(data.msg, {icon: 1, time: 1000});
                 } else {
-                    renderRoleModulePower(roleId);
+                    renderRoleModulePower(roleId, roleCode);
                     layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
                 }
             },
             error: function () {
                 layer.close(loading);
-                renderRoleModulePower(roleId);
+                renderRoleModulePower(roleId, roleCode);
                 layer.msg('请求异常，授权失败', {icon: 2, anim: 6, time: 1000});
             }
         });
@@ -195,7 +196,7 @@ var setting = {
                 $("#role-list").css('display', 'none');
                 $("#power-list").css('display', '');
                 $("#roleName").html(treeNode.name);
-                renderRoleModulePower(treeNode.id, treeNode.pId);
+                renderRoleModulePower(treeNode.id, treeNode.roleCode);
             }
         }
     },

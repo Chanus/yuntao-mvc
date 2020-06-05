@@ -58,7 +58,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
             t.setSuperior(t.getRoleCode());
         else
             t.setSuperior(parent.getSuperior() + "," + t.getRoleCode());
-        
+
         return super.insert(t);
     }
 
@@ -66,15 +66,26 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
     public String createTree(Map<String, Object> params) {
         StringBuilder tree = new StringBuilder("[");
         // 当前角色
-        Role r = mapper.get((String) params.get("roleId"));
+        Role r = mapper.getByRoleCode((String) params.get("roleCode"));
+        // 上级角色
+        Role p = mapper.get(r.getParentRoleId());
         // 构建一个角色列表根节点
-        tree.append("{\"id\":\"").append(r.getParentRoleId()).append("\", \"pId\":\"-1\", \"name\":\"角色列表\", \"open\":true").append(", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"").append(", \"iconOpen\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"").append(", \"iconClose\":\"../../lib/zTree/zTreeStyle/img/diy/1_close.png\"}");
+        tree.append("{\"id\":\"").append(r.getParentRoleId())
+                .append("\", \"roleCode\":\"").append(p == null ? "-1" : p.getRoleCode())// 根节点设置上级角色的角色代码
+                .append("\", \"pId\":\"-1\", \"name\":\"角色列表\", \"open\":true")
+                .append(", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"")
+                .append(", \"iconOpen\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"")
+                .append(", \"iconClose\":\"../../lib/zTree/zTreeStyle/img/diy/1_close.png\"}");
         try {
             // 构建角色列表目录节点
             List<Role> roles = mapper.list(params);
             if (!CollectionUtils.isEmpty(roles)) {
                 for (Role role : roles) {
-                    tree.append(", {\"id\":\"").append(role.getRoleId()).append("\", \"pId\":\"").append(role.getParentRoleId()).append("\", \"name\":\"").append(role.getRoleName()).append("\", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/9.png\"}");
+                    tree.append(", {\"id\":\"").append(role.getRoleId())
+                            .append("\", \"roleCode\":\"").append(role.getRoleCode())
+                            .append("\", \"pId\":\"").append(role.getParentRoleId())
+                            .append("\", \"name\":\"").append(role.getRoleName())
+                            .append("\", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/9.png\"}");
                 }
             }
         } catch (Exception e) {
@@ -100,7 +111,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
             for (String s : modulePowers) {
                 roleModulePower = new RoleModulePower();
                 roleModulePower.setRoleId(roleId);
-                String[] mp = s.split("_");
+                String[] mp = s.split("\\.");
                 roleModulePower.setModuleCode(mp[0]);
                 roleModulePower.setPowerItem(mp[1]);
                 roleModulePower.setSubNo(StringUtils.EMPTY);

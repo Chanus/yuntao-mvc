@@ -88,7 +88,7 @@
           <td width="180px" align="center">{{ d[i].children[j].moduleName }}</td>
           <td align="left">
             {{# for(var k = 0; k < d[i].children[j].modulePowers.length; k++){ }}
-              <input type="checkbox" id="module_power_{{ d[i].children[j].moduleId }}_{{ d[i].children[j].modulePowers[k].mpId }}" value="{{ d[i].children[j].moduleCode }}_{{ d[i].children[j].modulePowers[k].powerItem }}" {{# if(d[i].children[j].modulePowers[k].hasPower){ }}checked{{# } }} style="width:16px;height:16px;">
+              <input type="checkbox" id="module_power_{{ d[i].children[j].moduleId }}_{{ d[i].children[j].modulePowers[k].mpId }}" value="{{ d[i].children[j].moduleCode }}.{{ d[i].children[j].modulePowers[k].powerItem }}" {{# if(d[i].children[j].modulePowers[k].hasPower){ }}checked{{# } }} style="width:16px;height:16px;">
               {{ d[i].children[j].modulePowers[k].aliasName }}
             {{# } }}
           </td>
@@ -108,6 +108,6 @@
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${ctx }/lib/zTree/jquery.ztree.core.min.js"></script>
-    <script type="text/javascript" src="${ctx }/js/system/role.js?v=0.0.1.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/role.js?v=0.1.9.1"></script>
   </body>
 </html>
