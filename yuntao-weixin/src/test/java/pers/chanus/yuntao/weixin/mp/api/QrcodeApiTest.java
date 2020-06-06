@@ -11,7 +11,6 @@ package pers.chanus.yuntao.weixin.mp.api;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
-import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
 
 /**
  * QrcodeApi 测试
@@ -20,14 +19,9 @@ import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
  * @date 2020-05-18 01:10:12
  * @since 0.1.9
  */
-public class QrcodeApiTest {
-    private String appId = "wxe1b1996ffb222290";
-    private String appSecret = "3eff2d48cab4356dd096228528a1537c";
-
+public class QrcodeApiTest extends ApiConfigTest {
     @Test
     public void createTemporary() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-
         JSONObject jsonObject1 = QrcodeApi.createTemporary(10000, 1);
         System.out.println(jsonObject1.toJSONString());
 
@@ -37,8 +31,6 @@ public class QrcodeApiTest {
 
     @Test
     public void createPermanentTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-
         JSONObject jsonObject1 = QrcodeApi.createPermanent(1);
         System.out.println(jsonObject1.toJSONString());
 
@@ -56,7 +48,6 @@ public class QrcodeApiTest {
 
     @Test
     public void getShortUrlTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         String longUrl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQEo8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyNjBfaXQwV3djYUQxMDAwMHcwN3UAAgSFccFeAwQAAAAA";
         JSONObject jsonObject = QrcodeApi.getShortUrl(longUrl);
         System.out.println(jsonObject.toJSONString());

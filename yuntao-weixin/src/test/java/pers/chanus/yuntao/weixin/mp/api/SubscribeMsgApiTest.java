@@ -11,7 +11,6 @@ package pers.chanus.yuntao.weixin.mp.api;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
-import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
 import pers.chanus.yuntao.weixin.mp.api.bean.TemplateMessage;
 
 import java.io.UnsupportedEncodingException;
@@ -23,13 +22,9 @@ import java.io.UnsupportedEncodingException;
  * @date 2020-05-27 13:15:38
  * @since 0.1.9
  */
-public class SubscribeMsgApiTest {
-    private String appId = "wxe1b1996ffb222290";
-    private String appSecret = "3eff2d48cab4356dd096228528a1537c";
-
+public class SubscribeMsgApiTest extends ApiConfigTest {
     @Test
     public void getAuthorizeURLTest() throws UnsupportedEncodingException {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         String url = SubscribeMsgApi.getAuthorizeURL(1000, "rFpUW9knKNbu1by6EYd80OnfqNGhMGrr4JLAtjfMnPA",
                 "http://t.liulianhuan.com/teacher/register?schoolCode=350524001", "test");
 
@@ -38,8 +33,7 @@ public class SubscribeMsgApiTest {
 
     @Test
     public void subscribeTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        String json = TemplateMessage.create().setTouser("o-mAK55lxMjG-3Kd5wRtFtS__4rA")
+        String json = TemplateMessage.create().setTouser("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
                 .setTemplate_id("rFpUW9knKNbu1by6EYd80OnfqNGhMGrr4JLAtjfMnPA")
                 .setUrl("http://t.liulianhuan.com/teacher/register?schoolCode=350524001")
                 .setScene("1000").setTitle("一次性订阅消息")

@@ -11,7 +11,6 @@ package pers.chanus.yuntao.weixin.mp.api;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
-import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
 import pers.chanus.yuntao.weixin.mp.api.bean.MassMessage;
 import pers.chanus.yuntao.weixin.mp.api.bean.MassPreviewMessage;
 
@@ -25,10 +24,7 @@ import java.util.List;
  * @date 2020-05-22 21:28:24
  * @since 0.1.9
  */
-public class MessageApiTest {
-    private String appId = "wxe1b1996ffb222290";
-    private String appSecret = "3eff2d48cab4356dd096228528a1537c";
-
+public class MessageApiTest extends ApiConfigTest {
     @Test
     public void massTagSendTest() {
         String mpnewsJson = MassMessage.create(104).setMpnews("123dsdajkasd231jhksad").setSend_ignore_reprint(0)
@@ -55,14 +51,13 @@ public class MessageApiTest {
                 .toJSONString();
         System.out.println(wxcardJson);
 
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = MassMessageApi.massTagSend(textJson);
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void massOpenIdSendTest() {
-        List<String> touser = Arrays.asList("o-mAK55lxMjG-3Kd5wRtFtS__4rA", "o-mAK5_H-VujM2sT7SYs1pyJEEio");
+        List<String> touser = Arrays.asList("o9Q3g0c-95M7vLPzPY4iUfLyCLVs", "o-mAK5_H-VujM2sT7SYs1pyJEEio");
         String mpnewsJson = MassMessage.create(touser).setMpnews("123dsdajkasd231jhksad").setSend_ignore_reprint(0)
                 .toJSONString();
         System.out.println(mpnewsJson);
@@ -87,66 +82,60 @@ public class MessageApiTest {
                 .toJSONString();
         System.out.println(wxcardJson);
 
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = MassMessageApi.massOpenIdSend(textJson);
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void deleteTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = MassMessageApi.delete(3147483653L, null);
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void previewTest() {
-        String mpnewsJson = MassPreviewMessage.create("o-mAK55lxMjG-3Kd5wRtFtS__4rA")
+        String mpnewsJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
                 .setMpnews("123dsdajkasd231jhksad").toJSONString();
         System.out.println(mpnewsJson);
 
-        String textJson = MassPreviewMessage.create("o-mAK55lxMjG-3Kd5wRtFtS__4rA")
+        String textJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
                 .setText("CONTENT").toJSONString();
         System.out.println(textJson);
 
-        String voiceJson = MassPreviewMessage.create("o-mAK55lxMjG-3Kd5wRtFtS__4rA")
+        String voiceJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
                 .setVoice("123dsdajkasd231jhksad").toJSONString();
         System.out.println(voiceJson);
 
-        String imageJson = MassPreviewMessage.create("o-mAK55lxMjG-3Kd5wRtFtS__4rA")
+        String imageJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
                 .setImage("123dsdajkasd231jhksad").toJSONString();
         System.out.println(imageJson);
 
-        String mpvideoJson = MassPreviewMessage.create("o-mAK55lxMjG-3Kd5wRtFtS__4rA")
+        String mpvideoJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
                 .setMpvideo("IhdaAQXuvJtGzwwc0abfXnzeezfO0NgPK6AQYShD8RQYMTtfzbLdBIQkQziv2XJc").toJSONString();
         System.out.println(mpvideoJson);
 
-        String wxcardJson = MassPreviewMessage.create("o-mAK55lxMjG-3Kd5wRtFtS__4rA")
+        String wxcardJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
                 .setWxcard("123dsdajkasd231jhksad", "{\"code\":\"\",\"openid\":\"\",\"timestamp\":\"1402057159\",\"signature\":\"017bb17407c8e0058a66d72dcc61632b70f511ad\"}").toJSONString();
         System.out.println(wxcardJson);
 
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = MassMessageApi.preview(textJson);
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = MassMessageApi.get(3147483654L);
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getMassSpeedTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = MassMessageApi.getMassSpeed();
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void setMassSpeedTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = MassMessageApi.setMassSpeed(0);
         System.out.println(jsonObject.toJSONString());
     }

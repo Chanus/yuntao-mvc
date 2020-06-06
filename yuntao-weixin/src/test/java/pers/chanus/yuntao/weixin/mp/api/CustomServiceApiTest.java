@@ -13,7 +13,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import pers.chanus.yuntao.util.DateUtils;
 import pers.chanus.yuntao.util.encrypt.MD5Utils;
-import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
 import pers.chanus.yuntao.weixin.mp.api.bean.CustomMessage;
 
 import java.io.File;
@@ -25,41 +24,33 @@ import java.io.File;
  * @date 2020-05-28 22:27:34
  * @since 0.1.9
  */
-public class CustomServiceApiTest {
-    private String appId = "wxe1b1996ffb222290";
-    private String appSecret = "3eff2d48cab4356dd096228528a1537c";
-
+public class CustomServiceApiTest extends ApiConfigTest {
     @Test
     public void addKfAccountTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = CustomServiceApi.addKfAccount("Chanus@gh_f19e07ef435d", "Chanus", MD5Utils.md5("123456"));
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void inviteWorkerTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = CustomServiceApi.inviteWorker("Chanus@gh_f19e07ef435d", "13580553960");
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void updateKfAccountTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = CustomServiceApi.updateKfAccount("Chanus@gh_f19e07ef435d", "Chanus", MD5Utils.md5("123456"));
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void delKfAccountTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = CustomServiceApi.delKfAccount("Chanus@gh_f19e07ef435d", "Chanus", MD5Utils.md5("123456"));
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void uploadKfAccountHeadImgTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         File headImg = new File("/Users/Chanus/Documents/headimg.jpg");
         JSONObject jsonObject = CustomServiceApi.uploadKfAccountHeadImg("Chanus@gh_f19e07ef435d", headImg);
         System.out.println(jsonObject.toJSONString());
@@ -67,22 +58,19 @@ public class CustomServiceApiTest {
 
     @Test
     public void getKfListTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = CustomServiceApi.getKfList();
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getOnlineKfListTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = CustomServiceApi.getOnlineKfList();
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void sendTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        String touser = "o-mAK55lxMjG-3Kd5wRtFtS__4rA";
+        String touser = "o9Q3g0c-95M7vLPzPY4iUfLyCLVs";
         String kfAccount = "Chanus@gh_f19e07ef435d";
         String textMsg = CustomMessage.create(touser, kfAccount).setText("Hello World").toJSONString();
         System.out.println(textMsg);
@@ -122,50 +110,43 @@ public class CustomServiceApiTest {
 
     @Test
     public void typingTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        String touser = "o-mAK55lxMjG-3Kd5wRtFtS__4rA";
+        String touser = "o9Q3g0c-95M7vLPzPY4iUfLyCLVs";
         JSONObject jsonObject = CustomServiceApi.typing(touser);
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void createKfSessionTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        JSONObject jsonObject = CustomServiceApi.createKfSession("Chanus@gh_f19e07ef435d", "o-mAK55lxMjG-3Kd5wRtFtS__4rA");
+        JSONObject jsonObject = CustomServiceApi.createKfSession("Chanus@gh_f19e07ef435d", "o9Q3g0c-95M7vLPzPY4iUfLyCLVs");
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void closeKfSessionTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        JSONObject jsonObject = CustomServiceApi.closeKfSession("Chanus@gh_f19e07ef435d", "o-mAK55lxMjG-3Kd5wRtFtS__4rA");
+        JSONObject jsonObject = CustomServiceApi.closeKfSession("Chanus@gh_f19e07ef435d", "o9Q3g0c-95M7vLPzPY4iUfLyCLVs");
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getSessionTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        JSONObject jsonObject = CustomServiceApi.getSession("o-mAK55lxMjG-3Kd5wRtFtS__4rA");
+        JSONObject jsonObject = CustomServiceApi.getSession("o9Q3g0c-95M7vLPzPY4iUfLyCLVs");
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getSessionListTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = CustomServiceApi.getSessionList("Chanus@gh_f19e07ef435d");
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getWaitCaseTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         JSONObject jsonObject = CustomServiceApi.getWaitCase();
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getMsgListTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         long startTime = DateUtils.parseDateTime("2020-05-30 00:00:00").getTime() / 1000L;
         long endTime = DateUtils.parseDateTime("2020-05-30 23:59:59").getTime() / 1000L;
 
@@ -175,7 +156,6 @@ public class CustomServiceApiTest {
 
     @Test
     public void getRecordTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         long startTime = DateUtils.parseDateTime("2020-05-30 00:00:00").getTime() / 1000L;
         long endTime = DateUtils.parseDateTime("2020-05-30 23:59:59").getTime() / 1000L;
         JSONObject jsonObject = CustomServiceApi.getRecord(startTime, endTime, 1, 10);

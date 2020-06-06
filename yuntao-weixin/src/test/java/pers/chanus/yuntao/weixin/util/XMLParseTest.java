@@ -38,7 +38,7 @@ public class XMLParseTest {
 
     @Test
     public void parseXmlToMapTest() {
-        String xml = "<xml><ToUserName><![CDATA[gh_f19e07ef435d]]></ToUserName><FromUserName><![CDATA[o-mAK55lxMjG-3Kd5wRtFtS__4rA]]></FromUserName><CreateTime>1589503479</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[subscribe]]></Event><EventKey><![CDATA[qrscene_350524001]]></EventKey><Ticket><![CDATA[gQE-8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyREhHNHNGV3djYUQxVEJPQjF1Y1oAAgTl5b1eAwQAjScA]]></Ticket></xml>";
+        String xml = "<xml><ToUserName><![CDATA[gh_f19e07ef435d]]></ToUserName><FromUserName><![CDATA[o9Q3g0c-95M7vLPzPY4iUfLyCLVs]]></FromUserName><CreateTime>1589503479</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[subscribe]]></Event><EventKey><![CDATA[qrscene_350524001]]></EventKey><Ticket><![CDATA[gQE-8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyREhHNHNGV3djYUQxVEJPQjF1Y1oAAgTl5b1eAwQAjScA]]></Ticket></xml>";
         Map<String, String> map = XMLParse.parseXmlToMap(xml);
         map.forEach((x, y) -> System.out.println(x + "=" + y));
     }

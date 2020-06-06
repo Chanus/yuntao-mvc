@@ -11,7 +11,6 @@ package pers.chanus.yuntao.weixin.mp.api;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
-import pers.chanus.yuntao.weixin.mp.api.bean.ApiConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,28 +22,22 @@ import java.util.List;
  * @date 2020-05-18 16:05:54
  * @since 0.1.9
  */
-public class UserApiTest {
-    private String appId = "wxe1b1996ffb222290";
-    private String appSecret = "3eff2d48cab4356dd096228528a1537c";
-
+public class UserApiTest extends ApiConfigTest {
     @Test
     public void updateRemarkTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        JSONObject jsonObject = UserApi.updateRemark("o-mAK55lxMjG-3Kd5wRtFtS__4rA", "小胖");
+        JSONObject jsonObject = UserApi.updateRemark("o9Q3g0c-95M7vLPzPY4iUfLyCLVs", "小胖");
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getUserInfoTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        JSONObject jsonObject = UserApi.getUserInfo("o-mAK55lxMjG-3Kd5wRtFtS__4rA");
+        JSONObject jsonObject = UserApi.getUserInfo("o9Q3g0c-95M7vLPzPY4iUfLyCLVs");
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getUsersTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
-        JSONObject jsonObject1 = UserApi.getUsers("o-mAK55lxMjG-3Kd5wRtFtS__4rA");
+        JSONObject jsonObject1 = UserApi.getUsers("o9Q3g0c-95M7vLPzPY4iUfLyCLVs");
         System.out.println(jsonObject1.toJSONString());
         JSONObject jsonObject2 = UserApi.getUsers();
         System.out.println(jsonObject2.toJSONString());
@@ -52,9 +45,8 @@ public class UserApiTest {
 
     @Test
     public void batchGetUserInfoTest() {
-        AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
         List<String> openIdList = new ArrayList<>();
-        openIdList.add("o-mAK55lxMjG-3Kd5wRtFtS__4rA");
+        openIdList.add("o9Q3g0c-95M7vLPzPY4iUfLyCLVs");
         openIdList.add("o-mAK5_H-VujM2sT7SYs1pyJEEio");
         openIdList.add("o-mAK56WJbFNVxrptEbo80apufVc");
         openIdList.add("o-mAK55qfZGGZLh-BV4AG78sXgtQ");
