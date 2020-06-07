@@ -31,13 +31,13 @@ public class UserApiTest extends ApiConfigTest {
 
     @Test
     public void getUserInfoTest() {
-        JSONObject jsonObject = UserApi.getUserInfo("o9Q3g0c-95M7vLPzPY4iUfLyCLVs");
+        JSONObject jsonObject = UserApi.getUserInfo("oThyXtzi1FqPfKfM4MQYX51_c9ng");
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getUsersTest() {
-        JSONObject jsonObject1 = UserApi.getUsers("o9Q3g0c-95M7vLPzPY4iUfLyCLVs");
+        JSONObject jsonObject1 = UserApi.getUsers("oThyXtzi1FqPfKfM4MQYX51_c9ng");
         System.out.println(jsonObject1.toJSONString());
         JSONObject jsonObject2 = UserApi.getUsers();
         System.out.println(jsonObject2.toJSONString());

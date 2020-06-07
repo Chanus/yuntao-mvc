@@ -23,8 +23,8 @@ public class ApiConfigTest {
     @Before
     public void init() {
         System.out.println("init apiConfig");
-        String appId = "wx16232f77ef463d30";
-        String appSecret = "95a8506000fd232e948608e567b32faf";
+        String appId = "wx4c0b9bf56ed6df6a";
+        String appSecret = "657ddf71ed42456142380010e2be68a5";
         AccessTokenApi.apiConfig = new ApiConfig(appId, appSecret);
     }
 }

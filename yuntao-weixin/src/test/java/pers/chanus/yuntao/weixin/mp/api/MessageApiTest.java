@@ -27,7 +27,8 @@ import java.util.List;
 public class MessageApiTest extends ApiConfigTest {
     @Test
     public void massTagSendTest() {
-        String mpnewsJson = MassMessage.create(104).setMpnews("123dsdajkasd231jhksad").setSend_ignore_reprint(0)
+        String mpnewsJson = MassMessage.create(true).setMpnews("ceoP4JFMWtdx9pGN0GhB2pwplqUrrHhZ2DTXKa6rJY9i7gNgZFXoMMSrTJMJ3i_w")
+                .setSend_ignore_reprint(0)
                 .toJSONString();
         System.out.println(mpnewsJson);
 
@@ -43,7 +44,7 @@ public class MessageApiTest extends ApiConfigTest {
                 .toJSONString();
         System.out.println(imagesJson);
 
-        String mpvideoJson = MassMessage.create(104).setMpvideo("IhdaAQXuvJtGzwwc0abfXnzeezfO0NgPK6AQYShD8RQYMTtfzbLdBIQkQziv2XJc")
+        String mpvideoJson = MassMessage.create(true).setMpvideo("lHxNm-gEyytkHq3Bxp88uhXWsawqtE5xEj4hGmCbZ-Bk9QzinE2rNArZAd8GL5OC")
                 .toJSONString();
         System.out.println(mpvideoJson);
 
@@ -51,14 +52,14 @@ public class MessageApiTest extends ApiConfigTest {
                 .toJSONString();
         System.out.println(wxcardJson);
 
-        JSONObject jsonObject = MassMessageApi.massTagSend(textJson);
+        JSONObject jsonObject = MassMessageApi.massTagSend(mpnewsJson);
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void massOpenIdSendTest() {
-        List<String> touser = Arrays.asList("o9Q3g0c-95M7vLPzPY4iUfLyCLVs", "o-mAK5_H-VujM2sT7SYs1pyJEEio");
-        String mpnewsJson = MassMessage.create(touser).setMpnews("123dsdajkasd231jhksad").setSend_ignore_reprint(0)
+        List<String> touser = Arrays.asList("oThyXtzi1FqPfKfM4MQYX51_c9ng", "o-mAK5_H-VujM2sT7SYs1pyJEEio");
+        String mpnewsJson = MassMessage.create(touser).setMpnews("ceoP4JFMWtdx9pGN0GhB2pwplqUrrHhZ2DTXKa6rJY9i7gNgZFXoMMSrTJMJ3i_w").setSend_ignore_reprint(0)
                 .toJSONString();
         System.out.println(mpnewsJson);
 
@@ -74,7 +75,7 @@ public class MessageApiTest extends ApiConfigTest {
                 .toJSONString();
         System.out.println(imagesJson);
 
-        String mpvideoJson = MassMessage.create(touser).setMpvideo("IhdaAQXuvJtGzwwc0abfXnzeezfO0NgPK6AQYShD8RQYMTtfzbLdBIQkQziv2XJc")
+        String mpvideoJson = MassMessage.create(touser).setMpvideo("lHxNm-gEyytkHq3Bxp88uhXWsawqtE5xEj4hGmCbZ-Bk9QzinE2rNArZAd8GL5OC")
                 .toJSONString();
         System.out.println(mpvideoJson);
 

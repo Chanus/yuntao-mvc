@@ -183,6 +183,7 @@ public class HttpUtils {
             while ((line = bufferedReader.readLine()) != null) {
                 result.append(line);
             }
+            connection.disconnect();
         } catch (Exception e) {
             throw new RuntimeException("Request exception", e);
         } finally {
@@ -282,8 +283,8 @@ public class HttpUtils {
      * 文件上传
      *
      * @param url   发送请求的URL
-     * @param file  需要上传的文件
      * @param param 请求参数
+     * @param file  需要上传的文件
      * @return 远程资源的响应结果
      * @since 0.1.9
      */
@@ -291,7 +292,6 @@ public class HttpUtils {
         StringBuilder result = new StringBuilder();// 返回的结果
         DataOutputStream dataOutputStream = null;
         BufferedReader bufferedReader = null;// 读取响应输入流
-        BufferedWriter bufferedWriter = null;// 写入参数输出流
 
         // 必须多两道线
         String twoHyphens = "--";
@@ -330,10 +330,10 @@ public class HttpUtils {
                     // 上传头像
                     "Content-Disposition: form-data;name=\"media\";filename=\"" + file.getName() + "\"" + end +
                     // 上传多媒体
-                    // stringBuilder.append("Content-Disposition: form-data;name=\"file\";filename=\""+ file.getName()).append("\"").append(end);
+                    // "Content-Disposition: form-data;name=\"file\";filename=\""+ file.getName() + "\"" + end +
                     // 获取文件类型设置成请求头
                     "Content-Type: application/octet-stream" + end + end;
-            dataOutputStream.writeBytes(head);
+            dataOutputStream.write(head.getBytes(StandardCharsets.UTF_8));
             // 把文件以流文件的方式推入到 url 中
             DataInputStream dataInputStream = new DataInputStream(new FileInputStream(file));
             byte[] buffer = new byte[1024];
@@ -342,16 +342,19 @@ public class HttpUtils {
                 dataOutputStream.write(buffer, 0, length);
             }
             dataInputStream.close();
-            // 定义数据分隔线
-            dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + end);
-            dataOutputStream.flush();
 
-            // POST请求参数
             if (StringUtils.isNotBlank(param)) {
-                bufferedWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), StandardCharsets.UTF_8));
-                bufferedWriter.write(param);
-                bufferedWriter.flush();
+                String paramData = end + twoHyphens + boundary + end +
+                        "Content-Disposition: form-data;name=\"description\";" +
+                        "Content-Type: application/octet-stream" + end + end;
+                dataOutputStream.write(paramData.getBytes(StandardCharsets.UTF_8));
+                dataOutputStream.write(param.getBytes(StandardCharsets.UTF_8));
             }
+
+            // 定义数据分隔线
+            String foot = end + twoHyphens + boundary + twoHyphens + end;
+            dataOutputStream.write(foot.getBytes(StandardCharsets.UTF_8));
+            dataOutputStream.flush();
 
             // 读取响应
             // 定义BufferedReader输入流来读取URL的响应，并设置编码方式
@@ -365,7 +368,6 @@ public class HttpUtils {
             throw new RuntimeException("Request exception", e);
         } finally {
             IOUtils.close(dataOutputStream);
-            IOUtils.close(bufferedWriter);
             IOUtils.close(bufferedReader);
         }
         return result.toString();
@@ -384,14 +386,15 @@ public class HttpUtils {
     }
 
     /**
-     * 文件下载
+     * 文件下载，请求方式为POST
      *
      * @param url      发送请求的URL
+     * @param param    请求参数
      * @param savePath 下载文件保存路径
      * @return 下载的文件
      * @since 0.1.9
      */
-    public static File download(final String url, final String savePath) {
+    public static File downloadPost(final String url, final String param, final String savePath) {
         File file;
         BufferedInputStream bufferedInputStream = null;
         OutputStream out = null;
@@ -419,6 +422,14 @@ public class HttpUtils {
             // 建立实际的连接
             connection.connect();
 
+            // 请求参数
+            if (StringUtils.isNotBlank(param)) {
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(param.getBytes(StandardCharsets.UTF_8));
+                outputStream.flush();
+                IOUtils.closeQuietly(outputStream);
+            }
+
             // 文件大小
             // int fileLength = connection.getContentLength();
             // 文件路径
@@ -426,15 +437,16 @@ public class HttpUtils {
             // 文件名
             String fileFullName = filePath.substring(filePath.lastIndexOf(File.separatorChar) + 1);
 
-            // 获得输入流
-            bufferedInputStream = new BufferedInputStream(connection.getInputStream());
             String path = savePath + File.separatorChar + fileFullName;
             file = new File(path);
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
 
+            // 获得输出流
             out = new FileOutputStream(file);
+            // 获得输入流
+            bufferedInputStream = new BufferedInputStream(connection.getInputStream());
             int size;
             byte[] buffer = new byte[1024];
             while ((size = bufferedInputStream.read(buffer)) != -1) {
@@ -447,5 +459,170 @@ public class HttpUtils {
             IOUtils.close(bufferedInputStream);
         }
         return file;
+    }
+
+    /**
+     * 文件下载，请求方式为POST
+     *
+     * @param url      发送请求的URL
+     * @param savePath 下载文件保存路径
+     * @return 下载的文件
+     * @since 0.1.9
+     */
+    public static File downloadPostFile(final String url, final String savePath) {
+        return downloadPost(url, null, savePath);
+    }
+
+    /**
+     * 文件下载，请求方式为POST
+     *
+     * @param url   发送请求的URL
+     * @param param 请求参数
+     * @return {@code BufferedInputStream}输入流
+     * @since 0.1.9
+     */
+    public static BufferedInputStream downloadPost(final String url, final String param) {
+        try {
+            // 创建URL对象
+            URL connURL = new URL(url);
+            // 打开URL连接
+            HttpURLConnection connection = (HttpURLConnection) connURL.openConnection();
+            // 设置通用属性，请求头信息
+            connection.setRequestProperty("Accept", "*/*");
+            connection.setRequestProperty("Connection", "Keep-Alive");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+            // 设定请求的方法，默认是GET
+            connection.setRequestMethod("POST");
+            // 设置是否向 connection 输出
+            connection.setDoOutput(true);
+            // 设置是否从 connection 读入，默认情况下是true
+            connection.setDoInput(true);
+            // POST 请求不能使用缓存
+            connection.setUseCaches(false);
+            connection.setInstanceFollowRedirects(true);
+            connection.setReadTimeout(TIMEOUT_IN_MILLIONS);
+            connection.setConnectTimeout(TIMEOUT_IN_MILLIONS);
+            // 建立实际的连接
+            connection.connect();
+
+            // 请求参数
+            if (StringUtils.isNotBlank(param)) {
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(param.getBytes(StandardCharsets.UTF_8));
+                outputStream.flush();
+                IOUtils.closeQuietly(outputStream);
+            }
+
+            // 文件大小
+            // int fileLength = connection.getContentLength();
+            // 文件路径
+            String filePath = connection.getURL().getFile();
+            // 文件名
+            String fileFullName = filePath.substring(filePath.lastIndexOf(File.separatorChar) + 1);
+
+            // 获得输入流
+            return new BufferedInputStream(connection.getInputStream());
+
+        } catch (Exception e) {
+            throw new RuntimeException("Request exception", e);
+        }
+    }
+
+    /**
+     * 文件下载，请求方式为POST
+     *
+     * @param url 发送请求的URL
+     * @return {@code BufferedInputStream}输入流
+     * @since 0.1.9
+     */
+    public static BufferedInputStream downloadPost(final String url) {
+        return downloadPost(url, null);
+    }
+
+    /**
+     * 文件下载，请求方式为GET
+     *
+     * @param url      发送请求的URL
+     * @param savePath 下载文件保存路径
+     * @return 下载的文件
+     * @since 0.1.9
+     */
+    public static File downloadGet(final String url, final String savePath) {
+        File file;
+        BufferedInputStream bufferedInputStream = null;
+        OutputStream out = null;
+
+        try {
+            // 创建URL对象
+            URL connURL = new URL(url);
+            // 打开URL连接
+            HttpURLConnection connection = (HttpURLConnection) connURL.openConnection();
+            // 设置通用属性
+            connection.setRequestProperty("Accept", "*/*");
+            connection.setRequestProperty("Connection", "Keep-Alive");
+            connection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
+            connection.setRequestMethod("GET");
+            connection.setReadTimeout(TIMEOUT_IN_MILLIONS);
+            connection.setConnectTimeout(TIMEOUT_IN_MILLIONS);
+            // 建立实际的连接
+            connection.connect();
+
+            // 文件路径
+            String filePath = connection.getURL().getFile();
+            // 文件名
+            String fileFullName = filePath.substring(filePath.lastIndexOf(File.separatorChar) + 1);
+
+            String path = savePath + File.separatorChar + fileFullName;
+            file = new File(path);
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+
+            // 获得输出流
+            out = new FileOutputStream(file);
+            // 获得输入流
+            bufferedInputStream = new BufferedInputStream(connection.getInputStream());
+            int size;
+            byte[] buffer = new byte[1024];
+            while ((size = bufferedInputStream.read(buffer)) != -1) {
+                out.write(buffer, 0, size);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Request exception", e);
+        } finally {
+            IOUtils.close(out);
+            IOUtils.close(bufferedInputStream);
+        }
+        return file;
+    }
+
+    /**
+     * 文件下载，请求方式为GET
+     *
+     * @param url 发送请求的URL
+     * @return {@code BufferedInputStream}输入流
+     * @since 0.1.9
+     */
+    public static BufferedInputStream downloadGet(final String url) {
+        try {
+            // 创建URL对象
+            URL connURL = new URL(url);
+            // 打开URL连接
+            HttpURLConnection connection = (HttpURLConnection) connURL.openConnection();
+            // 设置通用属性
+            connection.setRequestProperty("Accept", "*/*");
+            connection.setRequestProperty("Connection", "Keep-Alive");
+            connection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
+            connection.setRequestMethod("GET");
+            connection.setReadTimeout(TIMEOUT_IN_MILLIONS);
+            connection.setConnectTimeout(TIMEOUT_IN_MILLIONS);
+            // 建立实际的连接
+            connection.connect();
+
+            // 获得输入流
+            return new BufferedInputStream(connection.getInputStream());
+        } catch (Exception e) {
+            throw new RuntimeException("Request exception", e);
+        }
     }
 }
