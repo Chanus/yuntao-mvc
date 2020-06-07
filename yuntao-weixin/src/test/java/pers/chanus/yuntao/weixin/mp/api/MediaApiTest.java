@@ -159,11 +159,11 @@ public class MediaApiTest extends ApiConfigTest {
                 .addArticle(new MediaArticle.Article().setTitle("test")
                         .setAuthor("Chanus").setThumb_media_id("s0iWZawffIjomOBPerigwDqdcMpHcjc9gBnG1NhcFPxgElkni7m_x7axK8W0QEqY")
                         .setDigest("这是一个摘要信息").setShow_cover_pic(1).setContent("图文素材的正文").setContent_source_url("www.baidu.com")
-                        .setNeed_open_comment(1).setOnly_fans_can_comment(1))
+                        .setNeed_open_comment(0).setOnly_fans_can_comment(0))
                 .addArticle(new MediaArticle.Article().setTitle("test2")
                         .setAuthor("Chanus").setThumb_media_id("s0iWZawffIjomOBPerigwDqdcMpHcjc9gBnG1NhcFPxgElkni7m_x7axK8W0QEqY")
                         .setDigest("这是一个摘要信息2").setShow_cover_pic(1).setContent("图文素材的正文2").setContent_source_url("www.baidu.com")
-                        .setNeed_open_comment(1).setOnly_fans_can_comment(1))
+                        .setNeed_open_comment(0).setOnly_fans_can_comment(0))
                 .toJSONString();
         System.out.println(articles);
 

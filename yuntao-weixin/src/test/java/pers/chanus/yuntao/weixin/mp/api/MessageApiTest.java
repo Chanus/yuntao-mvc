@@ -27,7 +27,7 @@ import java.util.List;
 public class MessageApiTest extends ApiConfigTest {
     @Test
     public void massTagSendTest() {
-        String mpnewsJson = MassMessage.create(true).setMpnews("ceoP4JFMWtdx9pGN0GhB2pwplqUrrHhZ2DTXKa6rJY9i7gNgZFXoMMSrTJMJ3i_w")
+        String mpnewsJson = MassMessage.create(true).setMpnews("u-ZYh_46YV-Smypw7e53hAuJamc_qQ-ZGoMiPENj-LTImqwjVCL0KdNTkTReuD8N")
                 .setSend_ignore_reprint(0)
                 .toJSONString();
         System.out.println(mpnewsJson);
@@ -52,18 +52,18 @@ public class MessageApiTest extends ApiConfigTest {
                 .toJSONString();
         System.out.println(wxcardJson);
 
-        JSONObject jsonObject = MassMessageApi.massTagSend(mpnewsJson);
+        JSONObject jsonObject = MassMessageApi.massTagSend(textJson);
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void massOpenIdSendTest() {
         List<String> touser = Arrays.asList("oThyXtzi1FqPfKfM4MQYX51_c9ng", "o-mAK5_H-VujM2sT7SYs1pyJEEio");
-        String mpnewsJson = MassMessage.create(touser).setMpnews("ceoP4JFMWtdx9pGN0GhB2pwplqUrrHhZ2DTXKa6rJY9i7gNgZFXoMMSrTJMJ3i_w").setSend_ignore_reprint(0)
+        String mpnewsJson = MassMessage.create(touser).setMpnews("u-ZYh_46YV-Smypw7e53hAuJamc_qQ-ZGoMiPENj-LTImqwjVCL0KdNTkTReuD8N").setSend_ignore_reprint(0)
                 .toJSONString();
         System.out.println(mpnewsJson);
 
-        String textJson = MassMessage.create(touser).setText("群发一条测试文本消息，通过openID").setMsgtype("text").setClientmsgid("testagin")
+        String textJson = MassMessage.create(touser).setText("群发一条测试文本消息，通过openID").setMsgtype("text").setClientmsgid("5")
                 .toJSONString();
         System.out.println(textJson);
 
@@ -95,37 +95,37 @@ public class MessageApiTest extends ApiConfigTest {
 
     @Test
     public void previewTest() {
-        String mpnewsJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
-                .setMpnews("123dsdajkasd231jhksad").toJSONString();
+        String mpnewsJson = MassPreviewMessage.create("oThyXtzi1FqPfKfM4MQYX51_c9ng")
+                .setMpnews("u-ZYh_46YV-Smypw7e53hAuJamc_qQ-ZGoMiPENj-LTImqwjVCL0KdNTkTReuD8N").toJSONString();
         System.out.println(mpnewsJson);
 
-        String textJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
+        String textJson = MassPreviewMessage.create("oThyXtzi1FqPfKfM4MQYX51_c9ng")
                 .setText("CONTENT").toJSONString();
         System.out.println(textJson);
 
-        String voiceJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
+        String voiceJson = MassPreviewMessage.create("oThyXtzi1FqPfKfM4MQYX51_c9ng")
                 .setVoice("123dsdajkasd231jhksad").toJSONString();
         System.out.println(voiceJson);
 
-        String imageJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
+        String imageJson = MassPreviewMessage.create("oThyXtzi1FqPfKfM4MQYX51_c9ng")
                 .setImage("123dsdajkasd231jhksad").toJSONString();
         System.out.println(imageJson);
 
-        String mpvideoJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
+        String mpvideoJson = MassPreviewMessage.create("oThyXtzi1FqPfKfM4MQYX51_c9ng")
                 .setMpvideo("IhdaAQXuvJtGzwwc0abfXnzeezfO0NgPK6AQYShD8RQYMTtfzbLdBIQkQziv2XJc").toJSONString();
         System.out.println(mpvideoJson);
 
-        String wxcardJson = MassPreviewMessage.create("o9Q3g0c-95M7vLPzPY4iUfLyCLVs")
+        String wxcardJson = MassPreviewMessage.create("oThyXtzi1FqPfKfM4MQYX51_c9ng")
                 .setWxcard("123dsdajkasd231jhksad", "{\"code\":\"\",\"openid\":\"\",\"timestamp\":\"1402057159\",\"signature\":\"017bb17407c8e0058a66d72dcc61632b70f511ad\"}").toJSONString();
         System.out.println(wxcardJson);
 
-        JSONObject jsonObject = MassMessageApi.preview(textJson);
+        JSONObject jsonObject = MassMessageApi.preview(mpnewsJson);
         System.out.println(jsonObject.toJSONString());
     }
 
     @Test
     public void getTest() {
-        JSONObject jsonObject = MassMessageApi.get(3147483654L);
+        JSONObject jsonObject = MassMessageApi.get(3147483661L);
         System.out.println(jsonObject.toJSONString());
     }
 
