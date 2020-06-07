@@ -59,11 +59,12 @@ public class MessageApiTest extends ApiConfigTest {
     @Test
     public void massOpenIdSendTest() {
         List<String> touser = Arrays.asList("oThyXtzi1FqPfKfM4MQYX51_c9ng", "o-mAK5_H-VujM2sT7SYs1pyJEEio");
-        String mpnewsJson = MassMessage.create(touser).setMpnews("u-ZYh_46YV-Smypw7e53hAuJamc_qQ-ZGoMiPENj-LTImqwjVCL0KdNTkTReuD8N").setSend_ignore_reprint(0)
+        String mpnewsJson = MassMessage.create(touser).setMpnews("AnkqXf2W_LuOE6oon0UB91mun35BfV1dULaNQk6Hp3XrYep_4nl8HaJ0RmK8Vmn_")
+                .setSend_ignore_reprint(1)
                 .toJSONString();
         System.out.println(mpnewsJson);
 
-        String textJson = MassMessage.create(touser).setText("群发一条测试文本消息，通过openID").setMsgtype("text").setClientmsgid("5")
+        String textJson = MassMessage.create(touser).setText("群发一条测试文本消息，通过openID").setMsgtype("text").setClientmsgid("6")
                 .toJSONString();
         System.out.println(textJson);
 
@@ -83,7 +84,7 @@ public class MessageApiTest extends ApiConfigTest {
                 .toJSONString();
         System.out.println(wxcardJson);
 
-        JSONObject jsonObject = MassMessageApi.massOpenIdSend(textJson);
+        JSONObject jsonObject = MassMessageApi.massOpenIdSend(mpnewsJson);
         System.out.println(jsonObject.toJSONString());
     }
 
