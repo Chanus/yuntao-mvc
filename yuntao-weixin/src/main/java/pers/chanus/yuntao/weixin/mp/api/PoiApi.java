@@ -14,7 +14,8 @@ import com.alibaba.fastjson.JSONObject;
 import pers.chanus.yuntao.util.HttpUtils;
 
 /**
- * 微信门店 API
+ * 微信门店 API<br>
+ * 详情请见：https://developers.weixin.qq.com/doc/offiaccount/WeChat_Stores/WeChat_Store_Interface.html
  *
  * @author Chanus
  * @date 2020-06-08 17:09:53

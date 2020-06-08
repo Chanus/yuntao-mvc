@@ -136,12 +136,12 @@ public class HttpUtils {
     /**
      * 向指定URL发送POST方法的请求
      *
-     * @param url   发送请求的URL，可以包含请求参数
-     * @param param 请求参数
+     * @param url    发送请求的URL，可以包含请求参数
+     * @param params 请求参数
      * @return 远程资源的响应结果
      * @since 0.1.9
      */
-    public static String post(final String url, final String param) {
+    public static String post(final String url, final String params) {
         StringBuilder result = new StringBuilder();// 返回的结果
         BufferedReader bufferedReader = null;// 读取响应输入流
         BufferedWriter bufferedWriter = null;// 写入参数输出流
@@ -169,9 +169,9 @@ public class HttpUtils {
             connection.connect();
 
             // POST请求参数
-            if (StringUtils.isNotBlank(param)) {
+            if (StringUtils.isNotBlank(params)) {
                 bufferedWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), StandardCharsets.UTF_8));
-                bufferedWriter.write(param);
+                bufferedWriter.write(params);
                 bufferedWriter.flush();
             }
 
@@ -221,14 +221,14 @@ public class HttpUtils {
      * 向指定URL发送异步POST方法的请求
      *
      * @param url      发送请求的URL，包含请求参数
-     * @param param    请求参数
+     * @param params   请求参数
      * @param callBack 回调方法
      * @since 0.1.9
      */
-    public static void postAsyn(final String url, final String param, final CallBack callBack) {
+    public static void postAsyn(final String url, final String params, final CallBack callBack) {
         new Thread(() -> {
             try {
-                String result = post(url, param);
+                String result = post(url, params);
                 if (callBack != null) {
                     callBack.onRequestComplete(result);
                 }
@@ -282,13 +282,13 @@ public class HttpUtils {
     /**
      * 文件上传
      *
-     * @param url   发送请求的URL
-     * @param param 请求参数
-     * @param file  需要上传的文件
+     * @param url    发送请求的URL
+     * @param params 请求参数
+     * @param file   需要上传的文件
      * @return 远程资源的响应结果
      * @since 0.1.9
      */
-    public static String upload(final String url, final String param, File file) {
+    public static String upload(final String url, final String params, File file) {
         StringBuilder result = new StringBuilder();// 返回的结果
         DataOutputStream dataOutputStream = null;
         BufferedReader bufferedReader = null;// 读取响应输入流
@@ -343,12 +343,12 @@ public class HttpUtils {
             }
             dataInputStream.close();
 
-            if (StringUtils.isNotBlank(param)) {
+            if (StringUtils.isNotBlank(params)) {
                 String paramData = end + twoHyphens + boundary + end +
                         "Content-Disposition: form-data;name=\"description\";" +
                         "Content-Type: application/octet-stream" + end + end;
                 dataOutputStream.write(paramData.getBytes(StandardCharsets.UTF_8));
-                dataOutputStream.write(param.getBytes(StandardCharsets.UTF_8));
+                dataOutputStream.write(params.getBytes(StandardCharsets.UTF_8));
             }
 
             // 定义数据分隔线
@@ -389,12 +389,12 @@ public class HttpUtils {
      * 文件下载，请求方式为POST
      *
      * @param url      发送请求的URL
-     * @param param    请求参数
+     * @param params   请求参数
      * @param savePath 下载文件保存路径
      * @return 下载的文件
      * @since 0.1.9
      */
-    public static File downloadPost(final String url, final String param, final String savePath) {
+    public static File downloadPost(final String url, final String params, final String savePath) {
         File file;
         BufferedInputStream bufferedInputStream = null;
         OutputStream out = null;
@@ -423,9 +423,9 @@ public class HttpUtils {
             connection.connect();
 
             // 请求参数
-            if (StringUtils.isNotBlank(param)) {
+            if (StringUtils.isNotBlank(params)) {
                 OutputStream outputStream = connection.getOutputStream();
-                outputStream.write(param.getBytes(StandardCharsets.UTF_8));
+                outputStream.write(params.getBytes(StandardCharsets.UTF_8));
                 outputStream.flush();
                 IOUtils.closeQuietly(outputStream);
             }
@@ -476,12 +476,12 @@ public class HttpUtils {
     /**
      * 文件下载，请求方式为POST
      *
-     * @param url   发送请求的URL
-     * @param param 请求参数
+     * @param url    发送请求的URL
+     * @param params 请求参数
      * @return {@code BufferedInputStream}输入流
      * @since 0.1.9
      */
-    public static BufferedInputStream downloadPost(final String url, final String param) {
+    public static BufferedInputStream downloadPost(final String url, final String params) {
         try {
             // 创建URL对象
             URL connURL = new URL(url);
@@ -506,9 +506,9 @@ public class HttpUtils {
             connection.connect();
 
             // 请求参数
-            if (StringUtils.isNotBlank(param)) {
+            if (StringUtils.isNotBlank(params)) {
                 OutputStream outputStream = connection.getOutputStream();
-                outputStream.write(param.getBytes(StandardCharsets.UTF_8));
+                outputStream.write(params.getBytes(StandardCharsets.UTF_8));
                 outputStream.flush();
                 IOUtils.closeQuietly(outputStream);
             }

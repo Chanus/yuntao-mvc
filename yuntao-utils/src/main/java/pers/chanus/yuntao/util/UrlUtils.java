@@ -64,6 +64,9 @@ public class UrlUtils {
 
         StringBuilder uri = new StringBuilder();
         for (String key : params.keySet()) {
+            if (params.get(key) == null)
+                continue;
+
             uri.append(key).append("=").append(params.get(key).toString()).append("&");
         }
 
