@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import pers.chanus.yuntao.manager.model.Organization;
-import pers.chanus.yuntao.server.mapper.BaseMapper;
+import pers.chanus.yuntao.server.mapper.SuperMapper;
 
 /**
  * 组织机构表
@@ -14,7 +14,7 @@ import pers.chanus.yuntao.server.mapper.BaseMapper;
  * @date 2019-05-06 21:11:46
  * @since 0.0.8
  */
-public interface OrganizationMapper extends BaseMapper<Organization, Integer> {
+public interface OrganizationMapper extends SuperMapper<Organization> {
     @Select("select max(priority) from sys_organization where org_parent_id = #{orgParentId,jdbcType=INTEGER}")
     Integer getMaxPriority(Integer orgParentId);
 

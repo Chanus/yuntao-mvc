@@ -14,6 +14,7 @@ import pers.chanus.yuntao.manager.model.ModulePower;
 import pers.chanus.yuntao.manager.model.ModulePowerMethod;
 import pers.chanus.yuntao.manager.service.ModulePowerService;
 import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.util.CollectionUtils;
 
 import java.util.Collection;
 
@@ -25,14 +26,9 @@ import java.util.Collection;
  * @since 0.0.1
  */
 @Service
-public class ModulePowerServiceImpl extends BaseServiceImpl<ModulePowerMapper, ModulePower, Integer> implements ModulePowerService {
+public class ModulePowerServiceImpl extends BaseServiceImpl<ModulePowerMapper, ModulePower> implements ModulePowerService {
     @Autowired
     private ModulePowerMethodMapper modulePowerMethodMapper;
-
-    @Autowired
-    public void setMapper(ModulePowerMapper mapper) {
-        this.mapper = mapper;
-    }
 
     @Override
     public PageBean listMethodPagination(CustomMap params) {
@@ -41,19 +37,21 @@ public class ModulePowerServiceImpl extends BaseServiceImpl<ModulePowerMapper, M
 
     @Override
     public Message insertMethod(ModulePowerMethod modulePowerMethod) {
-        modulePowerMethodMapper.insertSelective(modulePowerMethod);
+        modulePowerMethodMapper.insert(modulePowerMethod);
         return Message.addSuccess();
     }
 
     @Override
     public Message updateMethod(ModulePowerMethod modulePowerMethod) {
-        modulePowerMethodMapper.updateByPrimaryKeySelective(modulePowerMethod);
+        modulePowerMethodMapper.updateById(modulePowerMethod);
         return Message.updateSuccess();
     }
 
     @Override
     public Message deleteMethod(Collection<Integer> ids) {
-        modulePowerMethodMapper.deleteByPrimaryKey(ids);
+        if (!CollectionUtils.isEmpty(ids))
+            modulePowerMethodMapper.deleteBatchIds(ids);
+
         return Message.deleteSuccess();
     }
 

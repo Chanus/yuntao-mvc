@@ -16,7 +16,7 @@ import java.util.Map;
  * @date 2018-09-06 17:46:23
  * @since 0.0.1
  */
-public interface ParamService extends BaseService<Param, Integer> {
+public interface ParamService extends BaseService<Param> {
     /**
      * 调整系统参数优先级
      *

@@ -4,12 +4,12 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import pers.chanus.yuntao.manager.model.Operator;
-import pers.chanus.yuntao.server.mapper.BaseMapper;
+import pers.chanus.yuntao.server.mapper.SuperMapper;
 
 import java.util.List;
 import java.util.Map;
 
-public interface OperatorMapper extends BaseMapper<Operator, Integer> {
+public interface OperatorMapper extends SuperMapper<Operator> {
     Operator getById(@Param("id") Integer id, @Param("aesEmailKey") String aesEmailKey, @Param("aesPhoneKey") String aesPhoneKey);
 
     Operator getByOperatorNo(@Param("operatorNo") String operatorNo, @Param("aesEmailKey") String aesEmailKey, @Param("aesPhoneKey") String aesPhoneKey);

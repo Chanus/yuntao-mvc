@@ -10,6 +10,6 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @date 2019-06-07 14:01:03
  * @since 0.1.1
  */
-public interface DictItemService extends BaseService<DictItem, Integer> {
+public interface DictItemService extends BaseService<DictItem> {
 
 }

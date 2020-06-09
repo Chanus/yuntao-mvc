@@ -11,7 +11,7 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @date 2019-06-07 12:55:23
  * @since 0.1.1
  */
-public interface DictService extends BaseService<Dict, Integer> {
+public interface DictService extends BaseService<Dict> {
     /**
      * 重载字典数据
      *

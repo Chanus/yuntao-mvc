@@ -1,6 +1,5 @@
 package pers.chanus.yuntao.manager.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.ScheduleTriggerMapper;
@@ -17,13 +16,7 @@ import pers.chanus.yuntao.util.DateUtils;
  * @since 0.1.7
  */
 @Service
-public class ScheduleTriggerServiceImpl extends BaseServiceImpl<ScheduleTriggerMapper, ScheduleTrigger, Integer> implements ScheduleTriggerService {
-
-    @Autowired
-    public void setMapper(ScheduleTriggerMapper mapper) {
-        this.mapper = mapper;
-    }
-
+public class ScheduleTriggerServiceImpl extends BaseServiceImpl<ScheduleTriggerMapper, ScheduleTrigger> implements ScheduleTriggerService {
     @Override
     public Message insert(ScheduleTrigger scheduleTrigger) {
         String triggerStartTimeStr = scheduleTrigger.getTriggerStartTimeStr();

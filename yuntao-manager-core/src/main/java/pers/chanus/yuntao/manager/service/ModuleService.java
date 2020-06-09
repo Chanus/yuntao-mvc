@@ -17,7 +17,7 @@ import java.util.Map;
  * @date 2018-09-06 22:45:23
  * @since 0.0.1
  */
-public interface ModuleService extends BaseService<Module, Integer> {
+public interface ModuleService extends BaseService<Module> {
     /**
      * 创建模块树
      *

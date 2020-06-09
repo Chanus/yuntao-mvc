@@ -11,7 +11,7 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @date 2019-05-06 21:11:46
  * @since 0.0.8
  */
-public interface OrganizationService extends BaseService<Organization, Integer> {
+public interface OrganizationService extends BaseService<Organization> {
     /**
      * 创建组织机构树
      *

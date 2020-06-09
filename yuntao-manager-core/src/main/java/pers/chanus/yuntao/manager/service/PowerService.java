@@ -16,7 +16,7 @@ import java.util.Map;
  * @date 2018-09-06 19:32:43
  * @since 0.0.1
  */
-public interface PowerService extends BaseService<Power, Integer> {
+public interface PowerService extends BaseService<Power> {
     /**
      * 调整权限项优先级
      *

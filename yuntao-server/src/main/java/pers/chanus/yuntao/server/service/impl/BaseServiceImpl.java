@@ -3,15 +3,15 @@
  */
 package pers.chanus.yuntao.server.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
-import pers.chanus.yuntao.server.mapper.BaseMapper;
+import pers.chanus.yuntao.server.mapper.SuperMapper;
 import pers.chanus.yuntao.server.service.BaseService;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,25 +19,11 @@ import java.util.List;
  *
  * @param <Mapper> Mybatis实体接口
  * @param <T>      实体对象
- * @param <PK>     实体主键类型
  * @author Chanus
  * @date 2018-09-01 01:08:22
  * @since 0.0.1
  */
-public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK extends Serializable> implements BaseService<T, PK> {
-    /**
-     * 由子类注入实体Mapper
-     */
-    protected Mapper mapper;
-
-    /**
-     * 注入实体Mapper，由子类实现
-     *
-     * @param mapper 实体Mapper
-     * @since 0.0.1
-     */
-    public abstract void setMapper(Mapper mapper);
-
+public abstract class BaseServiceImpl<Mapper extends SuperMapper<T>, T> extends ServiceImpl<Mapper, T> implements BaseService<T> {
     /**
      * 根据主键查询实体
      *
@@ -46,8 +32,8 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
      * @since 0.0.1
      */
     @Override
-    public T get(PK pk) {
-        return mapper.selectByPrimaryKey(pk);
+    public T get(Serializable pk) {
+        return baseMapper.selectById(pk);
     }
 
     /**
@@ -59,7 +45,7 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
      */
     @Override
     public Message insert(T t) {
-        mapper.insertSelective(t);
+        baseMapper.insert(t);
         return Message.addSuccess();
     }
 
@@ -72,7 +58,7 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
      */
     @Override
     public Message update(T t) {
-        mapper.updateByPrimaryKeySelective(t);
+        baseMapper.updateById(t);
         return Message.updateSuccess();
     }
 
@@ -84,8 +70,8 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
      * @since 0.0.1
      */
     @Override
-    public Message delete(PK pk) {
-        mapper.deleteByPrimaryKey(Collections.singletonList(pk));
+    public Message delete(Serializable pk) {
+        baseMapper.deleteById(pk);
         return Message.deleteSuccess();
     }
 
@@ -97,8 +83,8 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
      * @since 0.0.1
      */
     @Override
-    public Message delete(Collection<PK> pks) {
-        mapper.deleteByPrimaryKey(pks);
+    public Message delete(Collection<Serializable> pks) {
+        baseMapper.deleteBatchIds(pks);
         return Message.deleteSuccess();
     }
 
@@ -111,7 +97,7 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
      */
     @Override
     public int count(CustomMap params) {
-        return mapper.count(params);
+        return baseMapper.count(params);
     }
 
     /**
@@ -123,7 +109,7 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
      */
     @Override
     public List<T> list(CustomMap params) {
-        return mapper.list(params);
+        return baseMapper.list(params);
     }
 
     /**
@@ -135,12 +121,12 @@ public abstract class BaseServiceImpl<Mapper extends BaseMapper<T, PK>, T, PK ex
      */
     @Override
     public PageBean listPagination(CustomMap params) {
-        int count = mapper.count(params);
+        int count = baseMapper.count(params);
         if (count > 0) {
             int page = params.get("page") == null ? 1 : Integer.parseInt(String.valueOf(params.get("page")));
             int limit = params.get("limit") == null ? PageBean.PAGE_SIZE : Integer.parseInt(String.valueOf(params.get("limit")));
             params.putNext("start", (page - 1) * limit).putNext("limit", limit).putNext("pagination", true);
-            return PageBean.pagination(count, mapper.list(params));
+            return PageBean.pagination(count, baseMapper.list(params));
         }
 
         return new PageBean();

@@ -34,7 +34,7 @@
       <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
       <property name="enableSubPackages" value="true" />
       <!-- 可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查 -->
-      <property name="rootInterface" value="pers.chanus.yuntao.server.mapper.BaseMapper"/>
+      <property name="rootInterface" value="pers.chanus.yuntao.server.mapper.SuperMapper"/>
     </javaClientGenerator>
     
     <!-- 指定数据库表 -->

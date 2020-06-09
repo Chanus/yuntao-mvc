@@ -3,9 +3,7 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import pers.chanus.yuntao.manager.mapper.WhiteIpMapper;
 import pers.chanus.yuntao.manager.model.WhiteIp;
 import pers.chanus.yuntao.manager.service.WhiteIpService;
@@ -19,11 +17,6 @@ import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
  * @since 0.0.1
  */
 @Service
-public class WhiteIpServiceImpl extends BaseServiceImpl<WhiteIpMapper, WhiteIp, Integer> implements WhiteIpService {
-
-    @Autowired
-    public void setMapper(WhiteIpMapper mapper) {
-        this.mapper = mapper;
-    }
+public class WhiteIpServiceImpl extends BaseServiceImpl<WhiteIpMapper, WhiteIp> implements WhiteIpService {
 
 }

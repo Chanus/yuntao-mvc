@@ -4,12 +4,12 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import pers.chanus.yuntao.manager.model.Module;
-import pers.chanus.yuntao.server.mapper.BaseMapper;
+import pers.chanus.yuntao.server.mapper.SuperMapper;
 
 import java.util.List;
 import java.util.Map;
 
-public interface ModuleMapper extends BaseMapper<Module, Integer> {
+public interface ModuleMapper extends SuperMapper<Module> {
     Integer getMaxModuleId(Integer moduleParentId);
 
     String getMaxModuleLevel(Integer moduleParentId);

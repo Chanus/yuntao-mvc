@@ -1,6 +1,5 @@
 package pers.chanus.yuntao.manager.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.manager.mapper.DictItemMapper;
 import pers.chanus.yuntao.manager.model.DictItem;
@@ -15,11 +14,6 @@ import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
  * @since 0.1.1
  */
 @Service
-public class DictItemServiceImpl extends BaseServiceImpl<DictItemMapper, DictItem, Integer> implements DictItemService {
-
-    @Autowired
-    public void setMapper(DictItemMapper mapper) {
-        this.mapper = mapper;
-    }
+public class DictItemServiceImpl extends BaseServiceImpl<DictItemMapper, DictItem> implements DictItemService {
 
 }

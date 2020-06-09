@@ -73,7 +73,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
             String moduleId = (String) params.get("moduleId");
             String moduleCode = null, moduleName = null;
             if (StringUtils.isNotBlank(moduleId)) {
-                Module module = moduleMapper.selectByPrimaryKey(Integer.parseInt(moduleId));
+                Module module = moduleMapper.selectById(Integer.parseInt(moduleId));
                 moduleCode = module == null ? null : module.getModuleCode();
                 moduleName = module == null ? null : module.getModuleName();
             }

@@ -3,7 +3,6 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.PowerMapper;
@@ -21,23 +20,17 @@ import java.util.Map;
  * @since 0.0.1
  */
 @Service
-public class PowerServiceImpl extends BaseServiceImpl<PowerMapper, Power, Integer> implements PowerService {
-
-    @Autowired
-    public void setMapper(PowerMapper mapper) {
-        this.mapper = mapper;
-    }
-
+public class PowerServiceImpl extends BaseServiceImpl<PowerMapper, Power> implements PowerService {
     @Override
     public Message insert(Power t) {
-        Integer priority = mapper.getMaxPriority();
+        Integer priority = baseMapper.getMaxPriority();
         t.setPriority(priority == null ? 1 : (priority + 1));
         return super.insert(t);
     }
 
     @Override
     public Message priority(Map<String, Object> params) {
-        mapper.priority(params);
+        baseMapper.priority(params);
         return Message.success("调整优先级成功");
     }
 

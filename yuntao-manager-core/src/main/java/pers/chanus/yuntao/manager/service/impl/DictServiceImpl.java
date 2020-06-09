@@ -1,6 +1,5 @@
 package pers.chanus.yuntao.manager.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.pojo.Message;
@@ -24,13 +23,7 @@ import java.util.stream.Collectors;
  * @since 0.1.1
  */
 @Service
-public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict, Integer> implements DictService {
-
-    @Autowired
-    public void setMapper(DictMapper mapper) {
-        this.mapper = mapper;
-    }
-
+public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implements DictService {
     @Override
     public Message reloadDict() {
         // 清空已缓存的字典数据
@@ -38,7 +31,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict, Integer> 
         CacheData.SYSTEM_DICT_ITEM_MAP.clear();
 
         // 重载字典数据
-        List<Dict> dicts = mapper.listWithDictItems(null);
+        List<Dict> dicts = baseMapper.listWithDictItems(null);
         if (!CollectionUtils.isEmpty(dicts)) {
             dicts.stream().filter(dict -> dict.getValidStatus().equals(ConfigConsts.STATUS_YES)).forEach(dict -> CacheData.SYSTEM_DICT_MAP.put(dict.getDictCode(), dict.getDictItems().stream().filter(dictItem -> dictItem.getValidStatus().equals(ConfigConsts.STATUS_YES)).collect(Collectors.toList())));
 

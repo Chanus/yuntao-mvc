@@ -16,7 +16,7 @@
 
   <!-- 引入jdbc配置文件，这里要特别注意，如果有多个properties文件，必须用逗号分开，不能写成两个 <context:property-placeholder/> -->
   <!-- <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true" /> -->
-  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
     <property name="locations">
       <list>
         <value>classpath:jdbc.properties</value>
@@ -96,9 +96,43 @@
   </aop:config>
 
   <!-- 配置SqlSessionFactoryBean -->
-  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  <!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource"/>
     <property name="configLocation" value="classpath:mybatis-config.xml"/>
+  </bean> -->
+  <!-- 集成 MyBatis-Plus，调整 SqlSessionFactory 为 MyBatis-Plus 的 SqlSessionFactory -->
+  <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    <!-- 注入全局配置 -->
+    <property name="globalConfig" ref="globalConfig"/>
+    <!-- 配置插件 -->
+    <property name="plugins">
+      <array>
+        <!-- 分页插件 -->
+        <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor">
+          <!-- COUNT SQL 解析.可以没有 -->
+          <property name="countSqlParser" ref="countSqlParser"/>
+        </bean>
+      </array>
+    </property>
+  </bean>
+
+  <!-- MyBatis-Plus 的全局策略配置 -->
+  <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
+    <property name="dbConfig" ref="dbConfig"/>
+  </bean>
+
+  <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
+    <!-- 全局主键自增策略，AUTO 表示自增长 -->
+    <property name="idType" value="AUTO"/>
+    <!-- 全局表前缀配置 -->
+    <property name="tablePrefix" value="sys_"/>
+  </bean>
+
+  <bean id="countSqlParser" class="com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize">
+    <!-- 设置为 true 可以优化部分 left join 的sql -->
+    <property name="optimizeJoin" value="true"/>
   </bean>
 
   <!-- 使用JDBC事务 -->
@@ -107,14 +141,14 @@
   </bean>
 
   <!-- 使用annotation注解方式声明事务 -->
-  <tx:annotation-driven transaction-manager="transactionManager"/>
+  <tx:annotation-driven/>
 
   <!-- 使用实现了某个接口的类让Spring来生成bean -->
   <aop:aspectj-autoproxy/>
 
   <!-- 配置Mybatis Mapper注册 -->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="**.mapper,pers.chanus.yuntao.server.syslog,jasun.spring.mvc.core.syslog"/>
+    <property name="basePackage" value="**.mapper,pers.chanus.yuntao.server.syslog"/>
   </bean>
 
   <!-- 扫描Service -->

@@ -13,6 +13,6 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @date 2018-09-15 15:58:54
  * @since 0.0.1
  */
-public interface ChinaAreaService extends BaseService<ChinaArea, Integer> {
+public interface ChinaAreaService extends BaseService<ChinaArea> {
 
 }

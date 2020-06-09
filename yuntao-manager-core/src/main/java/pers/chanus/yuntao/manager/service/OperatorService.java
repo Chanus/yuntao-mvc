@@ -16,7 +16,7 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @date 2018-09-06 22:45:43
  * @since 0.0.1
  */
-public interface OperatorService extends BaseService<Operator, Integer> {
+public interface OperatorService extends BaseService<Operator> {
     /**
      * 根据操作员ID查询操作员信息
      *

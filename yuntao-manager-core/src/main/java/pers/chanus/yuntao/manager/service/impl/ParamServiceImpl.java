@@ -3,7 +3,6 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
@@ -25,20 +24,14 @@ import java.util.Map;
  * @since 0.0.1
  */
 @Service
-public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param, Integer> implements ParamService {
-
-    @Autowired
-    public void setMapper(ParamMapper mapper) {
-        this.mapper = mapper;
-    }
-
+public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param> implements ParamService {
     @Override
     public Message insert(Param t) {
-        int count = mapper.count(CustomMap.get().putNext("paramCode", t.getParamCode()));
+        int count = baseMapper.count(CustomMap.get().putNext("paramCode", t.getParamCode()));
         if (count > 0)
             return Message.fail("当前参数代码已存在");
 
-        Integer priority = mapper.getMaxPriority();
+        Integer priority = baseMapper.getMaxPriority();
         t.setPriority(priority == null ? 1 : (priority + 1));
 
         return super.insert(t);
@@ -46,14 +39,14 @@ public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param, Intege
 
     @Override
     public Message priority(Map<String, Object> params) {
-        mapper.priority(params);
+        baseMapper.priority(params);
         return Message.success("调整优先级成功");
     }
 
     @Override
     public Message reloadParam() {
         CacheData.SYSTEM_PARAMS_MAP.clear();
-        List<Param> params = mapper.listValidParam();
+        List<Param> params = baseMapper.listValidParam();
         if (!CollectionUtils.isEmpty(params))
             params.forEach(param -> CacheData.SYSTEM_PARAMS_MAP.put(param.getParamCode(), param.getParamData()));
 

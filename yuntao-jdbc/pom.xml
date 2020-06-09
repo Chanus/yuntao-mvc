@@ -23,13 +23,18 @@
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
     </dependency>
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
+    </dependency> -->
+    <!-- 引入 MyBatis-Plus 之后请不要再次引入 MyBatis 以及 MyBatis-Spring，以避免因版本差异导致的问题 -->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus</artifactId>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>

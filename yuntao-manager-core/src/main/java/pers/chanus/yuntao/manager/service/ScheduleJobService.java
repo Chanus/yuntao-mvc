@@ -11,7 +11,7 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @date 2020-04-13 23:46:30
  * @since 0.1.7
  */
-public interface ScheduleJobService extends BaseService<ScheduleJob, Integer> {
+public interface ScheduleJobService extends BaseService<ScheduleJob> {
     /**
      * 启动定时任务，只能启动已经关闭的定时任务
      *

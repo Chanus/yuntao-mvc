@@ -36,18 +36,13 @@ import java.util.List;
  * @since 0.0.1
  */
 @Service
-public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operator, Integer> implements OperatorService {
+public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operator> implements OperatorService {
     @Autowired
     private LoginUserViewMapper loginUserViewMapper;
     @Autowired
     private RoleMapper roleMapper;
     @Autowired
     private RoleModulePowerMapper roleModulePowerMapper;
-
-    @Autowired
-    public void setMapper(OperatorMapper mapper) {
-        this.mapper = mapper;
-    }
 
     @Override
     public Message insert(Operator t) {
@@ -106,12 +101,12 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
 
     @Override
     public Operator get(Integer id) {
-        return mapper.getById(id, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
+        return baseMapper.getById(id, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
     }
 
     @Override
     public Operator get(String operatorNo) {
-        return mapper.getByOperatorNo(operatorNo, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
+        return baseMapper.getByOperatorNo(operatorNo, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
     }
 
     @Override
@@ -122,27 +117,27 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             if (StringUtils.isBlank(oldPassword))
                 return Message.fail("旧密码不能为空");
 
-            String operatorPassword = mapper.getPassword(operatorNo);
+            String operatorPassword = baseMapper.getPassword(operatorNo);
             if (StringUtils.isBlank(operatorPassword))
                 return Message.fail("用户不存在");
             if (!SHAUtils.verifySHA256(oldPassword + operatorNo, operatorPassword))
                 return Message.fail("旧密码不正确");
         }
 
-        mapper.updatePassword(operatorNo, SHAUtils.sha256(newPassword + operatorNo));
+        baseMapper.updatePassword(operatorNo, SHAUtils.sha256(newPassword + operatorNo));
 
         return Message.success("密码修改成功");
     }
 
     @Override
     public PageBean listSubPagination(CustomMap params) {
-        int count = mapper.countSub(params);
+        int count = baseMapper.countSub(params);
         if (count > 0) {
             params.putNext("aesEmailKey", AESKeyConsts.KEY_EMAIL).putNext("aesPhoneKey", AESKeyConsts.KEY_PHONE);
             int page = params.get("page") == null ? 1 : Integer.parseInt(String.valueOf(params.get("page")));
             int limit = params.get("limit") == null ? PageBean.PAGE_SIZE : Integer.parseInt(String.valueOf(params.get("limit")));
             params.putNext("start", (page - 1) * limit).putNext("limit", limit).putNext("pagination", true);
-            return PageBean.pagination(count, mapper.listSub(params));
+            return PageBean.pagination(count, baseMapper.listSub(params));
         }
 
         return new PageBean();
@@ -177,12 +172,12 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
 
     @Override
     public String getHeadImage(String operatorNo) {
-        return mapper.getHeadImage(operatorNo);
+        return baseMapper.getHeadImage(operatorNo);
     }
 
     @Override
     public Message updateHeadImage(String operatorNo, String headImage) {
-        mapper.updateHeadImage(operatorNo, headImage);
+        baseMapper.updateHeadImage(operatorNo, headImage);
         return Message.success("头像上传成功").initMsg(headImage);
     }
 

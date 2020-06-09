@@ -1,8 +1,8 @@
 package pers.chanus.yuntao.manager.mapper;
 
 import pers.chanus.yuntao.manager.model.ModulePowerMethod;
-import pers.chanus.yuntao.server.mapper.BaseMapper;
+import pers.chanus.yuntao.server.mapper.SuperMapper;
 
-public interface ModulePowerMethodMapper extends BaseMapper<ModulePowerMethod, Integer> {
+public interface ModulePowerMethodMapper extends SuperMapper<ModulePowerMethod> {
 
 }

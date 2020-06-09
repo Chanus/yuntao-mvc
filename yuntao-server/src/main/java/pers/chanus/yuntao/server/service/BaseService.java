@@ -3,6 +3,7 @@
  */
 package pers.chanus.yuntao.server.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
@@ -15,12 +16,11 @@ import java.util.List;
  * Service超接口
  *
  * @param <T>  实体对象
- * @param <PK> 实体主键类型
  * @author Chanus
  * @date 2018-09-01 01:04:21
  * @since 0.0.1
  */
-public interface BaseService<T, PK extends Serializable> {
+public interface BaseService<T> extends IService<T> {
     /**
      * 根据主键查询实体
      *
@@ -28,7 +28,7 @@ public interface BaseService<T, PK extends Serializable> {
      * @return 实体对象
      * @since 0.0.1
      */
-    T get(PK pk);
+    T get(Serializable pk);
 
     /**
      * 添加实体
@@ -55,7 +55,7 @@ public interface BaseService<T, PK extends Serializable> {
      * @return 操作结果信息{@code Message}
      * @since 0.0.1
      */
-    Message delete(PK pk);
+    Message delete(Serializable pk);
 
     /**
      * 根据主键集合批量删除实体
@@ -64,7 +64,7 @@ public interface BaseService<T, PK extends Serializable> {
      * @return 操作结果信息{@code Message}
      * @since 0.0.1
      */
-    Message delete(Collection<PK> pks);
+    Message delete(Collection<Serializable> pks);
 
     /**
      * 获取记录条数

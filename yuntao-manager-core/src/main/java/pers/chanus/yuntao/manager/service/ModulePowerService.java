@@ -19,7 +19,7 @@ import java.util.Collection;
  * @date 2018-09-08 20:14:11
  * @since 0.0.1
  */
-public interface ModulePowerService extends BaseService<ModulePower, Integer> {
+public interface ModulePowerService extends BaseService<ModulePower> {
     /**
      * 获取模块权限项方法列表
      *

@@ -3,9 +3,9 @@ package pers.chanus.yuntao.manager.mapper;
 import org.apache.ibatis.annotations.Select;
 
 import pers.chanus.yuntao.manager.model.Role;
-import pers.chanus.yuntao.server.mapper.BaseMapper;
+import pers.chanus.yuntao.server.mapper.SuperMapper;
 
-public interface RoleMapper extends BaseMapper<Role, Integer> {
+public interface RoleMapper extends SuperMapper<Role> {
     Role get(String roleId);
 
     Role getByRoleCode(String roleCode);

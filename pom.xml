@@ -25,6 +25,7 @@
     <aspectj.version>1.9.5</aspectj.version>
     <mybatis.version>3.5.4</mybatis.version>
     <mybatis.spring.version>2.0.4</mybatis.spring.version>
+    <mybatis.plus.version>3.3.2</mybatis.plus.version>
     <mysql.version>8.0.20</mysql.version>
     <druid.version>1.1.22</druid.version>
     <spring.data.redis.version>2.2.7.RELEASE</spring.data.redis.version>
@@ -144,6 +145,12 @@
         <groupId>org.mybatis</groupId>
         <artifactId>mybatis-spring</artifactId>
         <version>${mybatis.spring.version}</version>
+      </dependency>
+      <!-- Mybatis-Plus包 -->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus</artifactId>
+        <version>${mybatis.plus.version}</version>
       </dependency>
       <!-- mysql驱动程序 -->
       <dependency>

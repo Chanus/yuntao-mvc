@@ -10,6 +10,6 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @date 2020-04-13 23:47:09
  * @since 0.1.7
  */
-public interface ScheduleTriggerService extends BaseService<ScheduleTrigger, Integer> {
+public interface ScheduleTriggerService extends BaseService<ScheduleTrigger> {
 
 }

@@ -30,30 +30,25 @@ import java.util.List;
  * @since 0.0.1
  */
 @Service
-public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> implements RoleService {
+public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implements RoleService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleServiceImpl.class);
 
     @Autowired
     private RoleModulePowerMapper roleModulePowerMapper;
 
-    @Autowired
-    public void setMapper(RoleMapper mapper) {
-        this.mapper = mapper;
-    }
-
     @Override
     public Message insert(Role t) {
         // 获取最大角色，用来生成新的角色ID
-        String roleId = mapper.getMaxRoleId(t.getParentRoleId());
+        String roleId = baseMapper.getMaxRoleId(t.getParentRoleId());
         t.setRoleId(StringUtils.isBlank(roleId) ? (t.getParentRoleId() + "10") : String.valueOf(Integer.parseInt(roleId) + 1));
         // 如果没有填写角色代码，则默认为角色ID
         if (StringUtils.isBlank(t.getRoleCode()))
             t.setRoleCode(t.getRoleId());
         // 获取最大排序值，用来设置角色的排序
-        Integer priority = mapper.getMaxPriority(t.getParentRoleId());
+        Integer priority = baseMapper.getMaxPriority(t.getParentRoleId());
         t.setPriority(priority == null ? 1 : (priority + 1));
         // 获取上级角色信息，设置上级角色代码
-        Role parent = mapper.get(t.getParentRoleId());
+        Role parent = baseMapper.get(t.getParentRoleId());
         if (parent == null)
             t.setSuperior(t.getRoleCode());
         else
@@ -66,7 +61,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
     public String createTree(String roleCode, String hasOperator) {
         StringBuilder tree = new StringBuilder("[");
         // 上级角色
-        Role p = mapper.getParentRole(roleCode);
+        Role p = baseMapper.getParentRole(roleCode);
         // 构建一个角色列表根节点
         tree.append("{\"id\":\"").append(p == null ? "-1" : p.getRoleId())
                 .append("\", \"roleCode\":\"").append(p == null ? "-1" : p.getRoleCode())// 根节点设置上级角色的角色代码
@@ -77,7 +72,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role, Integer> 
         try {
             // 构建角色列表目录节点
             CustomMap params = CustomMap.get().putNext("roleCode", roleCode).putNext("hasOperator", hasOperator);
-            List<Role> roles = mapper.list(params);
+            List<Role> roles = baseMapper.list(params);
             if (!CollectionUtils.isEmpty(roles)) {
                 for (Role role : roles) {
                     tree.append(", {\"id\":\"").append(role.getRoleId())

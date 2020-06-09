@@ -3,7 +3,7 @@ package pers.chanus.yuntao.manager.mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import pers.chanus.yuntao.manager.model.ScheduleJob;
-import pers.chanus.yuntao.server.mapper.BaseMapper;
+import pers.chanus.yuntao.server.mapper.SuperMapper;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2020-04-13 23:46:30
  * @since 0.1.7
  */
-public interface ScheduleJobMapper extends BaseMapper<ScheduleJob, Integer> {
+public interface ScheduleJobMapper extends SuperMapper<ScheduleJob> {
     @Select("select valid_status from sys_schedule_job where id = #{arg0,jdbcType=INTEGER}")
     String getValidStatus(Integer id);
 

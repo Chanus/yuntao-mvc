@@ -14,7 +14,7 @@ import pers.chanus.yuntao.server.service.BaseService;
  * @date 2018-09-08 21:54:30
  * @since 0.0.1
  */
-public interface RoleService extends BaseService<Role, Integer> {
+public interface RoleService extends BaseService<Role> {
     /**
      * 创建角色树
      *
