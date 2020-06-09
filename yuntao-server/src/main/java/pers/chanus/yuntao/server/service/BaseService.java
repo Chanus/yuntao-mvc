@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
+import pers.chanus.yuntao.util.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Service超接口
  *
- * @param <T>  实体对象
+ * @param <T> 实体对象
  * @author Chanus
  * @date 2018-09-01 01:04:21
  * @since 0.0.1
@@ -28,7 +29,9 @@ public interface BaseService<T> extends IService<T> {
      * @return 实体对象
      * @since 0.0.1
      */
-    T get(Serializable pk);
+    default T get(Serializable pk) {
+        return this.getById(pk);
+    }
 
     /**
      * 添加实体
@@ -37,7 +40,10 @@ public interface BaseService<T> extends IService<T> {
      * @return 操作结果信息{@code Message}
      * @since 0.0.1
      */
-    Message insert(T t);
+    default Message insert(T t) {
+        boolean b = this.save(t);
+        return b ? Message.addSuccess() : Message.addFail();
+    }
 
     /**
      * 更新实体，过滤空字段
@@ -46,7 +52,10 @@ public interface BaseService<T> extends IService<T> {
      * @return 操作结果信息{@code Message}
      * @since 0.0.1
      */
-    Message update(T t);
+    default Message update(T t) {
+        boolean b = this.updateById(t);
+        return b ? Message.updateSuccess() : Message.updateFail();
+    }
 
     /**
      * 根据主键删除实体
@@ -55,7 +64,10 @@ public interface BaseService<T> extends IService<T> {
      * @return 操作结果信息{@code Message}
      * @since 0.0.1
      */
-    Message delete(Serializable pk);
+    default Message delete(Serializable pk) {
+        boolean b = this.removeById(pk);
+        return b ? Message.deleteSuccess() : Message.deleteFail();
+    }
 
     /**
      * 根据主键集合批量删除实体
@@ -64,7 +76,12 @@ public interface BaseService<T> extends IService<T> {
      * @return 操作结果信息{@code Message}
      * @since 0.0.1
      */
-    Message delete(Collection<Serializable> pks);
+    default Message delete(Collection<? extends Serializable> pks) {
+        boolean b = true;
+        if (!CollectionUtils.isEmpty(pks))
+            b = this.removeByIds(pks);
+        return b ? Message.deleteSuccess() : Message.deleteFail();
+    }
 
     /**
      * 获取记录条数

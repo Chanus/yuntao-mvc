@@ -46,7 +46,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationMapper,
     }
 
     @Override
-    public Message delete(Collection<Serializable> pks) {
+    public Message delete(Collection<? extends Serializable> pks) {
         int count;
         for (Serializable i : pks) {
             count = baseMapper.hasChildren((Integer) i);

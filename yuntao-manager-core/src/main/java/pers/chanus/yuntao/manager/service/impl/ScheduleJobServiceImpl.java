@@ -47,7 +47,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
     }
 
     @Override
-    public Message delete(Collection<Serializable> ids) {
+    public Message delete(Collection<? extends Serializable> ids) {
         // 先停止定时任务
         for (Serializable id : ids) {
             stop((Integer) id);

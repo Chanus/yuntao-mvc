@@ -1,5 +1,10 @@
 package pers.chanus.yuntao.manager.model;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -7,10 +12,12 @@ import java.util.List;
 public class Module implements Serializable {
     private static final long serialVersionUID = -4043140639207121275L;
 
+    @TableId(value = "module_id", type = IdType.INPUT)
     private Integer moduleId;
 
     private Integer moduleParentId;
 
+    @TableField(insertStrategy = FieldStrategy.NOT_EMPTY)
     private String moduleCode;
 
     private String moduleName;
@@ -39,8 +46,10 @@ public class Module implements Serializable {
 
     private Date gmtModified;
 
+    @TableField(exist = false)
     private List<Module> children;// 一级模块的子模块
 
+    @TableField(exist = false)
     private List<ModulePower> modulePowers;// 模块所具有的权限项
 
     public Integer getModuleId() {

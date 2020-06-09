@@ -88,6 +88,15 @@ public class Power implements Serializable {
 
     @Override
     public String toString() {
-        return "Power [id=" + id + ", powerItem=" + powerItem + ", powerName=" + powerName + ", remark=" + remark + ", priority=" + priority + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "Power [" +
+                "id=" + id +
+                ", powerItem=" + powerItem +
+                ", powerName=" + powerName +
+                ", remark=" + remark +
+                ", priority=" + priority +
+                ", validStatus=" + validStatus +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                "]";
     }
 }

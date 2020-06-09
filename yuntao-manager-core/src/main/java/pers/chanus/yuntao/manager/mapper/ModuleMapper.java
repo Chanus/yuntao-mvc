@@ -6,10 +6,14 @@ import org.apache.ibatis.annotations.Update;
 import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.server.mapper.SuperMapper;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 public interface ModuleMapper extends SuperMapper<Module> {
+    int deleteByPrimaryKey(Collection<? extends Serializable> moduleIds);
+
     Integer getMaxModuleId(Integer moduleParentId);
 
     String getMaxModuleLevel(Integer moduleParentId);

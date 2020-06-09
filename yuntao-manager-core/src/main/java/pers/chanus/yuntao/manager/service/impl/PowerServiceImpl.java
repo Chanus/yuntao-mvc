@@ -30,7 +30,7 @@ public class PowerServiceImpl extends BaseServiceImpl<PowerMapper, Power> implem
 
     @Override
     public Message priority(Map<String, Object> params) {
-        baseMapper.priority(params);
+        getBaseMapper().priority(params);
         return Message.success("调整优先级成功");
     }
 
