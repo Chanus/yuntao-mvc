@@ -1,10 +1,14 @@
 package pers.chanus.yuntao.manager.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 
 public class ChinaArea implements Serializable {
     private static final long serialVersionUID = -2057199923039898023L;
 
+    @TableId(value = "area_id", type = IdType.INPUT)
     private Integer areaId;
 
     private Integer areaParentId;
@@ -47,6 +51,11 @@ public class ChinaArea implements Serializable {
 
     @Override
     public String toString() {
-        return "ChinaArea [areaId=" + areaId + ", areaParentId=" + areaParentId + ", areaName=" + areaName + ", areaLevel=" + areaLevel + "]";
+        return "ChinaArea [" +
+                "areaId=" + areaId +
+                ", areaParentId=" + areaParentId +
+                ", areaName=" + areaName +
+                ", areaLevel=" + areaLevel +
+                "]";
     }
 }
