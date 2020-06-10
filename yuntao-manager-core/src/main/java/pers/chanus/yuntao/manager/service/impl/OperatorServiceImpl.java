@@ -3,6 +3,7 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,9 +67,9 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             t.setMasterNo(user.getLoginNo());
             t.setMasterRoleCode(user.getRoleCode());
 
-            role = roleMapper.getByRoleCode(user.getRoleCode());
+            role = roleMapper.selectOne(new QueryWrapper<Role>().lambda().eq(Role::getRoleCode, user.getRoleCode()));
         } else {
-            role = roleMapper.getByRoleCode(t.getOperatorRoleCode());
+            role = roleMapper.selectOne(new QueryWrapper<Role>().lambda().eq(Role::getRoleCode, t.getOperatorRoleCode()));
         }
 
         t.setSuperior(role.getSuperior());
@@ -86,7 +87,8 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
         t.setAesEmailKey(AESKeyConsts.KEY_EMAIL);
         t.setAesPhoneKey(AESKeyConsts.KEY_PHONE);
 
-        return super.update(t);
+        getBaseMapper().updateByPrimaryKeySelective(t);
+        return Message.updateSuccess();
     }
 
     @Override
@@ -101,12 +103,12 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
 
     @Override
     public Operator get(Integer id) {
-        return baseMapper.getById(id, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
+        return getBaseMapper().getById(id, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
     }
 
     @Override
     public Operator get(String operatorNo) {
-        return baseMapper.getByOperatorNo(operatorNo, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
+        return getBaseMapper().getByOperatorNo(operatorNo, AESKeyConsts.KEY_EMAIL, AESKeyConsts.KEY_PHONE);
     }
 
     @Override
@@ -117,27 +119,27 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             if (StringUtils.isBlank(oldPassword))
                 return Message.fail("旧密码不能为空");
 
-            String operatorPassword = baseMapper.getPassword(operatorNo);
+            String operatorPassword = getBaseMapper().getPassword(operatorNo);
             if (StringUtils.isBlank(operatorPassword))
                 return Message.fail("用户不存在");
             if (!SHAUtils.verifySHA256(oldPassword + operatorNo, operatorPassword))
                 return Message.fail("旧密码不正确");
         }
 
-        baseMapper.updatePassword(operatorNo, SHAUtils.sha256(newPassword + operatorNo));
+        getBaseMapper().updatePassword(operatorNo, SHAUtils.sha256(newPassword + operatorNo));
 
         return Message.success("密码修改成功");
     }
 
     @Override
     public PageBean listSubPagination(CustomMap params) {
-        int count = baseMapper.countSub(params);
+        int count = getBaseMapper().countSub(params);
         if (count > 0) {
             params.putNext("aesEmailKey", AESKeyConsts.KEY_EMAIL).putNext("aesPhoneKey", AESKeyConsts.KEY_PHONE);
             int page = params.get("page") == null ? 1 : Integer.parseInt(String.valueOf(params.get("page")));
             int limit = params.get("limit") == null ? PageBean.PAGE_SIZE : Integer.parseInt(String.valueOf(params.get("limit")));
             params.putNext("start", (page - 1) * limit).putNext("limit", limit).putNext("pagination", true);
-            return PageBean.pagination(count, baseMapper.listSub(params));
+            return PageBean.pagination(count, getBaseMapper().listSub(params));
         }
 
         return new PageBean();
@@ -172,12 +174,12 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
 
     @Override
     public String getHeadImage(String operatorNo) {
-        return baseMapper.getHeadImage(operatorNo);
+        return getBaseMapper().getHeadImage(operatorNo);
     }
 
     @Override
     public Message updateHeadImage(String operatorNo, String headImage) {
-        baseMapper.updateHeadImage(operatorNo, headImage);
+        getBaseMapper().updateHeadImage(operatorNo, headImage);
         return Message.success("头像上传成功").initMsg(headImage);
     }
 

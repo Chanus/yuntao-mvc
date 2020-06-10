@@ -98,6 +98,16 @@ public class Param implements Serializable {
 
     @Override
     public String toString() {
-        return "Param [id=" + id + ", paramCode=" + paramCode + ", paramData=" + paramData + ", remark=" + remark + ", validStatus=" + validStatus + ", modifiedRoleCode=" + modifiedRoleCode + ", priority=" + priority + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "Param [" +
+                "id=" + id +
+                ", paramCode=" + paramCode +
+                ", paramData=" + paramData +
+                ", remark=" + remark +
+                ", validStatus=" + validStatus +
+                ", modifiedRoleCode=" + modifiedRoleCode +
+                ", priority=" + priority +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                "]";
     }
 }

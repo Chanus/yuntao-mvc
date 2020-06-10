@@ -6,10 +6,6 @@ import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.server.mapper.SuperMapper;
 
 public interface RoleMapper extends SuperMapper<Role> {
-    Role get(String roleId);
-
-    Role getByRoleCode(String roleCode);
-
     Role getParentRole(String roleCode);
 
     @Select("select login_flag, valid_status from sys_role where role_code = #{roleCode,jdbcType=VARCHAR}")

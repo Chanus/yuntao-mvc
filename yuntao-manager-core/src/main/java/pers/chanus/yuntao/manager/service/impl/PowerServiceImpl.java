@@ -23,7 +23,7 @@ import java.util.Map;
 public class PowerServiceImpl extends BaseServiceImpl<PowerMapper, Power> implements PowerService {
     @Override
     public Message insert(Power t) {
-        Integer priority = baseMapper.getMaxPriority();
+        Integer priority = getBaseMapper().getMaxPriority();
         t.setPriority(priority == null ? 1 : (priority + 1));
         return super.insert(t);
     }

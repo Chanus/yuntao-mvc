@@ -1,56 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pers.chanus.yuntao.manager.mapper.OperatorMapper">
-  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.Operator">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="operator_no" jdbcType="VARCHAR" property="operatorNo" />
-    <result column="operator_name" jdbcType="VARCHAR" property="operatorName" />
-    <result column="operator_password" jdbcType="CHAR" property="operatorPassword" />
-    <result column="operator_role_code" jdbcType="VARCHAR" property="operatorRoleCode" />
-    <result column="master_no" jdbcType="VARCHAR" property="masterNo" />
-    <result column="master_role_code" jdbcType="VARCHAR" property="masterRoleCode" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="tel" jdbcType="VARCHAR" property="tel" />
-    <result column="head_image" jdbcType="VARCHAR" property="headImage" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="valid_status" jdbcType="CHAR" property="validStatus" />
-    <result column="superior" jdbcType="VARCHAR" property="superior" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-    
-    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
-  </resultMap>
-  
-  <sql id="Base_Column_List">
-    id, operator_no, operator_name, operator_password, operator_role_code, master_no, master_role_code, email,
-    tel, head_image, remark, valid_status, superior, gmt_create, gmt_modified
-  </sql>
-  
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_operator
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sys_operator
-    <where>
-      <choose>
-        <when test="list == null or list.size() == 0">
-          1 &lt;&gt; 1
-        </when>
-        <when test="list.size() == 1">
-          id = <foreach collection="list" item="id">#{id}</foreach>
-        </when>
-        <otherwise>
-          id in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
-        </otherwise>
-      </choose>
-    </where>
-  </delete>
-  
-  <insert id="insertSelective" parameterType="pers.chanus.yuntao.manager.model.Operator">
+  <insert id="insert" parameterType="pers.chanus.yuntao.manager.model.Operator">
     insert into sys_operator
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -197,7 +148,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="getById" resultMap="BaseResultMap">
+  <select id="getById" resultType="pers.chanus.yuntao.manager.model.Operator">
     select 
     id, operator_no, operator_name, operator_role_code, master_no, master_role_code, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, remark, valid_status
@@ -205,7 +156,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <select id="getByOperatorNo" resultMap="BaseResultMap">
+  <select id="getByOperatorNo" resultType="pers.chanus.yuntao.manager.model.Operator">
     select 
     sys_operator.id, operator_no, operator_name, operator_role_code, master_no, master_role_code, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, sys_operator.remark, sys_operator.valid_status, sys_operator.gmt_create, role_name
@@ -232,7 +183,7 @@
     </where>
   </select>
   
-  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="list" parameterType="java.util.Map" resultType="pers.chanus.yuntao.manager.model.Operator">
     select 
     sys_operator.id, operator_no, operator_name, operator_role_code, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, sys_operator.remark, sys_operator.valid_status, role_name
@@ -280,7 +231,7 @@
     </where>
   </select>
   
-  <select id="listSub" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="listSub" parameterType="java.util.Map" resultType="pers.chanus.yuntao.manager.model.Operator">
     select 
     sys_operator.id, operator_no, operator_name, master_no, master_role_code, AES_DECRYPT(UNHEX(email),#{aesEmailKey,jdbcType=VARCHAR}) email,
     AES_DECRYPT(UNHEX(tel),#{aesPhoneKey,jdbcType=VARCHAR}) tel, head_image, sys_operator.remark, sys_operator.valid_status, role_name

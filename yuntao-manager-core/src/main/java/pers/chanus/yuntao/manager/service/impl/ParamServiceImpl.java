@@ -27,11 +27,11 @@ import java.util.Map;
 public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param> implements ParamService {
     @Override
     public Message insert(Param t) {
-        int count = baseMapper.count(CustomMap.get().putNext("paramCode", t.getParamCode()));
+        int count = getBaseMapper().count(CustomMap.get().putNext("paramCode", t.getParamCode()));
         if (count > 0)
             return Message.fail("当前参数代码已存在");
 
-        Integer priority = baseMapper.getMaxPriority();
+        Integer priority = getBaseMapper().getMaxPriority();
         t.setPriority(priority == null ? 1 : (priority + 1));
 
         return super.insert(t);
@@ -39,14 +39,14 @@ public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param> implem
 
     @Override
     public Message priority(Map<String, Object> params) {
-        baseMapper.priority(params);
+        getBaseMapper().priority(params);
         return Message.success("调整优先级成功");
     }
 
     @Override
     public Message reloadParam() {
         CacheData.SYSTEM_PARAMS_MAP.clear();
-        List<Param> params = baseMapper.listValidParam();
+        List<Param> params = getBaseMapper().listValidParam();
         if (!CollectionUtils.isEmpty(params))
             params.forEach(param -> CacheData.SYSTEM_PARAMS_MAP.put(param.getParamCode(), param.getParamData()));
 

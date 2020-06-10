@@ -31,7 +31,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
     @Override
     public Message update(ScheduleJob scheduleJob) {
         // 定时任务停止后才能编辑
-        String validStatus = baseMapper.getValidStatus(scheduleJob.getId());
+        String validStatus = getBaseMapper().getValidStatus(scheduleJob.getId());
         if (!ConfigConsts.STATUS_JOB_STOP.equals(validStatus))
             return Message.fail("请先停止定时任务");
 
@@ -58,7 +58,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
 
     @Override
     public Message start(Integer id) {
-        ScheduleJob scheduleJob = baseMapper.getScheduleJob(id);
+        ScheduleJob scheduleJob = getBaseMapper().getScheduleJob(id);
         // 定时任务状态为停止时才可以启动
         if (!ConfigConsts.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
             return Message.fail("定时任务未停止");
@@ -94,14 +94,14 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
             return Message.fail("启动失败");
         }
         // 启动成功后更新任务状态
-        baseMapper.updateValidStatus(id, ConfigConsts.STATUS_JOB_START);
+        getBaseMapper().updateValidStatus(id, ConfigConsts.STATUS_JOB_START);
 
         return Message.success("启动成功");
     }
 
     @Override
     public Message pause(Integer id) {
-        ScheduleJob scheduleJob = baseMapper.selectById(id);
+        ScheduleJob scheduleJob = getBaseMapper().selectById(id);
         if (ConfigConsts.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
             return Message.fail("定时任务已停止");
         if (ConfigConsts.STATUS_JOB_PAUSE.equals(scheduleJob.getValidStatus()))
@@ -109,14 +109,14 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
 
         QuartzUtils.pauseJob(scheduleJob.getJobName(), scheduleJob.getJobGroup());
         // 暂停成功后更新任务状态
-        baseMapper.updateValidStatus(id, ConfigConsts.STATUS_JOB_PAUSE);
+        getBaseMapper().updateValidStatus(id, ConfigConsts.STATUS_JOB_PAUSE);
 
         return Message.success("暂停成功");
     }
 
     @Override
     public Message resume(Integer id) {
-        ScheduleJob scheduleJob = baseMapper.selectById(id);
+        ScheduleJob scheduleJob = getBaseMapper().selectById(id);
         if (ConfigConsts.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
             return Message.fail("定时任务已停止");
         if (ConfigConsts.STATUS_JOB_START.equals(scheduleJob.getValidStatus()))
@@ -124,14 +124,14 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
 
         QuartzUtils.resumeJob(scheduleJob.getJobName(), scheduleJob.getJobGroup());
         // 暂停成功后更新任务状态
-        baseMapper.updateValidStatus(id, ConfigConsts.STATUS_JOB_START);
+        getBaseMapper().updateValidStatus(id, ConfigConsts.STATUS_JOB_START);
 
         return Message.success("恢复成功");
     }
 
     @Override
     public Message stop(Integer id) {
-        ScheduleJob scheduleJob = baseMapper.getScheduleJob(id);
+        ScheduleJob scheduleJob = getBaseMapper().getScheduleJob(id);
         Map<String, String> triggerMap = new HashMap<>();
         List<ScheduleTrigger> scheduleTriggers = scheduleJob.getScheduleTriggers();
         if (!CollectionUtils.isEmpty(scheduleTriggers)) {
@@ -142,14 +142,14 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
 
         QuartzUtils.removeJob(scheduleJob.getJobName(), scheduleJob.getJobGroup(), triggerMap);
         // 停止成功后更新任务状态
-        baseMapper.updateValidStatus(id, ConfigConsts.STATUS_JOB_STOP);
+        getBaseMapper().updateValidStatus(id, ConfigConsts.STATUS_JOB_STOP);
 
         return Message.success("停止成功");
     }
 
     @Override
     public Message trigger(Integer id) {
-        ScheduleJob scheduleJob = baseMapper.selectById(id);
+        ScheduleJob scheduleJob = getBaseMapper().selectById(id);
         JobDataMap jobDataMap = new JobDataMap();
         if (StringUtils.isNotBlank(scheduleJob.getJobData()))
             jobDataMap.put("jobParams", scheduleJob.getJobData());
@@ -161,7 +161,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
 
     @Override
     public Message startAll() {
-        List<ScheduleJob> scheduleJobs = baseMapper.listScheduleJob();
+        List<ScheduleJob> scheduleJobs = getBaseMapper().listScheduleJob();
         if (!CollectionUtils.isEmpty(scheduleJobs)) {
             try {
                 // 创建调度器Scheduler

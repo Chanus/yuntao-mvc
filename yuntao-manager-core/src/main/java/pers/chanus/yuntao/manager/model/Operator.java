@@ -1,5 +1,7 @@
 package pers.chanus.yuntao.manager.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -36,10 +38,13 @@ public class Operator implements Serializable {
 
     private Date gmtModified;
 
+    @TableField(exist = false)
     private String roleName;
 
+    @TableField(exist = false)
     private String aesEmailKey;
 
+    @TableField(exist = false)
     private String aesPhoneKey;
 
     public Integer getId() {

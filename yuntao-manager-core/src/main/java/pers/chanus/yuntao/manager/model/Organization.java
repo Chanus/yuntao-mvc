@@ -1,6 +1,7 @@
 package pers.chanus.yuntao.manager.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // 组织ID
+    @TableId("org_id")
     private Integer orgId;
     // 组织代码
     private String orgCode;

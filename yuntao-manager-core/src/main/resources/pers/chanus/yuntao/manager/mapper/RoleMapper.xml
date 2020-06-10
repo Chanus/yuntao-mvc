@@ -1,180 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pers.chanus.yuntao.manager.mapper.RoleMapper">
-  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.Role">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
-    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
-    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
-    <result column="parent_role_id" jdbcType="VARCHAR" property="parentRoleId" />
-    <result column="login_flag" jdbcType="CHAR" property="loginFlag" />
-    <result column="has_operator" jdbcType="CHAR" property="hasOperator" />
-    <result column="valid_status" jdbcType="CHAR" property="validStatus" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="priority" jdbcType="INTEGER" property="priority" />
-    <result column="superior" jdbcType="VARCHAR" property="superior" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-  </resultMap>
-  
-  <sql id="Base_Column_List">
-    id, role_id, role_code, role_name, parent_role_id, login_flag, has_operator, valid_status,
-    remark, priority, superior, gmt_create, gmt_modified
-  </sql>
-
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from sys_role
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sys_role
-    <where>
-      <choose>
-        <when test="list == null or list.size() == 0">
-          1 &lt;&gt; 1
-        </when>
-        <when test="list.size() == 1">
-          id = <foreach collection="list" item="id">#{id}</foreach>
-        </when>
-        <otherwise>
-          id in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
-        </otherwise>
-      </choose>
-    </where>
-  </delete>
-
-  <insert id="insertSelective" parameterType="pers.chanus.yuntao.manager.model.Role">
-    insert into sys_role
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="roleId != null">
-        role_id,
-      </if>
-      <if test="roleCode != null">
-        role_code,
-      </if>
-      <if test="roleName != null">
-        role_name,
-      </if>
-      <if test="parentRoleId != null">
-        parent_role_id,
-      </if>
-      <if test="loginFlag != null">
-        login_flag,
-      </if>
-      <if test="hasOperator != null">
-        has_operator,
-      </if>
-      <if test="validStatus != null">
-        valid_status,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="priority != null">
-        priority,
-      </if>
-      <if test="superior != null">
-        superior,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="roleId != null">
-        #{roleId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleCode != null">
-        #{roleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="roleName != null">
-        #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentRoleId != null">
-        #{parentRoleId,jdbcType=VARCHAR},
-      </if>
-      <if test="loginFlag != null">
-        #{loginFlag,jdbcType=CHAR},
-      </if>
-      <if test="hasOperator != null">
-        #{hasOperator,jdbcType=CHAR},
-      </if>
-      <if test="validStatus != null">
-        #{validStatus,jdbcType=CHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="priority != null">
-        #{priority,jdbcType=INTEGER},
-      </if>
-      <if test="superior != null">
-        #{superior,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-
-  <update id="updateByPrimaryKeySelective" parameterType="pers.chanus.yuntao.manager.model.Role">
-    update sys_role
-    <set>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleCode != null">
-        role_code = #{roleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="roleName != null">
-        role_name = #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentRoleId != null">
-        parent_role_id = #{parentRoleId,jdbcType=VARCHAR},
-      </if>
-      <if test="loginFlag != null">
-        login_flag = #{loginFlag,jdbcType=CHAR},
-      </if>
-      <if test="hasOperator != null">
-        has_operator = #{hasOperator,jdbcType=CHAR},
-      </if>
-      <if test="validStatus != null">
-        valid_status = #{validStatus,jdbcType=CHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="priority != null">
-        priority = #{priority,jdbcType=INTEGER},
-      </if>
-      <if test="superior != null">
-        superior = #{superior,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-
   <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from sys_role
     <where>
@@ -194,9 +20,10 @@
     </where>
   </select>
 
-  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="list" parameterType="java.util.Map" resultType="pers.chanus.yuntao.manager.model.Role">
     select
-    <include refid="Base_Column_List" />
+    id, role_id, role_code, role_name, parent_role_id, login_flag, has_operator, valid_status,
+    remark, priority, superior, gmt_create, gmt_modified
     from sys_role
     <where>
       and role_id &lt;&gt; '1'
@@ -219,21 +46,7 @@
     </if>
   </select>
 
-  <select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from sys_role
-    where role_id = #{roleId,jdbcType=VARCHAR}
-  </select>
-
-  <select id="getByRoleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from sys_role
-    where role_code = #{roleCode,jdbcType=VARCHAR}
-  </select>
-
-  <select id="getParentRole" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="getParentRole" parameterType="java.lang.String" resultType="pers.chanus.yuntao.manager.model.Role">
     select
     p.id, p.role_id, p.role_code, p.role_name, p.parent_role_id, p.login_flag, p.has_operator, p.valid_status,
     p.remark, p.priority, p.superior

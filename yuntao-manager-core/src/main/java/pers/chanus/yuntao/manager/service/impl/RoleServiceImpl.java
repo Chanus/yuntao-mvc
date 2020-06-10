@@ -3,6 +3,7 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +40,16 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
     @Override
     public Message insert(Role t) {
         // 获取最大角色，用来生成新的角色ID
-        String roleId = baseMapper.getMaxRoleId(t.getParentRoleId());
+        String roleId = getBaseMapper().getMaxRoleId(t.getParentRoleId());
         t.setRoleId(StringUtils.isBlank(roleId) ? (t.getParentRoleId() + "10") : String.valueOf(Integer.parseInt(roleId) + 1));
         // 如果没有填写角色代码，则默认为角色ID
         if (StringUtils.isBlank(t.getRoleCode()))
             t.setRoleCode(t.getRoleId());
         // 获取最大排序值，用来设置角色的排序
-        Integer priority = baseMapper.getMaxPriority(t.getParentRoleId());
+        Integer priority = getBaseMapper().getMaxPriority(t.getParentRoleId());
         t.setPriority(priority == null ? 1 : (priority + 1));
         // 获取上级角色信息，设置上级角色代码
-        Role parent = baseMapper.get(t.getParentRoleId());
+        Role parent = getBaseMapper().selectOne(new QueryWrapper<Role>().lambda().eq(Role::getRoleId, t.getParentRoleId()));
         if (parent == null)
             t.setSuperior(t.getRoleCode());
         else
@@ -61,7 +62,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
     public String createTree(String roleCode, String hasOperator) {
         StringBuilder tree = new StringBuilder("[");
         // 上级角色
-        Role p = baseMapper.getParentRole(roleCode);
+        Role p = getBaseMapper().getParentRole(roleCode);
         // 构建一个角色列表根节点
         tree.append("{\"id\":\"").append(p == null ? "-1" : p.getRoleId())
                 .append("\", \"roleCode\":\"").append(p == null ? "-1" : p.getRoleCode())// 根节点设置上级角色的角色代码
@@ -72,7 +73,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
         try {
             // 构建角色列表目录节点
             CustomMap params = CustomMap.get().putNext("roleCode", roleCode).putNext("hasOperator", hasOperator);
-            List<Role> roles = baseMapper.list(params);
+            List<Role> roles = getBaseMapper().list(params);
             if (!CollectionUtils.isEmpty(roles)) {
                 for (Role role : roles) {
                     tree.append(", {\"id\":\"").append(role.getRoleId())
