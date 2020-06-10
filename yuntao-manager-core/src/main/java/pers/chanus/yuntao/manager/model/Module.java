@@ -1,6 +1,5 @@
 package pers.chanus.yuntao.manager.model;
 
-import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -17,7 +16,6 @@ public class Module implements Serializable {
 
     private Integer moduleParentId;
 
-    @TableField(insertStrategy = FieldStrategy.NOT_EMPTY)
     private String moduleCode;
 
     private String moduleName;

@@ -126,6 +126,9 @@
   <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
     <!-- 全局主键自增策略，AUTO 表示自增长 -->
     <property name="idType" value="AUTO"/>
+    <property name="insertStrategy" value="NOT_EMPTY"/>
+    <property name="updateStrategy" value="NOT_NULL"/>
+    <property name="selectStrategy" value="NOT_EMPTY"/>
     <!-- 全局表前缀配置 -->
     <property name="tablePrefix" value="sys_"/>
   </bean>

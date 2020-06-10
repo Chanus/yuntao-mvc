@@ -160,12 +160,13 @@ public class ModulePowerController extends BaseController {
     /**
      * 模块权限项方法列表
      *
+     * @param mpId 模块权限项主键
      * @return
      */
     @ResponseBody
     @PostMapping(value = "method-list.do", produces = "application/json; charset=utf-8")
-    public PageBean methodList() {
-        return modulePowerService.listMethodPagination(getParams());
+    public PageBean methodList(Integer mpId) {
+        return new PageBean(0, modulePowerService.listMethod(mpId));
     }
 
     /**

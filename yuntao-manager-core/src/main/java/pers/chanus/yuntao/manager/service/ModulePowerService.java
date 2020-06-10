@@ -3,14 +3,13 @@
  */
 package pers.chanus.yuntao.manager.service;
 
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.model.ModulePower;
 import pers.chanus.yuntao.manager.model.ModulePowerMethod;
 import pers.chanus.yuntao.server.service.BaseService;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 模块权限项接口
@@ -23,11 +22,11 @@ public interface ModulePowerService extends BaseService<ModulePower> {
     /**
      * 获取模块权限项方法列表
      *
-     * @param params mpId   模块权限项主键
+     * @param mpId 模块权限项主键
      * @return
      * @since 0.0.1
      */
-    PageBean listMethodPagination(CustomMap params);
+    List<ModulePowerMethod> listMethod(Integer mpId);
 
     /**
      * 添加模块权限项方法

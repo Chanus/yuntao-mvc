@@ -1,11 +1,15 @@
 package pers.chanus.yuntao.manager.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class ModulePower implements Serializable {
     private static final long serialVersionUID = 7581034261159771845L;
 
+    @TableId("mp_id")
     private Integer mpId;
 
     private String moduleCode;
@@ -18,8 +22,10 @@ public class ModulePower implements Serializable {
 
     private Date gmtModified;
 
+    @TableField(exist = false)
     private String moduleName;
 
+    @TableField(exist = false)
     private Integer hasPower;// 判断模块是否具有此权限，不为空则具有此权限
 
     public Integer getMpId() {

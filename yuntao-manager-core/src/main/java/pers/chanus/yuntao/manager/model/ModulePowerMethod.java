@@ -1,11 +1,14 @@
 package pers.chanus.yuntao.manager.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class ModulePowerMethod implements Serializable {
     private static final long serialVersionUID = 5917034100446628692L;
 
+    @TableId("mpm_id")
     private Integer mpmId;
 
     private Integer mpId;
@@ -68,6 +71,13 @@ public class ModulePowerMethod implements Serializable {
 
     @Override
     public String toString() {
-        return "ModulePowerMethod [mpmId=" + mpmId + ", mpId=" + mpId + ", className=" + className + ", url=" + url + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "ModulePowerMethod [" +
+                "mpmId=" + mpmId +
+                ", mpId=" + mpId +
+                ", className=" + className +
+                ", url=" + url +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                "]";
     }
 }

@@ -41,8 +41,8 @@ public interface BaseService<T> extends IService<T> {
      * @since 0.0.1
      */
     default Message insert(T t) {
-        boolean b = this.save(t);
-        return b ? Message.addSuccess() : Message.addFail();
+        this.save(t);
+        return Message.addSuccess();
     }
 
     /**
@@ -53,8 +53,8 @@ public interface BaseService<T> extends IService<T> {
      * @since 0.0.1
      */
     default Message update(T t) {
-        boolean b = this.updateById(t);
-        return b ? Message.updateSuccess() : Message.updateFail();
+        this.updateById(t);
+        return Message.updateSuccess();
     }
 
     /**
@@ -65,8 +65,8 @@ public interface BaseService<T> extends IService<T> {
      * @since 0.0.1
      */
     default Message delete(Serializable pk) {
-        boolean b = this.removeById(pk);
-        return b ? Message.deleteSuccess() : Message.deleteFail();
+        this.removeById(pk);
+        return Message.deleteSuccess();
     }
 
     /**
@@ -77,10 +77,9 @@ public interface BaseService<T> extends IService<T> {
      * @since 0.0.1
      */
     default Message delete(Collection<? extends Serializable> pks) {
-        boolean b = true;
         if (!CollectionUtils.isEmpty(pks))
-            b = this.removeByIds(pks);
-        return b ? Message.deleteSuccess() : Message.deleteFail();
+            this.removeByIds(pks);
+        return Message.deleteSuccess();
     }
 
     /**

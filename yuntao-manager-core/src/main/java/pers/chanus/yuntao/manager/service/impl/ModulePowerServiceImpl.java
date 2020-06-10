@@ -3,11 +3,10 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.mapper.ModulePowerMapper;
 import pers.chanus.yuntao.manager.mapper.ModulePowerMethodMapper;
 import pers.chanus.yuntao.manager.model.ModulePower;
@@ -17,6 +16,7 @@ import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 import pers.chanus.yuntao.util.CollectionUtils;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 模块权限项接口实现
@@ -31,8 +31,8 @@ public class ModulePowerServiceImpl extends BaseServiceImpl<ModulePowerMapper, M
     private ModulePowerMethodMapper modulePowerMethodMapper;
 
     @Override
-    public PageBean listMethodPagination(CustomMap params) {
-        return new PageBean(0, modulePowerMethodMapper.list(params));
+    public List<ModulePowerMethod> listMethod(Integer mpId) {
+        return modulePowerMethodMapper.selectList(new QueryWrapper<ModulePowerMethod>().lambda().eq(ModulePowerMethod::getMpId, mpId));
     }
 
     @Override
