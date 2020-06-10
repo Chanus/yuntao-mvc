@@ -190,6 +190,16 @@ public class DataBaseTable implements Serializable {
 
     @Override
     public String toString() {
-        return "DataBaseTable [tableSchema=" + tableSchema + ", tableName=" + tableName + ", tableType=" + tableType + ", engine=" + engine + ", tableRows=" + tableRows + ", autoIncrement=" + autoIncrement + ", createTime=" + createTime + ", tableCollation=" + tableCollation + ", tableComment=" + tableComment + "]";
+        return "DataBaseTable [" +
+                "tableSchema=" + tableSchema +
+                ", tableName=" + tableName +
+                ", tableType=" + tableType +
+                ", engine=" + engine +
+                ", tableRows=" + tableRows +
+                ", autoIncrement=" + autoIncrement +
+                ", createTime=" + createTime +
+                ", tableCollation=" + tableCollation +
+                ", tableComment=" + tableComment +
+                "]";
     }
 }

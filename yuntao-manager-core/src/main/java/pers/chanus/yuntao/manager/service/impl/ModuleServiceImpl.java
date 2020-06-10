@@ -20,7 +20,6 @@ import pers.chanus.yuntao.util.CollectionUtils;
 import pers.chanus.yuntao.util.StringUtils;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -70,13 +69,7 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module> imp
 
     @Override
     public Message delete(Serializable pk) {
-        getBaseMapper().deleteByPrimaryKey(Collections.singletonList(pk));
-        return Message.deleteSuccess();
-    }
-
-    @Override
-    public Message delete(Collection<? extends Serializable> pks) {
-        getBaseMapper().deleteByPrimaryKey(pks);
+        getBaseMapper().deleteBatchIds(Collections.singletonList(pk));
         return Message.deleteSuccess();
     }
 

@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pers.chanus.yuntao.manager.mapper.DataBaseTableMapper">
-  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.DataBaseTable">
-    <result column="table_schema" jdbcType="VARCHAR" property="tableSchema" />
-    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
-    <result column="table_type" jdbcType="VARCHAR" property="tableType" />
-    <result column="engine" jdbcType="VARCHAR" property="engine" />
-    <result column="table_rows" jdbcType="VARCHAR" property="tableRows" />
-    <result column="auto_increment" jdbcType="VARCHAR" property="autoIncrement" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="table_collation" jdbcType="VARCHAR" property="tableCollation" />
-    <result column="table_comment" jdbcType="VARCHAR" property="tableComment" />
-  </resultMap>
-  
   <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from information_schema.tables
     <where>
@@ -30,7 +18,7 @@
     </where>
   </select>
   
-  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="list" parameterType="java.util.Map" resultType="pers.chanus.yuntao.manager.model.DataBaseTable">
     select 
     table_schema, table_name, table_type, engine, table_rows, auto_increment, create_time, table_collation, table_comment
     from information_schema.tables
@@ -52,7 +40,7 @@
     </if>
   </select>
   
-  <select id="get" resultMap="BaseResultMap">
+  <select id="get" resultType="pers.chanus.yuntao.manager.model.DataBaseTable">
     select table_name, table_comment from information_schema.tables
     <where>
       <choose>

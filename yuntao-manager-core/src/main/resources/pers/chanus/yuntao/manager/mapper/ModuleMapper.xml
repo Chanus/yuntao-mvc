@@ -1,44 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pers.chanus.yuntao.manager.mapper.ModuleMapper">
-  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.Module">
-    <id column="module_id" jdbcType="INTEGER" property="moduleId" />
-    <result column="module_parent_id" jdbcType="INTEGER" property="moduleParentId" />
-    <result column="module_code" jdbcType="VARCHAR" property="moduleCode" />
-    <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
-    <result column="module_url" jdbcType="VARCHAR" property="moduleUrl" />
-    <result column="module_level" jdbcType="CHAR" property="moduleLevel" />
-    <result column="module_is_menu" jdbcType="CHAR" property="moduleIsMenu" />
-    <result column="module_for_permission" jdbcType="CHAR" property="moduleForPermission" />
-    <result column="module_for_admin" jdbcType="CHAR" property="moduleForAdmin" />
-    <result column="module_belong" jdbcType="CHAR" property="moduleBelong" />
-    <result column="module_icon" jdbcType="VARCHAR" property="moduleIcon" />
-    <result column="module_target" jdbcType="CHAR" property="moduleTarget" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="valid_status" jdbcType="CHAR" property="validStatus" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-  </resultMap>
-  
   <sql id="Base_Column_List">
     module_id, module_parent_id, module_code, module_name, module_url, module_level, module_is_menu, module_for_permission,
     module_for_admin, module_belong, module_icon, module_target, remark, valid_status, gmt_create, gmt_modified
   </sql>
   
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteBatchIds" parameterType="java.lang.Integer">
     delete from sys_module
     <where>
       <choose>
-        <when test="list == null or list.size() == 0">
+        <when test="coll == null or coll.size() == 0">
           1 &lt;&gt; 1
         </when>
-        <when test="list.size() == 1">
-          module_id = <foreach collection="list" item="id">#{id}</foreach>
-          or module_parent_id = <foreach collection="list" item="id">#{id}</foreach>
+        <when test="coll.size() == 1">
+          module_id = <foreach collection="coll" item="id">#{id,jdbcType=INTEGER}</foreach>
+          or module_parent_id = <foreach collection="coll" item="id">#{id,jdbcType=INTEGER}</foreach>
         </when>
         <otherwise>
-          module_id in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
-          or module_parent_id in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+          module_id in <foreach collection="coll" item="id" open="(" separator="," close=")">#{id,jdbcType=INTEGER}</foreach>
+          or module_parent_id in <foreach collection="coll" item="id" open="(" separator="," close=")">#{id,jdbcType=INTEGER}</foreach>
         </otherwise>
       </choose>
     </where>
@@ -56,7 +37,7 @@
     </where>
   </select>
   
-  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="list" parameterType="java.util.Map" resultType="pers.chanus.yuntao.manager.model.Module">
     select 
     <include refid="Base_Column_List" />
     from sys_module
@@ -82,7 +63,7 @@
     select max(module_level) from sys_module where module_id &lt;&gt; 99 and module_parent_id = #{moduleParentId,jdbcType=INTEGER}
   </select>
   
-  <select id="getModuleForPriority" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="getModuleForPriority" parameterType="java.util.Map" resultType="pers.chanus.yuntao.manager.model.Module">
     select 
     <include refid="Base_Column_List" />
     from sys_module

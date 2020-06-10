@@ -1,6 +1,8 @@
 package pers.chanus.yuntao.manager.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import pers.chanus.yuntao.util.DateUtils;
 
 import java.io.Serializable;
@@ -28,13 +30,16 @@ public class ScheduleTrigger implements Serializable {
     private String triggerCron;
     // 开始时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Date triggerStartTime;
     // 结束时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Date triggerEndTime;
     // 属性配置，json格式
     private String triggerData;
     // 优先级
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Integer priority;
     // 备注
     private String remark;
@@ -47,8 +52,10 @@ public class ScheduleTrigger implements Serializable {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date gmtModified;
 
+    @TableField(exist = false)
     private String triggerStartTimeStr;
 
+    @TableField(exist = false)
     private String triggerEndTimeStr;
 
     /**

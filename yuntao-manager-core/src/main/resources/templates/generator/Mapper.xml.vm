@@ -1,77 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${serverPackage}.mapper.${className}Mapper">
-  <resultMap id="BaseResultMap" type="${serverPackage}.model.${className}">
-#foreach ($column in $columns)
-#if($column.columnKey == 'PRI')
-    <id column="${column.columnName}" jdbcType="${column.jdbcType}" property="${column.attributename}" />
-#else
-    <result column="${column.columnName}" jdbcType="${column.jdbcType}" property="${column.attributename}" />
-#end
-#end
-  </resultMap>
-  
-  <sql id="Base_Column_List">
-    #foreach($column in $columns)$column.columnName#if($velocityCount != $columns.size()), #end#end
-
-  </sql>
-  
-  <select id="selectByPrimaryKey" parameterType="java.lang.${pk.attributeType}" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from ${tableName}
-    where ${pk.columnName} = #{${pk.attributename},jdbcType=${pk.jdbcType}}
-  </select>
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.${pk.attributeType}">
-    delete from ${tableName}
-    <where>
-      <choose>
-        <when test="list == null or list.size() == 0">
-          1 &lt;&gt; 1
-        </when>
-        <when test="list.size() == 1">
-          ${pk.columnName} = <foreach collection="list" item="id">#{id,jdbcType=${pk.jdbcType}}</foreach>
-        </when>
-        <otherwise>
-          ${pk.columnName} in <foreach collection="list" item="id" open="(" separator="," close=")">#{id,jdbcType=${pk.jdbcType}}</foreach>
-        </otherwise>
-      </choose>
-    </where>
-  </delete>
-  
-  <insert id="insertSelective" parameterType="${serverPackage}.model.${className}">
-    insert into ${tableName}
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-#foreach ($column in $columns)
-      <if test="${column.attributename} != null">
-        ${column.columnName},
-      </if>
-#end
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-#foreach ($column in $columns)
-      <if test="${column.attributename} != null">
-        #{${column.attributename},jdbcType=${column.jdbcType}},
-      </if>
-#end
-    </trim>
-  </insert>
-  
-  <update id="updateByPrimaryKeySelective" parameterType="${serverPackage}.model.${className}">
-    update ${tableName}
-    <set>
-#foreach ($column in $columns)
-#if($column.columnName != $pk.columnName)
-      <if test="${column.attributename} != null">
-        ${column.columnName} = #{${column.attributename},jdbcType=${column.jdbcType}},
-      </if>
-#end
-#end
-    </set>
-    where ${pk.columnName} = #{${pk.attributename},jdbcType=${pk.jdbcType}}
-  </update>
-  
   <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from ${tableName}
     <where>
@@ -82,8 +11,9 @@
   </select>
   
   <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    #foreach($column in $columns)$column.columnName#if($velocityCount != $columns.size()), #end#end
+
     from ${tableName}
     <where>
       <if test="${pk.attributename} != null">

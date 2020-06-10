@@ -88,6 +88,15 @@ public class WhiteIp implements Serializable {
 
     @Override
     public String toString() {
-        return "WhiteIp [id=" + id + ", whiteIp=" + whiteIp + ", loginNo=" + loginNo + ", remark=" + remark + ", fixedStatus=" + fixedStatus + ", validStatus=" + validStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "WhiteIp [" +
+                "id=" + id +
+                ", whiteIp=" + whiteIp +
+                ", loginNo=" + loginNo +
+                ", remark=" + remark +
+                ", fixedStatus=" + fixedStatus +
+                ", validStatus=" + validStatus +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                "]";
     }
 }

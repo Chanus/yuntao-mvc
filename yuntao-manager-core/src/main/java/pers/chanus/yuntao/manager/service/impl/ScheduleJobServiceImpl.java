@@ -14,10 +14,7 @@ import pers.chanus.yuntao.util.QuartzUtils;
 import pers.chanus.yuntao.util.StringUtils;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 定时任务管理接口实现
@@ -43,7 +40,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
         // 先停止定时任务
         this.stop((Integer) id);
 
-        return super.delete(id);
+        return super.delete(Collections.singletonList(id));
     }
 
     @Override

@@ -11,8 +11,8 @@ import pers.chanus.yuntao.manager.service.DictService;
 import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 import pers.chanus.yuntao.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +24,12 @@ import java.util.stream.Collectors;
  */
 @Service
 public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implements DictService {
+    @Override
+    public Message delete(Serializable pk) {
+        getBaseMapper().deleteBatchIds(Collections.singletonList(pk));
+        return Message.deleteSuccess();
+    }
+
     @Override
     public Message reloadDict() {
         // 清空已缓存的字典数据

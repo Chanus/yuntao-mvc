@@ -1,6 +1,7 @@
 package pers.chanus.yuntao.manager.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -33,6 +34,7 @@ public class Dict implements Serializable {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date gmtModified;
 
+    @TableField(exist = false)
     private List<DictItem> dictItems;
 
     /**

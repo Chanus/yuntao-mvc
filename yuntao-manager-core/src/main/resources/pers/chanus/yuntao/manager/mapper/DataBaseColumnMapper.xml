@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pers.chanus.yuntao.manager.mapper.DataBaseColumnMapper">
-  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.DataBaseColumn">
-    <result column="table_schema" jdbcType="VARCHAR" property="tableSchema" />
-    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
-    <result column="column_name" jdbcType="VARCHAR" property="columnName" />
-    <result column="column_default" jdbcType="VARCHAR" property="columnDefault" />
-    <result column="is_nullable" jdbcType="VARCHAR" property="nullable" />
-    <result column="character_set_name" jdbcType="VARCHAR" property="characterSetName" />
-    <result column="collation_name" jdbcType="VARCHAR" property="collationName" />
-    <result column="data_type" jdbcType="VARCHAR" property="dataType" />
-    <result column="column_type" jdbcType="VARCHAR" property="columnType" />
-    <result column="column_comment" jdbcType="VARCHAR" property="columnComment" />
-    <result column="column_key" jdbcType="VARCHAR" property="columnKey" />
-    <result column="extra" jdbcType="VARCHAR" property="extra" />
-  </resultMap>
-  
   <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from information_schema.columns
     <where>
@@ -28,9 +13,9 @@
     </where>
   </select>
   
-  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="list" parameterType="java.util.Map" resultType="pers.chanus.yuntao.manager.model.DataBaseColumn">
     select 
-    table_schema, table_name, column_name, column_default, is_nullable, character_set_name, collation_name, data_type, column_type, column_comment, column_key, extra
+    table_schema, table_name, column_name, column_default, is_nullable nullable, character_set_name, collation_name, data_type, column_type, column_comment, column_key, extra
     from information_schema.columns
     <where>
       <if test="tableSchema != null">

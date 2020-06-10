@@ -1,139 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pers.chanus.yuntao.manager.mapper.ScheduleJobMapper">
-  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.manager.model.ScheduleJob">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
-    <result column="job_group" jdbcType="VARCHAR" property="jobGroup" />
-    <result column="job_class_name" jdbcType="VARCHAR" property="jobClassName" />
-    <result column="job_data" jdbcType="VARCHAR" property="jobData" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="valid_status" jdbcType="CHAR" property="validStatus" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-  </resultMap>
-  
-  <sql id="Base_Column_List">
-    id, job_name, job_group, job_class_name, job_data, remark, valid_status, gmt_create, gmt_modified
-  </sql>
-  
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_schedule_job
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteBatchIds" parameterType="java.lang.Integer">
     delete sys_schedule_job, sys_schedule_trigger from sys_schedule_job
     left join sys_schedule_trigger on sys_schedule_job.id = sys_schedule_trigger.job_id
     <where>
       <choose>
-        <when test="list == null or list.size() == 0">
+        <when test="coll == null or coll.size() == 0">
           and 1 &lt;&gt; 1
         </when>
-        <when test="list.size() == 1">
-          and sys_schedule_job.id = <foreach collection="list" item="id">#{id,jdbcType=INTEGER}</foreach>
+        <when test="coll.size() == 1">
+          and sys_schedule_job.id = <foreach collection="coll" item="id">#{id,jdbcType=INTEGER}</foreach>
         </when>
         <otherwise>
-          and sys_schedule_job.id in <foreach collection="list" item="id" open="(" separator="," close=")">#{id,jdbcType=INTEGER}</foreach>
+          and sys_schedule_job.id in <foreach collection="coll" item="id" open="(" separator="," close=")">#{id,jdbcType=INTEGER}</foreach>
         </otherwise>
       </choose>
     </where>
   </delete>
-  
-  <insert id="insertSelective" parameterType="pers.chanus.yuntao.manager.model.ScheduleJob">
-    insert into sys_schedule_job
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="jobName != null">
-        job_name,
-      </if>
-      <if test="jobGroup != null">
-        job_group,
-      </if>
-      <if test="jobClassName != null">
-        job_class_name,
-      </if>
-      <if test="jobData != null">
-        job_data,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="validStatus != null">
-        valid_status,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="jobName != null">
-        #{jobName,jdbcType=VARCHAR},
-      </if>
-      <if test="jobGroup != null">
-        #{jobGroup,jdbcType=VARCHAR},
-      </if>
-      <if test="jobClassName != null">
-        #{jobClassName,jdbcType=VARCHAR},
-      </if>
-      <if test="jobData != null">
-        #{jobData,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="validStatus != null">
-        #{validStatus,jdbcType=CHAR},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  
-  <update id="updateByPrimaryKeySelective" parameterType="pers.chanus.yuntao.manager.model.ScheduleJob">
-    update sys_schedule_job
-    <set>
-      <if test="jobName != null">
-        job_name = #{jobName,jdbcType=VARCHAR},
-      </if>
-      <if test="jobGroup != null">
-        job_group = #{jobGroup,jdbcType=VARCHAR},
-      </if>
-      <if test="jobClassName != null">
-        job_class_name = #{jobClassName,jdbcType=VARCHAR},
-      </if>
-      <if test="jobData != null">
-        job_data = #{jobData,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="validStatus != null">
-        valid_status = #{validStatus,jdbcType=CHAR},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
   
   <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
     select count(*) from sys_schedule_job
@@ -144,9 +28,9 @@
     </where>
   </select>
   
-  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+  <select id="list" parameterType="java.util.Map" resultType="pers.chanus.yuntao.manager.model.ScheduleJob">
+    select
+    id, job_name, job_group, job_class_name, job_data, remark, valid_status, gmt_create, gmt_modified
     from sys_schedule_job
     <where>
       <if test="validStatus != null">

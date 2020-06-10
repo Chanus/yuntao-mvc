@@ -43,6 +43,14 @@ public class ${className} implements Serializable {
 #elseif($column.dataType == 'date')
     @JSONField(format = "yyyy-MM-dd")
 #end
+## 集成 Mybatis Plus，若主键名称不是id，需要指定字段名，若主键不是自增长，需要指定主键生成策略
+#if($column.columnKey == 'PRI' && $column.columnName != 'id')
+#if($column.extra == 'auto_increment')
+    @TableId("$column.columnName")
+#else
+    @TableId(value = "$column.columnName", type = IdType.INPUT)
+#end
+#end
     private $column.attributeType $column.attributename;
 #end
 #foreach ($column in $columns)

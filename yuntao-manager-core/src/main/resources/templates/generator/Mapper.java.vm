@@ -10,6 +10,6 @@ import pers.chanus.yuntao.server.mapper.SuperMapper;
  * @date ${dateTime}
  * @since ${since}
  */
-public interface ${className}Mapper extends SuperMapper<${className}, ${pk.attributeType}> {
+public interface ${className}Mapper extends SuperMapper<${className}> {
 
 }
