@@ -38,7 +38,7 @@ public class ConfigServlet extends HttpServlet {
                 " \\____   |  |  /   |  \\  |  / __ \\(  <_> ) /    Y    \\     /  \\     \\____\n").append(
                 " / ______|____/|___|  /__| (____  /\\____/  \\____|__  /\\___/    \\______  /\n").append(
                 " \\/                 \\/          \\/                 \\/                 \\/ \n").append(
-                "      :: Yuntao MVC :: By Chanus. Email: chanus1990@163.com (v")
+                "                                                          云道后台管理系统 (v")
                 .append(ConfigUtils.getProperty("system.version")).append(")\n").append(
                 "=========================================================================\n").append(
                 "                               _ooOoo_\n").append(

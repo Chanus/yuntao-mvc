@@ -109,18 +109,57 @@
   </aop:config>
 
   <!-- 配置SqlSessionFactoryBean -->
-  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <!-- 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
+  <!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    &lt;!&ndash; 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 &ndash;&gt;
     <property name="dataSource" ref="dataSource"/>
     <property name="configLocation" value="classpath:mybatis-config.xml"/>
-    <!-- 自动扫描classpath(类路径)下mapper目录下的所有SQL映射的xml文件  -->
-    <!-- <property name="mapperLocations" value="classpath:mapper/*.xml"/> -->
-    <!-- 读写分离 -->
+    &lt;!&ndash; 自动扫描classpath(类路径)下mapper目录下的所有SQL映射的xml文件  &ndash;&gt;
+    &lt;!&ndash; <property name="mapperLocations" value="classpath:mapper/*.xml"/> &ndash;&gt;
+    &lt;!&ndash; 读写分离 &ndash;&gt;
     <property name="plugins">
       <array>
         <bean class="pers.chanus.yuntao.jdbc.rwdb.DynamicPlugin"/>
       </array>
     </property>
+  </bean> -->
+  <!-- 集成 MyBatis-Plus，调整 SqlSessionFactory 为 MyBatis-Plus 的 SqlSessionFactory -->
+  <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    <!-- 注入全局配置 -->
+    <property name="globalConfig" ref="globalConfig"/>
+    <!-- 配置插件 -->
+    <property name="plugins">
+      <array>
+        <!-- 读写分离 -->
+        <bean class="pers.chanus.yuntao.jdbc.rwdb.DynamicPlugin"/>
+        <!-- 分页插件 -->
+        <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor">
+          <!-- COUNT SQL 解析.可以没有 -->
+          <property name="countSqlParser" ref="countSqlParser"/>
+        </bean>
+      </array>
+    </property>
+  </bean>
+
+  <!-- MyBatis-Plus 的全局策略配置 -->
+  <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
+    <property name="dbConfig" ref="dbConfig"/>
+  </bean>
+
+  <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
+    <!-- 全局主键自增策略，AUTO 表示自增长 -->
+    <property name="idType" value="AUTO"/>
+    <property name="insertStrategy" value="NOT_EMPTY"/>
+    <property name="updateStrategy" value="NOT_NULL"/>
+    <property name="selectStrategy" value="NOT_EMPTY"/>
+    <!-- 全局表前缀配置 -->
+    <property name="tablePrefix" value="sys_"/>
+  </bean>
+
+  <bean id="countSqlParser" class="com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize">
+    <!-- 设置为 true 可以优化部分 left join 的sql -->
+    <property name="optimizeJoin" value="true"/>
   </bean>
 
   <!-- 使用JDBC事务 -->
@@ -129,16 +168,16 @@
   </bean>
 
   <!-- 使用annotation注解方式声明事务 -->
-  <tx:annotation-driven transaction-manager="transactionManager"/>
+  <tx:annotation-driven/>
 
   <!-- 使用实现了某个接口的类让Spring来生成bean -->
   <aop:aspectj-autoproxy/>
 
   <!-- 配置Mybatis Mapper注册 -->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="**.mapper,pers.chanus.yuntao.server.syslog,jasun.spring.mvc.core.syslog"/>
+    <property name="basePackage" value="**.mapper,pers.chanus.yuntao.server.syslog"/>
   </bean>
 
   <!-- 扫描Service -->
-  <context:component-scan base-package="**.service.impl,**.services.impl"/>
+  <context:component-scan base-package="**.service.impl"/>
 </beans>
