@@ -1,30 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pers.chanus.yuntao.server.syslog.LogMapper">
-  <resultMap id="BaseResultMap" type="pers.chanus.yuntao.server.syslog.Log">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="operate_no" jdbcType="VARCHAR" property="operateNo" />
-    <result column="operate_role_code" jdbcType="VARCHAR" property="operateRoleCode" />
-    <result column="operate_ip" jdbcType="INTEGER" property="operateIp" />
-    <result column="operate_module_code" jdbcType="VARCHAR" property="operateModuleCode" />
-    <result column="operate_url" jdbcType="VARCHAR" property="operateUrl" />
-    <result column="operate_method" jdbcType="VARCHAR" property="operateMethod" />
-    <result column="operate_exception" jdbcType="VARCHAR" property="operateException" />
-    <result column="operate_content" jdbcType="LONGVARCHAR" property="operateContent" />
-    <result column="operate_type" jdbcType="VARCHAR" property="operateType" />
-    <result column="operate_type_desc" jdbcType="VARCHAR" property="operateTypeDesc" />
-    <result column="operate_consume_time" jdbcType="INTEGER" property="operateConsumeTime" />
-    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
-    <result column="superior" jdbcType="VARCHAR" property="superior" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-    
-    <result column="role_name" jdbcType="VARCHAR" property="operateRoleName" />
-    <result column="module_name" jdbcType="VARCHAR" property="operateModuleName" />
-  </resultMap>
-  
-  <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select operate_no, operate_url, operate_method, operate_exception, operate_content, operate_type from sys_log where id = #{id,jdbcType=BIGINT}
+  <select id="get" parameterType="java.lang.Long" resultType="pers.chanus.yuntao.server.syslog.Log">
+    select
+    operate_no, operate_url, operate_method, operate_exception, operate_content, operate_type
+    from sys_log
+    where id = #{id,jdbcType=BIGINT}
   </select>
   
   <insert id="insertSelective" parameterType="pers.chanus.yuntao.server.syslog.Log">
@@ -162,10 +143,10 @@
     </where>
   </select>
   
-  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="list" parameterType="java.util.Map" resultType="pers.chanus.yuntao.server.syslog.Log">
     select 
     sys_log.id, operate_no, operate_role_code, inet_ntoa(operate_ip) operate_ip, operate_module_code, operate_type,
-    operate_type_desc, operate_consume_time, operate_time, role_name, module_name
+    operate_type_desc, operate_consume_time, operate_time, role_name operate_role_name, module_name operate_module_name
     from sys_log
     left join sys_role on operate_role_code = role_code
     left join sys_module on operate_module_code = module_code
@@ -202,9 +183,9 @@
     </if>
   </select>
   
-  <select id="getLastLoginInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="getLastLoginInfo" parameterType="java.lang.String" resultType="pers.chanus.yuntao.server.syslog.Log">
     select 
-    operate_no, max(operate_time) operate_time, operate_role_code, inet_ntoa(operate_ip) operate_ip, role_name
+    operate_no, max(operate_time) operate_time, operate_role_code, inet_ntoa(operate_ip) operate_ip, role_name operate_role_name
     from sys_log, sys_role
     where operate_role_code = role_code and operate_type = 'LOGIN' and operate_no = #{operateNo,jdbcType=VARCHAR}
   </select>

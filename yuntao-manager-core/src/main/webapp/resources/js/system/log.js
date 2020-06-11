@@ -2,9 +2,10 @@ var action_path = ctx + '/system/log/';
 layui.config({
     base: '../../js/',
     version: '0.0.1.1'
-}).use(['table', 'popup', 'element', 'operations'], function () {
-    var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, element = layui.element, operations = layui.operations;
-    var operateType = '1';
+}).use(['table', 'popup', 'element', 'operations', 'util'], function () {
+    var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, element = layui.element,
+        operations = layui.operations, util = layui.util;
+    var operateType = '1', now = new Date();
 
     // 渲染表格
     table.render({
@@ -12,8 +13,8 @@ layui.config({
         id: 'd',
         url: action_path + 'list.do',
         where: {
-            beginTime: $('#beginTime').val(),
-            endTime: $('#endTime').val(),
+            beginTime: now.getFullYear() + '-' + util.digit(now.getMonth() + 1) + '-' + util.digit(now.getDate()) + ' 00:00:00',
+            endTime: now.getFullYear() + '-' + util.digit(now.getMonth() + 1) + '-' + util.digit(now.getDate()) + ' 23:59:59',
             operateType: '1'
         },
         method: 'post',
