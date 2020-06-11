@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface OperatorMapper extends SuperMapper<Operator> {
-    int updateByPrimaryKeySelective(Operator operator);
+    @Override
+    int updateById(Operator operator);
 
     Operator getById(@Param("id") Integer id, @Param("aesEmailKey") String aesEmailKey, @Param("aesPhoneKey") String aesPhoneKey);
 

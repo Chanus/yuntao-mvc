@@ -99,7 +99,7 @@
     </trim>
   </insert>
   
-  <update id="updateByPrimaryKeySelective" parameterType="pers.chanus.yuntao.manager.model.Operator">
+  <update id="updateById" parameterType="pers.chanus.yuntao.manager.model.Operator">
     update sys_operator
     <set>
       <if test="operatorNo != null">

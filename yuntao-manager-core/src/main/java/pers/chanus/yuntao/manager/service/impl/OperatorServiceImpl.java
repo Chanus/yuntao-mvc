@@ -87,7 +87,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
         t.setAesEmailKey(AESKeyConsts.KEY_EMAIL);
         t.setAesPhoneKey(AESKeyConsts.KEY_PHONE);
 
-        getBaseMapper().updateByPrimaryKeySelective(t);
+        getBaseMapper().updateById(t);
         return Message.updateSuccess();
     }
 
