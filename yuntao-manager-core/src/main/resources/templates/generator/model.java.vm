@@ -24,6 +24,7 @@ import java.util.Date;
 #if($hasJSONField)
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.TableName;
 #end
 
 /**
@@ -33,6 +34,9 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @date ${dateTime}
  * @since ${since}
  */
+#if($tablePrefix != 'sys_')
+@TableName("$tableName");
+#end
 public class ${className} implements Serializable {
     private static final long serialVersionUID = 1L;
 

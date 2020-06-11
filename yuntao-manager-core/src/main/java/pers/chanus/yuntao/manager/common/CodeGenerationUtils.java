@@ -260,11 +260,10 @@ public class CodeGenerationUtils {
      * @since 0.0.3
      */
     public static String tableToJava(String tableName, String tablePrefix, String autoRemovePrefix) {
-        if (ConfigConsts.STATUS_YES.equals(autoRemovePrefix)) {
-            tableName = tableName.substring(tableName.indexOf("_") + 1);
-        }
         if (StringUtils.isNotBlank(tablePrefix)) {
             tableName = tableName.replace(tablePrefix, "");
+        } else if (ConfigConsts.STATUS_YES.equals(autoRemovePrefix)) {
+            tableName = tableName.substring(tableName.indexOf("_") + 1);
         }
 
         return columnToJava(tableName);
