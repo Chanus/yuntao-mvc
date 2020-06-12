@@ -42,7 +42,7 @@ layui.config({
     };
 
     // 添加
-    $("#add").on('click', function () {
+    $('#add').on('click', function () {
         popup.open(600, 630, '<i class="layui-icon layui-icon-add-circle"></i>添加角色', action_path + 'add.do');
     });
 
@@ -100,7 +100,7 @@ layui.config({
             var view = $('#roleModulePowerContent');
             if (data && data.length > 0) {
                 data.currentRoleCode = roleCode;
-                var gettpl = $("#roleModulePowerTpl").html();
+                var gettpl = $('#roleModulePowerTpl').html();
                 laytpl(gettpl).render(data, function (html) {
                     view.html(html);
                 });
@@ -113,40 +113,40 @@ layui.config({
     }
 
     // 全选/全不选所有模块权限
-    $(document).on("click", "#selectAll", function () {
+    $(document).on('click', '#selectAll', function () {
         if (this.checked) {
-            $("input[type='checkbox']").each(function () {
+            $('input[type="checkbox"]').each(function () {
                 this.checked = true;
             });
         } else {
-            $("input[type='checkbox']").each(function () {
+            $('input[type="checkbox"]').each(function () {
                 this.checked = false;
             });
         }
     });
 
     // 全选/全不选单个模块权限
-    $(document).on("click", "input[id^='module_']", function () {
-        var module_id = this.id.split("_")[1];
-        var module_power_id = "module_power_" + module_id;
+    $(document).on('click', 'input[id^="module_"]', function () {
+        var module_id = this.id.split('_')[1];
+        var module_power_id = 'module_power_' + module_id;
         if (this.checked) {
-            $("input[id^='" + module_power_id + "']").each(function () {
+            $('input[id^="' + module_power_id + '"]').each(function () {
                 this.checked = true;
             });
         } else {
-            $("input[id^='" + module_power_id + "']").each(function () {
+            $('input[id^="' + module_power_id + '"]').each(function () {
                 this.checked = false;
             });
         }
     });
 
     // 授权
-    $(document).on("click", "#grant", function () {
+    $(document).on('click', '#grant', function () {
         var loading = layer.load(2, {shade: [0.2, '#000']});//0.2透明度的白色背景
         // 遍历所有选择的模块功能
         var modulePowers = [];
-        $("input[id^='module_power_']:checkbox").each(function () {
-            if ($(this).prop("checked")) {
+        $('input[id^="module_power_"]:checkbox').each(function () {
+            if ($(this).prop('checked')) {
                 modulePowers.push($(this).val());
             }
         });
@@ -182,19 +182,19 @@ var setting = {
     },
     callback: {
         onAsyncSuccess: function () {// 异步加载完成后默认选中根节点
-            treeObj = $.fn.zTree.getZTreeObj("roles");
-            var selNode = treeObj.getNodeByParam("level", "0");
+            treeObj = $.fn.zTree.getZTreeObj('roles');
+            var selNode = treeObj.getNodeByParam('level', '0');
             treeObj.selectNode(selNode);
         },
         onClick: function (event, treeId, treeNode) {
             if (treeNode.level === 0) {// 点击根节点重新加载角色列表
-                $("#power-list").css('display', 'none');
-                $("#role-list").css('display', '');
+                $('#power-list').css('display', 'none');
+                $('#role-list').css('display', '');
                 reload();
             } else {// 点击角色节点刷新角色模块权限
-                $("#role-list").css('display', 'none');
-                $("#power-list").css('display', '');
-                $("#roleName").html(treeNode.name);
+                $('#role-list').css('display', 'none');
+                $('#power-list').css('display', '');
+                $('#roleName').html(treeNode.name);
                 renderRoleModulePower(treeNode.roleCode);
             }
         }
@@ -214,10 +214,10 @@ var setting = {
 function init() {
     var nodes = treeObj.getSelectedNodes();
     if (nodes[0].level === 0)
-        $.fn.zTree.init($("#roles"), setting);
+        $.fn.zTree.init($('#roles'), setting);
 }
 
 // 加载角色列表树
 function loadTree() {
-    $.fn.zTree.init($("#roles"), setting);
+    $.fn.zTree.init($('#roles'), setting);
 }

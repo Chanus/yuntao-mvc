@@ -35,7 +35,7 @@ function formatDate(date, formatter) {
         return (n < 10 ? '0' : '') + n;
     };
     var dateStr = pad(date.getFullYear()) + '-' + pad((date.getMonth() + 1)) + '-' + pad(date.getDate());
-    if ("yyyy-MM-dd HH:mm:ss" === formatter) {
+    if ('yyyy-MM-dd HH:mm:ss' === formatter) {
         dateStr += (' ' + pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()));
     }
     return dateStr;
@@ -63,8 +63,8 @@ function date2Str24(date) {
 
 // 将CST格式的时间字符串转换为GMT格式的时间字符串
 function dateStrCST2GMT(dateStr) {
-    var dateStrArr = dateStr.trim().split(" ");
-    return dateStrArr[0] + " " + dateStrArr[1] + " " + dateStrArr[2] + " " + dateStrArr[5] + " " + dateStrArr[3] + " GMT+0800";
+    var dateStrArr = dateStr.trim().split(' ');
+    return dateStrArr[0] + ' ' + dateStrArr[1] + ' ' + dateStrArr[2] + ' ' + dateStrArr[5] + ' ' + dateStrArr[3] + ' GMT+0800';
 }
 
 //将CST格式的时间字符串转换为GMT格式的时间
@@ -78,22 +78,22 @@ Number.prototype.formatNumber = function (pointPsti) {
     if (isNaN(this))
         return Number(0).toFixed(pointPsti)
     var s = this;
-    var h = "";
+    var h = '';
     if (Number(s) < 0) {
-        s = (s + "").replace("-", "");
-        h = "-";
+        s = (s + '').replace('-', '');
+        h = '-';
     }
-    s = parseFloat((s + "").replace(/[^\d.-]/g, "")).toFixed(pointPsti) + "";
-    var l = s.split(".")[0].split("").reverse(), r = s.split(".")[1];
-    t = "";
+    s = parseFloat((s + '').replace(/[^\d.-]/g, '')).toFixed(pointPsti) + '';
+    var l = s.split('.')[0].split('').reverse(), r = s.split('.')[1];
+    t = '';
     for (i = 0; i < l.length; i++) {
-        t += l[i] + ((i + 1) % 3 === 0 && (i + 1) !== l.length ? "," : "");
+        t += l[i] + ((i + 1) % 3 === 0 && (i + 1) !== l.length ? ',' : '');
     }
-    var number = "";
-    if (s.indexOf(".") >= 0) {
-        number = h + t.split("").reverse().join("") + "." + r;
+    var number = '';
+    if (s.indexOf('.') >= 0) {
+        number = h + t.split('').reverse().join('') + '.' + r;
     } else {
-        number = h + t.split("").reverse().join("");
+        number = h + t.split('').reverse().join('');
     }
     return number;
 };

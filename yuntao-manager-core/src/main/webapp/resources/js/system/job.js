@@ -74,7 +74,7 @@ layui.config({
                         success: function (data) {
                             if (data.code === 0) {
                                 layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $(".layui-laypage-btn")[0].click();
+                                    $('.layui-laypage-btn')[0].click();
                                 });
                             } else {
                                 layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
@@ -99,7 +99,7 @@ layui.config({
                         success: function (data) {
                             if (data.code === 0) {
                                 layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $(".layui-laypage-btn")[0].click();
+                                    $('.layui-laypage-btn')[0].click();
                                 });
                             } else {
                                 layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
@@ -124,7 +124,7 @@ layui.config({
                         success: function (data) {
                             if (data.code === 0) {
                                 layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $(".layui-laypage-btn")[0].click();
+                                    $('.layui-laypage-btn')[0].click();
                                 });
                             } else {
                                 layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
@@ -149,7 +149,7 @@ layui.config({
                         success: function (data) {
                             if (data.code === 0) {
                                 layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $(".layui-laypage-btn")[0].click();
+                                    $('.layui-laypage-btn')[0].click();
                                 });
                             } else {
                                 layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
@@ -174,7 +174,7 @@ layui.config({
                         success: function (data) {
                             if (data.code === 0) {
                                 layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $(".layui-laypage-btn")[0].click();
+                                    $('.layui-laypage-btn')[0].click();
                                 });
                             } else {
                                 layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});

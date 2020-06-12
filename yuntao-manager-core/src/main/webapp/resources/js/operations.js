@@ -52,7 +52,7 @@ layui.define(['form', 'table'], function (exports) {
                         } else if (type === 'addAgain') {
                             if (addAgainFunc && typeof addAgainFunc === 'function')
                                 addAgainFunc(e);
-                            $(".layui-form")[0].reset();
+                            $('.layui-form')[0].reset();
                         }
                     });
                 } else {
@@ -72,7 +72,7 @@ layui.define(['form', 'table'], function (exports) {
             layer.confirm('确定删除记录？', {icon: 3, title: '提示'}, function (index) {
                 if (obj) {
                     // 拼接url
-                    if (typeof obj === "object") {
+                    if (typeof obj === 'object') {
                         url += '?';
                         for (const key in obj) {
                             url += key + '=' + obj[key] + '&';
@@ -183,7 +183,7 @@ layui.define(['form', 'table'], function (exports) {
     });
 
     // 批量删除时触发
-    $("#delete").on('click', function () {
+    $('#delete').on('click', function () {
         var checkStatus = table.checkStatus('d'), data = checkStatus.data;
         if (data.length === 0) {
             layer.msg('请选择要删除的记录', {icon: 2, anim: 6, time: 2000});
@@ -209,7 +209,7 @@ layui.define(['form', 'table'], function (exports) {
     });
 
     // 点击取消按钮时触发，关闭弹出层
-    $("#cancel").on('click', function () {
+    $('#cancel').on('click', function () {
         parent.layer.close(parent.layer.getFrameIndex(window.name));
     });
 

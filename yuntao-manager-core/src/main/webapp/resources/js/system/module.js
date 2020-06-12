@@ -56,7 +56,7 @@ layui.config({
     };
 
     // 添加
-    $("#add").on('click', function () {
+    $('#add').on('click', function () {
         var nodes = treeObj.getSelectedNodes();
         popup.open(650, 700, '<i class="layui-icon layui-icon-add-circle"></i>添加模块', action_path + 'add.do?moduleId=' + nodes[0].id);
     });
@@ -81,7 +81,7 @@ layui.config({
                         success: function (data) {
                             if (data.code === 0) {
                                 layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $(".layui-laypage-btn")[0].click();
+                                    $('.layui-laypage-btn')[0].click();
                                     init();
                                 });
                             } else {
@@ -109,7 +109,7 @@ layui.config({
                     success: function (data) {
                         if (data.code === 0) {
                             layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                $(".layui-laypage-btn")[0].click();
+                                $('.layui-laypage-btn')[0].click();
                                 init();
                             });
                         } else {
@@ -190,8 +190,8 @@ var setting = {
     },
     callback: {
         onAsyncSuccess: function () {// 异步加载完成后默认选中根节点
-            treeObj = $.fn.zTree.getZTreeObj("modules");
-            var selNode = treeObj.getNodeByParam("id", 0);
+            treeObj = $.fn.zTree.getZTreeObj('modules');
+            var selNode = treeObj.getNodeByParam('id', 0);
             treeObj.selectNode(selNode);
         },
         onClick: function (event, treeId, treeNode) {
@@ -213,10 +213,10 @@ var setting = {
 function init() {
     var nodes = treeObj.getSelectedNodes();
     if (nodes[0].id === 0)
-        $.fn.zTree.init($("#modules"), setting);
+        $.fn.zTree.init($('#modules'), setting);
 }
 
 // 加载模块列表树
 function loadTree() {
-    $.fn.zTree.init($("#modules"), setting);
+    $.fn.zTree.init($('#modules'), setting);
 }

@@ -67,10 +67,19 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             t.setMasterNo(user.getLoginNo());
             t.setMasterRoleCode(user.getRoleCode());
 
-            role = roleMapper.selectOne(new QueryWrapper<Role>().lambda().eq(Role::getRoleCode, user.getRoleCode()));
+            role = roleMapper.selectOne(new QueryWrapper<Role>().lambda()
+                    .select(Role::getHasOperator, Role::getSuperior)
+                    .eq(Role::getRoleCode, user.getRoleCode()));
         } else {
-            role = roleMapper.selectOne(new QueryWrapper<Role>().lambda().eq(Role::getRoleCode, t.getOperatorRoleCode()));
+            role = roleMapper.selectOne(new QueryWrapper<Role>().lambda()
+                    .select(Role::getHasOperator, Role::getSuperior)
+                    .eq(Role::getRoleCode, t.getOperatorRoleCode()));
         }
+
+        if (role == null)
+            return Message.fail("角色不存在");
+        if (ConfigConsts.STATUS_NO.equals(role.getHasOperator()))
+            return Message.fail("当前角色不能添加操作员");
 
         t.setSuperior(role.getSuperior());
         t.setAesEmailKey(AESKeyConsts.KEY_EMAIL);

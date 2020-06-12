@@ -41,7 +41,7 @@ layui.config({
     };
 
     // 添加
-    $("#add").on('click', function () {
+    $('#add').on('click', function () {
         popup.open(600, 720, '<i class="layui-icon layui-icon-add-circle"></i>添加IP白名单', action_path + 'add.do');
     });
 

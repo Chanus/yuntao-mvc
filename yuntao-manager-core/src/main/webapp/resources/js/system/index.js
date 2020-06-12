@@ -11,11 +11,11 @@ layui.config({
     // 系统时间
     setInterval(function () {
         var t = getBJTime();
-        $("#currentTime").html(t.Y + '-' + t.M + '-' + t.D + ' ' + t.H + ':' + t.I + ':' + t.S);
+        $('#currentTime').html(t.Y + '-' + t.M + '-' + t.D + ' ' + t.H + ':' + t.I + ':' + t.S);
     }, 1000);
 
     // 刷新权限
-    $("#reloadAuthority").on('click', function () {
+    $('#reloadAuthority').on('click', function () {
         var loading = layer.load(0, {shade: [0.2, '#000']});//0.2透明度的白色背景
         $.post(ctx + '/index/reload-authority.do', function (data) {
             layer.close(loading);

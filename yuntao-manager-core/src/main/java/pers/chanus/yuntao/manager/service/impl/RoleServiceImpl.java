@@ -78,6 +78,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
                 for (Role role : roles) {
                     tree.append(", {\"id\":\"").append(role.getRoleId())
                             .append("\", \"roleCode\":\"").append(role.getRoleCode())
+                            .append("\", \"hasOperator\":\"").append(role.getHasOperator())
                             .append("\", \"pId\":\"").append(role.getParentRoleId())
                             .append("\", \"name\":\"").append(role.getRoleName())
                             .append("\", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/9.png\"}");

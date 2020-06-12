@@ -58,7 +58,7 @@ layui.config({
     });
 
     // 重载系统字典
-    $("#reload").on('click', function () {
+    $('#reload').on('click', function () {
         $.ajax({
             type: 'post',
             url: action_path + 'reload-dict.do',

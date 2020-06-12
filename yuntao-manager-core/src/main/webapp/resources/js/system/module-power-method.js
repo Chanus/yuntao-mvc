@@ -5,7 +5,7 @@ layui.config({
 }).use(['table', 'popup', 'form', 'operations'], function () {
     var $ = layui.jquery, table = layui.table, layer = layui.layer, popup = layui.popup, form = layui.form,
         operations = layui.operations;
-    var mpId = $("#mpId").val();
+    var mpId = $('#mpId').val();
 
     // 渲染表格
     table.render({
@@ -46,7 +46,7 @@ layui.config({
             $.post({
                 url: action_path + 'urls.do',
                 data: {className: className},
-                dataType: "json",
+                dataType: 'json',
                 success: function (data) {
                     var selectHtml = '';
                     $.each(data, function (n, value) {
@@ -57,7 +57,7 @@ layui.config({
                 }
             });
         } else {
-            $("#url option:gt(0)").remove();
+            $('#url option:gt(0)').remove();
             form.render();
         }
     });
@@ -69,7 +69,7 @@ layui.config({
     });
 
     // 添加
-    $("#add").on('click', function () {
+    $('#add').on('click', function () {
         if (!className) {
             layer.msg('请选择类名', {icon: 2, anim: 6, time: 1000});
             return false;

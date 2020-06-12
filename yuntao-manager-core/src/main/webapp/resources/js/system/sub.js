@@ -36,20 +36,20 @@ layui.config({
                 curr: 1 //重新从第 1 页开始
             },
             where: {
-                masterNo: $("#masterNo").val() === undefined ? null : $("#masterNo").val(),
-                subNo: $("#subNo").val(),
+                masterNo: $('#masterNo').val() === undefined ? null : $('#masterNo').val(),
+                subNo: $('#subNo').val(),
                 v: new Date().getTime()
             }
         });
     };
 
     // 搜索
-    $("#search").on('click', function () {
+    $('#search').on('click', function () {
         reload();
     });
 
     // 添加
-    $("#add").on('click', function () {
+    $('#add').on('click', function () {
         popup.open(600, 700, '<i class="layui-icon layui-icon-add-circle"></i>添加子账号', action_path + 'add.do');
     });
 
@@ -68,44 +68,44 @@ layui.config({
     });
 
     // 全选/全不选所有模块权限
-    $(document).on("click", "#selectAll", function () {
+    $(document).on('click', '#selectAll', function () {
         if (this.checked) {
-            $("input[type='checkbox']").each(function () {
+            $('input[type="checkbox"]').each(function () {
                 this.checked = true;
             });
         } else {
-            $("input[type='checkbox']").each(function () {
+            $('input[type="checkbox"]').each(function () {
                 this.checked = false;
             });
         }
     });
 
     // 全选/全不选单个模块权限
-    $(document).on("click", "input[id^='module_']", function () {
-        var module_id = this.id.split("_")[1];
-        var module_power_id = "module_power_" + module_id;
+    $(document).on('click', 'input[id^="module_"]', function () {
+        var module_id = this.id.split('_')[1];
+        var module_power_id = 'module_power_' + module_id;
         if (this.checked) {
-            $("input[id^='" + module_power_id + "']").each(function () {
+            $('input[id^="' + module_power_id + '"]').each(function () {
                 this.checked = true;
             });
         } else {
-            $("input[id^='" + module_power_id + "']").each(function () {
+            $('input[id^="' + module_power_id + '"]').each(function () {
                 this.checked = false;
             });
         }
     });
 
     // 授权
-    $(document).on("click", "#grant", function () {
+    $(document).on('click', '#grant', function () {
         var loading = layer.load(2, {shade: [0.2, '#000']});//0.2透明度的白色背景
         // 遍历所有选择的模块功能
         var modulePowers = [];
-        $("input[id^='module_power_']:checkbox").each(function () {
-            if ($(this).prop("checked")) {
+        $('input[id^="module_power_"]:checkbox').each(function () {
+            if ($(this).prop('checked')) {
                 modulePowers.push($(this).val());
             }
         });
-        var subNo = $("#subNo").val();
+        var subNo = $('#subNo').val();
         $.ajax({
             type: 'post',
             url: action_path + 'configure.do?subNo=' + subNo + '&modulePowers=' + modulePowers,

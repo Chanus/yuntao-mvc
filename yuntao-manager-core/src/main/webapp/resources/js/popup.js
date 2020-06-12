@@ -23,7 +23,7 @@ layui.define(['layer'], function (exports) {
             width = (width && width < $(window).width()) ? width : $(window).width();
             height = (height && height < $(window).height()) ? height : $(window).height();
             title = title || false;
-            url = url || "404.html";
+            url = url || '404.html';
 
             var layerIndex = layer.open({
                 type: 2,// iframe层
@@ -67,7 +67,7 @@ layui.define(['layer'], function (exports) {
             width = (width && width < $(window).width()) ? width : $(window).width();
             height = (height && height < $(window).height()) ? height : $(window).height();
             title = title || false;
-            content = content || "";
+            content = content || '';
 
             var layerIndex = layer.open({
                 type: 1,// 页面层

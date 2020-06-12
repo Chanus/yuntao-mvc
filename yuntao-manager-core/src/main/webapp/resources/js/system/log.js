@@ -84,11 +84,11 @@ layui.config({
                 curr: 1 //重新从第 1 页开始
             },
             where: {
-                operateModuleCode: $("#operateModuleCode").val(),
-                operateNo: $("#operateNo").val(),
-                beginTime: $("#beginTime").val(),
-                endTime: $("#endTime").val(),
-                operateContent: encodeURI($("#operateContent").val()),
+                operateModuleCode: $('#operateModuleCode').val(),
+                operateNo: $('#operateNo').val(),
+                beginTime: $('#beginTime').val(),
+                endTime: $('#endTime').val(),
+                operateContent: encodeURI($('#operateContent').val()),
                 operateType: operateType,
                 v: new Date().getTime()
             }
@@ -96,7 +96,7 @@ layui.config({
     };
 
     // 搜索
-    $("#search").on('click', function () {
+    $('#search').on('click', function () {
         reload();
     });
 

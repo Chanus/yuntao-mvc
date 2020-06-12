@@ -35,19 +35,19 @@ layui.config({
             },
             where: {
                 operatorRoleCode: roleCode === '-1' ? null : roleCode,
-                operatorNo: $("#operatorNo").val(),
+                operatorNo: $('#operatorNo').val(),
                 v: new Date().getTime()
             }
         });
     };
 
     // 搜索
-    $("#search").on('click', function () {
+    $('#search').on('click', function () {
         reload(treeObj.getSelectedNodes()[0].roleCode);
     });
 
     // 添加
-    $("#add").on('click', function () {
+    $('#add').on('click', function () {
         var nodes = treeObj.getSelectedNodes();
         popup.open(600, 680, '<i class="layui-icon layui-icon-add-circle"></i>添加操作员', action_path + 'add.do?operatorRoleCode=' + nodes[0].roleCode);
     });
@@ -86,18 +86,24 @@ var setting = {
     },
     callback: {
         onAsyncSuccess: function () {// 异步加载完成后默认选中根节点
-            treeObj = $.fn.zTree.getZTreeObj("roles");
-            var selNode = treeObj.getNodeByParam("level", "0");
+            treeObj = $.fn.zTree.getZTreeObj('roles');
+            var selNode = treeObj.getNodeByParam('level', '0');
             treeObj.selectNode(selNode);
         },
         onClick: function (event, treeId, treeNode) {
             if (treeNode.level === 0) {// 点击根节点隐藏添加按钮
-                $("#add").css('display', 'none');
-            } else {// 点击角色节点显示添加按钮
-                $("#add").css('display', '');
+                $('#role-list').css('display', '');
+                $('#add').css('display', 'none');
+                // 点击节点重新加载操作员列表
+                reload('-1');
+            } else if (treeNode.hasOperator === '0') {// 点击不允许添加操作员的角色节点，隐藏操作员列表
+                $('#role-list').css('display', 'none');
+            } else {// 点击允许添加操作员的角色节点显示添加按钮
+                $('#role-list').css('display', '');
+                $('#add').css('display', '');
+                // 点击节点重新加载操作员列表
+                reload(treeNode.roleCode);
             }
-            // 点击节点重新加载操作员列表
-            reload(treeNode.level === 0 ? '-1' : treeNode.roleCode);
         }
     },
     data: {
@@ -113,5 +119,5 @@ var setting = {
 
 // 加载角色列表树
 function loadTree() {
-    $.fn.zTree.init($("#roles"), setting);
+    $.fn.zTree.init($('#roles'), setting);
 }

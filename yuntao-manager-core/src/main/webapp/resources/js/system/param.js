@@ -41,12 +41,12 @@ layui.config({
     };
 
     // 添加
-    $("#add").on('click', function () {
+    $('#add').on('click', function () {
         popup.open(600, 550, '<i class="layui-icon layui-icon-add-circle"></i>添加系统参数', action_path + 'add.do');
     });
 
     // 重载系统参数
-    $("#reload").on('click', function () {
+    $('#reload').on('click', function () {
         $.ajax({
             type: 'post',
             url: action_path + 'reload-param.do',
@@ -84,7 +84,7 @@ layui.config({
                         success: function (data) {
                             if (data.code === 0) {
                                 layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $(".layui-laypage-btn")[0].click();
+                                    $('.layui-laypage-btn')[0].click();
                                 });
                             } else {
                                 layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});

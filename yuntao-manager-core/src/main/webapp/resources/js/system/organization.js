@@ -47,7 +47,7 @@ layui.config({
     };
 
     // 添加
-    $("#add").on('click', function () {
+    $('#add').on('click', function () {
         var nodes = treeObj.getSelectedNodes();
         popup.open(600, 550, '<i class="layui-icon layui-icon-add-circle"></i>添加组织机构', action_path + 'add.do?orgParentId=' + nodes[0].id);
     });
@@ -130,8 +130,8 @@ var setting = {
     },
     callback: {
         onAsyncSuccess: function () {// 异步加载完成后默认选中根节点
-            treeObj = $.fn.zTree.getZTreeObj("organizations");
-            var selNode = treeObj.getNodeByParam("id", 0);
+            treeObj = $.fn.zTree.getZTreeObj('organizations');
+            var selNode = treeObj.getNodeByParam('id', 0);
             treeObj.selectNode(selNode);
         },
         onClick: function (event, treeId, treeNode) {
@@ -151,10 +151,10 @@ var setting = {
 
 // 加载组织机构列表树
 function init() {
-    $.fn.zTree.init($("#organizations"), setting);
+    $.fn.zTree.init($('#organizations'), setting);
 }
 
 // 加载组织机构列表树
 function loadTree() {
-    $.fn.zTree.init($("#organizations"), setting);
+    $.fn.zTree.init($('#organizations'), setting);
 }

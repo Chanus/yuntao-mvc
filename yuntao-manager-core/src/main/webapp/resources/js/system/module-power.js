@@ -42,7 +42,7 @@ layui.config({
     };
 
     // 搜索
-    $("#search").on('click', function () {
+    $('#search').on('click', function () {
         reload();
     });
 
@@ -55,7 +55,7 @@ layui.config({
             $.post({
                 url: ctx + '/system/module/modules.do',
                 data: {moduleParentId: moduleParentId},
-                dataType: "json",
+                dataType: 'json',
                 success: function (data) {
                     var selectHtml = '';
                     $.each(data, function (n, value) {
@@ -66,7 +66,7 @@ layui.config({
                 }
             });
         } else {
-            $("#moduleCode option:gt(0)").remove();
+            $('#moduleCode option:gt(0)').remove();
             form.render();
         }
     });
@@ -85,7 +85,7 @@ layui.config({
     });
 
     // 添加
-    $("#add").on('click', function () {
+    $('#add').on('click', function () {
         if (!moduleCode) {
             layer.msg('请选择模块', {icon: 2, anim: 6, time: 1000});
             return false;
