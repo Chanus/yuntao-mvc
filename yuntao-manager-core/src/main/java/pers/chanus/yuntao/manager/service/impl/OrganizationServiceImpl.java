@@ -35,8 +35,8 @@ public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationMapper,
 
     @Override
     public Message delete(Serializable pk) {
-        int count = getBaseMapper().hasChildren((Integer) pk);
-        if (count > 0)
+        Integer count = getBaseMapper().isExistLower((Integer) pk);
+        if (count != 0)
             return Message.fail("请先删除下级组织机构");
 
         return super.delete(pk);
@@ -44,10 +44,10 @@ public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationMapper,
 
     @Override
     public Message delete(Collection<? extends Serializable> pks) {
-        int count;
+        Integer count;
         for (Serializable i : pks) {
-            count = getBaseMapper().hasChildren((Integer) i);
-            if (count > 0)
+            count = getBaseMapper().isExistLower((Integer) i);
+            if (count != 0)
                 return Message.fail("请先删除下级组织机构");
         }
 

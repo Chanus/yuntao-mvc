@@ -18,8 +18,8 @@ public interface OrganizationMapper extends SuperMapper<Organization> {
     @Select("select max(priority) from sys_organization where org_parent_id = #{orgParentId,jdbcType=INTEGER}")
     Integer getMaxPriority(Integer orgParentId);
 
-    @Select("select count(*) from sys_organization where org_parent_id = #{orgParentId,jdbcType=INTEGER}")
-    int hasChildren(Integer orgParentId);
+    @Select("select 1 from sys_organization where org_parent_id = #{orgParentId,jdbcType=INTEGER} limit 1")
+    Integer isExistLower(Integer orgParentId);
 
     @Update("update sys_organization set priority = #{priority,jdbcType=INTEGER} where org_id = #{orgId,jdbcType=INTEGER}")
     int priority(@Param("orgId") Integer orgId, @Param("priority") Integer priority);

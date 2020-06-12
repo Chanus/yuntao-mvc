@@ -26,8 +26,8 @@ public interface ModuleMapper extends SuperMapper<Module> {
 
     List<String> listUrl(@Param("roleCode") String roleCode, @Param("subNo") String subNo);
 
-    @Select("select count(*) from sys_module where module_code = #{moduleCode,jdbcType=VARCHAR}")
-    int checkModuleCode(String moduleCode);
+    @Select("select 1 from sys_module where module_code = #{moduleCode,jdbcType=VARCHAR} limit 1")
+    Integer isExist(String moduleCode);
 
     @Update("update sys_module set module_id = #{moduleId,jdbcType=INTEGER}, module_parent_id = #{moduleParentId,jdbcType=INTEGER}, " +
             "module_level = #{moduleLevel,jdbcType=CHAR} where module_id = #{oldModuleId,jdbcType=INTEGER}")

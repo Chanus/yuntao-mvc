@@ -3,7 +3,9 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
+import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.common.CacheData;
@@ -46,9 +48,11 @@ public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param> implem
     @Override
     public Message reloadParam() {
         CacheData.SYSTEM_PARAMS_MAP.clear();
-        List<Param> params = getBaseMapper().listValidParam();
-        if (!CollectionUtils.isEmpty(params))
-            params.forEach(param -> CacheData.SYSTEM_PARAMS_MAP.put(param.getParamCode(), param.getParamData()));
+        List<Param> validParams = getBaseMapper().selectList(new QueryWrapper<Param>().lambda()
+                .select(Param::getParamCode, Param::getParamData)
+                .eq(Param::getValidStatus, ConfigConsts.STATUS_YES));
+        if (!CollectionUtils.isEmpty(validParams))
+            validParams.forEach(param -> CacheData.SYSTEM_PARAMS_MAP.put(param.getParamCode(), param.getParamData()));
 
         return Message.success("系统参数重载成功");
     }

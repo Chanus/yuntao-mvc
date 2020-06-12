@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Select;
 import pers.chanus.yuntao.manager.model.Param;
 import pers.chanus.yuntao.server.mapper.SuperMapper;
 
-import java.util.List;
 import java.util.Map;
 
 public interface ParamMapper extends SuperMapper<Param> {
@@ -12,7 +11,4 @@ public interface ParamMapper extends SuperMapper<Param> {
     Integer getMaxPriority();
 
     int priority(Map<String, Object> params);
-
-    @Select("select param_code, param_data from sys_param where valid_status = '1'")
-    List<Param> listValidParam();
 }
