@@ -1,4 +1,4 @@
-var treeObj, reload, action_path = ctx + '/system/organization/';
+var treeObj, selectedNode, reload, action_path = ctx + '/system/organization/';
 layui.config({
     base: '../../js/',
     version: '0.0.1.1'
@@ -131,10 +131,11 @@ var setting = {
     callback: {
         onAsyncSuccess: function () {// 异步加载完成后默认选中根节点
             treeObj = $.fn.zTree.getZTreeObj('organizations');
-            var selNode = treeObj.getNodeByParam('id', 0);
+            var selNode = selectedNode ? selectedNode : treeObj.getNodeByParam('id', 0);
             treeObj.selectNode(selNode);
         },
         onClick: function (event, treeId, treeNode) {
+            selectedNode = treeObj.getSelectedNodes()[0];
             reload(treeNode.id);// 重新加载组织机构列表
         }
     },

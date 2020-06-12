@@ -77,6 +77,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/organization.js?v=0.0.8.3"></script>
+    <script type="text/javascript" src="${ctx }/js/system/organization.js?v=0.2.0.1"></script>
   </body>
 </html>
