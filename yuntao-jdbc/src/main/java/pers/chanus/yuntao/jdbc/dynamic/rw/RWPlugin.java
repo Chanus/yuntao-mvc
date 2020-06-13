@@ -1,7 +1,4 @@
-/*
- * Copyright (c) 2018, Chanus and/or its affiliates. All rights reserved.
- */
-package pers.chanus.yuntao.jdbc.rwdb;
+package pers.chanus.yuntao.jdbc.dynamic.rw;
 
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.keygen.SelectKeyGenerator;
@@ -12,6 +9,8 @@ import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+import pers.chanus.yuntao.jdbc.dynamic.DataSourceEnum;
+import pers.chanus.yuntao.jdbc.dynamic.DynamicDataSourceHolder;
 
 import java.util.Locale;
 import java.util.Map;
@@ -22,17 +21,17 @@ import java.util.concurrent.ConcurrentHashMap;
  * Spring + MyBatis 实现数据库读写分离
  *
  * @author Chanus
- * @date 2019-01-03 23:08:56
- * @since 0.0.5
+ * @date 2020-06-13 16:04:23
+ * @since 0.2.1
  */
 @Intercepts({
         @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class}),
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})
 })
-public class DynamicPlugin implements Interceptor {
+public class RWPlugin implements Interceptor {
     private static final String REGEX = ".*insert\\u0020.*|.*delete\\u0020.*|.*update\\u0020.*";
 
-    private static final Map<String, DynamicDataSourceGlobal> cacheMap = new ConcurrentHashMap<>();
+    private static final Map<String, DataSourceEnum> cacheMap = new ConcurrentHashMap<>();
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -41,29 +40,29 @@ public class DynamicPlugin implements Interceptor {
             Object[] objects = invocation.getArgs();
             MappedStatement ms = (MappedStatement) objects[0];
 
-            DynamicDataSourceGlobal dynamicDataSourceGlobal;
+            DataSourceEnum dataSource;
 
-            if ((dynamicDataSourceGlobal = cacheMap.get(ms.getId())) == null) {
+            if ((dataSource = cacheMap.get(ms.getId())) == null) {
                 // 读方法
                 if (ms.getSqlCommandType().equals(SqlCommandType.SELECT)) {
                     // !selectKey 为自增id查询主键(SELECT LAST_INSERT_ID() )方法，使用主库
                     if (ms.getId().contains(SelectKeyGenerator.SELECT_KEY_SUFFIX)) {
-                        dynamicDataSourceGlobal = DynamicDataSourceGlobal.WRITE;
+                        dataSource = DataSourceEnum.DEFAULT;
                     } else {
                         BoundSql boundSql = ms.getSqlSource().getBoundSql(objects[1]);
                         String sql = boundSql.getSql().toLowerCase(Locale.CHINA).replaceAll("[\\t\\n\\r]", " ");
                         if (sql.matches(REGEX)) {
-                            dynamicDataSourceGlobal = DynamicDataSourceGlobal.WRITE;
+                            dataSource = DataSourceEnum.DEFAULT;
                         } else {
-                            dynamicDataSourceGlobal = DynamicDataSourceGlobal.READ;
+                            dataSource = DataSourceEnum.SECOND;
                         }
                     }
                 } else {
-                    dynamicDataSourceGlobal = DynamicDataSourceGlobal.WRITE;
+                    dataSource = DataSourceEnum.DEFAULT;
                 }
-                cacheMap.put(ms.getId(), dynamicDataSourceGlobal);
+                cacheMap.put(ms.getId(), dataSource);
             }
-            DynamicDataSourceHolder.putDataSource(dynamicDataSourceGlobal);
+            DynamicDataSourceHolder.setDataSource(dataSource.getValue());
         }
 
         return invocation.proceed();

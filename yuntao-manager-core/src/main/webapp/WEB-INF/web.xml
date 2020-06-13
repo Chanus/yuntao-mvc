@@ -13,10 +13,14 @@
     <param-value>classpath*:spring-database.xml</param-value>
     <!-- 双数据源，实现读写分离 -->
     <!-- <param-value>classpath*:spring-database-rw.xml</param-value> -->
+    <!-- 多数据源动态切换 -->
+    <!-- <param-value>classpath*:spring-database-dynamic.xml</param-value> -->
     <!-- 单数据源，支持Redis -->
     <!-- <param-value>classpath*:spring-database-redis.xml</param-value> -->
     <!-- 单数据源，实现读写分离，支持Redis -->
     <!-- <param-value>classpath*:spring-database-rw-redis.xml</param-value> -->
+    <!-- 多数据源动态切换，支持Redis -->
+    <!-- <param-value>classpath*:spring-database-dynamic-redis.xml</param-value> -->
   </context-param>
   
   <!-- Spring核心 -->

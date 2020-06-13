@@ -80,9 +80,9 @@
   </bean>
 
   <!-- 动态数据源 -->
-  <bean id="dataSource" class="pers.chanus.yuntao.jdbc.rwdb.DynamicDataSource">
-    <property name="writeDataSource" ref="dataSourceWrite"/>
-    <property name="readDataSource" ref="dataSourceRead"/>
+  <bean id="dataSource" class="pers.chanus.yuntao.jdbc.dynamic.rw.RWDataSource">
+    <property name="defaultDataSource" ref="dataSourceWrite"/>
+    <property name="secondDataSource" ref="dataSourceRead"/>
   </bean>
 
   <!-- 解密数据库密码 -->
@@ -132,7 +132,7 @@
     <property name="plugins">
       <array>
         <!-- 读写分离 -->
-        <bean class="pers.chanus.yuntao.jdbc.rwdb.DynamicPlugin"/>
+        <bean class="pers.chanus.yuntao.jdbc.dynamic.rw.RWPlugin"/>
         <!-- 分页插件 -->
         <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor">
           <!-- COUNT SQL 解析.可以没有 -->
@@ -163,12 +163,12 @@
   </bean>
 
   <!-- 使用JDBC事务 -->
-  <bean id="transactionManager" class="pers.chanus.yuntao.jdbc.rwdb.DynamicDataSourceTransactionManager">
+  <bean id="transactionManager" class="pers.chanus.yuntao.jdbc.dynamic.rw.RWDataSourceTransactionManager">
     <property name="dataSource" ref="dataSource"/>
   </bean>
 
   <!-- 使用annotation注解方式声明事务 -->
-  <tx:annotation-driven/>
+  <tx:annotation-driven proxy-target-class="true"/>
 
   <!-- 使用实现了某个接口的类让Spring来生成bean -->
   <aop:aspectj-autoproxy/>

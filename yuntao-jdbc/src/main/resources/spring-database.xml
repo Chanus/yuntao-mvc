@@ -144,7 +144,7 @@
   </bean>
 
   <!-- 使用annotation注解方式声明事务 -->
-  <tx:annotation-driven/>
+  <tx:annotation-driven proxy-target-class="true"/>
 
   <!-- 使用实现了某个接口的类让Spring来生成bean -->
   <aop:aspectj-autoproxy/>

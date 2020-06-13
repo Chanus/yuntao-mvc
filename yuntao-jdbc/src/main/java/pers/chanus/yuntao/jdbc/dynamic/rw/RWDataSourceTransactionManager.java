@@ -1,19 +1,18 @@
-/*
- * Copyright (c) 2018, Chanus and/or its affiliates. All rights reserved.
- */
-package pers.chanus.yuntao.jdbc.rwdb;
+package pers.chanus.yuntao.jdbc.dynamic.rw;
 
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
+import pers.chanus.yuntao.jdbc.dynamic.DataSourceEnum;
+import pers.chanus.yuntao.jdbc.dynamic.DynamicDataSourceHolder;
 
 /**
  * 事务管理
  *
  * @author Chanus
- * @date 2019-01-03 23:05:16
- * @since 0.0.5
+ * @date 2020-06-13 18:54:16
+ * @since 0.2.1
  */
-public class DynamicDataSourceTransactionManager extends DataSourceTransactionManager {
+public class RWDataSourceTransactionManager extends DataSourceTransactionManager {
     private static final long serialVersionUID = -4742343318643326824L;
 
     /**
@@ -27,9 +26,9 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
         // 设置数据源
         boolean readOnly = definition.isReadOnly();
         if (readOnly) {
-            DynamicDataSourceHolder.putDataSource(DynamicDataSourceGlobal.READ);
+            DynamicDataSourceHolder.setDataSource(DataSourceEnum.SECOND.getValue());
         } else {
-            DynamicDataSourceHolder.putDataSource(DynamicDataSourceGlobal.WRITE);
+            DynamicDataSourceHolder.setDataSource(DataSourceEnum.DEFAULT.getValue());
         }
         super.doBegin(transaction, definition);
     }
@@ -42,6 +41,6 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
     @Override
     protected void doCleanupAfterCompletion(Object transaction) {
         super.doCleanupAfterCompletion(transaction);
-        DynamicDataSourceHolder.clearDataSource();
+        DynamicDataSourceHolder.clear();
     }
 }
