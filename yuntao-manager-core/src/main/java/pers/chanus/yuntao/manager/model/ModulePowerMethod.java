@@ -3,7 +3,7 @@ package pers.chanus.yuntao.manager.model;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ModulePowerMethod implements Serializable {
     private static final long serialVersionUID = 5917034100446628692L;
@@ -17,9 +17,9 @@ public class ModulePowerMethod implements Serializable {
 
     private String url;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     public Integer getMpmId() {
         return mpmId;
@@ -53,19 +53,19 @@ public class ModulePowerMethod implements Serializable {
         this.url = url == null ? null : url.trim();
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 

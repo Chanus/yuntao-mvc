@@ -10,6 +10,7 @@ import pers.chanus.yuntao.manager.model.ScheduleTrigger;
 import pers.chanus.yuntao.manager.service.ScheduleJobService;
 import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
 import pers.chanus.yuntao.util.CollectionUtils;
+import pers.chanus.yuntao.util.LocalDateTimeUtils;
 import pers.chanus.yuntao.util.QuartzUtils;
 import pers.chanus.yuntao.util.StringUtils;
 
@@ -79,7 +80,8 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
             Trigger trigger;
             for (ScheduleTrigger scheduleTrigger : scheduleTriggers) {
                 trigger = QuartzUtils.getCronTrigger(scheduleTrigger.getTriggerName(), scheduleTrigger.getTriggerGroup(), scheduleTrigger.getTriggerCron(),
-                        scheduleTrigger.getTriggerStartTime(), scheduleTrigger.getTriggerEndTime(), scheduleTrigger.getPriority(), null, jobDetail);
+                        LocalDateTimeUtils.convertToDate(scheduleTrigger.getTriggerStartTime()),
+                        LocalDateTimeUtils.convertToDate(scheduleTrigger.getTriggerEndTime()), scheduleTrigger.getPriority(), null, jobDetail);
                 trigger.getJobDataMap().put("triggerParams", scheduleTrigger.getTriggerData());
                 scheduler.scheduleJob(trigger);
             }
@@ -180,7 +182,8 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
                     scheduleTriggers = scheduleJob.getScheduleTriggers();
                     for (ScheduleTrigger scheduleTrigger : scheduleTriggers) {
                         trigger = QuartzUtils.getCronTrigger(scheduleTrigger.getTriggerName(), scheduleTrigger.getTriggerGroup(), scheduleTrigger.getTriggerCron(),
-                                scheduleTrigger.getTriggerStartTime(), scheduleTrigger.getTriggerEndTime(), scheduleTrigger.getPriority(), null, jobDetail);
+                                LocalDateTimeUtils.convertToDate(scheduleTrigger.getTriggerStartTime()),
+                                LocalDateTimeUtils.convertToDate(scheduleTrigger.getTriggerEndTime()), scheduleTrigger.getPriority(), null, jobDetail);
                         trigger.getJobDataMap().put("triggerParams", scheduleTrigger.getTriggerData());
                         scheduler.scheduleJob(trigger);
                     }

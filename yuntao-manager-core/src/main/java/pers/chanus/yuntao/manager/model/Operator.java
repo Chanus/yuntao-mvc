@@ -3,7 +3,7 @@ package pers.chanus.yuntao.manager.model;
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Operator implements Serializable {
     private static final long serialVersionUID = -8513495354479579451L;
@@ -34,9 +34,9 @@ public class Operator implements Serializable {
 
     private String superior;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     @TableField(exist = false)
     private String roleName;
@@ -151,19 +151,19 @@ public class Operator implements Serializable {
         this.superior = superior == null ? null : superior.trim();
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 

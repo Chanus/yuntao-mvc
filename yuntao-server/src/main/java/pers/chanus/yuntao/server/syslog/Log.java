@@ -5,7 +5,7 @@ import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.util.StringUtils;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -37,11 +37,11 @@ public class Log implements Serializable {
     private Integer operateConsumeTime;
 
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date operateTime;
+    private LocalDateTime operateTime;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private String operateRoleName;
 
@@ -169,28 +169,28 @@ public class Log implements Serializable {
         return this;
     }
 
-    public Date getOperateTime() {
+    public LocalDateTime getOperateTime() {
         return operateTime;
     }
 
-    public Log setOperateTime(Date operateTime) {
+    public Log setOperateTime(LocalDateTime operateTime) {
         this.operateTime = operateTime;
         return this;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 

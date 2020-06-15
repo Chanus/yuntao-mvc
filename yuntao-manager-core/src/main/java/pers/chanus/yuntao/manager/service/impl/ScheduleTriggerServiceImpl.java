@@ -6,7 +6,7 @@ import pers.chanus.yuntao.manager.mapper.ScheduleTriggerMapper;
 import pers.chanus.yuntao.manager.model.ScheduleTrigger;
 import pers.chanus.yuntao.manager.service.ScheduleTriggerService;
 import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
-import pers.chanus.yuntao.util.DateUtils;
+import pers.chanus.yuntao.util.LocalDateTimeUtils;
 
 /**
  * 定时任务触发器管理接口实现
@@ -21,8 +21,8 @@ public class ScheduleTriggerServiceImpl extends BaseServiceImpl<ScheduleTriggerM
     public Message insert(ScheduleTrigger scheduleTrigger) {
         String triggerStartTimeStr = scheduleTrigger.getTriggerStartTimeStr();
         String triggerEndTimeStr = scheduleTrigger.getTriggerEndTimeStr();
-        scheduleTrigger.setTriggerStartTime(DateUtils.parseDateTime(triggerStartTimeStr));
-        scheduleTrigger.setTriggerEndTime(DateUtils.parseDateTime(triggerEndTimeStr));
+        scheduleTrigger.setTriggerStartTime(LocalDateTimeUtils.parseDateTime(triggerStartTimeStr));
+        scheduleTrigger.setTriggerEndTime(LocalDateTimeUtils.parseDateTime(triggerEndTimeStr));
 
         return super.insert(scheduleTrigger);
     }
@@ -31,8 +31,8 @@ public class ScheduleTriggerServiceImpl extends BaseServiceImpl<ScheduleTriggerM
     public Message update(ScheduleTrigger scheduleTrigger) {
         String triggerStartTimeStr = scheduleTrigger.getTriggerStartTimeStr();
         String triggerEndTimeStr = scheduleTrigger.getTriggerEndTimeStr();
-        scheduleTrigger.setTriggerStartTime(DateUtils.parseDateTime(triggerStartTimeStr));
-        scheduleTrigger.setTriggerEndTime(DateUtils.parseDateTime(triggerEndTimeStr));
+        scheduleTrigger.setTriggerStartTime(LocalDateTimeUtils.parseDateTime(triggerStartTimeStr));
+        scheduleTrigger.setTriggerEndTime(LocalDateTimeUtils.parseDateTime(triggerEndTimeStr));
 
         return super.update(scheduleTrigger);
     }

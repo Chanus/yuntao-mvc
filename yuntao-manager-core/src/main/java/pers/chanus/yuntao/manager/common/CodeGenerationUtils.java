@@ -60,11 +60,11 @@ public class CodeGenerationUtils {
         JDBC_JAVA_MAP.put("real", "Float");
         JDBC_JAVA_MAP.put("binary", "byte[]");
         JDBC_JAVA_MAP.put("varbinary", "byte[]");
-        JDBC_JAVA_MAP.put("date", "Date");
-        JDBC_JAVA_MAP.put("time", "Date");
-        JDBC_JAVA_MAP.put("datetime", "Date");
-        JDBC_JAVA_MAP.put("timestamp", "Date");
-        JDBC_JAVA_MAP.put("year", "Date");
+        JDBC_JAVA_MAP.put("date", "LocalDate");
+        JDBC_JAVA_MAP.put("time", "LocalTime");
+        JDBC_JAVA_MAP.put("datetime", "LocalDateTime");
+        JDBC_JAVA_MAP.put("timestamp", "LocalDateTime");
+        JDBC_JAVA_MAP.put("year", "LocalDate");
         JDBC_JAVA_MAP.put("tinyblob", "byte[]");
         JDBC_JAVA_MAP.put("blob", "byte[]");
         JDBC_JAVA_MAP.put("mediumblob", "byte[]");

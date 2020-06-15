@@ -1,7 +1,7 @@
 package pers.chanus.yuntao.manager.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Role implements Serializable {
     private static final long serialVersionUID = -3654625894207910719L;
@@ -28,9 +28,9 @@ public class Role implements Serializable {
 
     private String superior;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     public Integer getId() {
         return id;
@@ -120,19 +120,19 @@ public class Role implements Serializable {
         this.superior = superior == null ? null : superior.trim();
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 

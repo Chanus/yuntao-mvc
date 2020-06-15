@@ -3,10 +3,10 @@ package pers.chanus.yuntao.manager.model;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
-import pers.chanus.yuntao.util.DateUtils;
+import pers.chanus.yuntao.util.LocalDateTimeUtils;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 定时任务触发器表表
@@ -31,11 +31,11 @@ public class ScheduleTrigger implements Serializable {
     // 开始时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @TableField(updateStrategy = FieldStrategy.IGNORED)
-    private Date triggerStartTime;
+    private LocalDateTime triggerStartTime;
     // 结束时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @TableField(updateStrategy = FieldStrategy.IGNORED)
-    private Date triggerEndTime;
+    private LocalDateTime triggerEndTime;
     // 属性配置，json格式
     private String triggerData;
     // 优先级
@@ -47,10 +47,10 @@ public class ScheduleTrigger implements Serializable {
     private String validStatus;
     // 创建时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
     // 更新时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     @TableField(exist = false)
     private String triggerStartTimeStr;
@@ -131,31 +131,31 @@ public class ScheduleTrigger implements Serializable {
     /**
      * 获取：开始时间
      */
-    public Date getTriggerStartTime() {
+    public LocalDateTime getTriggerStartTime() {
         return triggerStartTime;
     }
 
     /**
      * 设置：开始时间
      */
-    public void setTriggerStartTime(Date triggerStartTime) {
+    public void setTriggerStartTime(LocalDateTime triggerStartTime) {
         this.triggerStartTime = triggerStartTime;
-        this.triggerStartTimeStr = DateUtils.formatDateTime(triggerStartTime);
+        this.triggerStartTimeStr = LocalDateTimeUtils.formatDateTime(triggerStartTime);
     }
 
     /**
      * 获取：结束时间
      */
-    public Date getTriggerEndTime() {
+    public LocalDateTime getTriggerEndTime() {
         return triggerEndTime;
     }
 
     /**
      * 设置：结束时间
      */
-    public void setTriggerEndTime(Date triggerEndTime) {
+    public void setTriggerEndTime(LocalDateTime triggerEndTime) {
         this.triggerEndTime = triggerEndTime;
-        this.triggerEndTimeStr = DateUtils.formatDateTime(triggerEndTime);
+        this.triggerEndTimeStr = LocalDateTimeUtils.formatDateTime(triggerEndTime);
     }
 
     /**
@@ -217,28 +217,28 @@ public class ScheduleTrigger implements Serializable {
     /**
      * 获取：创建时间
      */
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
     /**
      * 设置：创建时间
      */
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
     /**
      * 获取：更新时间
      */
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
     /**
      * 设置：更新时间
      */
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 

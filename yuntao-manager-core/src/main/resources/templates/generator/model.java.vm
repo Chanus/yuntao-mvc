@@ -1,30 +1,62 @@
 package ${serverPackage}.model;
 
-## 判断是否有BigDecimal、Date、JSONField
+## 判断是否有BigDecimal、LocalDateTime、LocalDate、LocalTime、JSONField
 #set($hasBigDecimal=false)
+#set($hasDateTime=false)
 #set($hasDate=false)
+#set($hasTime=false)
 #set($hasJSONField=false)
+#set($hasTableName=false)
+#set($hasTableId=false)
+#set($hasIdType=false)
 #foreach ($column in $columns)
 #if($column.attributeType == "BigDecimal")
     #set($hasBigDecimal=true)
-#elseif($column.attributeType == "Date")
+#elseif($column.attributeType == "LocalDateTime")
+    #set($hasDateTime=true)
+#elseif($column.attributeType == "LocalDate")
     #set($hasDate=true)
+#elseif($column.attributeType == "LocalTime")
+    #set($hasTime=true)
 #end
-#if($column.dataType == 'datetime' || $column.dataType == 'timestamp' || $column.dataType == 'date')
+#if($column.dataType == 'datetime' || $column.dataType == 'timestamp' || $column.dataType == 'date' || $column.dataType == 'time')
     #set($hasJSONField=true)
 #end
+#if($column.columnKey == 'PRI' && $column.columnName != 'id')
+    #set($hasTableId=true)
+#if($column.extra != 'auto_increment')
+    #set($hasIdType=true)
 #end
+#end
+#end
+#if($tablePrefix != 'sys_')
+    #set($hasTableName=true)
+#end
+#if($hasJSONField)
+import com.alibaba.fastjson.annotation.JSONField;
+#end
+#if($hasTableName)
+import com.baomidou.mybatisplus.annotation.TableName;
+#end
+#if($hasTableId)
+import com.baomidou.mybatisplus.annotation.TableId;
+#end
+#if($hasIdType)
+import com.baomidou.mybatisplus.annotation.IdType;
+#end
+
 import java.io.Serializable;
 #if($hasBigDecimal)
 import java.math.BigDecimal;
 #end
-#if($hasDate)
-import java.util.Date;
+#if($hasDateTime)
+import java.time.LocalDateTime;
 #end
-#if($hasJSONField)
-
-import com.alibaba.fastjson.annotation.JSONField;
-import com.baomidou.mybatisplus.annotation.TableName;
+#if($hasDate)
+import java.time.LocalDate;
+#end
+#if($hasTime)
+import java.time.LocalTime;
 #end
 
 /**
@@ -46,6 +78,8 @@ public class ${className} implements Serializable {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
 #elseif($column.dataType == 'date')
     @JSONField(format = "yyyy-MM-dd")
+#elseif($column.dataType == 'time')
+    @JSONField(format = "HH:mm:ss")
 #end
 ## 集成 Mybatis Plus，若主键名称不是id，需要指定字段名，若主键不是自增长，需要指定主键生成策略
 #if($column.columnKey == 'PRI' && $column.columnName != 'id')

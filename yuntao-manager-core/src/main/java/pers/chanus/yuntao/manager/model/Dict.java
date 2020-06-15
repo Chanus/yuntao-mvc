@@ -4,7 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -29,10 +29,10 @@ public class Dict implements Serializable {
     private String validStatus;
     // 创建时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
     // 更新时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     @TableField(exist = false)
     private List<DictItem> dictItems;
@@ -110,28 +110,28 @@ public class Dict implements Serializable {
     /**
      * 获取：创建时间
      */
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
     /**
      * 设置：创建时间
      */
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
     /**
      * 获取：更新时间
      */
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
     /**
      * 设置：更新时间
      */
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 

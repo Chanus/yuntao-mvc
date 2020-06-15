@@ -28,7 +28,7 @@ import pers.chanus.yuntao.util.IpUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -89,7 +89,7 @@ public class LogAspect {
         log.setOperateMethod(proceedingJoinPoint.getTarget().getClass().getName() + "." + proceedingJoinPoint.getSignature().getName() + "()");// 方法描述
         log.setOperateType(systemLog.logType().name());
         log.setOperateTypeDesc(systemLog.description());
-        log.setOperateTime(new Date());
+        log.setOperateTime(LocalDateTime.now());
         if (LogTypeEnum.LOGOUT.equals(systemLog.logType())) {// 退出系统时
             object = proceedingJoinPoint.proceed();
             log.setOperateConsumeTime((int) (System.currentTimeMillis() - start));

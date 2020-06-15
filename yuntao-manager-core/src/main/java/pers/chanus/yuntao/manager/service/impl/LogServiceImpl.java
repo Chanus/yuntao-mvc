@@ -16,7 +16,7 @@ import pers.chanus.yuntao.server.syslog.LogMapper;
 import pers.chanus.yuntao.util.IpUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 系统日志接口实现
@@ -39,7 +39,7 @@ public class LogServiceImpl implements LogService {
         sysLog.setOperateNo(operateNo).setOperateRoleCode(operateRoleCode).setOperateIp(IpUtils.getIpAddress(request))
                 .setOperateModuleCode(moduleCode).setOperateUrl(String.valueOf(request.getRequestURL()))
                 .setOperateContent(content).setOperateType(logType.name())
-                .setOperateTypeDesc(operateTypeDesc).setOperateTime(new Date());
+                .setOperateTypeDesc(operateTypeDesc).setOperateTime(LocalDateTime.now());
 
         logMapper.insertSelective(sysLog);
     }
@@ -49,7 +49,7 @@ public class LogServiceImpl implements LogService {
         Log log = new Log();
         log.setOperateNo(operateNo).setOperateRoleCode(operateRoleCode).setOperateModuleCode(moduleCode).setOperateMethod(operateMethod)
                 .setOperateContent(content).setOperateType(logType.name()).setOperateTypeDesc(operateTypeDesc)
-                .setOperateConsumeTime(operateConsumeTime).setOperateTime(new Date());
+                .setOperateConsumeTime(operateConsumeTime).setOperateTime(LocalDateTime.now());
 
         logMapper.insertSelective(log);
     }
