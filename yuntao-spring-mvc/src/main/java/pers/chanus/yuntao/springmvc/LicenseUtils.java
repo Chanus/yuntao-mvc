@@ -9,10 +9,10 @@
  */
 package pers.chanus.yuntao.springmvc;
 
+import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.util.*;
 import pers.chanus.yuntao.util.encrypt.RSAUtils;
-import pers.chanus.yuntao.util.encrypt.SHAUtils;
 
 import java.util.Date;
 import java.util.Map;
@@ -32,14 +32,14 @@ public class LicenseUtils {
      * @param version    产品版本号
      * @param macAddress 设备MAC地址，多个用","分隔
      * @param limit      证书时效，为yyyy-MM-dd格式日期字符串，若为0则表示永久有效
-     * @param enable     是否启用证书授权，{@code true}启用，{@code false}禁用
+     * @param enable     是否启用证书授权，1-启用，0-禁用
      * @param privateKey RSA私钥
      * @return 证书内容
      * @since 0.1.8
      */
-    public static String createLicense(String name, String version, String macAddress, String limit, boolean enable, String privateKey) {
+    public static String createLicense(String name, String version, String macAddress, String limit, String enable, String privateKey) {
         String text = "name=" + name + "&version=" + version + "&macAddress=" + macAddress + "&limit=" + limit + "&enable=" + enable;
-        String sign = SHAUtils.sha256(text);
+        String sign = RSAUtils.sign(text, privateKey);
         text = text + "&sign=" + sign;
 
         return RSAUtils.encryptByPrivateKey(text, privateKey);
@@ -52,12 +52,12 @@ public class LicenseUtils {
      * @param version    产品版本号
      * @param macAddress 设备MAC地址，多个用","分隔
      * @param limit      证书时效，为yyyy-MM-dd格式日期字符串，若为0则表示永久有效
-     * @param enable     是否启用证书授权，{@code true}启用，{@code false}禁用
+     * @param enable     是否启用证书授权，1-启用，0-禁用
      * @param privateKey RSA私钥
      * @param path       文件路径
      * @since 0.1.8
      */
-    public static void createLicense(String name, String version, String macAddress, String limit, boolean enable, String privateKey, String path) {
+    public static void createLicense(String name, String version, String macAddress, String limit, String enable, String privateKey, String path) {
         String ciphertext = createLicense(name, version, macAddress, limit, enable, privateKey);
         FileUtils.write(path, ciphertext, false);
     }
@@ -67,7 +67,7 @@ public class LicenseUtils {
      *
      * @param license   证书密文
      * @param publicKey RSA公钥
-     * @return
+     * @return 证书校验结果
      * @since 0.1.8
      */
     public static Message verify(String license, String publicKey) {
@@ -90,10 +90,10 @@ public class LicenseUtils {
         String sign = map.get("sign");
         String signText = "name=" + name + "&version=" + version + "&macAddress=" + macAddress + "&limit=" + limit + "&enable=" + enable;
 
-        if (!SHAUtils.verifySHA256(signText, sign))
+        if (!RSAUtils.verify(signText, sign, publicKey))
             return Message.fail("证书异常，签名不一致");
 
-        if ("false".equals(enable))
+        if (ConfigConsts.STATUS_NO.equals(enable))
             return Message.success("校验成功");
 
         if (!StringUtils.contains(macAddress, SystemUtils.HOST_MAC))
