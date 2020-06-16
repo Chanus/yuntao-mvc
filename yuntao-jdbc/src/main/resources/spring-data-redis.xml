@@ -12,7 +12,7 @@
 
   <!-- 引入jdbc配置文件，这里要特别注意，如果有多个properties文件，必须用逗号分开，不能写成两个 <context:property-placeholder/> -->
   <!-- <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true" /> -->
-  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
     <property name="locations">
       <list>
         <value>classpath:redis.properties</value><!-- 如果是类路径下这样加载 -->
@@ -59,16 +59,32 @@
     <constructor-arg index="4" name="password" value="${spring.redis.password}" type="java.lang.String" />
   </bean> -->
 
-  <!-- 配置jedis连接工厂 -->
-  <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+  <!-- redis链接密码，在 spring-data-redis 2.0 以上的版本中在配置密码的时候不能像老版本直接设置密码值，需要注入一个 RedisPassword 的 bean 在 RedisPassword 的构造方法中设置密码 -->
+  <bean id="redisPassword" class="org.springframework.data.redis.connection.RedisPassword">
+    <constructor-arg name="thePassword" value="${spring.redis.password}"/>
+  </bean>
+  <!-- spring-data-redis 2.0 以上的配置 -->
+  <bean id="redisStandaloneConfiguration" class="org.springframework.data.redis.connection.RedisStandaloneConfiguration">
     <property name="hostName" value="${spring.redis.host}"/>
     <property name="port" value="${spring.redis.port}"/>
-    <property name="password" value="${spring.redis.password}"/>
+    <property name="password" ref="redisPassword" />
     <property name="database" value="${spring.redis.database}"/>
+  </bean>
+
+  <!-- 配置jedis连接工厂 -->
+  <!-- spring-data-redis2.0 中建议改为构造器传入一个RedisStandaloneConfiguration（单机），RedisSentinelConfiguration（主从复制），RedisClusterConfiguration（集群） -->
+  <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+    <!-- 注销掉的部分为 spring-data-redis 2.0 以下的版本配置的方式  -->
+    <!-- <property name="hostName" value="${spring.redis.host}"/> -->
+    <!-- <property name="port" value="${spring.redis.port}"/> -->
+    <!-- <property name="password" value="${spring.redis.password}"/> -->
+    <!-- <property name="database" value="${spring.redis.database}"/> -->
     <property name="timeout" value="${spring.redis.timeout}"/>
     <property name="poolConfig" ref="jedisPoolConfig"/>
     <!-- usePool：是否使用连接池 -->
     <property name="usePool" value="true"/>
+    <!-- spring-data-redis 2.0 以上建议获取的方式 -->
+    <constructor-arg name="standaloneConfig" ref="redisStandaloneConfiguration"/>
   </bean>
 
   <!-- SDR默认采用的序列化策略有两种，一种是String的序列化策略，一种是JDK的序列化策略。 StringRedisTemplate默认采用的是String的序列化策略，保存的key和value都是采用此策略序列化保存的。 
@@ -76,7 +92,7 @@
     所以根据key去删除数据的时候就出现了删除失败的问题。 -->
   <!-- redis 序列化策略 ，通常情况下key值采用String序列化策略，如果不指定序列化策略，StringRedisTemplate的key和value都将采用String序列化策略。
     但是RedisTemplate的key和value都将采用JDK序列化 这样就会出现采用不同template保存的数据不能用同一个template删除的问题 -->
-  <!-- 配置RedisTemplate -->
+  <!-- 配置 jedis 模板 RedisTemplate -->
   <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
     <property name="connectionFactory" ref="jedisConnectionFactory"/>
 
