@@ -213,7 +213,7 @@ public class DateUtilsTest {
         System.out.println(DateUtils.dayOfWeek("2020-05-28"));// 周四
         System.out.println(DateUtils.dayOfWeek("2020-05-29"));// 周五
         System.out.println(DateUtils.dayOfWeek("2020-05-30"));// 周六
-        System.out.println(DateUtils.dayOfWeek("2020-05-31 15:47::30"));// 周日
+        System.out.println(DateUtils.dayOfWeek("2020-05-31 15:47:30"));// 周日
 
         System.out.println(DateUtils.dayOfWeek());
     }

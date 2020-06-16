@@ -15,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * 日期时间工具类，适应于jdk 1.8及以上版本
@@ -136,6 +137,17 @@ public class LocalDateTimeUtils {
     }
 
     /**
+     * {@code localDate}日期对象转yyyy-MM-dd格式字符串
+     *
+     * @param localDate 日期，为空时返回{@code null}
+     * @return yyyy-MM-dd格式字符串
+     * @since 0.2.1
+     */
+    public static String formatDate(LocalDate localDate) {
+        return localDate == null ? null : localDate.format(DATE_FORMATTER);
+    }
+
+    /**
      * {@code LocalDateTime}日期时间对象转HH:mm:ss格式字符串
      *
      * @param localDateTime 日期时间，为空时返回{@code null}
@@ -147,10 +159,21 @@ public class LocalDateTimeUtils {
     }
 
     /**
+     * {@code localTime}时间对象转HH:mm:ss格式字符串
+     *
+     * @param localTime 时间，为空时返回{@code null}
+     * @return HH:mm:ss格式字符串
+     * @since 0.2.1
+     */
+    public static String formatTime(LocalTime localTime) {
+        return localTime == null ? null : localTime.format(TIME_FORMATTER);
+    }
+
+    /**
      * {@code LocalDateTime}日期时间对象转HH:mm:ss.SSS格式字符串
      *
      * @param localDateTime 日期时间，为空时返回{@code null}
-     * @return HH:mm:ss格式字符串
+     * @return HH:mm:ss.SSS格式字符串
      * @since 0.1.1
      */
     public static String formatTimeMillis(LocalDateTime localDateTime) {
@@ -158,10 +181,19 @@ public class LocalDateTimeUtils {
     }
 
     /**
-     * 日期时间字符串转自定义格式{@code pattern}的{@code LocalDateTime}日期时间对象
-     * <p>
-     * {@code localDateTime}与{@code pattern}需对应，且必须包含时间
-     * <p>
+     * {@code localTime}时间对象转HH:mm:ss.SSS格式字符串
+     *
+     * @param localTime 时间，为空时返回{@code null}
+     * @return HH:mm:ss.SSS格式字符串
+     * @since 0.1.1
+     */
+    public static String formatTimeMillis(LocalTime localTime) {
+        return localTime == null ? null : localTime.format(TIME_MILLIS_FORMATTER);
+    }
+
+    /**
+     * 日期时间字符串转自定义格式{@code pattern}的{@code LocalDateTime}日期时间对象<br>
+     * {@code localDateTime}与{@code pattern}需对应，且必须包含时间<br>
      * {@code pattern}可以包含年月日时分秒毫秒数，例如：yyyy-MM-dd HH:mm:ss.SSS，yyyy-MM-dd HH:mm:ss，yyyy-MM-dd HH:mm，yyyy年MM月dd日 HH时mm分ss秒
      *
      * @param localDateTime 日期时间字符串，为空时返回{@code null}
@@ -196,10 +228,8 @@ public class LocalDateTimeUtils {
     }
 
     /**
-     * 日期字符串转自定义格式{@code pattern}的{@code LocalDate}日期对象
-     * <p>
-     * {@code localDate}与{@code pattern}需对应，且不能包含时间
-     * <p>
+     * 日期字符串转自定义格式{@code pattern}的{@code LocalDate}日期对象<br>
+     * {@code localDate}与{@code pattern}需对应，且不能包含时间<br>
      * {@code pattern}可以包含年月日，例如：yyyy-MM-dd，yyyy年MM月dd日
      *
      * @param localDate 日期字符串，为空时返回{@code null}
@@ -223,10 +253,8 @@ public class LocalDateTimeUtils {
     }
 
     /**
-     * 时间字符串转自定义格式{@code pattern}的{@code LocalTime}日期时间对象
-     * <p>
-     * {@code localTime}与{@code pattern}需对应，且不能包含年月日
-     * <p>
+     * 时间字符串转自定义格式{@code pattern}的{@code LocalTime}日期时间对象<br>
+     * {@code localTime}与{@code pattern}需对应，且不能包含年月日<br>
      * {@code pattern}可以包含时分秒毫秒数，例如：HH:mm:ss.SSS，HH:mm:ss，HH时mm分ss秒
      *
      * @param localTime 时间字符串，为空时返回{@code null}
@@ -783,5 +811,91 @@ public class LocalDateTimeUtils {
      */
     public static boolean between(LocalTime localTime, LocalTime start, LocalTime end) {
         return !localTime.isBefore(start) && !localTime.isAfter(end);
+    }
+
+    /**
+     * 获取指定日期是星期几，1表示周一，2表示周二，3表示周三，4表示周四，5表示周五，6表示周六，7表示周日
+     *
+     * @param date 日期
+     * @return {@code date}是星期几
+     * @since 0.2.1
+     */
+    public static int dayOfWeek(LocalDate date) {
+        int dayOfWeek = date.getDayOfWeek().getValue();
+
+        return dayOfWeek == 0 ? 7 : dayOfWeek;
+    }
+
+    /**
+     * 获取指定日期是星期几，1表示周一，2表示周二，3表示周三，4表示周四，5表示周五，6表示周六，7表示周日
+     *
+     * @param dateStr 日期字符串
+     * @return {@code dateStr}是星期几
+     * @since 0.2.1
+     */
+    public static int dayOfWeek(String dateStr) {
+        return dayOfWeek(Objects.requireNonNull(parseDate(dateStr)));
+    }
+
+    /**
+     * 获取今天是星期几，1表示周一，2表示周二，3表示周三，4表示周四，5表示周五，6表示周六，7表示周日
+     *
+     * @return 今天是星期几
+     * @since 0.2.1
+     */
+    public static int dayOfWeek() {
+        return dayOfWeek(LocalDate.now());
+    }
+
+    /**
+     * 获取指定日期是指定时间周期内的第几天，1表示第一天，0表示指定时间小于周期开始日期
+     *
+     * @param date      日期
+     * @param cycle     时间周期的天数
+     * @param beginDate 时间周期的开始日期
+     * @return 指定日期是指定时间周期内的第几天，如果指定日期小于周期开始日期，则返回0
+     * @since 0.2.1
+     */
+    public static int dayOfCycle(LocalDate date, int cycle, LocalDate beginDate) {
+        if (compare(date, beginDate) == -1)
+            return 0;
+        return (int) (interval(beginDate, date, ChronoUnit.DAYS) % cycle + 1);
+    }
+
+    /**
+     * 获取指定日期是指定时间周期内的第几天，1表示第一天，0表示指定时间小于周期开始日期
+     *
+     * @param dateStr      日期字符串
+     * @param cycle        时间周期的天数
+     * @param beginDateStr 时间周期的开始日期字符串
+     * @return 指定日期是指定时间周期内的第几天，如果指定日期小于周期开始日期，则返回0
+     * @since 0.2.1
+     */
+    public static int dayOfCycle(String dateStr, int cycle, String beginDateStr) {
+        return dayOfCycle(parseDate(dateStr), cycle, parseDate(beginDateStr));
+    }
+
+    /**
+     * 获取今天是指定时间周期内的第几天，1表示第一天，0表示今天小于周期开始日期
+     *
+     * @param cycle     时间周期的天数
+     * @param beginDate 时间周期的开始日期
+     * @return 今天是指定时间周期内的第几天，如果今天小于周期开始日期，则返回0
+     * @since 0.2.1
+     */
+    public static int dayOfCycle(int cycle, LocalDate beginDate) {
+        return dayOfCycle(LocalDate.now(), cycle, beginDate);
+    }
+
+    /**
+     * 获取今天是指定时间周期内的第几天，1表示第一天，0表示今天小于周期开始日期
+     *
+     * @param cycle        时间周期的天数
+     * @param beginDateStr 时间周期的开始日期字符串
+     * @return 今天是指定时间周期内的第几天，如果今天小于周期开始日期，则返回0
+     * @since 0.2.1
+     */
+    public static int dayOfCycle(int cycle, String beginDateStr) {
+        return dayOfCycle(LocalDate.now(), cycle, parseDate(beginDateStr));
     }
 }

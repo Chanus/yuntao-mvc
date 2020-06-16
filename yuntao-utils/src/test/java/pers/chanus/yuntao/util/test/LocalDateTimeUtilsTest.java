@@ -316,4 +316,37 @@ public class LocalDateTimeUtilsTest {
         LocalDateTime localDateTime = LocalDateTimeUtils.parseOriginalDateTime(originalDateTime);
         System.out.println(localDateTime);
     }
+
+    @Test
+    public void dayOfWeekTest() {
+        System.out.println(LocalDateTimeUtils.dayOfWeek("2020-06-08"));// 周一
+        System.out.println(LocalDateTimeUtils.dayOfWeek("2020-06-09"));// 周二
+        System.out.println(LocalDateTimeUtils.dayOfWeek("2020-06-10"));// 周三
+        System.out.println(LocalDateTimeUtils.dayOfWeek("2020-06-11"));// 周四
+        System.out.println(LocalDateTimeUtils.dayOfWeek("2020-06-12"));// 周五
+        System.out.println(LocalDateTimeUtils.dayOfWeek("2020-06-13"));// 周六
+        System.out.println(LocalDateTimeUtils.dayOfWeek("2020-06-14"));// 周日
+
+        System.out.println(LocalDateTimeUtils.dayOfWeek());
+    }
+
+    @Test
+    public void dayOfCycleTest() {
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-16", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-25", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-26", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-27", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-28", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-29", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-30", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-31", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-01", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-30", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2020-06-31", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2021-06-28", 7, "2020-05-25"));
+        System.out.println(LocalDateTimeUtils.dayOfCycle("2021-06-31", 7, "2020-05-25"));
+
+        System.out.println(LocalDateTimeUtils.dayOfCycle(7, LocalDateTimeUtils.parseDate("2020-05-25")));
+        System.out.println(LocalDateTimeUtils.dayOfCycle(10, "2020-06-01"));
+    }
 }
