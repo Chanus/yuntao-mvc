@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.manager.service.LogService;
-import pers.chanus.yuntao.util.DateUtils;
+import pers.chanus.yuntao.util.LocalDateTimeUtils;
 
 /**
  * 定时任务测试
@@ -41,7 +41,7 @@ public class TestJob implements Job {
         JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
         JobDataMap triggerDataMap = context.getTrigger().getJobDataMap();
         StringBuilder s = new StringBuilder();
-        s.append("时间：").append(DateUtils.getDateTimeToday())
+        s.append("时间：").append(LocalDateTimeUtils.nowDateTime())
                 .append(" 任务名：").append(context.getJobDetail().getKey().getName()).append(" 任务组：").append(context.getJobDetail().getKey().getGroup())
                 .append(" 任务参数：").append(jobDataMap.get("jobParams"))
                 .append(" 触发器名：").append(context.getTrigger().getKey().getName()).append(" 触发器组：").append(context.getTrigger().getKey().getGroup())
