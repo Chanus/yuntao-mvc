@@ -7,7 +7,7 @@ import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
-import pers.chanus.yuntao.server.syslog.Log;
+import pers.chanus.yuntao.springmvc.log.Log;
 
 import javax.servlet.http.HttpServletRequest;
 

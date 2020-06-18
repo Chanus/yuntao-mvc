@@ -11,8 +11,8 @@ import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.service.LogService;
-import pers.chanus.yuntao.server.syslog.Log;
-import pers.chanus.yuntao.server.syslog.LogMapper;
+import pers.chanus.yuntao.springmvc.log.Log;
+import pers.chanus.yuntao.springmvc.log.LogMapper;
 import pers.chanus.yuntao.util.IpUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,16 +32,16 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public void insert(HttpServletRequest request, String moduleCode, String content, LogTypeEnum logType, String operateTypeDesc) {
-        Log sysLog = new Log();
+        Log log = new Log();
         LoginUser loginUser = LoginUser.getLoginUser();
         String operateNo = loginUser == null ? "system" : loginUser.getLoginNo(),
                 operateRoleCode = loginUser == null ? "0" : loginUser.getRoleCode();
-        sysLog.setOperateNo(operateNo).setOperateRoleCode(operateRoleCode).setOperateIp(IpUtils.getIpAddress(request))
+        log.setOperateNo(operateNo).setOperateRoleCode(operateRoleCode).setOperateIp(IpUtils.getIpAddress(request))
                 .setOperateModuleCode(moduleCode).setOperateUrl(String.valueOf(request.getRequestURL()))
                 .setOperateContent(content).setOperateType(logType.name())
                 .setOperateTypeDesc(operateTypeDesc).setOperateTime(LocalDateTime.now());
 
-        logMapper.insertSelective(sysLog);
+        logMapper.insertSelective(log);
     }
 
     @Override

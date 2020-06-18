@@ -5,7 +5,7 @@ import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.ScheduleTriggerMapper;
 import pers.chanus.yuntao.manager.model.ScheduleTrigger;
 import pers.chanus.yuntao.manager.service.ScheduleTriggerService;
-import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
 import pers.chanus.yuntao.util.LocalDateTimeUtils;
 
 /**

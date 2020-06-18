@@ -20,9 +20,9 @@ import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.constant.MsgCode;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.server.annotation.SystemLog;
-import pers.chanus.yuntao.server.syslog.Log;
-import pers.chanus.yuntao.server.syslog.LogMapper;
+import pers.chanus.yuntao.springmvc.annotation.SystemLog;
+import pers.chanus.yuntao.springmvc.log.Log;
+import pers.chanus.yuntao.springmvc.log.LogMapper;
 import pers.chanus.yuntao.util.CollectionUtils;
 import pers.chanus.yuntao.util.IpUtils;
 
@@ -51,7 +51,7 @@ public class LogAspect {
      *
      * @since 0.0.1
      */
-    @Pointcut("@annotation(pers.chanus.yuntao.server.annotation.SystemLog)")
+    @Pointcut("@annotation(pers.chanus.yuntao.springmvc.annotation.SystemLog)")
     public void systemLogAspect() {
     }
 

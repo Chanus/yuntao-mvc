@@ -17,7 +17,7 @@ import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.model.Operator;
 import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.manager.service.OperatorService;
-import pers.chanus.yuntao.server.annotation.SystemLog;
+import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 import pers.chanus.yuntao.util.FileUtils;
 import pers.chanus.yuntao.util.StringUtils;

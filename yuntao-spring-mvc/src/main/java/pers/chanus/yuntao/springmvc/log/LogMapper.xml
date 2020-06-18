@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="pers.chanus.yuntao.server.syslog.LogMapper">
-  <select id="get" parameterType="java.lang.Long" resultType="pers.chanus.yuntao.server.syslog.Log">
+<mapper namespace="pers.chanus.yuntao.springmvc.log.LogMapper">
+  <select id="get" parameterType="java.lang.Long" resultType="pers.chanus.yuntao.springmvc.log.Log">
     select
     operate_no, operate_url, operate_method, operate_exception, operate_content, operate_type
     from sys_log
     where id = #{id,jdbcType=BIGINT}
   </select>
   
-  <insert id="insertSelective" parameterType="pers.chanus.yuntao.server.syslog.Log">
+  <insert id="insertSelective" parameterType="pers.chanus.yuntao.springmvc.log.Log">
     insert into sys_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -143,7 +143,7 @@
     </where>
   </select>
   
-  <select id="list" parameterType="java.util.Map" resultType="pers.chanus.yuntao.server.syslog.Log">
+  <select id="list" parameterType="java.util.Map" resultType="pers.chanus.yuntao.springmvc.log.Log">
     select 
     sys_log.id, operate_no, operate_role_code, inet_ntoa(operate_ip) operate_ip, operate_module_code, operate_type,
     operate_type_desc, operate_consume_time, operate_time, role_name operate_role_name, module_name operate_module_name
@@ -183,7 +183,7 @@
     </if>
   </select>
   
-  <select id="getLastLoginInfo" parameterType="java.lang.String" resultType="pers.chanus.yuntao.server.syslog.Log">
+  <select id="getLastLoginInfo" parameterType="java.lang.String" resultType="pers.chanus.yuntao.springmvc.log.Log">
     select 
     operate_no, max(operate_time) operate_time, operate_role_code, inet_ntoa(operate_ip) operate_ip, role_name operate_role_name
     from sys_log, sys_role

@@ -1,4 +1,4 @@
-package pers.chanus.yuntao.server.syslog;
+package pers.chanus.yuntao.springmvc.log;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;

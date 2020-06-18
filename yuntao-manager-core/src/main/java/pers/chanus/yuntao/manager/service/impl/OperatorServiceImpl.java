@@ -21,7 +21,7 @@ import pers.chanus.yuntao.manager.model.Operator;
 import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.model.RoleModulePower;
 import pers.chanus.yuntao.manager.service.OperatorService;
-import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
 import pers.chanus.yuntao.util.CollectionUtils;
 import pers.chanus.yuntao.util.StringUtils;
 import pers.chanus.yuntao.util.encrypt.SHAUtils;

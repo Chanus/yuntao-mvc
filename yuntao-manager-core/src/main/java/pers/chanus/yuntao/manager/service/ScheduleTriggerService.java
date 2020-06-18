@@ -1,7 +1,7 @@
 package pers.chanus.yuntao.manager.service;
 
 import pers.chanus.yuntao.manager.model.ScheduleTrigger;
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 /**
  * 定时任务触发器管理接口

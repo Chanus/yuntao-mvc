@@ -7,7 +7,7 @@ import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.model.Operator;
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 /**
  * 操作员管理接口

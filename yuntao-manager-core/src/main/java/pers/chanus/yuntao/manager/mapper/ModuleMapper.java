@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import pers.chanus.yuntao.manager.model.Module;
-import pers.chanus.yuntao.server.mapper.SuperMapper;
+import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
 
 import java.util.List;
 import java.util.Map;

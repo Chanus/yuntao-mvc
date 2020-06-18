@@ -16,7 +16,7 @@ import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import ${serverPackage}.model.${className};
 import ${serverPackage}.service.${className}Service;
-import pers.chanus.yuntao.server.annotation.SystemLog;
+import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 
 /**

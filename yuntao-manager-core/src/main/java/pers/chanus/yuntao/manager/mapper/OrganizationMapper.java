@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import pers.chanus.yuntao.manager.model.Organization;
-import pers.chanus.yuntao.server.mapper.SuperMapper;
+import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
 
 /**
  * 组织机构表

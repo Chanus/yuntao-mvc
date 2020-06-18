@@ -8,7 +8,7 @@ import pers.chanus.yuntao.manager.mapper.DictMapper;
 import pers.chanus.yuntao.manager.model.Dict;
 import pers.chanus.yuntao.manager.model.DictItem;
 import pers.chanus.yuntao.manager.service.DictService;
-import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
 import pers.chanus.yuntao.util.CollectionUtils;
 
 import java.io.Serializable;

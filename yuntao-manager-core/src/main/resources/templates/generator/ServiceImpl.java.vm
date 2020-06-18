@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ${serverPackage}.mapper.${className}Mapper;
 import ${serverPackage}.model.${className};
 import ${serverPackage}.service.${className}Service;
-import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
 
 /**
  * ${moduleName}接口实现

@@ -4,7 +4,7 @@
 package pers.chanus.yuntao.manager.service;
 
 import pers.chanus.yuntao.manager.model.WhiteIp;
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 /**
  * IP白名单管理接口

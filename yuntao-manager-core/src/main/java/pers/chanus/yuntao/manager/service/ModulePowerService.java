@@ -6,7 +6,7 @@ package pers.chanus.yuntao.manager.service;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.model.ModulePower;
 import pers.chanus.yuntao.manager.model.ModulePowerMethod;
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 import java.util.Collection;
 import java.util.List;

@@ -21,7 +21,7 @@ import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import pers.chanus.yuntao.manager.model.Operator;
 import pers.chanus.yuntao.manager.service.OperatorService;
 import pers.chanus.yuntao.manager.service.RoleService;
-import pers.chanus.yuntao.server.annotation.SystemLog;
+import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 
 import java.util.Arrays;

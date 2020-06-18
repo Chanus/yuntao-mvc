@@ -3,7 +3,7 @@ package pers.chanus.yuntao.manager.mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import pers.chanus.yuntao.manager.model.ScheduleJob;
-import pers.chanus.yuntao.server.mapper.SuperMapper;
+import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
 
 import java.util.List;
 

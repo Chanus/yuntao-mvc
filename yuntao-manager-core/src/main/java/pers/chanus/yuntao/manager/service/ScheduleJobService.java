@@ -2,7 +2,7 @@ package pers.chanus.yuntao.manager.service;
 
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.model.ScheduleJob;
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 /**
  * 定时任务管理接口

@@ -1,7 +1,7 @@
 package pers.chanus.yuntao.manager.mapper;
 
 import pers.chanus.yuntao.manager.model.Dict;
-import pers.chanus.yuntao.server.mapper.SuperMapper;
+import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
 
 import java.util.List;
 

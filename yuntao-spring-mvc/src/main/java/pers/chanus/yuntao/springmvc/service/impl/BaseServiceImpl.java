@@ -1,15 +1,15 @@
 /*
  * Copyright (c) 2018, Chanus and/or its affiliates. All rights reserved.
  */
-package pers.chanus.yuntao.server.service.impl;
+package pers.chanus.yuntao.springmvc.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.PageBean;
-import pers.chanus.yuntao.server.mapper.SuperMapper;
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 import java.util.List;
 

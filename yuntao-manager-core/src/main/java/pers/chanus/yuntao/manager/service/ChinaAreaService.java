@@ -4,7 +4,7 @@
 package pers.chanus.yuntao.manager.service;
 
 import pers.chanus.yuntao.manager.model.ChinaArea;
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 /**
  * 中国区划信息管理接口

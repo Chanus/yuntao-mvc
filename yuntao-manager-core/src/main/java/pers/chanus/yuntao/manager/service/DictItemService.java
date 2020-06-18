@@ -1,7 +1,7 @@
 package pers.chanus.yuntao.manager.service;
 
 import pers.chanus.yuntao.manager.model.DictItem;
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 /**
  * 数据字典项管理接口

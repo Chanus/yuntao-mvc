@@ -2,7 +2,7 @@ package pers.chanus.yuntao.manager.service;
 
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.model.Organization;
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 /**
  * 组织机构管理接口

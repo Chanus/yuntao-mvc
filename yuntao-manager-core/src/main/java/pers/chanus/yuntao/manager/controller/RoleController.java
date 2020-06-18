@@ -20,7 +20,7 @@ import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.manager.service.RoleService;
-import pers.chanus.yuntao.server.annotation.SystemLog;
+import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 
 import java.util.Arrays;

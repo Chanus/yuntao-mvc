@@ -22,7 +22,7 @@ import pers.chanus.yuntao.manager.model.ModulePowerMethod;
 import pers.chanus.yuntao.manager.service.ModulePowerService;
 import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.manager.service.PowerService;
-import pers.chanus.yuntao.server.annotation.SystemLog;
+import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 import pers.chanus.yuntao.util.CollectionUtils;
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.manager.mapper.WhiteIpMapper;
 import pers.chanus.yuntao.manager.model.WhiteIp;
 import pers.chanus.yuntao.manager.service.WhiteIpService;
-import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
 
 /**
  * IP白名单管理接口实现

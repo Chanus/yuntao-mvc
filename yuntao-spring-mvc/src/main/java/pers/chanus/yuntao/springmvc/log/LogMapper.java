@@ -1,4 +1,4 @@
-package pers.chanus.yuntao.server.syslog;
+package pers.chanus.yuntao.springmvc.log;
 
 import org.apache.ibatis.annotations.Delete;
 

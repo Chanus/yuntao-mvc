@@ -12,7 +12,7 @@ import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.mapper.ParamMapper;
 import pers.chanus.yuntao.manager.model.Param;
 import pers.chanus.yuntao.manager.service.ParamService;
-import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
 import pers.chanus.yuntao.util.CollectionUtils;
 
 import java.util.List;

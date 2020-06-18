@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.manager.mapper.ChinaAreaMapper;
 import pers.chanus.yuntao.manager.model.ChinaArea;
 import pers.chanus.yuntao.manager.service.ChinaAreaService;
-import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
 
 /**
  * 中国区划信息管理接口实现

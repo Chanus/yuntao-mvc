@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import pers.chanus.yuntao.commons.constant.MsgCode;
 import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.server.exception.ApplicationException;
+import pers.chanus.yuntao.springmvc.exception.ApplicationException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

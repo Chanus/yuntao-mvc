@@ -12,7 +12,7 @@ import pers.chanus.yuntao.manager.mapper.ModulePowerMethodMapper;
 import pers.chanus.yuntao.manager.model.ModulePower;
 import pers.chanus.yuntao.manager.model.ModulePowerMethod;
 import pers.chanus.yuntao.manager.service.ModulePowerService;
-import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
 import pers.chanus.yuntao.util.CollectionUtils;
 
 import java.util.Collection;

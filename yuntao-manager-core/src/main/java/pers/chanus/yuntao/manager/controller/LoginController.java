@@ -18,7 +18,7 @@ import pers.chanus.yuntao.commons.pojo.SessionSave;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.manager.service.LoginUserService;
-import pers.chanus.yuntao.server.annotation.SystemLog;
+import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 import pers.chanus.yuntao.util.GoogleAuthenticatorUtils;
 import pers.chanus.yuntao.util.IpUtils;

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Chanus and/or its affiliates. All rights reserved.
  */
-package pers.chanus.yuntao.server.annotation;
+package pers.chanus.yuntao.springmvc.annotation;
 
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 

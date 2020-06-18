@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Chanus and/or its affiliates. All rights reserved.
  */
-package pers.chanus.yuntao.server.service;
+package pers.chanus.yuntao.springmvc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.transaction.annotation.Transactional;

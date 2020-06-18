@@ -1,7 +1,7 @@
 package pers.chanus.yuntao.manager.mapper;
 
 import pers.chanus.yuntao.manager.model.ScheduleTrigger;
-import pers.chanus.yuntao.server.mapper.SuperMapper;
+import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
 
 /**
  * 定时任务触发器表表

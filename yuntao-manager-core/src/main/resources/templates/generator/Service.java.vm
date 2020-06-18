@@ -1,7 +1,7 @@
 package ${serverPackage}.service;
 
 import ${serverPackage}.model.${className};
-import pers.chanus.yuntao.server.service.BaseService;
+import pers.chanus.yuntao.springmvc.service.BaseService;
 
 /**
  * ${moduleName}接口

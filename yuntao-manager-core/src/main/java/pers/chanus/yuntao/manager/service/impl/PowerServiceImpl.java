@@ -8,7 +8,7 @@ import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.PowerMapper;
 import pers.chanus.yuntao.manager.model.Power;
 import pers.chanus.yuntao.manager.service.PowerService;
-import pers.chanus.yuntao.server.service.impl.BaseServiceImpl;
+import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
 
 import java.util.Map;
 

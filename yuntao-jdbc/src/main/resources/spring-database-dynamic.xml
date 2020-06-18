@@ -177,7 +177,7 @@
 
   <!-- 配置Mybatis Mapper注册 -->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="**.mapper,pers.chanus.yuntao.server.syslog"/>
+    <property name="basePackage" value="**.mapper,pers.chanus.yuntao.springmvc.log"/>
   </bean>
 
   <!-- 扫描Service -->

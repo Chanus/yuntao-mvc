@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Chanus and/or its affiliates. All rights reserved.
  */
-package pers.chanus.yuntao.server.mapper;
+package pers.chanus.yuntao.springmvc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 

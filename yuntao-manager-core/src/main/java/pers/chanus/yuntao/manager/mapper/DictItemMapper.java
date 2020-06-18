@@ -1,7 +1,7 @@
 package pers.chanus.yuntao.manager.mapper;
 
 import pers.chanus.yuntao.manager.model.DictItem;
-import pers.chanus.yuntao.server.mapper.SuperMapper;
+import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
 
 /**
  * 系统字典项表
