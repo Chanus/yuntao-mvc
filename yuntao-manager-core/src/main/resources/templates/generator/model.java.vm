@@ -67,7 +67,7 @@ import java.time.LocalTime;
  * @since ${since}
  */
 #if($tablePrefix != 'sys_')
-@TableName("$tableName");
+@TableName("$tableName")
 #end
 public class ${className} implements Serializable {
     private static final long serialVersionUID = 1L;

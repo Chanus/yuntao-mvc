@@ -42,9 +42,9 @@
       <artifactId>standard</artifactId>
     </dependency>
     <dependency>
-      <groupId>yuntao</groupId>
+      <groupId>com.chanus</groupId>
       <artifactId>yuntao-mybatis-generator</artifactId>
-      <version>${project.version}</version>
+      <version>1.0.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

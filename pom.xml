@@ -475,7 +475,6 @@
     <module>yuntao-commons</module>
     <module>yuntao-jdbc</module>
     <module>yuntao-spring-mvc</module>
-    <module>yuntao-mybatis-generator</module>
     <module>yuntao-manager-core</module>
     <module>yuntao-weixin</module>
   </modules>

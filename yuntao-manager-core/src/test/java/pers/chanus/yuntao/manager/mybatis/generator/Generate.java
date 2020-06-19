@@ -15,7 +15,7 @@ import java.io.File;
 public class Generate {
 
     public static void main(String[] args) {
-        pers.chanus.yuntao.mybatis.generator.Generate.generator(new File(new File("").getAbsolutePath(), "yuntao-manager-core/src/main/resources/development/generatorConfig.xml"));
+        com.chanus.yuntao.mybatis.generator.Generate.generator(new File(new File("").getAbsolutePath(), "yuntao-manager-core/src/main/resources/development/generatorConfig.xml"));
     }
 
 }
