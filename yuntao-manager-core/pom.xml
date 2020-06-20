@@ -41,12 +41,6 @@
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.chanus</groupId>
-      <artifactId>yuntao-mybatis-generator</artifactId>
-      <version>1.0.0</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
   
   <build>
