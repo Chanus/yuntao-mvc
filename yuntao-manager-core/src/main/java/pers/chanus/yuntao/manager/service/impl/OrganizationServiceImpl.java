@@ -7,7 +7,7 @@ import pers.chanus.yuntao.manager.mapper.OrganizationMapper;
 import pers.chanus.yuntao.manager.model.Organization;
 import pers.chanus.yuntao.manager.service.OrganizationService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import pers.chanus.yuntao.util.CollectionUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.Collection;

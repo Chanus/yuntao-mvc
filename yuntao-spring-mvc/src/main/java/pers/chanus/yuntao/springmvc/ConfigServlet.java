@@ -6,7 +6,7 @@ package pers.chanus.yuntao.springmvc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
-import pers.chanus.yuntao.util.StringUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +38,7 @@ public class ConfigServlet extends HttpServlet {
                 " \\____   |  |  /   |  \\  |  / __ \\(  <_> ) /    Y    \\     /  \\     \\____\n").append(
                 " / ______|____/|___|  /__| (____  /\\____/  \\____|__  /\\___/    \\______  /\n").append(
                 " \\/                 \\/          \\/                 \\/                 \\/ \n").append(
-                "                                                              0.2.1\n").append(
+                "                                                              0.2.2\n").append(
                 "=========================================================================\n").append(
                 "                                 _ooOoo_\n").append(
                 "                                o8888888o\n").append(

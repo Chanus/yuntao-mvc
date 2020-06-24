@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pers.chanus.yuntao.manager.model.ChinaArea;
 import pers.chanus.yuntao.manager.service.ChinaAreaService;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
-import pers.chanus.yuntao.util.ObjectUtils;
+import com.chanus.yuntao.utils.core.ObjectUtils;
 
 import java.util.List;
 

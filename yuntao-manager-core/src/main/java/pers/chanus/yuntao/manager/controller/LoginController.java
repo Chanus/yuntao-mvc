@@ -20,11 +20,11 @@ import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.manager.service.LoginUserService;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
-import pers.chanus.yuntao.util.GoogleAuthenticatorUtils;
-import pers.chanus.yuntao.util.IpUtils;
-import pers.chanus.yuntao.util.StringUtils;
-import pers.chanus.yuntao.util.VerifyCodeUtils;
-import pers.chanus.yuntao.util.encrypt.RSAUtils;
+import com.chanus.yuntao.utils.core.GoogleAuthenticatorUtils;
+import com.chanus.yuntao.utils.core.IpUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.VerifyCodeUtils;
+import com.chanus.yuntao.utils.core.encrypt.RSAUtils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -144,7 +144,7 @@ public class LoginController extends BaseController {
                 return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
 
             String secret = CacheData.SYSTEM_PARAMS_MAP.get("sys_google_authenticator_secret");
-            if (!GoogleAuthenticatorUtils.check_code(secret, Long.parseLong(googleAuthenticatorCode)))
+            if (!GoogleAuthenticatorUtils.checkCode(secret, Long.parseLong(googleAuthenticatorCode)))
                 return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
         }
 

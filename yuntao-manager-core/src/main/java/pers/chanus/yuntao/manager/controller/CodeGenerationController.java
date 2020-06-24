@@ -15,7 +15,7 @@ import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import pers.chanus.yuntao.manager.service.CodeGenerationService;
 import pers.chanus.yuntao.springmvc.ConfigUtils;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
-import pers.chanus.yuntao.util.StreamUtils;
+import com.chanus.yuntao.utils.core.StreamUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
-import pers.chanus.yuntao.util.CollectionUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.Collection;

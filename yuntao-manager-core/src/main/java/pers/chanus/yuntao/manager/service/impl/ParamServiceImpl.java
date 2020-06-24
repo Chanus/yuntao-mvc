@@ -13,7 +13,7 @@ import pers.chanus.yuntao.manager.mapper.ParamMapper;
 import pers.chanus.yuntao.manager.model.Param;
 import pers.chanus.yuntao.manager.service.ParamService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import pers.chanus.yuntao.util.CollectionUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;

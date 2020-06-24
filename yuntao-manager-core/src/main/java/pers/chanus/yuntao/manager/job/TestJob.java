@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.manager.service.LogService;
-import pers.chanus.yuntao.util.LocalDateTimeUtils;
+import com.chanus.yuntao.utils.core.LocalDateTimeUtils;
 
 /**
  * 定时任务测试

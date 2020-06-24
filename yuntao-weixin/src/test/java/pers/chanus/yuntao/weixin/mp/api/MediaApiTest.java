@@ -11,7 +11,7 @@ package pers.chanus.yuntao.weixin.mp.api;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
-import pers.chanus.yuntao.util.FileUtils;
+import com.chanus.yuntao.utils.core.FileUtils;
 import pers.chanus.yuntao.weixin.mp.api.bean.MediaArticle;
 import pers.chanus.yuntao.weixin.mp.api.bean.MediaTypeEnum;
 

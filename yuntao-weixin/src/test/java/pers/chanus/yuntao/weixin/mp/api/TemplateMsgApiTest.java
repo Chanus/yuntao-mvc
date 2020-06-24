@@ -11,7 +11,7 @@ package pers.chanus.yuntao.weixin.mp.api;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
-import pers.chanus.yuntao.util.DateUtils;
+import com.chanus.yuntao.utils.core.DateUtils;
 import pers.chanus.yuntao.weixin.mp.api.bean.TemplateMessage;
 
 /**
@@ -59,7 +59,7 @@ public class TemplateMsgApiTest extends ApiConfigTest {
                 .setUrl("http://t.liulianhuan.com/teacher/register?schoolCode=350524001")
                 .setData("first", "老师注册")
                 .setData("keyword1", "安溪一中")
-                .setData("keyword2", DateUtils.getDateTimeToday())
+                .setData("keyword2", DateUtils.nowDateTime())
                 .setData("remark", "请点击注册，感谢您的支持。", "#FF0000")
                 .toJSONString();
 

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import pers.chanus.yuntao.manager.model.DictItem;
-import pers.chanus.yuntao.util.encrypt.RSAUtils;
+import com.chanus.yuntao.utils.core.encrypt.RSAUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;

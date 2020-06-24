@@ -14,11 +14,6 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>yuntao</groupId>
-      <artifactId>yuntao-utils</artifactId>
-      <version>${project.version}</version>
-    </dependency>
   </dependencies>
   
   <build>

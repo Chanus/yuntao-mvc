@@ -3,7 +3,7 @@ package pers.chanus.yuntao.manager.model;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
-import pers.chanus.yuntao.util.LocalDateTimeUtils;
+import com.chanus.yuntao.utils.core.LocalDateTimeUtils;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

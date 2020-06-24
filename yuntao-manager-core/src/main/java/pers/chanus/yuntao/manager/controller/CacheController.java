@@ -14,7 +14,7 @@ import pers.chanus.yuntao.manager.job.LicenseJob;
 import pers.chanus.yuntao.manager.service.DictService;
 import pers.chanus.yuntao.manager.service.ParamService;
 import pers.chanus.yuntao.manager.service.ScheduleJobService;
-import pers.chanus.yuntao.util.QuartzUtils;
+import com.chanus.yuntao.utils.extra.quartz.QuartzUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;

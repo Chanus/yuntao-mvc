@@ -15,8 +15,8 @@ import pers.chanus.yuntao.manager.model.DataBaseColumn;
 import pers.chanus.yuntao.manager.model.DataBaseTable;
 import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.service.CodeGenerationService;
-import pers.chanus.yuntao.util.IOUtils;
-import pers.chanus.yuntao.util.StringUtils;
+import com.chanus.yuntao.utils.core.IOUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;

@@ -19,7 +19,7 @@ import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
-import pers.chanus.yuntao.util.StringUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

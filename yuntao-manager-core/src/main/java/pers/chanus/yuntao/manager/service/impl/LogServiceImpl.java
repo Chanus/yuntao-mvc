@@ -13,7 +13,7 @@ import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.springmvc.log.Log;
 import pers.chanus.yuntao.springmvc.log.LogMapper;
-import pers.chanus.yuntao.util.IpUtils;
+import com.chanus.yuntao.utils.core.IpUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;

@@ -17,8 +17,8 @@ import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.model.RoleModulePower;
 import pers.chanus.yuntao.manager.service.RoleService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import pers.chanus.yuntao.util.CollectionUtils;
-import pers.chanus.yuntao.util.StringUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;

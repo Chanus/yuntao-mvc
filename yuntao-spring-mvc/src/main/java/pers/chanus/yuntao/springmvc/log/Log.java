@@ -2,7 +2,7 @@ package pers.chanus.yuntao.springmvc.log;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.util.StringUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

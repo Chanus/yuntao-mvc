@@ -23,8 +23,8 @@ import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.log.Log;
 import pers.chanus.yuntao.springmvc.log.LogMapper;
-import pers.chanus.yuntao.util.CollectionUtils;
-import pers.chanus.yuntao.util.IpUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.IpUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;

@@ -6,8 +6,8 @@ package pers.chanus.yuntao.manager.common;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.model.ModulePower;
-import pers.chanus.yuntao.util.CollectionUtils;
-import pers.chanus.yuntao.util.StringUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;

@@ -16,8 +16,8 @@ import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import pers.chanus.yuntao.util.CollectionUtils;
-import pers.chanus.yuntao.util.StringUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.io.Serializable;
 import java.util.Collections;

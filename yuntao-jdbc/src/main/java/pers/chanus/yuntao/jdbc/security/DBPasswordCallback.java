@@ -4,7 +4,7 @@
 package pers.chanus.yuntao.jdbc.security;
 
 import com.alibaba.druid.util.DruidPasswordCallback;
-import pers.chanus.yuntao.util.encrypt.AESUtils;
+import com.chanus.yuntao.utils.core.encrypt.AESUtils;
 
 import java.util.Properties;
 

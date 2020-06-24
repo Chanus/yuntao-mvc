@@ -5,7 +5,7 @@ package pers.chanus.yuntao.manager.test;
 
 import org.junit.Test;
 
-import pers.chanus.yuntao.util.GoogleAuthenticatorUtils;
+import com.chanus.yuntao.utils.core.GoogleAuthenticatorUtils;
 
 /**
  * google身份验证器

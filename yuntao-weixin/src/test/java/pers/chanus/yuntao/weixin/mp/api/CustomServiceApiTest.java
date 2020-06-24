@@ -11,8 +11,8 @@ package pers.chanus.yuntao.weixin.mp.api;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
-import pers.chanus.yuntao.util.DateUtils;
-import pers.chanus.yuntao.util.encrypt.MD5Utils;
+import com.chanus.yuntao.utils.core.DateUtils;
+import com.chanus.yuntao.utils.core.encrypt.MD5Utils;
 import pers.chanus.yuntao.weixin.mp.api.bean.CustomMessage;
 
 import java.io.File;

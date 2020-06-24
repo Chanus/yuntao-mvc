@@ -16,7 +16,7 @@ import net.sf.ehcache.config.PersistenceConfiguration;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
 import org.junit.Test;
 import pers.chanus.yuntao.manager.common.ehcache.EhCacheUtils;
-import pers.chanus.yuntao.util.CollectionUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.net.URL;
 import java.util.Arrays;

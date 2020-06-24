@@ -18,10 +18,10 @@ import pers.chanus.yuntao.manager.model.LoginUserView;
 import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.service.LoginUserService;
-import pers.chanus.yuntao.util.CollectionUtils;
-import pers.chanus.yuntao.util.ObjectUtils;
-import pers.chanus.yuntao.util.StringUtils;
-import pers.chanus.yuntao.util.encrypt.SHAUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.ObjectUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.encrypt.SHAUtils;
 
 import java.util.List;
 

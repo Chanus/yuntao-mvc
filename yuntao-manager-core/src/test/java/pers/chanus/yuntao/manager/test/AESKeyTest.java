@@ -5,7 +5,7 @@ package pers.chanus.yuntao.manager.test;
 
 import org.junit.Test;
 
-import pers.chanus.yuntao.util.encrypt.AESUtils;
+import com.chanus.yuntao.utils.core.encrypt.AESUtils;
 
 /**
  * AES加密密钥
