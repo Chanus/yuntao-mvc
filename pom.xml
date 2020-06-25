@@ -490,6 +490,5 @@
     <module>yuntao-jdbc</module>
     <module>yuntao-spring-mvc</module>
     <module>yuntao-manager-core</module>
-    <module>yuntao-weixin</module>
   </modules>
 </project>
