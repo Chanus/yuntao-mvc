@@ -16,6 +16,7 @@ import com.chanus.yuntao.utils.core.encrypt.RSAUtils;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 系统授权工具类
@@ -96,7 +97,18 @@ public class LicenseUtils {
         if (ConfigConsts.STATUS_NO.equals(enable))
             return Message.success("校验成功");
 
-        if (!StringUtils.contains(macAddress, SystemUtils.HOST_MAC))
+        Set<String> macSet = SystemUtils.getHostMac();
+        if (CollectionUtils.isEmpty(macSet))
+            return Message.fail("无法获取本机 Mac 地址");
+
+        boolean b = false;
+        for (String mac : macSet) {
+            if (StringUtils.contains(macAddress, mac)) {
+                b = true;
+                break;
+            }
+        }
+        if (!b)
             return Message.fail("机器码不一致");
 
         if (StringUtils.isBlank(limit))

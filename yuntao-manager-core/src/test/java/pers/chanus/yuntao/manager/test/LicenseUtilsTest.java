@@ -31,7 +31,7 @@ public class LicenseUtilsTest {
     public void licenseTest() {
         String name = "yundao";
         String version = "0.2.1";
-        // String macAddress = SystemUtils.HOST_MAC;
+        // Set<String> macAddress = SystemUtils.getHostMac();
         String macAddress = null;
         String limit = "0";
         String enable = "0";
