@@ -489,6 +489,6 @@
     <module>yuntao-commons</module>
     <module>yuntao-jdbc</module>
     <module>yuntao-spring-mvc</module>
-    <module>yuntao-manager-core</module>
+    <module>yuntao-manager</module>
   </modules>
 </project>
