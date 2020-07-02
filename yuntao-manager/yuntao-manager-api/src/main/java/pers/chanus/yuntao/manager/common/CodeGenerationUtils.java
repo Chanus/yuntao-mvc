@@ -190,6 +190,7 @@ public class CodeGenerationUtils {
         String serverPackage = (String) params.get("serverPackage");
         String controllerPackage = (String) params.get("controllerPackage");
         String pathName = (String) params.get("pathName");
+        String multi = (String) params.get("multi");
         params.put("tableName", table.getTableName());
         params.put("tableComment", table.getTableComment());
         params.put("pk", table.getPk());
@@ -226,7 +227,7 @@ public class CodeGenerationUtils {
 
             try {
                 // 添加到zip
-                String fileName = getFileName(template, table.getClassName(), serverPackage, controllerPackage, pathName, jsPath, jsName);
+                String fileName = getFileName(template, table.getClassName(), serverPackage, controllerPackage, pathName, jsPath, jsName, multi);
                 if (StringUtils.isNotBlank(fileName))
                     zip.putNextEntry(new ZipEntry(fileName));
                 StreamUtils.write(stringWriter.toString(), zip, "UTF-8");
@@ -279,16 +280,24 @@ public class CodeGenerationUtils {
      * @param pathName          URL标识
      * @param jsPath            js文件相对路径
      * @param jsName            js文件名
+     * @param multi             是否是多模块项目，1 是多模块项目，0是单模块项目
      * @return
      * @since 0.0.3
      */
-    public static String getFileName(String template, String className, String serverPackage, String controllerPackage, String pathName, String jsPath, String jsName) {
+    public static String getFileName(String template, String className, String serverPackage, String controllerPackage, String pathName, String jsPath, String jsName, String multi) {
         serverPackage = serverPackage.replace(".", File.separator) + File.separator;
         controllerPackage = controllerPackage.replace(".", File.separator) + File.separator;
 
-        String rootPath = "src" + File.separator + "main" + File.separator;
-        String javaServerPath = rootPath + "java" + File.separator + serverPackage;
-        String javaControllerPath = rootPath + "java" + File.separator + controllerPackage;
+        String rootPath = "src" + File.separator + "main" + File.separator, apiRootPath, webRootPath;
+        if (ConfigConsts.STATUS_YES.equals(multi)) {// 如果是多模块项目
+            apiRootPath = "api" + File.separator + rootPath;
+            webRootPath = "web" + File.separator + rootPath;
+        } else {// 如果是单模块项目
+            apiRootPath = rootPath;
+            webRootPath = rootPath;
+        }
+        String javaServerPath = apiRootPath + "java" + File.separator + serverPackage;
+        String javaControllerPath = webRootPath + "java" + File.separator + controllerPackage;
 
         if (template.contains("model.java.vm")) {
             return javaServerPath + "model" + File.separator + className + ".java";
@@ -299,7 +308,7 @@ public class CodeGenerationUtils {
         }
 
         if (template.contains("Mapper.xml.vm")) {
-            return rootPath + "resources" + File.separator + serverPackage + "mapper" + File.separator + className + "Mapper.xml";
+            return apiRootPath + "resources" + File.separator + serverPackage + "mapper" + File.separator + className + "Mapper.xml";
         }
 
         if (template.contains("Service.java.vm")) {
@@ -315,15 +324,15 @@ public class CodeGenerationUtils {
         }
 
         if (template.contains("list.jsp.vm")) {
-            return rootPath + "webapp" + File.separator + "WEB-INF" + File.separator + "view" + File.separator + pathName + File.separator + "list.jsp";
+            return webRootPath + "webapp" + File.separator + "WEB-INF" + File.separator + "view" + File.separator + pathName + File.separator + "list.jsp";
         }
 
         if (template.contains("add-update.jsp.vm")) {
-            return rootPath + "webapp" + File.separator + "WEB-INF" + File.separator + "view" + File.separator + pathName + File.separator + "add-update.jsp";
+            return webRootPath + "webapp" + File.separator + "WEB-INF" + File.separator + "view" + File.separator + pathName + File.separator + "add-update.jsp";
         }
 
         if (template.contains("list.js.vm")) {
-            return rootPath + "webapp" + File.separator + "resources" + File.separator + "js" + File.separator + jsPath + File.separator + jsName + ".js";
+            return webRootPath + "webapp" + File.separator + "resources" + File.separator + "js" + File.separator + jsPath + File.separator + jsName + ".js";
         }
 
         if (template.contains("menu.sql.vm")) {

@@ -27,6 +27,13 @@
             <input type="text" name="since" required lay-verify="required" value="${since }" placeholder="请输入代码版本号" class="layui-input" autocomplete="off">
           </div>
         </div>
+        <div class="layui-form-item" pane>
+          <label class="layui-form-label">项目结构<span class="red">*</span></label>
+          <div class="layui-input-block">
+            <input type="radio" name="multi" lay-verify="mustradio" value="1" title="多模块" <c:if test="${multi == '1' }">checked</c:if>>
+            <input type="radio" name="multi" value="0" title="单模块" <c:if test="${empty multi or multi == '0' }">checked</c:if>>
+          </div>
+        </div>
         <div class="layui-form-item">
           <label class="layui-form-label">服务类包名<span class="red">*</span></label>
           <div class="layui-input-block">
@@ -73,6 +80,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.1.7.4"></script>
+    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.2.3.1"></script>
   </body>
 </html>

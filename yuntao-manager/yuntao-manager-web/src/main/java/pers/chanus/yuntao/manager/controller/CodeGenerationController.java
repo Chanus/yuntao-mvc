@@ -82,6 +82,7 @@ public class CodeGenerationController extends BaseController {
         model.addAttribute("tableName", tableName);
         model.addAttribute("author", ConfigUtils.getProperty("code.generation.author"));
         model.addAttribute("since", ConfigUtils.getProperty("code.generation.since"));
+        model.addAttribute("multi", ConfigUtils.getProperty("code.generation.multi"));
         model.addAttribute("serverPackage", ConfigUtils.getProperty("code.generation.server.package"));
         model.addAttribute("controllerPackage", ConfigUtils.getProperty("code.generation.controller.package"));
         model.addAttribute("tablePrefix", ConfigUtils.getProperty("code.generation.tablePrefix"));

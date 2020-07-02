@@ -54,14 +54,23 @@ layui.config({
         if (layEvent === 'column') {// 表字典
             popup.open(700, 600, '<i class="layui-icon layui-icon-about"></i>【' + data.tableName + '】表字典', action_path + 'table-column.do?tableSchema=' + data.tableSchema + '&tableName=' + data.tableName);
         } else if (layEvent === 'generate') {// 代码生成
-            popup.open(600, 600, '<i class="layui-icon layui-icon-fonts-code"></i>代码生成', action_path + 'generate.do?tableSchema=' + data.tableSchema + '&tableName=' + data.tableName);
+            popup.open(600, 650, '<i class="layui-icon layui-icon-fonts-code"></i>代码生成', action_path + 'generate.do?tableSchema=' + data.tableSchema + '&tableName=' + data.tableName);
         }
     });
 
     // 确认生成代码时触发
     form.on('submit(generate)', function (data) {
-        location.href = action_path + 'generate-download.do?tableSchema=' + data.field.tableSchema + '&tableName=' + data.field.tableName + '&author=' + data.field.author + '&since=' + data.field.since + '&serverPackage=' + data.field.serverPackage
-            + '&controllerPackage=' + data.field.controllerPackage + '&tablePrefix=' + data.field.tablePrefix + '&autoRemovePrefix=' + data.field.autoRemovePrefix + '&pathName=' + data.field.pathName + '&moduleId=' + data.field.moduleId;
+        location.href = action_path + 'generate-download.do?tableSchema=' + data.field.tableSchema +
+            '&tableName=' + data.field.tableName +
+            '&author=' + data.field.author +
+            '&since=' + data.field.since +
+            '&multi=' + data.field.multi +
+            '&serverPackage=' + data.field.serverPackage +
+            '&controllerPackage=' + data.field.controllerPackage +
+            '&tablePrefix=' + data.field.tablePrefix +
+            '&autoRemovePrefix=' + data.field.autoRemovePrefix +
+            '&pathName=' + data.field.pathName +
+            '&moduleId=' + data.field.moduleId;
         return false;
     });
 });
