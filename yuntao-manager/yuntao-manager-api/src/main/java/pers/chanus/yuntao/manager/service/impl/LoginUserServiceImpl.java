@@ -3,6 +3,9 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.encrypt.SHAUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
@@ -18,10 +21,6 @@ import pers.chanus.yuntao.manager.model.LoginUserView;
 import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.service.LoginUserService;
-import com.chanus.yuntao.utils.core.CollectionUtils;
-import com.chanus.yuntao.utils.core.ObjectUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
-import com.chanus.yuntao.utils.core.encrypt.SHAUtils;
 
 import java.util.List;
 
@@ -88,8 +87,8 @@ public class LoginUserServiceImpl implements LoginUserService {
 
         LoginUser loginUser = new LoginUser().setLoginNo(loginUserView.getLoginNo())
                 .setLoginName(loginUserView.getLoginName()).setRoleCode(loginUserView.getRoleCode())
-                .setMasterNo(ObjectUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
-                .setMasterRoleCode(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleCode(), loginUserView.getRoleCode()))
+                .setMasterNo(StringUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
+                .setMasterRoleCode(StringUtils.defaultIfBlank(loginUserView.getMasterRoleCode(), loginUserView.getRoleCode()))
                 .setLoginIp(loginIp).setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
                 .setUrls(moduleMapper.listUrl(loginUserView.getRoleCode(), loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
@@ -147,8 +146,8 @@ public class LoginUserServiceImpl implements LoginUserService {
 
         LoginUser loginUser = new LoginUser().setLoginNo(loginUserView.getLoginNo())
                 .setLoginName(loginUserView.getLoginName()).setRoleCode(roleCode)
-                .setMasterNo(ObjectUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
-                .setMasterRoleCode(ObjectUtils.defaultIfBlank(loginUserView.getMasterRoleCode(), roleCode))
+                .setMasterNo(StringUtils.defaultIfBlank(loginUserView.getMasterNo(), loginUserView.getLoginNo()))
+                .setMasterRoleCode(StringUtils.defaultIfBlank(loginUserView.getMasterRoleCode(), roleCode))
                 .setLoginIp(loginIp).setHeadImage(loginUserView.getHeadImage()).setMenus(menus)
                 .setUrls(moduleMapper.listUrl(roleCode, loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
