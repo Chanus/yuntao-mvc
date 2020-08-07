@@ -13,7 +13,7 @@
         <ul id="roles" class="ztree"></ul>
       </div>
       <!-- 操作员列表 -->
-      <div class="page-tree-list" id="role-list">
+      <div class="page-tree-list" id="operator-list">
         <div class="layui-form layui-form-pane">
           <div class="layui-form-item">
             <div class="layui-inline">

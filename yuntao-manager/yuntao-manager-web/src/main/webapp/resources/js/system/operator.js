@@ -92,14 +92,14 @@ var setting = {
         },
         onClick: function (event, treeId, treeNode) {
             if (treeNode.level === 0) {// 点击根节点隐藏添加按钮
-                $('#role-list').css('display', '');
+                $('#operator-list').css('display', '');
                 $('#add').css('display', 'none');
                 // 点击节点重新加载操作员列表
                 reload('-1');
             } else if (treeNode.hasOperator === '0') {// 点击不允许添加操作员的角色节点，隐藏操作员列表
-                $('#role-list').css('display', 'none');
+                $('#operator-list').css('display', 'none');
             } else {// 点击允许添加操作员的角色节点显示添加按钮
-                $('#role-list').css('display', '');
+                $('#operator-list').css('display', '');
                 $('#add').css('display', '');
                 // 点击节点重新加载操作员列表
                 reload(treeNode.roleCode);
