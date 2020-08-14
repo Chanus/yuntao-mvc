@@ -16,7 +16,7 @@ import pers.chanus.yuntao.springmvc.controller.BaseController;
 import java.util.Arrays;
 
 /**
- * 数据字典项理
+ * 数据字典项管理
  *
  * @author Chanus
  * @date 2019-06-07 14:01:03

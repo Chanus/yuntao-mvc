@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.ModulePowerUtils;
@@ -19,7 +18,6 @@ import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 定时任务管理
@@ -35,13 +33,6 @@ public class ScheduleJobController extends BaseController {
     private ScheduleJobService scheduleJobService;
 
     private final String currentModuleCode = "JOB";
-
-    /**
-     * 初始化加载定时任务，启动默认状态为启用的所有定时任务
-     */
-    public void scheduleJobInit() {
-        List<ScheduleJob> scheduleJob = scheduleJobService.list(CustomMap.get().putNext("validStatus", ConfigConsts.STATUS_YES));
-    }
 
     /**
      * 首页

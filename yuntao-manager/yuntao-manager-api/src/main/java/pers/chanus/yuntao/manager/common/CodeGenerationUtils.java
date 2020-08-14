@@ -3,6 +3,7 @@
  */
 package pers.chanus.yuntao.manager.common;
 
+import com.chanus.yuntao.utils.core.*;
 import org.apache.commons.lang.WordUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -12,10 +13,6 @@ import org.slf4j.LoggerFactory;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.manager.model.DataBaseColumn;
 import pers.chanus.yuntao.manager.model.DataBaseTable;
-import com.chanus.yuntao.utils.core.DateUtils;
-import com.chanus.yuntao.utils.core.IOUtils;
-import com.chanus.yuntao.utils.core.StreamUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -230,7 +227,7 @@ public class CodeGenerationUtils {
                 String fileName = getFileName(template, table.getClassName(), serverPackage, controllerPackage, pathName, jsPath, jsName, multi);
                 if (StringUtils.isNotBlank(fileName))
                     zip.putNextEntry(new ZipEntry(fileName));
-                StreamUtils.write(stringWriter.toString(), zip, "UTF-8");
+                StreamUtils.write(zip, CharsetUtils.CHARSET_UTF_8, true, stringWriter.toString());
                 IOUtils.closeQuietly(stringWriter);
                 zip.closeEntry();
             } catch (IOException e) {
