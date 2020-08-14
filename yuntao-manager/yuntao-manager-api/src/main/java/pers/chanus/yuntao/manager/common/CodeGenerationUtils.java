@@ -227,7 +227,7 @@ public class CodeGenerationUtils {
                 String fileName = getFileName(template, table.getClassName(), serverPackage, controllerPackage, pathName, jsPath, jsName, multi);
                 if (StringUtils.isNotBlank(fileName))
                     zip.putNextEntry(new ZipEntry(fileName));
-                StreamUtils.write(zip, CharsetUtils.CHARSET_UTF_8, true, stringWriter.toString());
+                StreamUtils.write(zip, CharsetUtils.CHARSET_UTF_8, stringWriter.toString());
                 IOUtils.closeQuietly(stringWriter);
                 zip.closeEntry();
             } catch (IOException e) {
