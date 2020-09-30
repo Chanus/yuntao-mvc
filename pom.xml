@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>yuntao</groupId>
   <artifactId>yuntao</artifactId>
-  <version>0.2.4</version>
+  <version>0.2.5</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   
@@ -46,7 +46,7 @@
     <caffeine.version>2.8.2</caffeine.version>
     <jstl.version>1.2</jstl.version>
     <taglibs.standard.version>1.1.2</taglibs.standard.version>
-    <yuntao.utils.version>1.2.1</yuntao.utils.version>
+    <yuntao.utils.version>1.2.6</yuntao.utils.version>
   </properties>
   
   <dependencyManagement>
