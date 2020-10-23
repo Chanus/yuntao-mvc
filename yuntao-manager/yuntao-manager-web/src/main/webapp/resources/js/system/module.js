@@ -58,7 +58,8 @@ layui.config({
     // 添加
     $('#add').on('click', function () {
         var nodes = treeObj.getSelectedNodes();
-        popup.open(650, 700, '<i class="layui-icon layui-icon-add-circle"></i>添加模块', action_path + 'add.do?moduleId=' + nodes[0].id);
+        popup.open(650, 700, '<i class="layui-icon layui-icon-add-circle"></i>添加模块',
+            action_path + 'add.do?moduleId=' + nodes[0].id + '&level=' + nodes[0].level);
     });
 
     // 监听工具条
@@ -67,7 +68,9 @@ layui.config({
         var layEvent = obj.event; // 获得lay-event对应的值
         // var tr = obj.tr; // 获得当前行tr的DOM对象
         if (layEvent === 'update') {// 编辑
-            popup.open(650, 700, '<i class="layui-icon layui-icon-edit"></i>编辑模块', action_path + 'update.do?moduleId=' + data.moduleId);
+            var nodes = treeObj.getSelectedNodes();
+            popup.open(650, 700, '<i class="layui-icon layui-icon-edit"></i>编辑模块',
+                action_path + 'update.do?moduleId=' + data.moduleId + '&level=' + nodes[0].level);
         } else if (layEvent === 'del') {// 删除
             operations.del({ids: [data.moduleId]}, action_path + 'delete.do', init);
         } else if (layEvent === 'up' || layEvent === 'down') {// 调整优先级

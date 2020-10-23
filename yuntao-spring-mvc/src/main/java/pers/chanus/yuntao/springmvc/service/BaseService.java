@@ -4,11 +4,11 @@
 package pers.chanus.yuntao.springmvc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.transaction.annotation.Transactional;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
-import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -103,7 +103,7 @@ public interface BaseService<T> extends IService<T> {
      * @since 0.0.1
      */
     default Message delete(Collection<? extends Serializable> pks) {
-        if (!CollectionUtils.isEmpty(pks))
+        if (CollectionUtils.isNotEmpty(pks))
             this.removeByIds(pks);
         return Message.deleteSuccess();
     }

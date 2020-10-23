@@ -16,24 +16,28 @@
             <input type="hidden" name="moduleId" value="${module.moduleId }" class="layui-input" autocomplete="off">
           </c:otherwise>
         </c:choose>
-        <div class="layui-form-item">
-          <label class="layui-form-label">模块代码</label>
-          <div class="layui-input-block">
-            <input type="text" name="moduleCode" value="${module.moduleCode }" placeholder="请输入模块代码" class="layui-input" autocomplete="off">
+        <c:if test="${level == 1 }">
+          <div class="layui-form-item">
+            <label class="layui-form-label">模块代码<span class="red">*</span></label>
+            <div class="layui-input-block">
+              <input type="text" name="moduleCode" required lay-verify="required" value="${module.moduleCode }" placeholder="请输入模块代码" class="layui-input" autocomplete="off">
+            </div>
           </div>
-        </div>
+        </c:if>
         <div class="layui-form-item">
           <label class="layui-form-label">模块名称<span class="red">*</span></label>
           <div class="layui-input-block">
             <input type="text" name="moduleName" required lay-verify="required" value="${module.moduleName }" placeholder="请输入模块名称" class="layui-input" autocomplete="off">
           </div>
         </div>
-        <div class="layui-form-item">
-          <label class="layui-form-label">模块URL</label>
-          <div class="layui-input-block">
-            <input type="text" name="moduleUrl" value="${module.moduleUrl }" placeholder="请输入模块URL" class="layui-input" autocomplete="off">
+        <c:if test="${level == 1 }">
+          <div class="layui-form-item">
+            <label class="layui-form-label">模块URL</label>
+            <div class="layui-input-block">
+              <input type="text" name="moduleUrl" value="${module.moduleUrl }" placeholder="请输入模块URL" class="layui-input" autocomplete="off">
+            </div>
           </div>
-        </div>
+        </c:if>
         <div class="layui-form-item" pane>
           <label class="layui-form-label">是否菜单<span class="red">*</span></label>
           <div class="layui-input-block">
@@ -70,16 +74,17 @@
             <input type="text" id="iconPicker" value="${module.moduleIcon }" lay-filter="iconPicker" class="hide">
           </div>
         </div>
-        <div class="layui-form-item">
-          <label class="layui-form-label">打开位置</label>
-          <div class="layui-input-block">
-            <select name="moduleTarget" lay-filter="moduleTarget">
-              <option value="" <c:if test="${empty module.moduleTarget }">selected="selected"</c:if>></option>
-              <option value="0" <c:if test="${module.moduleTarget eq '0' }">selected="selected"</c:if>>页签</option>
-              <option value="1" <c:if test="${module.moduleTarget eq '1' }">selected="selected"</c:if>>新页面</option>
-            </select>
+        <c:if test="${level == 1 }">
+          <div class="layui-form-item">
+            <label class="layui-form-label">打开位置</label>
+            <div class="layui-input-block">
+              <select name="moduleTarget" lay-filter="moduleTarget">
+                <option value="0" <c:if test="${empty module.moduleTarget or module.moduleTarget eq '0' }">selected="selected"</c:if>>页签</option>
+                <option value="1" <c:if test="${module.moduleTarget eq '1' }">selected="selected"</c:if>>新页面</option>
+              </select>
+            </div>
           </div>
-        </div>
+        </c:if>
         <div class="layui-form-item" pane>
           <label class="layui-form-label">状态<span class="red">*</span></label>
           <div class="layui-input-block">
@@ -111,6 +116,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.1.8.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.3.0.2"></script>
   </body>
 </html>

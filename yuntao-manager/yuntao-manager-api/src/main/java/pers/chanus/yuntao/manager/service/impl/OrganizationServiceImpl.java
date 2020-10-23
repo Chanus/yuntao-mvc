@@ -65,7 +65,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationMapper,
         try {
             // 构建组织机构列表目录节点
             List<Organization> organizations = getBaseMapper().selectList(Wrappers.emptyWrapper());
-            if (!CollectionUtils.isEmpty(organizations)) {
+            if (CollectionUtils.isNotEmpty(organizations)) {
                 for (Organization organization : organizations) {
                     tree.append(", {\"id\":\"").append(organization.getOrgId())
                             .append("\", \"pId\":\"").append(organization.getOrgParentId())

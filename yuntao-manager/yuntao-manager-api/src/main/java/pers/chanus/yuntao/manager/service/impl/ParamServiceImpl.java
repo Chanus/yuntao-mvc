@@ -4,16 +4,16 @@
 package pers.chanus.yuntao.manager.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.mapper.ParamMapper;
 import pers.chanus.yuntao.manager.model.Param;
 import pers.chanus.yuntao.manager.service.ParamService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +29,7 @@ import java.util.Map;
 public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param> implements ParamService {
     @Override
     public Message insert(Param t) {
-        int count = getBaseMapper().count(CustomMap.get().putNext("paramCode", t.getParamCode()));
+        int count = getBaseMapper().count(CustomMap.create().putNext("paramCode", t.getParamCode()));
         if (count > 0)
             return Message.fail("当前参数代码已存在");
 
@@ -51,7 +51,7 @@ public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param> implem
         List<Param> validParams = getBaseMapper().selectList(new QueryWrapper<Param>().lambda()
                 .select(Param::getParamCode, Param::getParamData)
                 .eq(Param::getValidStatus, ConfigConsts.STATUS_YES));
-        if (!CollectionUtils.isEmpty(validParams))
+        if (CollectionUtils.isNotEmpty(validParams))
             validParams.forEach(param -> CacheData.SYSTEM_PARAMS_MAP.put(param.getParamCode(), param.getParamData()));
 
         return Message.success("系统参数重载成功");

@@ -38,7 +38,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
 
         // 重载字典数据
         List<Dict> dicts = getBaseMapper().listWithDictItems(null);
-        if (!CollectionUtils.isEmpty(dicts)) {
+        if (CollectionUtils.isNotEmpty(dicts)) {
             dicts.stream().filter(dict -> dict.getValidStatus().equals(ConfigConsts.STATUS_YES)).forEach(dict -> CacheData.SYSTEM_DICT_MAP.put(dict.getDictCode(), dict.getDictItems().stream().filter(dictItem -> dictItem.getValidStatus().equals(ConfigConsts.STATUS_YES)).collect(Collectors.toList())));
 
             List<DictItem> dictItems = new ArrayList<>();

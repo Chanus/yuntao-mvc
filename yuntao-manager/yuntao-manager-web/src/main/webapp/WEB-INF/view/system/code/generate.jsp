@@ -71,6 +71,14 @@
             <input type="text" name="moduleId" placeholder="请输入模块ID" class="layui-input" autocomplete="off">
           </div>
         </div>
+        <div class="layui-form-item" pane>
+          <label class="layui-form-label">重写SQL</label>
+          <div class="layui-input-block">
+            <input type="checkbox" name="overrideInsert" value="1" lay-skin="primary" title="insert">
+            <input type="checkbox" name="overrideUpdate" value="1" lay-skin="primary" title="update">
+            <input type="checkbox" name="overrideDelete" value="1" lay-skin="primary" title="delete">
+          </div>
+        </div>
         <div class="layui-form-item text-c">
           <div class="layui-inline">
             <button class="layui-btn layui-btn-normal" lay-submit lay-filter="generate">生成代码</button>
@@ -80,6 +88,6 @@
       </form>
     </div>
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.2.3.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.3.0.1"></script>
   </body>
 </html>

@@ -4,6 +4,7 @@
 package pers.chanus.yuntao.manager.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;

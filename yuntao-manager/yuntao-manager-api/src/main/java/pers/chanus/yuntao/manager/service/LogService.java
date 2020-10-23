@@ -3,8 +3,8 @@
  */
 package pers.chanus.yuntao.manager.service;
 
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.springmvc.log.Log;

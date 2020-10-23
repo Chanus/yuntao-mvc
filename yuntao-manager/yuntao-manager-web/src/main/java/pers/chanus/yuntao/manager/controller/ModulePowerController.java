@@ -3,6 +3,8 @@
  */
 package pers.chanus.yuntao.manager.controller;
 
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.CacheData;
@@ -24,7 +25,6 @@ import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.manager.service.PowerService;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
-import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -57,8 +57,8 @@ public class ModulePowerController extends BaseController {
     @GetMapping(value = "main.do")
     public String main(Model model) {
         model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
-        model.addAttribute("modules1", moduleService.list(CustomMap.get().putNext("moduleParentId", 0)));
-        model.addAttribute("powerItems", powerService.list(CustomMap.get().putNext("validStatus", ConfigConsts.STATUS_YES)));
+        model.addAttribute("modules1", moduleService.list(CustomMap.create("moduleParentId", 0)));
+        model.addAttribute("powerItems", powerService.list(CustomMap.create("validStatus", ConfigConsts.STATUS_YES)));
         return "system/modulepower/list";
     }
 

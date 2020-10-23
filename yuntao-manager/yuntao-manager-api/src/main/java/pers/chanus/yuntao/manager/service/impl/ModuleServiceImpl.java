@@ -4,11 +4,13 @@
 package pers.chanus.yuntao.manager.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.ModuleMapper;
 import pers.chanus.yuntao.manager.mapper.RoleMapper;
@@ -16,8 +18,6 @@ import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import com.chanus.yuntao.utils.core.CollectionUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -77,13 +77,18 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module> imp
     public String createTree() {
         StringBuilder tree = new StringBuilder("[");
         // 构建一个模块列表根节点
-        tree.append("{\"id\":0, \"pId\":0, \"name\":\"模块列表\", \"open\":true").append(", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"").append(", \"iconOpen\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"").append(", \"iconClose\":\"../../lib/zTree/zTreeStyle/img/diy/1_close.png\"}");
+        tree.append("{\"id\":0, \"pId\":0, \"name\":\"模块列表\", \"open\":true")
+                .append(", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"")
+                .append(", \"iconOpen\":\"../../lib/zTree/zTreeStyle/img/diy/1_open.png\"")
+                .append(", \"iconClose\":\"../../lib/zTree/zTreeStyle/img/diy/1_close.png\"}");
         try {
             // 构建模块列表目录节点
-            List<Module> modules = getBaseMapper().list(CustomMap.get().putNext("moduleParentId", 0));
-            if (!CollectionUtils.isEmpty(modules)) {
+            List<Module> modules = getBaseMapper().list(CustomMap.create("moduleParentId", 0));
+            if (CollectionUtils.isNotEmpty(modules)) {
                 for (Module module : modules) {
-                    tree.append(", {\"id\":").append(module.getModuleId()).append(", \"pId\":0, \"name\":\"").append(module.getModuleName()).append("\", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/9.png\"}");
+                    tree.append(", {\"id\":").append(module.getModuleId())
+                            .append(", \"pId\":0, \"name\":\"").append(module.getModuleName())
+                            .append("\", \"icon\":\"../../lib/zTree/zTreeStyle/img/diy/9.png\"}");
                 }
             }
         } catch (Exception e) {
@@ -120,7 +125,7 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module> imp
             // 更新当前模块下的二级模块优先级
             params.put("moduleParentId", currentModule.getModuleId());
             List<Module> modules = getBaseMapper().list(params);
-            if (!CollectionUtils.isEmpty(modules)) {
+            if (CollectionUtils.isNotEmpty(modules)) {
                 for (Module m : modules) {
                     m.setModuleLevel(currentModule.getModuleLevel() + m.getModuleLevel().substring(2));
                     super.update(m);
@@ -129,7 +134,7 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module> imp
             // 更新待交换优先级模块下的二级模块优先级
             params.put("moduleParentId", module.getModuleId());
             modules = getBaseMapper().list(params);
-            if (!CollectionUtils.isEmpty(modules)) {
+            if (CollectionUtils.isNotEmpty(modules)) {
                 for (Module m : modules) {
                     m.setModuleLevel(module.getModuleLevel() + m.getModuleLevel().substring(2));
                     super.update(m);

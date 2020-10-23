@@ -4,12 +4,15 @@
 package pers.chanus.yuntao.manager.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.chanus.yuntao.utils.core.ArrayUtils;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.RoleMapper;
 import pers.chanus.yuntao.manager.mapper.RoleModulePowerMapper;
@@ -17,8 +20,6 @@ import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.model.RoleModulePower;
 import pers.chanus.yuntao.manager.service.RoleService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import com.chanus.yuntao.utils.core.CollectionUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,9 +73,9 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
                 .append(", \"iconClose\":\"../../lib/zTree/zTreeStyle/img/diy/1_close.png\"}");
         try {
             // 构建角色列表目录节点
-            CustomMap params = CustomMap.get().putNext("roleCode", roleCode).putNext("hasOperator", hasOperator);
+            CustomMap params = CustomMap.create().putNext("roleCode", roleCode).putNext("hasOperator", hasOperator);
             List<Role> roles = getBaseMapper().list(params);
-            if (!CollectionUtils.isEmpty(roles)) {
+            if (CollectionUtils.isNotEmpty(roles)) {
                 for (Role role : roles) {
                     tree.append(", {\"id\":\"").append(role.getRoleId())
                             .append("\", \"roleCode\":\"").append(role.getRoleCode())
@@ -101,7 +102,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
         // 先删除角色原有权限
         roleModulePowerMapper.deleteByRoleCode(roleCode);
         // 再写入新的角色权限
-        if (!CollectionUtils.isEmpty(modulePowers)) {
+        if (ArrayUtils.isNotEmpty(modulePowers)) {
             List<RoleModulePower> roleModulePowers = new ArrayList<>();
             RoleModulePower roleModulePower;
             for (String s : modulePowers) {

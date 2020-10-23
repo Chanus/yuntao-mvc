@@ -3,13 +3,14 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.chanus.yuntao.utils.core.ArrayUtils;
 import com.chanus.yuntao.utils.core.CollectionUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
 import com.chanus.yuntao.utils.core.encrypt.SHAUtils;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.common.CacheData;
@@ -59,7 +60,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             if (StringUtils.isNotBlank(fixedWhiteIps) && !StringUtils.contains(fixedWhiteIps + ",", loginIp + ",")) {// 用户固定IP，登录IP必须存在于该IP白名单才能登录
                 return Message.fail("当前IP不允许登录");
             } else if (StringUtils.isBlank(fixedWhiteIps)) {// 用户没有固定IP，登录IP存在于任何一组白名单IP中即可登录
-                int whiteIpsCount = whiteIpMapper.count(CustomMap.get().putNext("validStatus", ConfigConsts.STATUS_YES).putNext("fixedStatus", ConfigConsts.STATUS_NO).putNext("whiteIp", loginIp).putNext("loginNo", loginNo));
+                int whiteIpsCount = whiteIpMapper.count(CustomMap.create().putNext("validStatus", ConfigConsts.STATUS_YES).putNext("fixedStatus", ConfigConsts.STATUS_NO).putNext("whiteIp", loginIp).putNext("loginNo", loginNo));
                 if (whiteIpsCount == 0)
                     return Message.fail("当前IP不允许登录");
             }
@@ -113,7 +114,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             if (StringUtils.isNotBlank(fixedWhiteIps) && !StringUtils.contains(fixedWhiteIps + ",", loginIp + ",")) {// 用户固定IP，登录IP必须存在于该IP白名单才能登录
                 return Message.fail("当前IP不允许登录");
             } else if (StringUtils.isBlank(fixedWhiteIps)) {// 用户没有固定IP，登录IP存在于任何一组白名单IP中即可登录
-                int whiteIpsCount = whiteIpMapper.count(CustomMap.get().putNext("validStatus", ConfigConsts.STATUS_YES).putNext("fixedStatus", ConfigConsts.STATUS_NO).putNext("whiteIp", loginIp).putNext("loginNo", loginNo));
+                int whiteIpsCount = whiteIpMapper.count(CustomMap.create().putNext("validStatus", ConfigConsts.STATUS_YES).putNext("fixedStatus", ConfigConsts.STATUS_NO).putNext("whiteIp", loginIp).putNext("loginNo", loginNo));
                 if (whiteIpsCount == 0)
                     return Message.fail("当前IP不允许登录");
             }
@@ -129,7 +130,7 @@ public class LoginUserServiceImpl implements LoginUserService {
         if (StringUtils.isBlank(loginUserView.getRoleCode()))
             return Message.fail("当前用户角色不存在");
         String[] userRoleCodes = loginUserView.getRoleCode().split(",");
-        if (!CollectionUtils.contains(userRoleCodes, roleCode))
+        if (!ArrayUtils.contains(userRoleCodes, roleCode))
             return Message.fail("当前用户角色不存在");
 
         Role role = roleMapper.getLoginStatus(roleCode);

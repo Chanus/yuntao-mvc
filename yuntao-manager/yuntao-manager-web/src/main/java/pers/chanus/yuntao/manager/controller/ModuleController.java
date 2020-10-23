@@ -76,14 +76,16 @@ public class ModuleController extends BaseController {
      * 跳转到添加页面
      *
      * @param moduleId 上级模块ID
+     * @param level    菜单层级
      * @param model
      * @return
      * @since 0.0.1
      */
     @GetMapping(value = "add.do")
-    public String add(Integer moduleId, Model model) {
+    public String add(Integer moduleId, Integer level, Model model) {
         model.addAttribute("module", new Module());
         model.addAttribute("moduleId", moduleId);
+        model.addAttribute("level", level);
         model.addAttribute("cmd", "add");
         return "system/module/add-update";
     }
@@ -105,12 +107,14 @@ public class ModuleController extends BaseController {
      * 跳转到修改页面
      *
      * @param moduleId 模块ID
+     * @param level    菜单层级
      * @param model
      * @return
      */
     @GetMapping(value = "update.do")
-    public String update(Integer moduleId, Model model) {
+    public String update(Integer moduleId, Integer level, Model model) {
         model.addAttribute("module", moduleService.get(moduleId));
+        model.addAttribute("level", level);
         model.addAttribute("cmd", "update");
         return "system/module/add-update";
     }
@@ -167,7 +171,7 @@ public class ModuleController extends BaseController {
     /**
      * 模块迁移
      *
-     * @param moduleId 待迁移的模块ID
+     * @param moduleId       待迁移的模块ID
      * @param moduleParentId 要迁移到的模块ID
      * @return
      */

@@ -100,8 +100,7 @@ public class CodeGenerationController extends BaseController {
      */
     @GetMapping(value = "generate-download.do", produces = "application/json; charset=utf-8")
     public void generateDownload(HttpServletResponse response, String tableSchema, String tableName) {
-        String[] tableNames = new String[]{tableName};
-        byte[] data = codeGenerationService.generateCode(tableSchema, tableNames, getParams());
+        byte[] data = codeGenerationService.generateCode(tableSchema, tableName, getParams());
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"yuntao-generate-code.zip\"");
         response.addHeader("Content-Length", String.valueOf(data.length));

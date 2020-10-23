@@ -4,6 +4,9 @@
 package pers.chanus.yuntao.springmvc.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.chanus.yuntao.utils.core.ArrayUtils;
+import com.chanus.yuntao.utils.core.IpUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -23,8 +26,6 @@ import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.log.Log;
 import pers.chanus.yuntao.springmvc.log.LogMapper;
-import com.chanus.yuntao.utils.core.CollectionUtils;
-import com.chanus.yuntao.utils.core.IpUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -164,7 +165,8 @@ public class LogAspect {
         }
 
         if (e != null) {
-            parameters.append("\r\n").append(e).append("\r\n").append(CollectionUtils.join(e.getStackTrace()));
+            parameters.append("\r\n").append(e).append("\r\n")
+                    .append(ArrayUtils.joinIgnoreNull(e.getStackTrace(), StringUtils.COMMA));
         }
 
         return parameters.toString();

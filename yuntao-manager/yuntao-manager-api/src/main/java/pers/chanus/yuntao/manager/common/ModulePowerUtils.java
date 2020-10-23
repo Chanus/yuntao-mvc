@@ -62,7 +62,7 @@ public class ModulePowerUtils {
     public static Map<String, Boolean> getPowers(HttpSession session, String moduleCode) {
         List<ModulePower> modulePowers = getModulePowers(session, moduleCode);
         Map<String, Boolean> powerMap = new HashMap<>();
-        if (!CollectionUtils.isEmpty(modulePowers)) {
+        if (CollectionUtils.isNotEmpty(modulePowers)) {
             for (ModulePower power : modulePowers) {
                 if (power != null)
                     powerMap.put(power.getPowerItem(), true);

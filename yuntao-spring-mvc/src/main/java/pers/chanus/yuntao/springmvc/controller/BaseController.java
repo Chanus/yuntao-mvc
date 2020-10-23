@@ -3,6 +3,11 @@
  */
 package pers.chanus.yuntao.springmvc.controller;
 
+import com.chanus.yuntao.utils.core.FileUtils;
+import com.chanus.yuntao.utils.core.IOUtils;
+import com.chanus.yuntao.utils.core.RandomUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.WebDataBinder;
@@ -11,11 +16,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import pers.chanus.yuntao.commons.constant.MsgCode;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
-import com.chanus.yuntao.utils.core.IOUtils;
-import com.chanus.yuntao.utils.core.RandomUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Controller基类
+ * Controller 基类
  *
  * @author Chanus
  * @date 2018-09-01 02:37:44
@@ -42,43 +43,39 @@ public abstract class BaseController {
     }
 
     /**
-     * 获取Request对象
+     * 获取 Request 对象
      *
-     * @return Request对象
-     * @since 0.0.1
+     * @return Request 对象
      */
     protected HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
     }
 
     /**
-     * 获取Response对象
+     * 获取 Response 对象
      *
-     * @return Response对象
-     * @since 0.0.1
+     * @return Response 对象
      */
     protected HttpServletResponse getResponse() {
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getResponse();
     }
 
     /**
-     * 获取Session对象
+     * 获取 Session 对象
      *
-     * @return Session对象
-     * @since 0.0.1
+     * @return Session 对象
      */
     protected HttpSession getSession() {
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest().getSession();
     }
 
     /**
-     * 将请求参数组装成Map
+     * 将请求参数组装成 Map
      *
-     * @return 请求参数Map集合
-     * @since 0.0.1
+     * @return 请求参数 Map 集合
      */
     protected CustomMap getParams() {
-        CustomMap params = CustomMap.get();
+        CustomMap params = CustomMap.create();
         Map<String, String[]> parameterMap = getRequest().getParameterMap();
         for (String k : parameterMap.keySet()) {
             String[] v = parameterMap.get(k);
@@ -94,9 +91,9 @@ public abstract class BaseController {
     }
 
     /**
-     * 读取HTTP请求的body内容
+     * 读取 HTTP 请求的 body 内容
      *
-     * @return HTTP请求的body字符串
+     * @return HTTP 请求的 body 字符串
      * @since 0.1.7
      */
     protected String getRequestBody() {
@@ -105,12 +102,12 @@ public abstract class BaseController {
         try {
             bufferedReader = getRequest().getReader();
             String s;
-            while((s = bufferedReader.readLine()) != null) {
+            while ((s = bufferedReader.readLine()) != null) {
                 stringBuilder.append(s);
             }
             bufferedReader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("读取 HTTP 请求的 body 内容异常", e);
         } finally {
             IOUtils.closeQuietly(bufferedReader);
         }
@@ -121,25 +118,39 @@ public abstract class BaseController {
     /**
      * 单文件上传
      *
-     * @param file
+     * @param file 文件
      * @param path 文件保存路径
-     * @return {@code Message}信息
-     * @since 0.0.1
+     * @return {@code Message} 信息
      */
     protected Message upload(MultipartFile file, String path) {
+        return upload(file, path, RandomUtils.getRandomUniqueNo());
+    }
+
+    /**
+     * 单文件上传
+     *
+     * @param file     文件
+     * @param path     文件保存路径
+     * @param fileName 文件名，不包含后缀
+     * @return {@link Message}
+     */
+    protected Message upload(MultipartFile file, String path, String fileName) {
         Message message = new Message(MsgCode.SUCCESS, "文件上传成功");
         if (file != null && file.getSize() > 0) {
             // 保存路径
-            String realFileName, fileName;
-            realFileName = file.getOriginalFilename();
-            fileName = RandomUtils.getRandomUniqueNo() + realFileName.substring(realFileName.lastIndexOf("."));
-            File f = new File(getSession().getServletContext().getAttribute("parentRealCtx") + "/" + path, fileName);
-            if (!f.exists())
-                f.mkdirs();
+            String realFileName = file.getOriginalFilename();
+            fileName = fileName + realFileName.substring(realFileName.lastIndexOf("."));
+            File f = new File(path, fileName);
+            if (FileUtils.isFileExist(f))
+                FileUtils.delete(f);
+
+            if (!f.getParentFile().exists())
+                f.getParentFile().mkdirs();
+
             try {
                 file.transferTo(f);
                 // 返回文件保存的路径，文件真实名称，文件保存的名称
-                message.setMap(CustomMap.get().putNext("filePath", path).putNext("realFileName", realFileName).putNext("fileName", fileName));
+                message.setMap(CustomMap.create().putNext("filePath", path).putNext("realFileName", realFileName).putNext("fileName", fileName));
             } catch (Exception e) {// 图片上传失败
                 return Message.initMsg(MsgCode.FAIL, "文件上传失败");
             }
@@ -153,7 +164,6 @@ public abstract class BaseController {
      *
      * @param fileParh 文件存储绝对路径
      * @param realName 返回的文件名称，若为空则返回原始文件名称
-     * @since 0.0.1
      */
     protected void download(String fileParh, String realName) {
         HttpServletRequest request = getRequest();
@@ -185,24 +195,11 @@ public abstract class BaseController {
             while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {
                 bos.write(buff, 0, bytesRead);
             }
+            bos.flush();
         } catch (Exception e) {
             LOGGER.error("文件下载异常", e);
         } finally {
-            if (bos != null) {
-                try {
-                    bos.flush();
-                    bos.close();
-                } catch (IOException e) {
-                    LOGGER.error("关闭输出流异常", e);
-                }
-            }
-            if (bis != null) {
-                try {
-                    bis.close();
-                } catch (IOException e) {
-                    LOGGER.error("关闭输入流异常", e);
-                }
-            }
+            IOUtils.closeQuietly(bos, bis);
         }
     }
 }

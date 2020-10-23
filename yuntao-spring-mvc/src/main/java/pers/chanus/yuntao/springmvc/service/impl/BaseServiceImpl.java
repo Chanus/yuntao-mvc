@@ -4,9 +4,9 @@
 package pers.chanus.yuntao.springmvc.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
 import pers.chanus.yuntao.springmvc.service.BaseService;

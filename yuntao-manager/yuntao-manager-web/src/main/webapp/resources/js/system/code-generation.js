@@ -70,7 +70,10 @@ layui.config({
             '&tablePrefix=' + data.field.tablePrefix +
             '&autoRemovePrefix=' + data.field.autoRemovePrefix +
             '&pathName=' + data.field.pathName +
-            '&moduleId=' + data.field.moduleId;
+            '&moduleId=' + data.field.moduleId +
+            '&overrideInsert=' + (data.field.overrideInsert || '0') +
+            '&overrideUpdate=' + (data.field.overrideUpdate || '0') +
+            '&overrideDelete=' + (data.field.overrideDelete || '0');
         return false;
     });
 });

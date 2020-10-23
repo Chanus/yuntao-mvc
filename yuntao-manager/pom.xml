@@ -6,7 +6,7 @@
   <parent>
     <groupId>yuntao</groupId>
     <artifactId>yuntao</artifactId>
-    <version>0.2.5</version>
+    <version>0.3.0</version>
   </parent>
 
   <artifactId>yuntao-manager</artifactId>

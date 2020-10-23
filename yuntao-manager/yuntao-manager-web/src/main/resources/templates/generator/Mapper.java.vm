@@ -11,5 +11,8 @@ import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
  * @since ${since}
  */
 public interface ${className}Mapper extends SuperMapper<${className}> {
-
+#if($overrideUpdate == '1')
+    @Override
+    int updateById(${className} ${classname});
+#end
 }

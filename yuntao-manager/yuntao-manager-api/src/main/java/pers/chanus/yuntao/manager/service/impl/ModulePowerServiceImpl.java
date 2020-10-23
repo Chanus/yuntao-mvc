@@ -49,7 +49,7 @@ public class ModulePowerServiceImpl extends BaseServiceImpl<ModulePowerMapper, M
 
     @Override
     public Message deleteMethod(Collection<Integer> ids) {
-        if (!CollectionUtils.isEmpty(ids))
+        if (CollectionUtils.isNotEmpty(ids))
             modulePowerMethodMapper.deleteBatchIds(ids);
 
         return Message.deleteSuccess();

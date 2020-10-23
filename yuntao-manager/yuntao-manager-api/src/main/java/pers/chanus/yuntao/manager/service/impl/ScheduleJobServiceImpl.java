@@ -54,6 +54,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
         return super.delete(ids);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Message start(Integer id) {
         ScheduleJob scheduleJob = getBaseMapper().getScheduleJob(id);
@@ -133,7 +134,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
         ScheduleJob scheduleJob = getBaseMapper().getScheduleJob(id);
         Map<String, String> triggerMap = new HashMap<>();
         List<ScheduleTrigger> scheduleTriggers = scheduleJob.getScheduleTriggers();
-        if (!CollectionUtils.isEmpty(scheduleTriggers)) {
+        if (CollectionUtils.isNotEmpty(scheduleTriggers)) {
             scheduleTriggers.forEach(o -> {
                 triggerMap.put(o.getTriggerName(), o.getTriggerGroup());
             });
@@ -158,12 +159,13 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
         return Message.success("执行成功");
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Message startAll() {
         List<ScheduleJob> scheduleJobs = getBaseMapper().listScheduleJob();
-        if (!CollectionUtils.isEmpty(scheduleJobs)) {
+        if (CollectionUtils.isNotEmpty(scheduleJobs)) {
             try {
-                // 创建调度器Scheduler
+                // 创建调度器 Scheduler
                 Scheduler scheduler = QuartzUtils.getScheduler();
 
                 Class<? extends Job> clazz;

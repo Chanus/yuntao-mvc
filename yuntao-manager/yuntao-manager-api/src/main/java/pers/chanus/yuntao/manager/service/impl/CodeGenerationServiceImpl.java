@@ -3,9 +3,11 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.chanus.yuntao.utils.core.IOUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.CodeGenerationUtils;
 import pers.chanus.yuntao.manager.mapper.DataBaseColumnMapper;
@@ -15,8 +17,6 @@ import pers.chanus.yuntao.manager.model.DataBaseColumn;
 import pers.chanus.yuntao.manager.model.DataBaseTable;
 import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.service.CodeGenerationService;
-import com.chanus.yuntao.utils.core.IOUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -58,31 +58,27 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     }
 
     @Override
-    public byte[] generateCode(String tableSchema, String[] tableNames, Map<String, Object> params) {
+    public byte[] generateCode(String tableSchema, String tableName, Map<String, Object> params) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
 
-        DataBaseTable table;
-        List<DataBaseColumn> columns;
-        for (String tableName : tableNames) {
-            // 查询表信息
-            table = dataBaseTableMapper.get(tableSchema, tableName);
-            // 查询列信息
-            columns = dataBaseColumnMapper.list(CustomMap.get().putNext("tableSchema", tableSchema).putNext("tableName", tableName));
-            // 获取模块代码和模块名称
-            String moduleId = (String) params.get("moduleId");
-            String moduleCode = null, moduleName = null;
-            if (StringUtils.isNotBlank(moduleId)) {
-                Module module = moduleMapper.selectById(Integer.parseInt(moduleId));
-                moduleCode = module == null ? null : module.getModuleCode();
-                moduleName = module == null ? null : module.getModuleName();
-            }
-
-            params.put("moduleCode", StringUtils.isBlank(moduleCode) ? table.getTableName().toUpperCase() : moduleCode);
-            params.put("moduleName", StringUtils.isBlank(moduleName) ? table.getTableComment() : moduleName);
-            // 生成代码
-            CodeGenerationUtils.generateCode(table, columns, params, zip);
+        // 查询表信息
+        DataBaseTable table = dataBaseTableMapper.get(tableSchema, tableName);
+        // 查询列信息
+        List<DataBaseColumn> columns = dataBaseColumnMapper.list(CustomMap.create().putNext("tableSchema", tableSchema).putNext("tableName", tableName));
+        // 获取模块代码和模块名称
+        String moduleId = (String) params.get("moduleId");
+        String moduleCode = null, moduleName = null;
+        if (StringUtils.isNotBlank(moduleId)) {
+            Module module = moduleMapper.selectById(Integer.parseInt(moduleId));
+            moduleCode = module == null ? null : module.getModuleCode();
+            moduleName = module == null ? null : module.getModuleName();
         }
+
+        params.put("moduleCode", StringUtils.isBlank(moduleCode) ? table.getTableName().toUpperCase() : moduleCode);
+        params.put("moduleName", StringUtils.isBlank(moduleName) ? table.getTableComment() : moduleName);
+        // 生成代码
+        CodeGenerationUtils.generateCode(table, columns, params, zip);
 
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();

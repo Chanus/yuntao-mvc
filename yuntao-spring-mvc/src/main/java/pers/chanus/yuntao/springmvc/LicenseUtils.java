@@ -80,7 +80,7 @@ public class LicenseUtils {
         String text = RSAUtils.decryptByPublicKey(license, publicKey);
 
         Map<String, String> map = UrlUtils.getParamsMap(text, null);
-        if (CollectionUtils.isEmpty(map))
+        if (MapUtils.isEmpty(map))
             return Message.fail("证书异常");
 
         String name = map.get("name");

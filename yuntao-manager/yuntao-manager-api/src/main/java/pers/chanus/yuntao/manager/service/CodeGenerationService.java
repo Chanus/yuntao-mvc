@@ -3,7 +3,7 @@
  */
 package pers.chanus.yuntao.manager.service;
 
-import pers.chanus.yuntao.commons.pojo.CustomMap;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.model.DataBaseColumn;
 
@@ -42,7 +42,7 @@ public interface CodeGenerationService {
      * 生成代码
      *
      * @param tableSchema 数据库名称
-     * @param tableNames  表名称
+     * @param tableName   表名称
      * @param params      自动生成代码参数配置
      *                    package   代码包名
      *                    author    作者
@@ -55,5 +55,5 @@ public interface CodeGenerationService {
      * @return
      * @since 0.0.3
      */
-    byte[] generateCode(String tableSchema, String[] tableNames, Map<String, Object> params);
+    byte[] generateCode(String tableSchema, String tableName, Map<String, Object> params);
 }

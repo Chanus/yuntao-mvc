@@ -70,6 +70,6 @@
     <%@ include file="../../public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${ctx }/lib/zTree/jquery.ztree.core.min.js"></script>
-    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.1.8.2"></script>
+    <script type="text/javascript" src="${ctx }/js/system/module.js?v=0.3.0.2"></script>
   </body>
 </html>

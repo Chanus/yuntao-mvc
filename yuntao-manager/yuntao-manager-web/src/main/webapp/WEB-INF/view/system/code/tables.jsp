@@ -35,6 +35,6 @@
     </script>
     
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.0.8.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/code-generation.js?v=0.3.0.1"></script>
   </body>
 </html>

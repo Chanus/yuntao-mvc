@@ -4,11 +4,14 @@
 package pers.chanus.yuntao.manager.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.chanus.yuntao.utils.core.ArrayUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.encrypt.SHAUtils;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.CustomMap;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.AESKeyConsts;
@@ -22,9 +25,6 @@ import pers.chanus.yuntao.manager.model.Role;
 import pers.chanus.yuntao.manager.model.RoleModulePower;
 import pers.chanus.yuntao.manager.service.OperatorService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import com.chanus.yuntao.utils.core.CollectionUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
-import com.chanus.yuntao.utils.core.encrypt.SHAUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,7 +163,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
         // 先删除子账号原有权限
         roleModulePowerMapper.deleteBySubNo(subNo);
         // 再写入新的子账号权限
-        if (!CollectionUtils.isEmpty(modulePowers)) {
+        if (ArrayUtils.isNotEmpty(modulePowers)) {
             List<RoleModulePower> subModulePowers = new ArrayList<>();
             RoleModulePower subModulePower;
             for (String s : modulePowers) {
