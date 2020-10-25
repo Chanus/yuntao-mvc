@@ -189,7 +189,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
     @Override
     public Message updateHeadImage(String operatorNo, String headImage) {
         getBaseMapper().updateHeadImage(operatorNo, headImage);
-        return Message.success("头像上传成功").initMsg(headImage);
+        return Message.success("头像上传成功").setData(headImage);
     }
 
 }

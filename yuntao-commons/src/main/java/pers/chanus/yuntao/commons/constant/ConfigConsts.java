@@ -26,12 +26,10 @@ public class ConfigConsts {
      * 定时任务状态：停止
      */
     public final static String STATUS_JOB_STOP = "0";
-
     /**
      * 定时任务状态：启动
      */
     public final static String STATUS_JOB_START = "1";
-
     /**
      * 定时任务状态：暂停
      */

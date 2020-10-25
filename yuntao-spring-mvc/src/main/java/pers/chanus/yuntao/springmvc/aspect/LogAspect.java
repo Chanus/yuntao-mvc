@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.constant.MsgCode;
+import pers.chanus.yuntao.commons.constant.MsgCodeConstants;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
@@ -106,7 +106,7 @@ public class LogAspect {
                         log.setOperateMasterRoleCode(loginUser.getMasterRoleCode());
                     }
                 }
-                if (object instanceof Message && ((Message) object).getCode() == MsgCode.SUCCESS) {// 操作成功
+                if (object instanceof Message && ((Message) object).getCode() == MsgCodeConstants.SUCCESS) {// 操作成功
                     log.setOperateContent(getParameters(proceedingJoinPoint, null, systemLog.ignore()));// 操作内容
                     log.setOperateConsumeTime((int) (System.currentTimeMillis() - start));
                     logMapper.insertSelective(log);
@@ -121,7 +121,7 @@ public class LogAspect {
             }
         }
 
-        return object == null ? Message.initMsg(MsgCode.FAIL, "系统异常") : object;
+        return object == null ? Message.fail("系统异常") : object;
     }
 
     /**

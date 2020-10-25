@@ -62,18 +62,6 @@ public class PageBean {
     }
 
     /**
-     * 构造方法，初始化{@code code}和{@code object}
-     *
-     * @param object 记录对象
-     * @since 0.0.1
-     */
-    public PageBean(Object object) {
-        super();
-        this.code = 0;
-        this.object = object;
-    }
-
-    /**
      * 构造方法，初始化{@code code}、{@code count}和{@code data}
      *
      * @param count 记录条数
@@ -84,22 +72,6 @@ public class PageBean {
         super();
         this.code = 0;
         this.count = count;
-        this.data = data;
-    }
-
-    /**
-     * 构造方法，初始化{@code code}、{@code count}、{@code object}和{@code data}
-     *
-     * @param count  记录条数
-     * @param object 记录对象
-     * @param data   记录列表
-     * @since 0.0.1
-     */
-    public PageBean(Integer count, Object object, List<?> data) {
-        super();
-        this.code = 0;
-        this.count = count;
-        this.object = object;
         this.data = data;
     }
 
@@ -134,22 +106,6 @@ public class PageBean {
     }
 
     /**
-     * 设置{@code count}、{@code object}和{@code data}
-     *
-     * @param count  记录条数
-     * @param object 记录对象
-     * @param data   记录列表
-     * @return 当前{@code PageBean}实例
-     * @since 0.0.1
-     */
-    public PageBean init(Integer count, Object object, List<?> data) {
-        this.count = count;
-        this.object = object;
-        this.data = data;
-        return this;
-    }
-
-    /**
      * 设置{@code count}、{@code data}和{@code totalRow}
      *
      * @param count    记录条数
@@ -175,19 +131,6 @@ public class PageBean {
      */
     public static PageBean pagination(Integer count, List<?> data) {
         return new PageBean(count, data);
-    }
-
-    /**
-     * 分页
-     *
-     * @param count  记录条数
-     * @param object 记录对象
-     * @param data   记录列表
-     * @return {@code PageBean}实例
-     * @since 0.0.1
-     */
-    public static PageBean pagination(Integer count, Object object, List<?> data) {
-        return new PageBean(count, object, data);
     }
 
     /**

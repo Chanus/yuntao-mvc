@@ -4,14 +4,13 @@
 package pers.chanus.yuntao.springmvc.exception;
 
 import com.alibaba.fastjson.JSON;
+import com.chanus.yuntao.utils.core.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
-import pers.chanus.yuntao.commons.constant.MsgCode;
 import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.springmvc.exception.ApplicationException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,14 +29,7 @@ public class ExceptionResolver implements HandlerExceptionResolver {
 
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception exception) {
-        Message message;
-
-        if (exception instanceof ApplicationException) {
-            ApplicationException ae = (ApplicationException) exception;
-            message = new Message(ae.getCode(), ae.getMessage());
-        } else {
-            message = new Message(MsgCode.UNKNOW_ERROR, "未知错误");
-        }
+        Message message = Message.init(99999, StringUtils.defaultIfBlank(exception.getMessage(), "系统异常"));
 
         LOGGER.error(exception.getMessage(), exception);
 

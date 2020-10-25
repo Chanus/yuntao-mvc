@@ -94,7 +94,7 @@ public class LoginUserServiceImpl implements LoginUserService {
                 .setUrls(moduleMapper.listUrl(loginUserView.getRoleCode(), loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
 
-        return Message.success("登录成功").initMsg(loginUser);
+        return Message.success("登录成功").setData(loginUser);
     }
 
     @Override
@@ -153,7 +153,7 @@ public class LoginUserServiceImpl implements LoginUserService {
                 .setUrls(moduleMapper.listUrl(roleCode, loginUserView.getLoginNo()));
         LoginUser.setLoginUser(loginUser);
 
-        return Message.success("登录成功").initMsg(loginUser);
+        return Message.success("登录成功").setData(loginUser);
     }
 
     @Override

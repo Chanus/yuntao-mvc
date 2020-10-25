@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.constant.MsgCode;
+import pers.chanus.yuntao.commons.constant.MsgCodeConstants;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.common.CacheData;
@@ -114,7 +114,7 @@ public class IndexController extends BaseController {
     public Message headImage(@RequestParam("file") MultipartFile file) {
         String filePath = "upload/headImag";
         Message message = upload(file, filePath);
-        if (message.getCode() == MsgCode.SUCCESS) {
+        if (message.getCode() == MsgCodeConstants.SUCCESS) {
             String operatorNo = LoginUser.getLoginUser().getLoginNo();
             String headImageOld = operatorService.getHeadImage(operatorNo);
             HttpSession session = getSession();
@@ -122,7 +122,7 @@ public class IndexController extends BaseController {
                 FileUtils.delete(session.getServletContext().getAttribute("parentRealCtx") + "/" + headImageOld);
             String headImage = filePath + "/" + message.getMap().get("fileName");
             message = operatorService.updateHeadImage(operatorNo, headImage);
-            if (message.getCode() == MsgCode.SUCCESS) {
+            if (message.getCode() == MsgCodeConstants.SUCCESS) {
                 LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
                 loginUser.setHeadImage(headImage);
                 session.setAttribute("loginUser", loginUser);

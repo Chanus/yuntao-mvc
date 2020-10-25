@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import pers.chanus.yuntao.commons.constant.MsgCode;
+import pers.chanus.yuntao.commons.constant.MsgCodeConstants;
 import pers.chanus.yuntao.commons.pojo.Message;
 
 import javax.servlet.http.HttpServletRequest;
@@ -135,7 +135,7 @@ public abstract class BaseController {
      * @return {@link Message}
      */
     protected Message upload(MultipartFile file, String path, String fileName) {
-        Message message = new Message(MsgCode.SUCCESS, "文件上传成功");
+        Message message = new Message(MsgCodeConstants.SUCCESS, "文件上传成功");
         if (file != null && file.getSize() > 0) {
             // 保存路径
             String realFileName = file.getOriginalFilename();
@@ -152,7 +152,7 @@ public abstract class BaseController {
                 // 返回文件保存的路径，文件真实名称，文件保存的名称
                 message.setMap(CustomMap.create().putNext("filePath", path).putNext("realFileName", realFileName).putNext("fileName", fileName));
             } catch (Exception e) {// 图片上传失败
-                return Message.initMsg(MsgCode.FAIL, "文件上传失败");
+                return Message.fail("文件上传失败");
             }
         }
 

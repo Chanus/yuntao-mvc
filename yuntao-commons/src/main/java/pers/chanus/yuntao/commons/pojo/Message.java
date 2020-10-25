@@ -3,7 +3,7 @@
  */
 package pers.chanus.yuntao.commons.pojo;
 
-import pers.chanus.yuntao.commons.constant.MsgCode;
+import pers.chanus.yuntao.commons.constant.MsgCodeConstants;
 
 import java.util.List;
 import java.util.Map;
@@ -20,43 +20,36 @@ public class Message {
      * 信息代码
      */
     private int code;
-
     /**
      * 信息内容
      */
     private String msg;
-
     /**
      * 数据对象
      */
     private Object data;
-
     /**
      * 数据列表
      */
     private List<?> datas;
-
     /**
      * Map集合数据
      */
     private Map<String, Object> map;
 
     /**
-     * 构造方法，初始化{@code code}
-     *
-     * @since 0.0.1
+     * 构造方法，初始化 {@code code}
      */
     public Message() {
         super();
-        this.code = MsgCode.SUCCESS;
+        this.code = MsgCodeConstants.SUCCESS;
     }
 
     /**
-     * 构造方法，初始化{@code code}和{@code msg}
+     * 构造方法，初始化 {@code code} 和 {@code msg}
      *
      * @param code 信息代码
      * @param msg  信息内容
-     * @since 0.0.1
      */
     public Message(int code, String msg) {
         super();
@@ -65,165 +58,117 @@ public class Message {
     }
 
     /**
-     * 设置{@code code}和{@code msg}
+     * 设置 {@code code} 和 {@code msg}
      *
      * @param code 信息代码
      * @param msg  信息内容
-     * @return {@code Message}实例
-     * @since 0.0.1
+     * @return {@link Message}
      */
-    public static Message initMsg(int code, String msg) {
+    public static Message init(int code, String msg) {
         return new Message(code, msg);
     }
 
     /**
-     * 设置{@code data}
-     *
-     * @param data 数据对象
-     * @return 当前{@code Message}实例
-     * @since 0.0.1
-     */
-    public Message initMsg(Object data) {
-        this.data = data;
-        return this;
-    }
-
-    /**
-     * 设置{@code datas}
-     *
-     * @param datas 数据列表
-     * @return 当前{@code Message}实例
-     * @since 0.0.1
-     */
-    public Message initMsg(List<?> datas) {
-        this.datas = datas;
-        return this;
-    }
-
-    /**
-     * 设置{@code map}
-     *
-     * @param map Map集合数据
-     * @return 当前{@code Message}实例
-     * @since 0.0.1
-     */
-    public Message initMsg(Map<String, Object> map) {
-        this.map = map;
-        return this;
-    }
-
-    /**
-     * 操作成功
+     * 执行成功
      *
      * @param msg 信息内容
-     * @return {@code Message}实例
-     * @since 0.0.1
+     * @return {@link Message}
      */
     public static Message success(String msg) {
-        return new Message(MsgCode.SUCCESS, msg);
+        return new Message(MsgCodeConstants.SUCCESS, msg);
     }
 
     /**
-     * 操作失败
+     * 执行失败
      *
      * @param code 信息代码
      * @param msg  信息内容
-     * @return {@code Message}实例
-     * @since 0.0.1
+     * @return {@link Message}
      */
     public static Message fail(int code, String msg) {
         return new Message(code, msg);
     }
 
     /**
-     * 操作失败
+     * 执行失败
      *
      * @param msg 信息内容
-     * @return {@code Message}实例
-     * @since 0.0.1
+     * @return {@link Message}
      */
     public static Message fail(String msg) {
-        return new Message(MsgCode.FAIL, msg);
+        return new Message(MsgCodeConstants.FAIL, msg);
     }
 
     /**
      * 添加成功
      *
-     * @return {@code Message}实例
-     * @since 0.1.7
+     * @return {@link Message}
      */
     public static Message addSuccess() {
-        return success(MsgCode.MSG_ADD_SUCCESS);
+        return success(MsgCodeConstants.ADD_SUCCESS);
     }
 
     /**
      * 添加失败
      *
-     * @return {@code Message}实例
-     * @since 0.1.7
+     * @return {@link Message}
      */
     public static Message addFail() {
-        return fail(MsgCode.MSG_ADD_FAIL);
+        return fail(MsgCodeConstants.ADD_FAIL);
     }
 
     /**
      * 删除成功
      *
-     * @return {@code Message}实例
-     * @since 0.1.7
+     * @return {@link Message}
      */
     public static Message deleteSuccess() {
-        return success(MsgCode.MSG_DELETE_SUCCESS);
+        return success(MsgCodeConstants.DELETE_SUCCESS);
     }
 
     /**
      * 删除失败
      *
-     * @return {@code Message}实例
-     * @since 0.1.7
+     * @return {@link Message}
      */
     public static Message deleteFail() {
-        return fail(MsgCode.MSG_DELETE_FAIL);
+        return fail(MsgCodeConstants.DELETE_FAIL);
     }
 
     /**
      * 修改成功
      *
-     * @return {@code Message}实例
-     * @since 0.1.7
+     * @return {@link Message}
      */
     public static Message updateSuccess() {
-        return success(MsgCode.MSG_UPDATE_SUCCESS);
+        return success(MsgCodeConstants.UPDATE_SUCCESS);
     }
 
     /**
      * 修改失败
      *
-     * @return {@code Message}实例
-     * @since 0.1.7
+     * @return {@link Message}
      */
     public static Message updateFail() {
-        return fail(MsgCode.MSG_UPDATE_FAIL);
+        return fail(MsgCodeConstants.UPDATE_FAIL);
     }
 
     /**
      * 操作成功
      *
-     * @return {@code Message}实例
-     * @since 0.1.7
+     * @return {@link Message}
      */
     public static Message operateSuccess() {
-        return success(MsgCode.MSG_OPERATE_SUCCESS);
+        return success(MsgCodeConstants.OPERATE_SUCCESS);
     }
 
     /**
      * 操作失败
      *
-     * @return {@code Message}实例
-     * @since 0.1.7
+     * @return {@link Message}
      */
     public static Message operateFail() {
-        return fail(MsgCode.MSG_OPERATE_FAIL);
+        return fail(MsgCodeConstants.OPERATE_FAIL);
     }
 
     public int getCode() {

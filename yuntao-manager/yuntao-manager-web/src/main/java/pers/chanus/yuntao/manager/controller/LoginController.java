@@ -3,6 +3,11 @@
  */
 package pers.chanus.yuntao.manager.controller;
 
+import com.chanus.yuntao.utils.core.GoogleAuthenticatorUtils;
+import com.chanus.yuntao.utils.core.IpUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.VerifyCodeUtils;
+import com.chanus.yuntao.utils.core.encrypt.RSAUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.chanus.yuntao.commons.constant.ConfigConsts;
 import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.constant.MsgCode;
+import pers.chanus.yuntao.commons.constant.MsgCodeConstants;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
 import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.SessionSave;
@@ -20,11 +25,6 @@ import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.manager.service.LoginUserService;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
-import com.chanus.yuntao.utils.core.GoogleAuthenticatorUtils;
-import com.chanus.yuntao.utils.core.IpUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
-import com.chanus.yuntao.utils.core.VerifyCodeUtils;
-import com.chanus.yuntao.utils.core.encrypt.RSAUtils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -138,14 +138,14 @@ public class LoginController extends BaseController {
             String googleAuthenticatorCode = (String) params.get("googleAuthenticatorCode");
 
             if (StringUtils.isBlank(googleAuthenticatorCode))
-                return Message.initMsg(MsgCode.FAIL, "动态验证码不能为空");
+                return Message.fail("动态验证码不能为空");
 
             if (!StringUtils.isNumeric(googleAuthenticatorCode))
-                return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
+                return Message.fail("动态验证码不正确");
 
             String secret = CacheData.SYSTEM_PARAMS_MAP.get("sys_google_authenticator_secret");
             if (!GoogleAuthenticatorUtils.checkCode(secret, Long.parseLong(googleAuthenticatorCode)))
-                return Message.initMsg(MsgCode.FAIL, "动态验证码不正确");
+                return Message.fail("动态验证码不正确");
         }
 
         String loginname = (String) params.get("loginname");
@@ -164,7 +164,7 @@ public class LoginController extends BaseController {
             message = loginUserService.login(loginname, password, roleCode, IpUtils.getIpAddress(getRequest()));
         }
 
-        if (message.getCode() == MsgCode.SUCCESS) {// 存储登录账号信息
+        if (message.getCode() == MsgCodeConstants.SUCCESS) {// 存储登录账号信息
             session.setAttribute("loginUser", message.getData());
             if (ConfigConsts.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_single_location_login")))
                 SessionSave.getSessionIdSave().put(loginname, session.getId());
