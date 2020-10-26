@@ -1,18 +1,20 @@
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.mapper.DictMapper;
 import pers.chanus.yuntao.manager.model.Dict;
 import pers.chanus.yuntao.manager.model.DictItem;
 import pers.chanus.yuntao.manager.service.DictService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -39,7 +41,7 @@ public class DictServiceImpl extends BaseServiceImpl<DictMapper, Dict> implement
         // 重载字典数据
         List<Dict> dicts = getBaseMapper().listWithDictItems(null);
         if (CollectionUtils.isNotEmpty(dicts)) {
-            dicts.stream().filter(dict -> dict.getValidStatus().equals(ConfigConsts.STATUS_YES)).forEach(dict -> CacheData.SYSTEM_DICT_MAP.put(dict.getDictCode(), dict.getDictItems().stream().filter(dictItem -> dictItem.getValidStatus().equals(ConfigConsts.STATUS_YES)).collect(Collectors.toList())));
+            dicts.stream().filter(dict -> dict.getValidStatus().equals(Constants.STATUS_YES)).forEach(dict -> CacheData.SYSTEM_DICT_MAP.put(dict.getDictCode(), dict.getDictItems().stream().filter(dictItem -> dictItem.getValidStatus().equals(Constants.STATUS_YES)).collect(Collectors.toList())));
 
             List<DictItem> dictItems = new ArrayList<>();
             dicts.forEach(dict -> dictItems.addAll(dict.getDictItems()));

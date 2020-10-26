@@ -5,10 +5,10 @@ package pers.chanus.yuntao.manager.service.impl;
 
 import com.chanus.yuntao.utils.core.IOUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.CodeGenerationUtils;
 import pers.chanus.yuntao.manager.mapper.DataBaseColumnMapper;
 import pers.chanus.yuntao.manager.mapper.DataBaseTableMapper;
@@ -40,16 +40,13 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     private ModuleMapper moduleMapper;
 
     @Override
-    public PageBean listDataBaseTablePagination(CustomMap params) {
+    public Page<DataBaseTable> listDataBaseTablePagination(CustomMap params) {
         int count = dataBaseTableMapper.count(params);
         if (count > 0) {
-            int page = params.get("page") == null ? 1 : Integer.parseInt(String.valueOf(params.get("page")));
-            int limit = params.get("limit") == null ? PageBean.PAGE_SIZE : Integer.parseInt(String.valueOf(params.get("limit")));
-            params.putNext("start", (page - 1) * limit).putNext("limit", limit).putNext("pagination", true);
-            return PageBean.pagination(count, dataBaseTableMapper.list(params));
+            return Page.pagination(count, dataBaseTableMapper.list(Page.initPageParams(params)));
         }
 
-        return new PageBean();
+        return new Page<>();
     }
 
     @Override

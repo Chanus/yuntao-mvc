@@ -3,10 +3,10 @@
  */
 package pers.chanus.yuntao.manager.service;
 
+import com.chanus.yuntao.utils.core.lang.Message;
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 import pers.chanus.yuntao.springmvc.log.Log;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,7 +73,7 @@ public interface LogService {
      * @return
      * @since 0.0.1
      */
-    PageBean listPagination(CustomMap params);
+    Page<Log> listPagination(CustomMap params);
 
     /**
      * 获取用户最后登录信息

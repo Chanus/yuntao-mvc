@@ -3,7 +3,7 @@
  */
 package pers.chanus.yuntao.manager.service;
 
-import pers.chanus.yuntao.commons.pojo.Message;
+import com.chanus.yuntao.utils.core.lang.Message;
 import pers.chanus.yuntao.manager.model.ModulePower;
 import pers.chanus.yuntao.manager.model.ModulePowerMethod;
 import pers.chanus.yuntao.springmvc.service.BaseService;

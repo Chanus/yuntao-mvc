@@ -5,10 +5,10 @@ package pers.chanus.yuntao.manager.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.mapper.ParamMapper;
 import pers.chanus.yuntao.manager.model.Param;
@@ -50,7 +50,7 @@ public class ParamServiceImpl extends BaseServiceImpl<ParamMapper, Param> implem
         CacheData.SYSTEM_PARAMS_MAP.clear();
         List<Param> validParams = getBaseMapper().selectList(new QueryWrapper<Param>().lambda()
                 .select(Param::getParamCode, Param::getParamData)
-                .eq(Param::getValidStatus, ConfigConsts.STATUS_YES));
+                .eq(Param::getValidStatus, Constants.STATUS_YES));
         if (CollectionUtils.isNotEmpty(validParams))
             validParams.forEach(param -> CacheData.SYSTEM_PARAMS_MAP.put(param.getParamCode(), param.getParamData()));
 

@@ -4,10 +4,10 @@
 package pers.chanus.yuntao.springmvc.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.springmvc.mapper.SuperMapper;
 import pers.chanus.yuntao.springmvc.service.BaseService;
 
@@ -57,16 +57,12 @@ public abstract class BaseServiceImpl<Mapper extends SuperMapper<T>, T> extends 
      * @since 0.0.1
      */
     @Override
-    public PageBean listPagination(CustomMap params) {
+    public Page<T> listPagination(CustomMap params) {
         int count = getBaseMapper().count(params);
-        if (count > 0) {
-            int page = params.get("page") == null ? 1 : Integer.parseInt(String.valueOf(params.get("page")));
-            int limit = params.get("limit") == null ? PageBean.PAGE_SIZE : Integer.parseInt(String.valueOf(params.get("limit")));
-            params.putNext("start", (page - 1) * limit).putNext("limit", limit).putNext("pagination", true);
-            return PageBean.pagination(count, getBaseMapper().list(params));
-        }
+        if (count > 0)
+            return Page.pagination(count, getBaseMapper().list(Page.initPageParams(params)));
 
-        return new PageBean();
+        return new Page<>();
     }
 
 }

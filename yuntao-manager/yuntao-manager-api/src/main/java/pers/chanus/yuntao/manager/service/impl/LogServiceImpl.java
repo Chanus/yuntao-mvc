@@ -4,14 +4,14 @@
 package pers.chanus.yuntao.manager.service.impl;
 
 import com.chanus.yuntao.utils.core.IpUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
-import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.service.LogService;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 import pers.chanus.yuntao.springmvc.log.Log;
 import pers.chanus.yuntao.springmvc.log.LogMapper;
 
@@ -60,16 +60,13 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public PageBean listPagination(CustomMap params) {
+    public Page<Log> listPagination(CustomMap params) {
         int count = logMapper.count(params);
         if (count > 0) {
-            int page = params.get("page") == null ? 1 : Integer.parseInt(String.valueOf(params.get("page")));
-            int limit = params.get("limit") == null ? PageBean.PAGE_SIZE : Integer.parseInt(String.valueOf(params.get("limit")));
-            params.putNext("start", (page - 1) * limit).putNext("limit", limit).putNext("pagination", true);
-            return PageBean.pagination(count, logMapper.list(params));
+            return Page.pagination(count, logMapper.list(Page.initPageParams(params)));
         }
 
-        return new PageBean();
+        return new Page<>();
     }
 
     @Override

@@ -3,8 +3,8 @@
  */
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.PowerMapper;
 import pers.chanus.yuntao.manager.model.Power;
 import pers.chanus.yuntao.manager.service.PowerService;

@@ -4,23 +4,22 @@
  */
 package pers.chanus.yuntao.manager.controller;
 
+import com.chanus.yuntao.utils.core.FileUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.constant.MsgCodeConstants;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.model.Operator;
 import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.manager.service.OperatorService;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
-import com.chanus.yuntao.utils.core.FileUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 
 import javax.servlet.http.HttpSession;
 
@@ -114,7 +113,7 @@ public class IndexController extends BaseController {
     public Message headImage(@RequestParam("file") MultipartFile file) {
         String filePath = "upload/headImag";
         Message message = upload(file, filePath);
-        if (message.getCode() == MsgCodeConstants.SUCCESS) {
+        if (message.getCode() == Message.SUCCESS) {
             String operatorNo = LoginUser.getLoginUser().getLoginNo();
             String headImageOld = operatorService.getHeadImage(operatorNo);
             HttpSession session = getSession();
@@ -122,7 +121,7 @@ public class IndexController extends BaseController {
                 FileUtils.delete(session.getServletContext().getAttribute("parentRealCtx") + "/" + headImageOld);
             String headImage = filePath + "/" + message.getMap().get("fileName");
             message = operatorService.updateHeadImage(operatorNo, headImage);
-            if (message.getCode() == MsgCodeConstants.SUCCESS) {
+            if (message.getCode() == Message.SUCCESS) {
                 LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
                 loginUser.setHeadImage(headImage);
                 session.setAttribute("loginUser", loginUser);

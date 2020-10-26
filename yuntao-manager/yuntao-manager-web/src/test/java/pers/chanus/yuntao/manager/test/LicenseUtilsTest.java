@@ -9,8 +9,8 @@
  */
 package pers.chanus.yuntao.manager.test;
 
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.junit.Test;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.springmvc.LicenseUtils;
 
 /**
@@ -30,7 +30,7 @@ public class LicenseUtilsTest {
     @Test
     public void licenseTest() {
         String name = "yundao";
-        String version = "0.4.0";
+        String version = "0.5.0";
         // Set<String> macAddress = SystemUtils.getHostMac();
         String macAddress = null;
         String limit = "0";

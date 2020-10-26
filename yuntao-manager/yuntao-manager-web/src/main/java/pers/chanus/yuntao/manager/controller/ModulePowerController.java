@@ -4,6 +4,8 @@
 package pers.chanus.yuntao.manager.controller;
 
 import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import pers.chanus.yuntao.manager.model.ModulePower;
@@ -25,6 +24,7 @@ import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.manager.service.PowerService;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -58,7 +58,7 @@ public class ModulePowerController extends BaseController {
     public String main(Model model) {
         model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
         model.addAttribute("modules1", moduleService.list(CustomMap.create("moduleParentId", 0)));
-        model.addAttribute("powerItems", powerService.list(CustomMap.create("validStatus", ConfigConsts.STATUS_YES)));
+        model.addAttribute("powerItems", powerService.list(CustomMap.create("validStatus", Constants.STATUS_YES)));
         return "system/modulepower/list";
     }
 
@@ -69,7 +69,7 @@ public class ModulePowerController extends BaseController {
      */
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
-    public PageBean list() {
+    public Page<ModulePower> list() {
         return modulePowerService.listPagination(getParams());
     }
 
@@ -165,8 +165,8 @@ public class ModulePowerController extends BaseController {
      */
     @ResponseBody
     @PostMapping(value = "method-list.do", produces = "application/json; charset=utf-8")
-    public PageBean methodList(Integer mpId) {
-        return new PageBean(0, modulePowerService.listMethod(mpId));
+    public Page<ModulePowerMethod> methodList(Integer mpId) {
+        return new Page<>(0, modulePowerService.listMethod(mpId));
     }
 
     /**

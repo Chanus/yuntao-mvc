@@ -3,9 +3,10 @@
  */
 package pers.chanus.yuntao.manager.service;
 
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.model.DataBaseColumn;
+import pers.chanus.yuntao.manager.model.DataBaseTable;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public interface CodeGenerationService {
      * @return
      * @since 0.0.3
      */
-    PageBean listDataBaseTablePagination(CustomMap params);
+    Page<DataBaseTable> listDataBaseTablePagination(CustomMap params);
 
     /**
      * 获取系统数据库表下的字段

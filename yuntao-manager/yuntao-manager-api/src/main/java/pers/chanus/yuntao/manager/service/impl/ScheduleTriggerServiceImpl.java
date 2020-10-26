@@ -1,7 +1,7 @@
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.ScheduleTriggerMapper;
 import pers.chanus.yuntao.manager.model.ScheduleTrigger;
 import pers.chanus.yuntao.manager.service.ScheduleTriggerService;

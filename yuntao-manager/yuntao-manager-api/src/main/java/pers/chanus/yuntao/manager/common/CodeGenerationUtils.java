@@ -10,7 +10,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.manager.model.DataBaseColumn;
 import pers.chanus.yuntao.manager.model.DataBaseTable;
 
@@ -260,7 +260,7 @@ public class CodeGenerationUtils {
     public static String tableToJava(String tableName, String tablePrefix, String autoRemovePrefix) {
         if (StringUtils.isNotBlank(tablePrefix)) {
             tableName = tableName.replace(tablePrefix, "");
-        } else if (ConfigConsts.STATUS_YES.equals(autoRemovePrefix)) {
+        } else if (Constants.STATUS_YES.equals(autoRemovePrefix)) {
             tableName = tableName.substring(tableName.indexOf("_") + 1);
         }
 
@@ -286,7 +286,7 @@ public class CodeGenerationUtils {
         controllerPackage = controllerPackage.replace(".", File.separator) + File.separator;
 
         String rootPath = "src" + File.separator + "main" + File.separator, apiRootPath, webRootPath;
-        if (ConfigConsts.STATUS_YES.equals(multi)) {// 如果是多模块项目
+        if (Constants.STATUS_YES.equals(multi)) {// 如果是多模块项目
             apiRootPath = "api" + File.separator + rootPath;
             webRootPath = "web" + File.separator + rootPath;
         } else {// 如果是单模块项目

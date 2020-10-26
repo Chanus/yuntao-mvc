@@ -3,6 +3,8 @@
  */
 package pers.chanus.yuntao.manager.controller;
 
+import com.chanus.yuntao.utils.core.lang.Message;
+import com.chanus.yuntao.utils.core.lang.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
-import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import pers.chanus.yuntao.manager.model.Module;
 import pers.chanus.yuntao.manager.model.Operator;
@@ -22,6 +21,7 @@ import pers.chanus.yuntao.manager.service.ModuleService;
 import pers.chanus.yuntao.manager.service.OperatorService;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 
 import java.util.Arrays;
 import java.util.List;
@@ -62,7 +62,7 @@ public class SubController extends BaseController {
      */
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
-    public PageBean list() {
+    public Page<Operator> list() {
         return operatorService.listSubPagination(getParams().putNext("loginNo", LoginUser.getLoginUser().getLoginNo()).putNext("loginRoleCode", LoginUser.getLoginUser().getRoleCode()));
     }
 
@@ -89,8 +89,8 @@ public class SubController extends BaseController {
     @SystemLog(module = currentModuleCode, logType = LogTypeEnum.INSERT)
     @PostMapping(value = "add.do", produces = "application/json; charset=utf-8")
     public Message add(Operator operator) {
-        operator.setOperatorRoleCode(ConfigConsts.ROLE_SUB_1);
-        if (!ConfigConsts.ROLE_ADMIN_0.equals(LoginUser.getLoginUser().getRoleCode()))
+        operator.setOperatorRoleCode(Constants.ROLE_SUB_1);
+        if (!Constants.ROLE_ADMIN_0.equals(LoginUser.getLoginUser().getRoleCode()))
             operator.setMasterNo(LoginUser.getLoginUser().getLoginNo());
 
         return operatorService.insert(operator);

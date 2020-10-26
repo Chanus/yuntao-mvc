@@ -4,16 +4,16 @@
 package pers.chanus.yuntao.manager.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.ModulePowerMapper;
 import pers.chanus.yuntao.manager.mapper.ModulePowerMethodMapper;
 import pers.chanus.yuntao.manager.model.ModulePower;
 import pers.chanus.yuntao.manager.model.ModulePowerMethod;
 import pers.chanus.yuntao.manager.service.ModulePowerService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.util.Collection;
 import java.util.List;

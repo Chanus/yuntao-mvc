@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.chanus.yuntao.utils.core.ArrayUtils;
 import com.chanus.yuntao.utils.core.IpUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -19,11 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.constant.MsgCodeConstants;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 import pers.chanus.yuntao.springmvc.log.Log;
 import pers.chanus.yuntao.springmvc.log.LogMapper;
 
@@ -106,7 +105,7 @@ public class LogAspect {
                         log.setOperateMasterRoleCode(loginUser.getMasterRoleCode());
                     }
                 }
-                if (object instanceof Message && ((Message) object).getCode() == MsgCodeConstants.SUCCESS) {// 操作成功
+                if (object instanceof Message && ((Message) object).getCode() == Message.SUCCESS) {// 操作成功
                     log.setOperateContent(getParameters(proceedingJoinPoint, null, systemLog.ignore()));// 操作内容
                     log.setOperateConsumeTime((int) (System.currentTimeMillis() - start));
                     logMapper.insertSelective(log);

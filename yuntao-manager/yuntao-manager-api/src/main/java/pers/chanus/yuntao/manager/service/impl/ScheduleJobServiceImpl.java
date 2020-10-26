@@ -1,18 +1,18 @@
 package pers.chanus.yuntao.manager.service.impl;
 
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.LocalDateTimeUtils;
+import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
+import com.chanus.yuntao.utils.extra.quartz.QuartzUtils;
 import org.quartz.*;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.manager.mapper.ScheduleJobMapper;
 import pers.chanus.yuntao.manager.model.ScheduleJob;
 import pers.chanus.yuntao.manager.model.ScheduleTrigger;
 import pers.chanus.yuntao.manager.service.ScheduleJobService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import com.chanus.yuntao.utils.core.CollectionUtils;
-import com.chanus.yuntao.utils.core.LocalDateTimeUtils;
-import com.chanus.yuntao.utils.extra.quartz.QuartzUtils;
-import com.chanus.yuntao.utils.core.StringUtils;
 
 import java.io.Serializable;
 import java.util.*;
@@ -30,7 +30,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
     public Message update(ScheduleJob scheduleJob) {
         // 定时任务停止后才能编辑
         String validStatus = getBaseMapper().getValidStatus(scheduleJob.getId());
-        if (!ConfigConsts.STATUS_JOB_STOP.equals(validStatus))
+        if (!Constants.STATUS_JOB_STOP.equals(validStatus))
             return Message.fail("请先停止定时任务");
 
         return super.update(scheduleJob);
@@ -59,7 +59,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
     public Message start(Integer id) {
         ScheduleJob scheduleJob = getBaseMapper().getScheduleJob(id);
         // 定时任务状态为停止时才可以启动
-        if (!ConfigConsts.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
+        if (!Constants.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
             return Message.fail("定时任务未停止");
         // 定时任务未绑定有效的触发器，不能启动
         List<ScheduleTrigger> scheduleTriggers = scheduleJob.getScheduleTriggers();
@@ -94,7 +94,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
             return Message.fail("启动失败");
         }
         // 启动成功后更新任务状态
-        getBaseMapper().updateValidStatus(id, ConfigConsts.STATUS_JOB_START);
+        getBaseMapper().updateValidStatus(id, Constants.STATUS_JOB_START);
 
         return Message.success("启动成功");
     }
@@ -102,14 +102,14 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
     @Override
     public Message pause(Integer id) {
         ScheduleJob scheduleJob = getBaseMapper().selectById(id);
-        if (ConfigConsts.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
+        if (Constants.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
             return Message.fail("定时任务已停止");
-        if (ConfigConsts.STATUS_JOB_PAUSE.equals(scheduleJob.getValidStatus()))
+        if (Constants.STATUS_JOB_PAUSE.equals(scheduleJob.getValidStatus()))
             return Message.fail("定时任务已暂停");
 
         QuartzUtils.pauseJob(scheduleJob.getJobName(), scheduleJob.getJobGroup());
         // 暂停成功后更新任务状态
-        getBaseMapper().updateValidStatus(id, ConfigConsts.STATUS_JOB_PAUSE);
+        getBaseMapper().updateValidStatus(id, Constants.STATUS_JOB_PAUSE);
 
         return Message.success("暂停成功");
     }
@@ -117,14 +117,14 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
     @Override
     public Message resume(Integer id) {
         ScheduleJob scheduleJob = getBaseMapper().selectById(id);
-        if (ConfigConsts.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
+        if (Constants.STATUS_JOB_STOP.equals(scheduleJob.getValidStatus()))
             return Message.fail("定时任务已停止");
-        if (ConfigConsts.STATUS_JOB_START.equals(scheduleJob.getValidStatus()))
+        if (Constants.STATUS_JOB_START.equals(scheduleJob.getValidStatus()))
             return Message.fail("定时任务已启动");
 
         QuartzUtils.resumeJob(scheduleJob.getJobName(), scheduleJob.getJobGroup());
         // 暂停成功后更新任务状态
-        getBaseMapper().updateValidStatus(id, ConfigConsts.STATUS_JOB_START);
+        getBaseMapper().updateValidStatus(id, Constants.STATUS_JOB_START);
 
         return Message.success("恢复成功");
     }
@@ -142,7 +142,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobMapper, S
 
         QuartzUtils.removeJob(scheduleJob.getJobName(), scheduleJob.getJobGroup(), triggerMap);
         // 停止成功后更新任务状态
-        getBaseMapper().updateValidStatus(id, ConfigConsts.STATUS_JOB_STOP);
+        getBaseMapper().updateValidStatus(id, Constants.STATUS_JOB_STOP);
 
         return Message.success("停止成功");
     }

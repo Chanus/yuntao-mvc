@@ -9,10 +9,10 @@
  */
 package pers.chanus.yuntao.springmvc;
 
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.Message;
 import com.chanus.yuntao.utils.core.*;
 import com.chanus.yuntao.utils.core.encrypt.RSAUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
+import pers.chanus.yuntao.commons.constant.Constants;
 
 import java.util.Date;
 import java.util.Map;
@@ -94,7 +94,7 @@ public class LicenseUtils {
         if (!RSAUtils.verify(signText, sign, publicKey))
             return Message.fail("证书异常，签名不一致");
 
-        if (ConfigConsts.STATUS_NO.equals(enable))
+        if (Constants.STATUS_NO.equals(enable))
             return Message.success("校验成功");
 
         Set<String> macSet = SystemUtils.getHostMac();

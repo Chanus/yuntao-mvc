@@ -1,6 +1,8 @@
 package pers.chanus.yuntao.manager.controller;
 
 import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,14 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.ModulePowerUtils;
 import pers.chanus.yuntao.manager.model.Dict;
 import pers.chanus.yuntao.manager.service.DictService;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -54,7 +54,7 @@ public class DictController extends BaseController {
      */
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
-    public PageBean list() {
+    public Page<Dict> list() {
         CustomMap params = getParams();
         String dictName = (String) params.get("dictName");
         try {

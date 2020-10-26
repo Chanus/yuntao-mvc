@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @date 2018-08-31 22:22:27
  * @since 0.0.1
  */
-public class ConfigConsts {
+public class Constants {
     /**
      * 状态：否
      */

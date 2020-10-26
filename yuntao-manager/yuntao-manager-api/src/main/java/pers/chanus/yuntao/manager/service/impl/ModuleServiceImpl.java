@@ -6,12 +6,12 @@ package pers.chanus.yuntao.manager.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chanus.yuntao.utils.core.CollectionUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.Message;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.manager.mapper.ModuleMapper;
 import pers.chanus.yuntao.manager.mapper.RoleMapper;
 import pers.chanus.yuntao.manager.model.Module;
@@ -147,12 +147,12 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleMapper, Module> imp
 
     @Override
     public List<Module> listRoleModulePower(String roleCode) {
-        if (ConfigConsts.ROLE_ADMIN_0.equals(roleCode)) {// 超级管理员
+        if (Constants.ROLE_ADMIN_0.equals(roleCode)) {// 超级管理员
             return getBaseMapper().listRoleModulePowerForAdmin();
         } else {
             Role role = roleMapper.selectOne(new QueryWrapper<Role>().lambda().eq(Role::getRoleCode, roleCode));
             Role parentRole = roleMapper.selectOne(new QueryWrapper<Role>().lambda().eq(Role::getRoleId, role.getParentRoleId()));
-            return ConfigConsts.STATUS_YES.equals(role.getLoginFlag()) ? getBaseMapper().listRoleModulePowerForNotAdmin(roleCode, parentRole.getRoleCode()) : null;
+            return Constants.STATUS_YES.equals(role.getLoginFlag()) ? getBaseMapper().listRoleModulePowerForNotAdmin(roleCode, parentRole.getRoleCode()) : null;
         }
     }
 

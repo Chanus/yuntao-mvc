@@ -7,12 +7,12 @@ import com.chanus.yuntao.utils.core.ArrayUtils;
 import com.chanus.yuntao.utils.core.CollectionUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
 import com.chanus.yuntao.utils.core.encrypt.SHAUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.mapper.LoginUserViewMapper;
 import pers.chanus.yuntao.manager.mapper.ModuleMapper;
@@ -51,7 +51,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             return Message.fail("登录密码不能为空");
 
         // 验证IP白名单
-        if (ConfigConsts.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_check_white_ip"))) {
+        if (Constants.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_check_white_ip"))) {
             if (StringUtils.isBlank(loginIp))
                 return Message.fail("登录IP为空");
 
@@ -60,7 +60,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             if (StringUtils.isNotBlank(fixedWhiteIps) && !StringUtils.contains(fixedWhiteIps + ",", loginIp + ",")) {// 用户固定IP，登录IP必须存在于该IP白名单才能登录
                 return Message.fail("当前IP不允许登录");
             } else if (StringUtils.isBlank(fixedWhiteIps)) {// 用户没有固定IP，登录IP存在于任何一组白名单IP中即可登录
-                int whiteIpsCount = whiteIpMapper.count(CustomMap.create().putNext("validStatus", ConfigConsts.STATUS_YES).putNext("fixedStatus", ConfigConsts.STATUS_NO).putNext("whiteIp", loginIp).putNext("loginNo", loginNo));
+                int whiteIpsCount = whiteIpMapper.count(CustomMap.create().putNext("validStatus", Constants.STATUS_YES).putNext("fixedStatus", Constants.STATUS_NO).putNext("whiteIp", loginIp).putNext("loginNo", loginNo));
                 if (whiteIpsCount == 0)
                     return Message.fail("当前IP不允许登录");
             }
@@ -69,7 +69,7 @@ public class LoginUserServiceImpl implements LoginUserService {
         LoginUserView loginUserView = loginUserViewMapper.login(loginNo);
         if (loginUserView == null)
             return Message.fail("当前用户不存在");
-        if (ConfigConsts.STATUS_NO.equals(loginUserView.getValidStatus()))
+        if (Constants.STATUS_NO.equals(loginUserView.getValidStatus()))
             return Message.fail("当前用户不可用");
         if (!SHAUtils.verifySHA256(password + loginNo, loginUserView.getPassword()))
             return Message.fail("登录密码不正确");
@@ -77,9 +77,9 @@ public class LoginUserServiceImpl implements LoginUserService {
         Role role = roleMapper.getLoginStatus(loginUserView.getRoleCode());
         if (role == null)
             return Message.fail("当前用户角色不存在");
-        if (ConfigConsts.STATUS_NO.equals(role.getValidStatus()))
+        if (Constants.STATUS_NO.equals(role.getValidStatus()))
             return Message.fail("当前用户角色被禁用");
-        if (ConfigConsts.STATUS_NO.equals(role.getLoginFlag()))
+        if (Constants.STATUS_NO.equals(role.getLoginFlag()))
             return Message.fail("当前用户角色不允许登录系统");
 
         List<Module> menus = moduleMapper.listMenu(loginUserView.getRoleCode(), loginUserView.getLoginNo());
@@ -105,7 +105,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             return Message.fail("登录密码不能为空");
 
         // 验证IP白名单
-        if (ConfigConsts.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_check_white_ip"))) {
+        if (Constants.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_check_white_ip"))) {
             if (StringUtils.isBlank(loginIp))
                 return Message.fail("登录IP为空");
 
@@ -114,7 +114,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             if (StringUtils.isNotBlank(fixedWhiteIps) && !StringUtils.contains(fixedWhiteIps + ",", loginIp + ",")) {// 用户固定IP，登录IP必须存在于该IP白名单才能登录
                 return Message.fail("当前IP不允许登录");
             } else if (StringUtils.isBlank(fixedWhiteIps)) {// 用户没有固定IP，登录IP存在于任何一组白名单IP中即可登录
-                int whiteIpsCount = whiteIpMapper.count(CustomMap.create().putNext("validStatus", ConfigConsts.STATUS_YES).putNext("fixedStatus", ConfigConsts.STATUS_NO).putNext("whiteIp", loginIp).putNext("loginNo", loginNo));
+                int whiteIpsCount = whiteIpMapper.count(CustomMap.create().putNext("validStatus", Constants.STATUS_YES).putNext("fixedStatus", Constants.STATUS_NO).putNext("whiteIp", loginIp).putNext("loginNo", loginNo));
                 if (whiteIpsCount == 0)
                     return Message.fail("当前IP不允许登录");
             }
@@ -123,7 +123,7 @@ public class LoginUserServiceImpl implements LoginUserService {
         LoginUserView loginUserView = loginUserViewMapper.login(loginNo);
         if (loginUserView == null)
             return Message.fail("当前用户不存在");
-        if (ConfigConsts.STATUS_NO.equals(loginUserView.getValidStatus()))
+        if (Constants.STATUS_NO.equals(loginUserView.getValidStatus()))
             return Message.fail("当前用户不可用");
         if (!SHAUtils.verifySHA256(password + loginNo, loginUserView.getPassword()))
             return Message.fail("登录密码不正确");
@@ -136,9 +136,9 @@ public class LoginUserServiceImpl implements LoginUserService {
         Role role = roleMapper.getLoginStatus(roleCode);
         if (role == null)
             return Message.fail("当前用户角色不存在");
-        if (ConfigConsts.STATUS_NO.equals(role.getValidStatus()))
+        if (Constants.STATUS_NO.equals(role.getValidStatus()))
             return Message.fail("当前用户角色被禁用");
-        if (ConfigConsts.STATUS_NO.equals(role.getLoginFlag()))
+        if (Constants.STATUS_NO.equals(role.getLoginFlag()))
             return Message.fail("当前用户角色不允许登录系统");
 
         List<Module> menus = moduleMapper.listMenu(roleCode, loginUserView.getLoginNo());

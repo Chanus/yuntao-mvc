@@ -3,9 +3,9 @@
  */
 package pers.chanus.yuntao.manager.service;
 
+import com.chanus.yuntao.utils.core.lang.Message;
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
-import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.model.Operator;
 import pers.chanus.yuntao.springmvc.service.BaseService;
 
@@ -59,7 +59,7 @@ public interface OperatorService extends BaseService<Operator> {
      * @return
      * @since 0.0.1
      */
-    PageBean listSubPagination(CustomMap params);
+    Page<Operator> listSubPagination(CustomMap params);
 
     /**
      * 子账号授权

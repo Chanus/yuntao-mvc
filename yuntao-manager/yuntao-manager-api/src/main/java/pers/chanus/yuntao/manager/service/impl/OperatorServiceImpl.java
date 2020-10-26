@@ -7,13 +7,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chanus.yuntao.utils.core.ArrayUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
 import com.chanus.yuntao.utils.core.encrypt.SHAUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.manager.common.AESKeyConsts;
 import pers.chanus.yuntao.manager.mapper.LoginUserViewMapper;
 import pers.chanus.yuntao.manager.mapper.OperatorMapper;
@@ -54,14 +54,14 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             t.setOperatorPassword(SHAUtils.sha256(t.getOperatorPassword() + t.getOperatorNo()));
 
         Role role;
-        if (ConfigConsts.ROLE_SUB_1.equals(t.getOperatorRoleCode())) {// 添加子账号时
+        if (Constants.ROLE_SUB_1.equals(t.getOperatorRoleCode())) {// 添加子账号时
             if (StringUtils.isBlank(t.getMasterNo()))
                 return Message.fail("主账号不能为空");
 
             LoginUserView user = loginUserViewMapper.getUser(t.getMasterNo());
             if (user == null)
                 return Message.fail("主账号不存在");
-            if (ConfigConsts.ROLE_SUB_1.equals(user.getRoleCode()))
+            if (Constants.ROLE_SUB_1.equals(user.getRoleCode()))
                 return Message.fail("子账号不能创建子账号");
 
             t.setMasterNo(user.getLoginNo());
@@ -78,7 +78,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
 
         if (role == null)
             return Message.fail("角色不存在");
-        if (ConfigConsts.STATUS_NO.equals(role.getHasOperator()))
+        if (Constants.STATUS_NO.equals(role.getHasOperator()))
             return Message.fail("当前角色不能添加操作员");
 
         t.setSuperior(role.getSuperior());
@@ -106,7 +106,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
     }
 
     @Override
-    public PageBean listPagination(CustomMap params) {
+    public Page<Operator> listPagination(CustomMap params) {
         return super.listPagination(params.putNext("aesEmailKey", AESKeyConsts.KEY_EMAIL).putNext("aesPhoneKey", AESKeyConsts.KEY_PHONE));
     }
 
@@ -141,17 +141,14 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
     }
 
     @Override
-    public PageBean listSubPagination(CustomMap params) {
+    public Page<Operator> listSubPagination(CustomMap params) {
         int count = getBaseMapper().countSub(params);
         if (count > 0) {
             params.putNext("aesEmailKey", AESKeyConsts.KEY_EMAIL).putNext("aesPhoneKey", AESKeyConsts.KEY_PHONE);
-            int page = params.get("page") == null ? 1 : Integer.parseInt(String.valueOf(params.get("page")));
-            int limit = params.get("limit") == null ? PageBean.PAGE_SIZE : Integer.parseInt(String.valueOf(params.get("limit")));
-            params.putNext("start", (page - 1) * limit).putNext("limit", limit).putNext("pagination", true);
-            return PageBean.pagination(count, getBaseMapper().listSub(params));
+            return Page.pagination(count, getBaseMapper().listSub(Page.initPageParams(params)));
         }
 
-        return new PageBean();
+        return new Page<>();
     }
 
     @Transactional
@@ -168,7 +165,7 @@ public class OperatorServiceImpl extends BaseServiceImpl<OperatorMapper, Operato
             RoleModulePower subModulePower;
             for (String s : modulePowers) {
                 subModulePower = new RoleModulePower();
-                subModulePower.setRoleCode(ConfigConsts.ROLE_SUB_1);
+                subModulePower.setRoleCode(Constants.ROLE_SUB_1);
                 subModulePower.setSubNo(subNo);
                 String[] mp = s.split("\\.");
                 subModulePower.setModuleCode(mp[0]);

@@ -3,7 +3,7 @@
  */
 package pers.chanus.yuntao.springmvc.annotation;
 
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 
 import java.lang.annotation.*;
 

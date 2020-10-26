@@ -7,6 +7,7 @@ import com.chanus.yuntao.utils.core.FileUtils;
 import com.chanus.yuntao.utils.core.IOUtils;
 import com.chanus.yuntao.utils.core.RandomUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import pers.chanus.yuntao.commons.constant.MsgCodeConstants;
-import pers.chanus.yuntao.commons.pojo.Message;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -135,7 +134,7 @@ public abstract class BaseController {
      * @return {@link Message}
      */
     protected Message upload(MultipartFile file, String path, String fileName) {
-        Message message = new Message(MsgCodeConstants.SUCCESS, "文件上传成功");
+        Message message = new Message(Message.SUCCESS, "文件上传成功");
         if (file != null && file.getSize() > 0) {
             // 保存路径
             String realFileName = file.getOriginalFilename();

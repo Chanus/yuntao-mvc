@@ -8,23 +8,22 @@ import com.chanus.yuntao.utils.core.IpUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
 import com.chanus.yuntao.utils.core.VerifyCodeUtils;
 import com.chanus.yuntao.utils.core.encrypt.RSAUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pers.chanus.yuntao.commons.constant.ConfigConsts;
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
-import pers.chanus.yuntao.commons.constant.MsgCodeConstants;
+import pers.chanus.yuntao.commons.constant.Constants;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.commons.pojo.SessionSave;
 import pers.chanus.yuntao.manager.common.CacheData;
 import pers.chanus.yuntao.manager.service.LogService;
 import pers.chanus.yuntao.manager.service.LoginUserService;
 import pers.chanus.yuntao.springmvc.annotation.SystemLog;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -164,9 +163,9 @@ public class LoginController extends BaseController {
             message = loginUserService.login(loginname, password, roleCode, IpUtils.getIpAddress(getRequest()));
         }
 
-        if (message.getCode() == MsgCodeConstants.SUCCESS) {// 存储登录账号信息
+        if (message.getCode() == Message.SUCCESS) {// 存储登录账号信息
             session.setAttribute("loginUser", message.getData());
-            if (ConfigConsts.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_single_location_login")))
+            if (Constants.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_single_location_login")))
                 SessionSave.getSessionIdSave().put(loginname, session.getId());
         }
 

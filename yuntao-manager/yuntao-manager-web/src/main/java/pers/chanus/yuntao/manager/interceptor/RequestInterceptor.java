@@ -3,10 +3,10 @@
  */
 package pers.chanus.yuntao.manager.interceptor;
 
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import pers.chanus.yuntao.commons.pojo.LoginUser;
-import pers.chanus.yuntao.commons.pojo.Message;
 import com.chanus.yuntao.utils.core.CollectionUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
 

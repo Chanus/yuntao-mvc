@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Chanus and/or its affiliates. All rights reserved.
  */
-package pers.chanus.yuntao.commons.constant;
+package pers.chanus.yuntao.springmvc.enums;
 
 /**
  * 系统日志操作类型

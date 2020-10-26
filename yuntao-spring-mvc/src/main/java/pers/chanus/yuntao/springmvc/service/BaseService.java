@@ -5,10 +5,10 @@ package pers.chanus.yuntao.springmvc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
+import com.chanus.yuntao.utils.core.lang.Page;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.transaction.annotation.Transactional;
-import pers.chanus.yuntao.commons.pojo.Message;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -157,5 +157,5 @@ public interface BaseService<T> extends IService<T> {
      * @return 指定页的数据信息
      * @since 0.0.1
      */
-    PageBean listPagination(CustomMap params);
+    Page<T> listPagination(CustomMap params);
 }

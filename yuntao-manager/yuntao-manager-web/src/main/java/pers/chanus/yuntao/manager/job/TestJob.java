@@ -9,6 +9,7 @@
  */
 package pers.chanus.yuntao.manager.job;
 
+import com.chanus.yuntao.utils.core.LocalDateTimeUtils;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -16,9 +17,8 @@ import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-import pers.chanus.yuntao.commons.constant.LogTypeEnum;
 import pers.chanus.yuntao.manager.service.LogService;
-import com.chanus.yuntao.utils.core.LocalDateTimeUtils;
+import pers.chanus.yuntao.springmvc.enums.LogTypeEnum;
 
 /**
  * 定时任务测试

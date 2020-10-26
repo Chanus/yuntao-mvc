@@ -1,13 +1,13 @@
 package pers.chanus.yuntao.manager.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.chanus.yuntao.utils.core.CollectionUtils;
+import com.chanus.yuntao.utils.core.lang.Message;
 import org.springframework.stereotype.Service;
-import pers.chanus.yuntao.commons.pojo.Message;
 import pers.chanus.yuntao.manager.mapper.OrganizationMapper;
 import pers.chanus.yuntao.manager.model.Organization;
 import pers.chanus.yuntao.manager.service.OrganizationService;
 import pers.chanus.yuntao.springmvc.service.impl.BaseServiceImpl;
-import com.chanus.yuntao.utils.core.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.Collection;

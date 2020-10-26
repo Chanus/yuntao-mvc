@@ -3,6 +3,8 @@
  */
 package pers.chanus.yuntao.manager.controller;
 
+import com.chanus.yuntao.utils.core.StreamUtils;
+import com.chanus.yuntao.utils.core.lang.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pers.chanus.yuntao.commons.pojo.PageBean;
 import pers.chanus.yuntao.manager.common.ModulePowerUtils;
+import pers.chanus.yuntao.manager.model.DataBaseTable;
 import pers.chanus.yuntao.manager.service.CodeGenerationService;
 import pers.chanus.yuntao.springmvc.ConfigUtils;
 import pers.chanus.yuntao.springmvc.controller.BaseController;
-import com.chanus.yuntao.utils.core.StreamUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class CodeGenerationController extends BaseController {
      */
     @ResponseBody
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
-    public PageBean list() {
+    public Page<DataBaseTable> list() {
         return codeGenerationService.listDataBaseTablePagination(getParams());
     }
 
