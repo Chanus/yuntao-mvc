@@ -85,6 +85,8 @@
   <resources mapping="/font/**" location="/resources/font/" />
   <resources mapping="/audio/**" location="/resources/audio/" />
   <resources mapping="/lib/**" location="/resources/lib/" />
+  <resources mapping="/json/**" location="/resources/json/" />
+  <resources mapping="/theme/**" location="/resources/theme/" />
   <resources mapping="/templates/**" location="/resources/templates/" />
   <resources mapping="/**" location="/" />
 

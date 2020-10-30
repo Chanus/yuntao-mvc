@@ -105,7 +105,7 @@ public class LogAspect {
                         log.setOperateMasterRoleCode(loginUser.getMasterRoleCode());
                     }
                 }
-                if (object instanceof Message && ((Message) object).getCode() == Message.SUCCESS) {// 操作成功
+                if (object instanceof Message && ((Message) object).isSuccess()) {// 操作成功
                     log.setOperateContent(getParameters(proceedingJoinPoint, null, systemLog.ignore()));// 操作内容
                     log.setOperateConsumeTime((int) (System.currentTimeMillis() - start));
                     logMapper.insertSelective(log);

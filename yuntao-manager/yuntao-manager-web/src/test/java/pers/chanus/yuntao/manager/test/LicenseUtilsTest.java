@@ -30,7 +30,7 @@ public class LicenseUtilsTest {
     @Test
     public void licenseTest() {
         String name = "yundao";
-        String version = "0.5.0";
+        String version = "0.5.1";
         // Set<String> macAddress = SystemUtils.getHostMac();
         String macAddress = null;
         String limit = "0";

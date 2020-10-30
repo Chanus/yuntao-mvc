@@ -113,7 +113,7 @@ public class IndexController extends BaseController {
     public Message headImage(@RequestParam("file") MultipartFile file) {
         String filePath = "upload/headImag";
         Message message = upload(file, filePath);
-        if (message.getCode() == Message.SUCCESS) {
+        if (message.isSuccess()) {
             String operatorNo = LoginUser.getLoginUser().getLoginNo();
             String headImageOld = operatorService.getHeadImage(operatorNo);
             HttpSession session = getSession();
@@ -121,7 +121,7 @@ public class IndexController extends BaseController {
                 FileUtils.delete(session.getServletContext().getAttribute("parentRealCtx") + "/" + headImageOld);
             String headImage = filePath + "/" + message.getMap().get("fileName");
             message = operatorService.updateHeadImage(operatorNo, headImage);
-            if (message.getCode() == Message.SUCCESS) {
+            if (message.isSuccess()) {
                 LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
                 loginUser.setHeadImage(headImage);
                 session.setAttribute("loginUser", loginUser);

@@ -163,7 +163,7 @@ public class LoginController extends BaseController {
             message = loginUserService.login(loginname, password, roleCode, IpUtils.getIpAddress(getRequest()));
         }
 
-        if (message.getCode() == Message.SUCCESS) {// 存储登录账号信息
+        if (message.isSuccess()) {// 存储登录账号信息
             session.setAttribute("loginUser", message.getData());
             if (Constants.STATUS_YES.equals(CacheData.SYSTEM_PARAMS_MAP.get("sys_single_location_login")))
                 SessionSave.getSessionIdSave().put(loginname, session.getId());
