@@ -62,7 +62,6 @@
     </script>
     
     <%@ include file="../../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${ctx }/lib/zTree/jquery.ztree.core.min.js"></script>
     <script type="text/javascript" src="${ctx }/js/system/operator.js?v=0.1.9.2"></script>
   </body>

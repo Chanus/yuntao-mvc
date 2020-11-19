@@ -19,7 +19,7 @@
        设置为 true，则找不到不会抛出异常，而是使用 messageKey 作为返回值 -->
   <beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
     <beans:property name="defaultEncoding" value="UTF-8"/>
-    <!-- <beans:property name="useCodeAsDefaultMessage" value="true"/> -->
+    <beans:property name="useCodeAsDefaultMessage" value="true"/>
     <beans:property name="basename" value="messages/message"/>
   </beans:bean>
 
