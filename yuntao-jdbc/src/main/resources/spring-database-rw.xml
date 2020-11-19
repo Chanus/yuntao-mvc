@@ -98,9 +98,6 @@
         <value>com.*.service.impl</value>
         <value>com.*.*.service.impl</value>
         <value>com.*.*.*.service.impl</value>
-        <value>com.*.services.impl</value>
-        <value>com.*.*.services.impl</value>
-        <value>com.*.*.*.services.impl</value>
       </list>
     </property>
   </bean>

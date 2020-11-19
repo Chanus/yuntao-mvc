@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,6 +14,9 @@
     <link rel="stylesheet" href="${ctx }/css/login.css?v=0.1.7.3"/>
     <link rel="shortcut icon" href="${ctx }/images/favicon.ico" type="image/x-icon"/>
     <title>系统登录</title>
+    <script type="text/javascript">
+        var ctx = '${ctx }';
+    </script>
   </head>
   <body class="beg-login-bg">
     <div class="beg-login-box">
@@ -58,8 +62,7 @@
         </form>
       </div>
     </div>
-    <script type="text/javascript" src="${ctx }/lib/layui/layui.js"></script>
-    <script type="text/javascript" src="${ctx }/js/verify.js"></script>
+    <%@ include file="public/footer.jsp" %>
     <script type="text/javascript" src="${ctx }/js/jsencrypt.min.js"></script>
     <script>
         layui.use(['layer', 'form'], function () {
@@ -81,7 +84,7 @@
                             });
                         } else {
                             if (verifyCodeUrl)
-                                $("#img").attr("src", verifyCodeUrl + "?timestamp=" + new Date().getTime());
+                                $('#img').attr('src', verifyCodeUrl + '?timestamp=' + new Date().getTime());
                             layer.msg(message.msg, {icon: 2, anim: 6, time: 1000});
                         }
                     });
@@ -90,8 +93,8 @@
                 return false;
             });
 
-            $("#img").on('click', function () {
-                $(this).attr("src", verifyCodeUrl + "?timestamp=" + new Date().getTime());
+            $('#img').on('click', function () {
+                $(this).attr('src', verifyCodeUrl + '?timestamp=' + new Date().getTime());
             });
         });
     </script>

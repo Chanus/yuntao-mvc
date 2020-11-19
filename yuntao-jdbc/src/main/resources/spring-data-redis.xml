@@ -64,10 +64,11 @@
     <constructor-arg name="thePassword" value="${spring.redis.password}"/>
   </bean>
   <!-- spring-data-redis 2.0 以上的配置 -->
-  <bean id="redisStandaloneConfiguration" class="org.springframework.data.redis.connection.RedisStandaloneConfiguration">
+  <bean id="redisStandaloneConfiguration"
+        class="org.springframework.data.redis.connection.RedisStandaloneConfiguration">
     <property name="hostName" value="${spring.redis.host}"/>
     <property name="port" value="${spring.redis.port}"/>
-    <property name="password" ref="redisPassword" />
+    <property name="password" ref="redisPassword"/>
     <property name="database" value="${spring.redis.database}"/>
   </bean>
 

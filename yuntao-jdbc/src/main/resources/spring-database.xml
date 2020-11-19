@@ -85,9 +85,6 @@
         <value>com.*.service.impl</value>
         <value>com.*.*.service.impl</value>
         <value>com.*.*.*.service.impl</value>
-        <value>com.*.services.impl</value>
-        <value>com.*.*.services.impl</value>
-        <value>com.*.*.*.services.impl</value>
       </list>
     </property>
   </bean>
@@ -133,7 +130,8 @@
     <property name="tablePrefix" value="sys_"/>
   </bean>
 
-  <bean id="countSqlParser" class="com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize">
+  <bean id="countSqlParser"
+        class="com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize">
     <!-- 设置为 true 可以优化部分 left join 的sql -->
     <property name="optimizeJoin" value="true"/>
   </bean>

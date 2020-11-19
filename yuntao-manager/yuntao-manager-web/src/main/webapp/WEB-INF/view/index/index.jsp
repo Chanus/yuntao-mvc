@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page isELIgnored="false"%>
+<%@ include file="../public/public.jsp"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -162,6 +160,6 @@
     </div>
   
     <%@ include file="../public/footer.jsp" %>
-    <script type="text/javascript" src="${ctx }/js/system/index.js?v=0.0.7.1"></script>
+    <script type="text/javascript" src="${ctx }/js/system/index.js?v=0.0.7.2"></script>
   </body>
 </html>

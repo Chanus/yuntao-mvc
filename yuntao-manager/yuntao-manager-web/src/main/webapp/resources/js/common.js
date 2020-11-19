@@ -72,6 +72,48 @@ function dateCST2GMT(dateStr) {
     return new Date(Date.parse(dateStrCST2GMT(dateStr)));
 }
 
+/**
+ * 设置 cookie
+ */
+var setCookie = function (name, value, expires) {
+    if (value === null) {
+        value = '';
+        expires = -1;
+    }
+    // 设置 cookie 过期时间
+    if (expires && (typeof expires == 'number' || expires.toUTCString)) {
+        var date;
+        if (typeof expires == 'number') {// expires 为 cookie 有效的天数
+            date = new Date();
+            date.setTime(date.getTime() + (expires * 24 * 60 * 60 * 1000));
+        } else {// expires 为 cookie 到期的时间
+            date = expires;
+        }
+        expires = '; expires=' + date.toUTCString(); // use expires attribute, max-age is not supported by IE
+    } else {
+        expires = '';
+    }
+    document.cookie = [name, '=', encodeURIComponent(value), expires].join('');
+};
+
+// 获取 cookie
+var getCookie = function (name) {
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split('; ');
+        for (var i = 0; i < cookies.length; i++) {
+            if (cookies[i].substring(0, name.length + 1) === (name + '=')) {
+                return decodeURIComponent(cookies[i].substring(name.length + 1));
+            }
+        }
+    }
+    return null;
+}
+
+// 删除 cookie
+var deleteCookie = function(name) {
+    setCookie(name, null);
+}
+
 // 千分化金额，保留pointPsti位小数
 Number.prototype.formatNumber = function (pointPsti) {
     pointPsti = (pointPsti >= 0 && pointPsti <= 20) ? pointPsti : 2;
