@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.chanus.yuntaomvc</groupId>
+    <artifactId>yuntao-mvc-manager</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>yuntao-mvc-manager-web</artifactId>
+  <packaging>war</packaging>
+  <name>${project.artifactId}</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.chanus.yuntaomvc</groupId>
+      <artifactId>yuntao-mvc-manager-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>yuntao-manager-web</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <!-- <version>3.1.0</version> -->
+        <configuration>
+          <!-- 启用attachClasses选项可以把JAR文件和标准的WAR文件同时安装到Maven仓库中 -->
+          <attachClasses>true</attachClasses>
+        </configuration>
+      </plugin>
+      <!-- 打包源文件插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <configuration>
+          <attach>true</attach>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

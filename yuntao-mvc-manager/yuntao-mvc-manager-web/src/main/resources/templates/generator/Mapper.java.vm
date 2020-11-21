@@ -1,0 +1,18 @@
+package ${serverPackage}.mapper;
+
+import ${serverPackage}.model.${className};
+import com.chanus.yuntao.mvc.framework.mapper.SuperMapper;
+
+/**
+ * ${tableComment}
+ *
+ * @author ${author}
+ * @date ${dateTime}
+ * @since ${since}
+ */
+public interface ${className}Mapper extends SuperMapper<${className}> {
+#if($overrideUpdate == '1')
+    @Override
+    int updateById(${className} ${classname});
+#end
+}

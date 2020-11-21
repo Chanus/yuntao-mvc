@@ -1,0 +1,15 @@
+package ${serverPackage}.service;
+
+import ${serverPackage}.model.${className};
+import com.chanus.yuntao.mvc.framework.service.BaseService;
+
+/**
+ * ${moduleName}接口
+ *
+ * @author ${author}
+ * @date ${dateTime}
+ * @since ${since}
+ */
+public interface ${className}Service extends BaseService<${className}> {
+
+}
