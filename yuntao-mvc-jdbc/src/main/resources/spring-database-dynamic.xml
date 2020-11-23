@@ -97,8 +97,6 @@
   <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
     <property name="patterns">
       <list>
-        <value>pers.chanus.yuntao.*.service.impl</value>
-        <value>pers.chanus.yuntao.*.*.service.impl</value>
         <value>com.*.service.impl</value>
         <value>com.*.*.service.impl</value>
         <value>com.*.*.*.service.impl</value>
