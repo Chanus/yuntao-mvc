@@ -17,7 +17,7 @@
     <!-- 请求验证 -->
     <interceptor>
       <!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
-      <mapping path="/*/*/*.do"/>
+      <mapping path="/**/*.do"/>
       <beans:bean class="com.chanus.yuntao.mvc.manager.interceptor.RequestInterceptor"/>
     </interceptor>
   </interceptors>

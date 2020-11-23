@@ -41,7 +41,7 @@ public class ScheduleTriggerController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Integer jobId, Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(currentModuleCode));
         model.addAttribute("jobId", jobId);
         return "system/job/trigger/list";
     }

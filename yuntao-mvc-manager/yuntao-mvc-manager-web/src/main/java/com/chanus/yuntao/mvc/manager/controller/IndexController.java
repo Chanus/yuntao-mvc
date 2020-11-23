@@ -42,7 +42,6 @@ public class IndexController extends BaseController {
      */
     @GetMapping(value = "index.do")
     public String index(Model model) {
-        model.addAttribute("menus", getSession().getAttribute("menus"));
         model.addAttribute("singleLocationLogin", CacheData.SYSTEM_PARAMS_MAP.get("sys_single_location_login"));
 
         return "index/index";

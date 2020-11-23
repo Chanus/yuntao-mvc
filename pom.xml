@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.chanus.yuntaomvc</groupId>
   <artifactId>yuntao-mvc</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   
@@ -21,7 +21,7 @@
     <!-- J2EE支持 -->
     <javax.servlet.version>3.1.0</javax.servlet.version>
     <!-- 通用jar包版本 -->
-    <spring.version>5.3.1</spring.version>
+    <spring.version>5.2.11.RELEASE</spring.version>
     <aspectj.version>1.9.6</aspectj.version>
     <mybatis.version>3.5.6</mybatis.version>
     <mybatis.spring.version>2.0.6</mybatis.spring.version>

@@ -21,7 +21,6 @@ import com.chanus.yuntao.mvc.manager.model.ModulePower;
 import com.chanus.yuntao.utils.core.CollectionUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,14 +36,13 @@ public class ModulePowerUtils {
     /**
      * 获取用户的模块权限
      *
-     * @param session
      * @param moduleCode 模块代码
      * @return 用户的模块权限列表
      * @since 0.0.1
      */
     @SuppressWarnings("unchecked")
-    public static List<ModulePower> getModulePowers(HttpSession session, String moduleCode) {
-        List<Module> menus = (List<Module>) ((LoginUser) session.getAttribute("loginUser")).getMenus();
+    public static List<ModulePower> getModulePowers(String moduleCode) {
+        List<Module> menus = (List<Module>) LoginUser.getLoginUser().getMenus();
         if (CollectionUtils.isEmpty(menus))
             return null;
 
@@ -66,13 +64,12 @@ public class ModulePowerUtils {
     /**
      * 获取用户的模块权限
      *
-     * @param session
      * @param moduleCode 模块代码
      * @return 用户的模块权限Map集合
      * @since 0.0.1
      */
-    public static Map<String, Boolean> getPowers(HttpSession session, String moduleCode) {
-        List<ModulePower> modulePowers = getModulePowers(session, moduleCode);
+    public static Map<String, Boolean> getPowers(String moduleCode) {
+        List<ModulePower> modulePowers = getModulePowers(moduleCode);
         Map<String, Boolean> powerMap = new HashMap<>();
         if (CollectionUtils.isNotEmpty(modulePowers)) {
             for (ModulePower power : modulePowers) {

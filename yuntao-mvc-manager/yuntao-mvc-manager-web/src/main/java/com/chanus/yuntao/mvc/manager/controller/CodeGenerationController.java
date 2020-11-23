@@ -39,7 +39,7 @@ public class CodeGenerationController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), "CODE_GENERATION"));
+        model.addAttribute("powers", ModulePowerUtils.getPowers("CODE_GENERATION"));
         return "system/code/tables";
     }
 

@@ -41,7 +41,7 @@ public class ScheduleJobController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(currentModuleCode));
         return "system/job/list";
     }
 

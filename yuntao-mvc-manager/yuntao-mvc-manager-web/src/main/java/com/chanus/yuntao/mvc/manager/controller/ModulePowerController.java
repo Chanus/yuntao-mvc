@@ -53,7 +53,7 @@ public class ModulePowerController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(currentModuleCode));
         model.addAttribute("modules1", moduleService.list(CustomMap.create("moduleParentId", 0)));
         model.addAttribute("powerItems", powerService.list(CustomMap.create("validStatus", Constants.STATUS_YES)));
         return "system/modulepower/list";

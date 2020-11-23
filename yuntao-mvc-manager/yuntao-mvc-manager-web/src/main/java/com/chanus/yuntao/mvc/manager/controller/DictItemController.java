@@ -38,7 +38,7 @@ public class DictItemController extends BaseController {
      */
     @GetMapping(value = "main.do")
     public String main(@ModelAttribute("dictCode") String dictCode, Model model) {
-        model.addAttribute("powers", ModulePowerUtils.getPowers(getSession(), currentModuleCode));
+        model.addAttribute("powers", ModulePowerUtils.getPowers(currentModuleCode));
         return "system/dict/item/list";
     }
 
