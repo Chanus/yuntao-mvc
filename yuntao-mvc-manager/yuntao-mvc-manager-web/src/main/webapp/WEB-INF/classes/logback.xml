@@ -29,8 +29,38 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- 每天生成一个日志文件，保存30天的日志文件 - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。 -->
       <!-- fileNamePattern 文件格式不正确则无法产生日志文件 -->
-      <fileNamePattern>${log.path}/log_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <fileNamePattern>${log.path}/log_%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+      <!--日志文件保留天数-->
       <maxHistory>30</maxHistory>
+      <!-- 当天的日志大小超过 128M 时，压缩日志并保存 -->
+      <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>128MB</maxFileSize>
+      </TimeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+  </appender>
+
+  <!-- 滚动记录文件，记录 level 为 ERROR 的日志 -->
+  <appender name="error_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- 正在记录的日志文件的路径及文件名 -->
+    <file>${log.path}/error/log_error.log</file>
+    <!-- 此日志文件只记录 ERROR 级别的 -->
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+    <!-- 日志文件输出格式 -->
+    <encoder>
+      <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%5level] %logger{36} %msg%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+    <!-- 每天生成一个日志文件，保存30天的日志文件 - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。 -->
+    <!-- fileNamePattern文件格式不正确则无法产生日志文件 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${log.path}/error/log_error_%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+      <!--日志文件保留天数-->
+      <maxHistory>30</maxHistory>
+      <!-- 当天的日志大小超过 128M 时，压缩日志并保存 -->
       <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <maxFileSize>128MB</maxFileSize>
       </TimeBasedFileNamingAndTriggeringPolicy>
@@ -45,10 +75,12 @@
   <root level="INFO">
     <appender-ref ref="console" />
     <appender-ref ref="file" />
+    <appender-ref ref="error_file"/>
   </root>
   <!-- 自定义 logger -->
   <logger name="com.chanus.yuntao.mvc.framework.controller.BaseController" level="INFO" additivity="false">
     <appender-ref ref="console" />
     <appender-ref ref="file" />
+    <appender-ref ref="error_file"/>
   </logger>
 </configuration>
