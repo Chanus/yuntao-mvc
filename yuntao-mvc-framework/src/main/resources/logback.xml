@@ -10,9 +10,13 @@
   <!-- 加载配置文件 -->
   <property resource="config.properties"/>
   <!-- 定义日志文件的存储地址，勿在 LogBack 的配置中使用相对路径 -->
-  <property name="LOG_HOME" value="${logging.file.path:-../log}"/>
+  <property name="LOG_HOME" value="${logging.file.path:-../logback}"/>
   <!-- 定义日志文件的名称 -->
   <property name="LOG_FILE_NAME" value="${logging.file.name:-log}"/>
+  <!-- 日志文件保留天数 -->
+  <property name="MAX_HISTORY" value="${logging.file.max.history:-30}"/>
+  <!-- 当天的日志大小超过指定值时，压缩日志并保存 -->
+  <property name="MAX_FILE_SIZE" value="${logging.file.max.size:-128MB}"/>
 
   <!-- 负责写日志，控制台日志 -->
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -34,14 +38,14 @@
       <charset>UTF-8</charset>
     </encoder>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <!-- 每天生成一个日志文件，保存30天的日志文件 - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。 -->
+      <!-- 每天生成一个日志文件，保存 MAX_HISTORY 天的日志文件 - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。 -->
       <!-- fileNamePattern 文件格式不正确则无法产生日志文件 -->
       <fileNamePattern>${LOG_HOME}/${LOG_FILE_NAME}_%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
-      <!--日志文件保留天数-->
-      <maxHistory>30</maxHistory>
-      <!-- 当天的日志大小超过 128M 时，压缩日志并保存 -->
+      <!-- 日志文件保留天数 -->
+      <maxHistory>${MAX_HISTORY}</maxHistory>
+      <!-- 当天的日志大小超过 MAX_FILE_SIZE 时，压缩日志并保存 -->
       <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-        <maxFileSize>128MB</maxFileSize>
+        <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
       </TimeBasedFileNamingAndTriggeringPolicy>
     </rollingPolicy>
   </appender>
@@ -61,15 +65,15 @@
       <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%5level] %logger{36} %msg%n</pattern>
       <charset>UTF-8</charset>
     </encoder>
-    <!-- 每天生成一个日志文件，保存30天的日志文件 - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。 -->
+    <!-- 每天生成一个日志文件，保存 MAX_HISTORY 天的日志文件 - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。 -->
     <!-- fileNamePattern文件格式不正确则无法产生日志文件 -->
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_HOME}/error/${LOG_FILE_NAME}_error_%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
-      <!--日志文件保留天数-->
-      <maxHistory>30</maxHistory>
-      <!-- 当天的日志大小超过 128M 时，压缩日志并保存 -->
+      <!-- 日志文件保留天数 -->
+      <maxHistory>${MAX_HISTORY}</maxHistory>
+      <!-- 当天的日志大小超过 MAX_FILE_SIZE 时，压缩日志并保存 -->
       <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-        <maxFileSize>128MB</maxFileSize>
+        <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
       </TimeBasedFileNamingAndTriggeringPolicy>
     </rollingPolicy>
   </appender>
