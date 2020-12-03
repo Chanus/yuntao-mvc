@@ -36,7 +36,7 @@ public class LicenseUtilsTest {
         // String path = "/Users/Chanus/Documents/license.lic";// mac
 
         String name = "yundao-mvc-manager";
-        String version = "1.1.3";
+        String version = "1.1.x";
         // Set<String> macAddress = SystemUtils.getHostMac();
         String macAddress = null;
         String limit = "0";
