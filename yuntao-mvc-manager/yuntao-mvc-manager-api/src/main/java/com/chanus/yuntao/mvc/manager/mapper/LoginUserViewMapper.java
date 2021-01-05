@@ -1,10 +1,9 @@
 package com.chanus.yuntao.mvc.manager.mapper;
 
+import com.chanus.yuntao.mvc.manager.model.LoginUserView;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import com.chanus.yuntao.mvc.manager.model.LoginUserView;
-
-import java.util.Map;
 
 /**
  * 登录用户视图
@@ -22,8 +21,8 @@ public interface LoginUserViewMapper {
     Integer isExistUser(String userNo);
 
     @Select("select * from view_user where binary user_no = #{userNo,jdbcType=VARCHAR} limit 1")
-    Map<String, Object> selectUserByUserNo(String userNo);
+    CustomMap selectUserByUserNo(String userNo);
 
     @Select("select * from view_user where ${column} = #{value}")
-    Map<String, Object> selectUser(@Param("column") String column, @Param("value") String value);
+    CustomMap selectUser(@Param("column") String column, @Param("value") String value);
 }

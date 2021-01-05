@@ -1,5 +1,7 @@
 package com.chanus.yuntao.mvc.manager.service.impl;
 
+import com.chanus.yuntao.mvc.common.constant.Constants;
+import com.chanus.yuntao.mvc.common.pojo.LoginUser;
 import com.chanus.yuntao.mvc.manager.common.CacheData;
 import com.chanus.yuntao.mvc.manager.mapper.LoginUserViewMapper;
 import com.chanus.yuntao.mvc.manager.mapper.ModuleMapper;
@@ -8,6 +10,7 @@ import com.chanus.yuntao.mvc.manager.mapper.WhiteIpMapper;
 import com.chanus.yuntao.mvc.manager.model.LoginUserView;
 import com.chanus.yuntao.mvc.manager.model.Module;
 import com.chanus.yuntao.mvc.manager.model.Role;
+import com.chanus.yuntao.mvc.manager.service.LoginUserService;
 import com.chanus.yuntao.utils.core.ArrayUtils;
 import com.chanus.yuntao.utils.core.CollectionUtils;
 import com.chanus.yuntao.utils.core.StringUtils;
@@ -16,12 +19,8 @@ import com.chanus.yuntao.utils.core.lang.Message;
 import com.chanus.yuntao.utils.core.map.CustomMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.chanus.yuntao.mvc.common.constant.Constants;
-import com.chanus.yuntao.mvc.common.pojo.LoginUser;
-import com.chanus.yuntao.mvc.manager.service.LoginUserService;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 登录用户接口实现
@@ -160,12 +159,12 @@ public class LoginUserServiceImpl implements LoginUserService {
     }
 
     @Override
-    public Map<String, Object> getUserByUserNo(String userNo) {
+    public CustomMap getUserByUserNo(String userNo) {
         return loginUserViewMapper.selectUserByUserNo(userNo);
     }
 
     @Override
-    public Map<String, Object> getUser(String column, String value) {
+    public CustomMap getUser(String column, String value) {
         return loginUserViewMapper.selectUser(column, value);
     }
 }

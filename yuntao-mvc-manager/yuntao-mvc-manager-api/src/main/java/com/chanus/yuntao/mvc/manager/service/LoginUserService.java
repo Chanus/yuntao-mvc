@@ -2,8 +2,7 @@ package com.chanus.yuntao.mvc.manager.service;
 
 import com.chanus.yuntao.mvc.manager.model.LoginUserView;
 import com.chanus.yuntao.utils.core.lang.Message;
-
-import java.util.Map;
+import com.chanus.yuntao.utils.core.map.CustomMap;
 
 /**
  * 登录用户接口
@@ -52,7 +51,7 @@ public interface LoginUserService {
      * @return
      * @since 1.2.0
      */
-    Map<String, Object> getUserByUserNo(String userNo);
+    CustomMap getUserByUserNo(String userNo);
 
     /**
      * 根据指定字段获取用户信息
@@ -62,5 +61,5 @@ public interface LoginUserService {
      * @return
      * @since 1.2.0
      */
-    Map<String, Object> getUser(String column, String value);
+    CustomMap getUser(String column, String value);
 }
