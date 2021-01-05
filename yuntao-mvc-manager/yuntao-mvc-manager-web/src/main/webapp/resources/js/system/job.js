@@ -65,140 +65,38 @@ layui.config({
         } else if (layEvent === 'configure') {// 配置触发器
             popup.open(900, 600, '<i class="layui-icon layui-icon-set"></i>定时任务【' + data.jobName + '】触发器', action_path + 'trigger/main.do?jobId=' + data.id);
         } else if (layEvent === 'start') {// 启动定时任务
-            layer.confirm('确定启动该定时任务吗？', {icon: 3, title: '提示'}, function (index) {
-                if (data.id) {
-                    $.ajax({
-                        type: 'post',
-                        url: action_path + 'start.do?id=' + data.id,
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.code === 0) {
-                                layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $('.layui-laypage-btn')[0].click();
-                                });
-                            } else {
-                                layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
-                            }
-                        },
-                        error: function () {
-                            layer.msg('请求异常，操作失败', {icon: 2, anim: 6, time: 2000});
-                        }
-                    });
-                } else {
-                    layer.msg('请选择要操作的记录！', {icon: 2, anim: 6, time: 2000});
-                }
-                layer.close(index);
+            operations.confirm({
+                url: action_path + 'start.do',
+                data: {id: data.id},
+                tips: '确定启动该定时任务吗？'
             });
         } else if (layEvent === 'pause') {// 暂停定时任务
-            layer.confirm('确定暂停该定时任务吗？', {icon: 3, title: '提示'}, function (index) {
-                if (data.id) {
-                    $.ajax({
-                        type: 'post',
-                        url: action_path + 'pause.do?id=' + data.id,
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.code === 0) {
-                                layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $('.layui-laypage-btn')[0].click();
-                                });
-                            } else {
-                                layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
-                            }
-                        },
-                        error: function () {
-                            layer.msg('请求异常，操作失败', {icon: 2, anim: 6, time: 2000});
-                        }
-                    });
-                } else {
-                    layer.msg('请选择要操作的记录！', {icon: 2, anim: 6, time: 2000});
-                }
-                layer.close(index);
+            operations.confirm({
+                url: action_path + 'pause.do',
+                data: {id: data.id},
+                tips: '确定暂停该定时任务吗？'
             });
         } else if (layEvent === 'resume') {// 恢复定时任务
-            layer.confirm('确定恢复该定时任务吗？', {icon: 3, title: '提示'}, function (index) {
-                if (data.id) {
-                    $.ajax({
-                        type: 'post',
-                        url: action_path + 'resume.do?id=' + data.id,
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.code === 0) {
-                                layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $('.layui-laypage-btn')[0].click();
-                                });
-                            } else {
-                                layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
-                            }
-                        },
-                        error: function () {
-                            layer.msg('请求异常，操作失败', {icon: 2, anim: 6, time: 2000});
-                        }
-                    });
-                } else {
-                    layer.msg('请选择要操作的记录！', {icon: 2, anim: 6, time: 2000});
-                }
-                layer.close(index);
+            operations.confirm({
+                url: action_path + 'resume.do',
+                data: {id: data.id},
+                tips: '确定恢复该定时任务吗？'
             });
         } else if (layEvent === 'stop') {// 停止定时任务
-            layer.confirm('确定停止该定时任务吗？', {icon: 3, title: '提示'}, function (index) {
-                if (data.id) {
-                    $.ajax({
-                        type: 'post',
-                        url: action_path + 'stop.do?id=' + data.id,
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.code === 0) {
-                                layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $('.layui-laypage-btn')[0].click();
-                                });
-                            } else {
-                                layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
-                            }
-                        },
-                        error: function () {
-                            layer.msg('请求异常，操作失败', {icon: 2, anim: 6, time: 2000});
-                        }
-                    });
-                } else {
-                    layer.msg('请选择要操作的记录！', {icon: 2, anim: 6, time: 2000});
-                }
-                layer.close(index);
+            operations.confirm({
+                url: action_path + 'stop.do',
+                data: {id: data.id},
+                tips: '确定停止该定时任务吗？'
             });
         } else if (layEvent === 'trigger') {// 立即执行定时任务
-            layer.confirm('确定立即执行该定时任务吗？', {icon: 3, title: '提示'}, function (index) {
-                if (data.id) {
-                    $.ajax({
-                        type: 'post',
-                        url: action_path + 'trigger.do?id=' + data.id,
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.code === 0) {
-                                layer.msg(data.msg, {icon: 1, time: 1000}, function () {
-                                    $('.layui-laypage-btn')[0].click();
-                                });
-                            } else {
-                                layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
-                            }
-                        },
-                        error: function () {
-                            layer.msg('请求异常，操作失败', {icon: 2, anim: 6, time: 2000});
-                        }
-                    });
-                } else {
-                    layer.msg('请选择要操作的记录！', {icon: 2, anim: 6, time: 2000});
-                }
-                layer.close(index);
+            operations.confirm({
+                url: action_path + 'trigger.do',
+                data: {id: data.id},
+                tips: '确定立即执行该定时任务吗？'
             });
         }
     });
 
     // 增删改
-    var p0 = $('.layui-show', window.parent.document), p = p0.children()[p0.length - 1].contentWindow;
-    operations.id = 'id';
-    operations.addUrl = action_path + 'add.do';
-    operations.commonAddFunc = function () {
-        p.reload();
-    };
-    operations.updateUrl = action_path + 'update.do';
-    operations.delUrl = action_path + 'delete.do';
+    operations.config({path: action_path});
 });

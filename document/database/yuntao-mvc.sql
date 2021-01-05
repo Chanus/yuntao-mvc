@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 21/11/2020 17:45:19
+ Date: 05/01/2021 13:49:27
 */
 
 SET NAMES utf8mb4;
@@ -3859,7 +3859,7 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_login_user` AS sele
 -- View structure for view_user
 -- ----------------------------
 DROP VIEW IF EXISTS `view_user`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_user` AS select `sys_operator`.`operator_no` AS `user_name` from `sys_operator`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_user` AS select `sys_operator`.`operator_no` AS `user_no` from `sys_operator`;
 
 -- ----------------------------
 -- Function structure for get_parent_roles

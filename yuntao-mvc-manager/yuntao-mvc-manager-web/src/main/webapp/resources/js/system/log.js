@@ -1,4 +1,4 @@
-var action_path = ctx + '/system/log/';
+var reload, action_path = ctx + '/system/log/';
 layui.config({
     base: '../../js/',
     version: '0.0.1.1'
@@ -55,30 +55,17 @@ layui.config({
 
     // 清除日志
     $('#clear').on('click', function () {
-        layer.confirm('确定清除所有日志吗？', {icon: 3, title: '提示'}, function (index) {
-            $.ajax({
-                type: 'post',
-                url: action_path + 'clear.do',
-                dataType: 'json',
-                success: function (data) {
-                    if (data.code === 0) {
-                        layer.msg(data.msg, {time: 1000}, function () {
-                            reload();
-                        });
-                    } else {
-                        layer.msg(data.msg, {icon: 2, anim: 6, time: 2000});
-                    }
-                },
-                error: function () {
-                    layer.msg('请求异常，操作失败', {icon: 2, anim: 6, time: 2000});
-                }
-            });
-            layer.close(index);
+        operations.confirm({
+            url: action_path + 'clear.do',
+            tips: '确定清除所有日志吗？',
+            success: function () {
+                reload();
+            }
         });
     });
 
     // 重新加载
-    var reload = function () {
+    reload = function () {
         table.reload('d', {
             page: {
                 curr: 1 //重新从第 1 页开始

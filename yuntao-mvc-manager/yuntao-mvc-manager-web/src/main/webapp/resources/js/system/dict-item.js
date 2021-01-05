@@ -71,14 +71,13 @@ layui.config({
 
     // 增删改
     var p = $('.layui-layer-content', window.parent.document).children()[0].contentWindow;
-    operations.id = 'id';
-    operations.addUrl = action_path + 'add.do';
-    operations.commonAddFunc = function () {
-        p.reload();
-    };
-    operations.updateUrl = action_path + 'update.do';
-    operations.updateFunc = function() {
-        p.reload();
-    };
-    operations.delUrl = action_path + 'delete.do';
+    operations.config({
+        path: action_path,
+        commonAddFunc: function () {
+            p.reload();
+        },
+        updateFunc: function () {
+            p.reload();
+        }
+    });
 });
