@@ -40,7 +40,7 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- 每天生成一个日志文件，保存 MAX_HISTORY 天的日志文件 - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。 -->
       <!-- fileNamePattern 文件格式不正确则无法产生日志文件 -->
-      <fileNamePattern>${LOG_HOME}/${LOG_FILE_NAME}_%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+      <fileNamePattern>${LOG_HOME}/${LOG_FILE_NAME}_%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
       <!-- 日志文件保留天数 -->
       <maxHistory>${MAX_HISTORY}</maxHistory>
       <!-- 当天的日志大小超过 MAX_FILE_SIZE 时，压缩日志并保存 -->
@@ -68,7 +68,7 @@
     <!-- 每天生成一个日志文件，保存 MAX_HISTORY 天的日志文件 - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。 -->
     <!-- fileNamePattern文件格式不正确则无法产生日志文件 -->
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_HOME}/error/${LOG_FILE_NAME}_error_%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+      <fileNamePattern>${LOG_HOME}/error/${LOG_FILE_NAME}_error_%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
       <!-- 日志文件保留天数 -->
       <maxHistory>${MAX_HISTORY}</maxHistory>
       <!-- 当天的日志大小超过 MAX_FILE_SIZE 时，压缩日志并保存 -->
