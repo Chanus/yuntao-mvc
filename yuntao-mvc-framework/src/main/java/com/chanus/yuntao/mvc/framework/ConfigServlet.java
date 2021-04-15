@@ -49,7 +49,7 @@ public class ConfigServlet extends HttpServlet {
                 " \\____   |  |  /   |  \\  |  / __ \\(  <_> ) /    Y    \\     /  \\     \\____\n" +
                 " / ______|____/|___|  /__| (____  /\\____/  \\____|__  /\\___/    \\______  /\n" +
                 " \\/                 \\/          \\/                 \\/                 \\/ \n" +
-                "                                                              v1.2.1\n";
+                "                                                              v1.2.2\n";
         System.out.println(logo);
 
         ServletContext servletContext = getServletContext();

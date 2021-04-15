@@ -56,7 +56,7 @@ public class DictController extends BaseController {
     @PostMapping(value = "list.do", produces = "application/json; charset=utf-8")
     public Page<Dict> list() {
         CustomMap params = getParams();
-        String dictName = (String) params.get("dictName");
+        String dictName = params.getStringValue("dictName");
         try {
             if (StringUtils.isNotBlank(dictName))
                 params.put("dictName", URLDecoder.decode(dictName, "UTF-8"));
